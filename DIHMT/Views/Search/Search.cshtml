@@ -1,0 +1,54 @@
+﻿@model DIHMT.Models.SearchResult
+
+@{
+    ViewBag.Title = "Search";
+}
+
+@if (Model.Results.Any())
+{
+    <h2>Search results</h2>
+    foreach (var item in Model.Results)
+    {
+        <hr />
+        <div>
+            <h3><a href="@Url.Action("Game", "Home", new { id = item.Id })">@item.Name</a></h3>
+            <a href="@Url.Action("Game", "Home", new { id = item.Id })">
+                <img src="@item.ThumbImageUrl" />
+            </a>
+            <br />
+            <strong>Game summary:</strong> @item.Summary
+            <br />
+            <strong>Rating: </strong> @item.Rating
+            <br />
+            @if (!string.IsNullOrEmpty(item.RatingExplanation))
+            {
+                <strong>Reasoning: </strong> @item.RatingExplanation
+            }
+            else
+            {
+                <em>There is no available reasoning for this game's rating.</em>
+            }
+        </div>
+    }
+}
+
+else
+{
+    <h2>No results found</h2>
+}
+
+<hr/>
+
+@if (Model.Page > 1)
+{
+    <a href="@Url.Action("Search", "Search", new { q = Model.Query, page = Model.Page - 1})">&lt;== Prev</a>
+    <text>&nbsp;|&nbsp;</text>
+}
+
+<strong>@Model.Page</strong>
+
+@if (Model.Results.Any())
+{
+    <text>&nbsp;|&nbsp;</text>
+    <a href="@Url.Action("Search", "Search", new { q = Model.Query, page = Model.Page + 1})">Next ==&gt;</a>
+}
