@@ -14,13 +14,13 @@ namespace DIHMT.Controllers
     {
         private const int PageLimit = 10;
 
-        public ActionResult Search(string q, int page = 1)
+        public async Task<ActionResult> Search(string q, int page = 1)
         {
             var games = new List<DisplayGame>();
 
             if (!string.IsNullOrEmpty(q))
             {
-                var searchResult = SearchHelpers.SearchGamesInDb(q);
+                var searchResult = await SearchHelpers.SearchGamesInDb(q);
 
                 if (searchResult.Count > (page - 1) * PageLimit)
                 {
@@ -35,13 +35,15 @@ namespace DIHMT.Controllers
                     // Dispatch a Task on a different thread to ask GB for games
                     // related to the query, and add any results we don't yet have
                     // to our own DB.
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                     Task.Run(() => GameHelpers.SearchGbAndCacheResults(q, page));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
                 }
             }
 
             if (!games.Any()) // Ask GB for games instead
             {
-                var rawResults = GbGateway.Search(q, page);
+                var rawResults = await GbGateway.SearchAsync(q, page);
 
                 if (rawResults.Any())
                 {
@@ -54,7 +56,7 @@ namespace DIHMT.Controllers
                             GameHelpers.SaveGameToDb(v);
                         }
 
-                        games.Add(GameHelpers.RefreshDisplayGame(v.Id));
+                        games.Add(await GameHelpers.RefreshDisplayGame(v.Id));
                     }
                 }
             }

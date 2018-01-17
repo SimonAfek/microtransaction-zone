@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using DIHMT.Models;
 
@@ -8,7 +9,7 @@ namespace DIHMT.Static
 {
     public static class SearchHelpers
     {
-        public static List<DisplayGame> SearchGamesInDb(string q)
+        public static async Task<List<DisplayGame>> SearchGamesInDb(string q)
         {
             var retval = new List<DisplayGame>();
 
@@ -21,7 +22,10 @@ namespace DIHMT.Static
                 return retval;
             }
 
-            retval.AddRange(dbGames.Select(x => x.Id).Select(GameHelpers.RefreshDisplayGame));
+            foreach (var i in dbGames.Select(x => x.Id))
+            {
+                retval.Add(await GameHelpers.RefreshDisplayGame(i));
+            }
 
             return retval;
         }
