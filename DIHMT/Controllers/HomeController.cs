@@ -28,9 +28,9 @@ namespace DIHMT.Controllers
             return View();
         }
 
-        public ActionResult Game(int id)
+        public async Task<ActionResult> Game(int id)
         {
-            var displayGame = GameHelpers.RefreshDisplayGame(id);
+            var displayGame = await GameHelpers.RefreshDisplayGame(id);
 
             return View(displayGame);
         }

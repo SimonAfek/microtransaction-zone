@@ -14,14 +14,11 @@ namespace DIHMT.Static
         {
             var results = new List<DbGame>();
 
-            lock (Lock)
+            using (var ctx = new DIHMTEntities())
             {
-                using (var ctx = new DIHMTEntities())
-                {
-                    var dbResults = ctx.DbGames.Where(q => query.All(k => q.Name.Contains(k)));
+                var dbResults = ctx.DbGames.Where(q => query.All(k => q.Name.Contains(k)));
 
-                    results = dbResults.Any() ? dbResults.ToList() : results;
-                }
+                results = dbResults.Any() ? dbResults.ToList() : results;
             }
 
             return results;

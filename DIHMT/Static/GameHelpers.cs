@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DIHMT.Models;
 using GiantBomb.Api.Model;
 
@@ -60,13 +61,13 @@ namespace DIHMT.Static
         /// </summary>
         /// <param name="id">Id of the game to be returned</param>
         /// <returns></returns>
-        public static DisplayGame RefreshDisplayGame(int id)
+        public static async Task<DisplayGame> RefreshDisplayGame(int id)
         {
             var displayGame = CreateDisplayGameObject(id);
 
             if (displayGame == null)
             {
-                var gbGame = GbGateway.GetGame(id);
+                var gbGame = await GbGateway.GetGameAsync(id);
 
                 SaveGameToDb(gbGame);
 
@@ -75,7 +76,7 @@ namespace DIHMT.Static
 
             if ((DateTime.UtcNow - displayGame.LastUpdated).Days >= 7)
             {
-                var gbGame = GbGateway.GetGame(id);
+                var gbGame = await GbGateway.GetGameAsync(id);
                 UpdateGameFromGb(displayGame, gbGame);
                 displayGame = CreateDisplayGameObject(id);
             }
