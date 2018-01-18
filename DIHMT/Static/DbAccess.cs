@@ -74,11 +74,6 @@ namespace DIHMT.Static
                         .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
                         .Include(x => x.DbRating)
                         .FirstOrDefault(x => x.Id == id);
-
-                    if (results == null)
-                    {
-                        return null;
-                    }
                 }
             }
 
