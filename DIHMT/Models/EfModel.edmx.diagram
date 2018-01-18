@@ -12,7 +12,6 @@
         <AssociationConnector Association="Entities.FK__DbGame__RatingId__286302EC" ManuallyRouted="false" />
         <AssociationConnector Association="Entities.FK__DbGamePla__GameI__29572725" ManuallyRouted="false" />
         <AssociationConnector Association="Entities.FK__DbGamePla__Platf__2A4B4B5E" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Entities.DbGameWithRating" Width="1.5" PointX="0.75" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

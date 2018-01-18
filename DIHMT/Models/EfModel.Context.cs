@@ -29,6 +29,5 @@ namespace DIHMT.Models
         public virtual DbSet<DbGamePlatform> DbGamePlatforms { get; set; }
         public virtual DbSet<DbPlatform> DbPlatforms { get; set; }
         public virtual DbSet<DbRating> DbRatings { get; set; }
-        public virtual DbSet<DbGameWithRating> DbGameWithRatings { get; set; }
     }
 }

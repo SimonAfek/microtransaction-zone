@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DbGame">
           <Key>
             <PropertyRef Name="Id" />
@@ -45,29 +45,7 @@
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DIHMT.dbo.DbGameWithRating' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="DbGameWithRating">
-          <Key>
-            <PropertyRef Name="GameId" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Rating" />
-            <PropertyRef Name="LastUpdated" />
-            <PropertyRef Name="PlatformId" />
-          </Key>
-          <Property Name="GameId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Summary" Type="nvarchar" MaxLength="2000" />
-          <Property Name="Rating" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="RatingExplanation" Type="nvarchar" MaxLength="2000" />
-          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
-          <Property Name="SmallImageUrl" Type="nvarchar" MaxLength="1000" />
-          <Property Name="ThumbImageUrl" Type="nvarchar" MaxLength="1000" />
-          <Property Name="GbSiteDetailUrl" Type="nvarchar" MaxLength="500" />
-          <Property Name="PlatformId" Type="int" Nullable="false" />
-          <Property Name="PlatformName" Type="nvarchar" MaxLength="100" />
-          <Property Name="PlatformIcon" Type="nvarchar" MaxLength="1024" />
-          <Property Name="PlatformAbbreviation" Type="nvarchar" MaxLength="20" />
-        </EntityType>
-        <Association Name="FK__DbGame__RatingId__286302EC">
+        <Association Name="FK__DbGame__RatingId__5070F446">
           <End Role="DbRating" Type="Self.DbRating" Multiplicity="1" />
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="*" />
           <ReferentialConstraint>
@@ -79,7 +57,7 @@ warning 6002: The table/view 'DIHMT.dbo.DbGameWithRating' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DbGamePla__GameI__29572725">
+        <Association Name="FK__DbGamePla__GameI__5165187F">
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="0..1" />
           <End Role="DbGamePlatform" Type="Self.DbGamePlatform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -91,7 +69,7 @@ warning 6002: The table/view 'DIHMT.dbo.DbGameWithRating' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DbGamePla__Platf__2A4B4B5E">
+        <Association Name="FK__DbGamePla__Platf__52593CB8">
           <End Role="DbPlatform" Type="Self.DbPlatform" Multiplicity="0..1" />
           <End Role="DbGamePlatform" Type="Self.DbGamePlatform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -108,32 +86,15 @@ warning 6002: The table/view 'DIHMT.dbo.DbGameWithRating' does not have a primar
           <EntitySet Name="DbGamePlatform" EntityType="Self.DbGamePlatform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbPlatform" EntityType="Self.DbPlatform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbRating" EntityType="Self.DbRating" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DbGameWithRating" EntityType="Self.DbGameWithRating" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [DbGameWithRating].[GameId] AS [GameId], 
-    [DbGameWithRating].[Name] AS [Name], 
-    [DbGameWithRating].[Summary] AS [Summary], 
-    [DbGameWithRating].[Rating] AS [Rating], 
-    [DbGameWithRating].[RatingExplanation] AS [RatingExplanation], 
-    [DbGameWithRating].[LastUpdated] AS [LastUpdated], 
-    [DbGameWithRating].[SmallImageUrl] AS [SmallImageUrl], 
-    [DbGameWithRating].[ThumbImageUrl] AS [ThumbImageUrl], 
-    [DbGameWithRating].[GbSiteDetailUrl] AS [GbSiteDetailUrl], 
-    [DbGameWithRating].[PlatformId] AS [PlatformId], 
-    [DbGameWithRating].[PlatformName] AS [PlatformName], 
-    [DbGameWithRating].[PlatformIcon] AS [PlatformIcon], 
-    [DbGameWithRating].[PlatformAbbreviation] AS [PlatformAbbreviation]
-    FROM [dbo].[DbGameWithRating] AS [DbGameWithRating]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__DbGame__RatingId__286302EC" Association="Self.FK__DbGame__RatingId__286302EC">
+          <AssociationSet Name="FK__DbGame__RatingId__5070F446" Association="Self.FK__DbGame__RatingId__5070F446">
             <End Role="DbRating" EntitySet="DbRating" />
             <End Role="DbGame" EntitySet="DbGame" />
           </AssociationSet>
-          <AssociationSet Name="FK__DbGamePla__GameI__29572725" Association="Self.FK__DbGamePla__GameI__29572725">
+          <AssociationSet Name="FK__DbGamePla__GameI__5165187F" Association="Self.FK__DbGamePla__GameI__5165187F">
             <End Role="DbGame" EntitySet="DbGame" />
             <End Role="DbGamePlatform" EntitySet="DbGamePlatform" />
           </AssociationSet>
-          <AssociationSet Name="FK__DbGamePla__Platf__2A4B4B5E" Association="Self.FK__DbGamePla__Platf__2A4B4B5E">
+          <AssociationSet Name="FK__DbGamePla__Platf__52593CB8" Association="Self.FK__DbGamePla__Platf__52593CB8">
             <End Role="DbPlatform" EntitySet="DbPlatform" />
             <End Role="DbGamePlatform" EntitySet="DbGamePlatform" />
           </AssociationSet>
@@ -239,30 +200,7 @@ warning 6002: The table/view 'DIHMT.dbo.DbGameWithRating' does not have a primar
             <End Role="DbPlatform" EntitySet="DbPlatforms" />
             <End Role="DbGamePlatform" EntitySet="DbGamePlatforms" />
           </AssociationSet>
-          <EntitySet Name="DbGameWithRatings" EntityType="Entities.DbGameWithRating" />
         </EntityContainer>
-        <EntityType Name="DbGameWithRating">
-          <Key>
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Rating" />
-            <PropertyRef Name="LastUpdated" />
-            <PropertyRef Name="GameId" />
-            <PropertyRef Name="PlatformId" />
-          </Key>
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Summary" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="Rating" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RatingExplanation" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="SmallImageUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="ThumbImageUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="GbSiteDetailUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="PlatformName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PlatformIcon" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
-          <Property Name="PlatformAbbreviation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="GameId" Type="Int32" Nullable="false" />
-          <Property Name="PlatformId" Type="Int32" Nullable="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -307,25 +245,6 @@ warning 6002: The table/view 'DIHMT.dbo.DbGameWithRating' does not have a primar
             <EntityTypeMapping TypeName="Entities.DbRating">
               <MappingFragment StoreEntitySet="DbRating">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DbGameWithRatings">
-            <EntityTypeMapping TypeName="Entities.DbGameWithRating">
-              <MappingFragment StoreEntitySet="DbGameWithRating">
-                <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
-                <ScalarProperty Name="GameId" ColumnName="GameId" />
-                <ScalarProperty Name="PlatformAbbreviation" ColumnName="PlatformAbbreviation" />
-                <ScalarProperty Name="PlatformIcon" ColumnName="PlatformIcon" />
-                <ScalarProperty Name="PlatformName" ColumnName="PlatformName" />
-                <ScalarProperty Name="GbSiteDetailUrl" ColumnName="GbSiteDetailUrl" />
-                <ScalarProperty Name="ThumbImageUrl" ColumnName="ThumbImageUrl" />
-                <ScalarProperty Name="SmallImageUrl" ColumnName="SmallImageUrl" />
-                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-                <ScalarProperty Name="RatingExplanation" ColumnName="RatingExplanation" />
-                <ScalarProperty Name="Rating" ColumnName="Rating" />
-                <ScalarProperty Name="Summary" ColumnName="Summary" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -62,15 +62,23 @@ namespace DIHMT.Static
             return result;
         }
 
-        public static List<DbGameWithRating> GetDbGameView(int id)
+        public static DbGame GetDbGameView(int id)
         {
-            List<DbGameWithRating> results;
+            DbGame results;
 
             lock (Lock)
             {
                 using (var ctx = new DIHMTEntities())
                 {
-                    results = ctx.DbGameWithRatings.Where(x => x.GameId == id).ToList();
+                    results = ctx.DbGames
+                        .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
+                        .Include(x => x.DbRating)
+                        .FirstOrDefault(x => x.Id == id);
+
+                    if (results == null)
+                    {
+                        return null;
+                    }
                 }
             }
 

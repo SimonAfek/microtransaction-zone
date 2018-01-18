@@ -217,15 +217,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Models\DbGameWithRating.cs">
-      <DependentUpon>EfModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DisplayGame.cs" />
-    <Compile Include="Models\SearchResult.cs" />
-    <Compile Include="Static\DbAccess.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="Models\DbGame.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>
@@ -237,6 +228,12 @@
     </Compile>
     <Compile Include="Models\DbRating.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DisplayGame.cs" />
+    <Compile Include="Models\SearchResult.cs" />
+    <Compile Include="Static\DbAccess.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\EfModel.Context.cs">
       <AutoGen>True</AutoGen>

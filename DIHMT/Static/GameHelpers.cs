@@ -51,7 +51,7 @@ namespace DIHMT.Static
         {
             var platforms = DbAccess.GetPlatforms(gbGame.Platforms);
 
-            return platforms.Select(p => new DbGamePlatform { GameId = gbGame.Id, PlatformId = p.Id }).ToList();
+            return platforms?.Select(p => new DbGamePlatform { GameId = gbGame.Id, PlatformId = p.Id }).ToList();
         }
 
         /// <summary>
@@ -134,26 +134,28 @@ namespace DIHMT.Static
 
             DisplayGame result = null;
 
-            if (dbGameView.Count > 0)
+            if (dbGameView != null)
             {
                 result = new DisplayGame
                 {
-                    GbSiteDetailUrl = dbGameView[0].GbSiteDetailUrl,
-                    Id = dbGameView[0].GameId,
-                    LastUpdated = dbGameView[0].LastUpdated,
-                    Name = dbGameView[0].Name,
-                    Platforms = dbGameView.Select(x => new DisplayGamePlatform
+                    GbSiteDetailUrl = dbGameView.GbSiteDetailUrl,
+                    Id = dbGameView.Id,
+                    LastUpdated = dbGameView.LastUpdated,
+                    Name = dbGameView.Name,
+
+                    Platforms = dbGameView.DbGamePlatforms.Select(x => new DisplayGamePlatform
                     {
-                        Abbreviation = x.PlatformAbbreviation,
-                        Id = x.PlatformId,
-                        ImageUrl = x.PlatformIcon,
-                        Name = x.PlatformName
+                        Abbreviation = x.DbPlatform.Abbreviation,
+                        Id = x.DbPlatform.Id,
+                        ImageUrl = x.DbPlatform.ImageUrl,
+                        Name = x.DbPlatform.Name
                     }).ToList(),
-                    Rating = dbGameView[0].Rating,
-                    RatingExplanation = dbGameView[0].RatingExplanation,
-                    SmallImageUrl = dbGameView[0].SmallImageUrl,
-                    Summary = dbGameView[0].Summary,
-                    ThumbImageUrl = dbGameView[0].ThumbImageUrl
+
+                    Rating = dbGameView.DbRating.Name,
+                    RatingExplanation = dbGameView.RatingExplanation,
+                    SmallImageUrl = dbGameView.SmallImageUrl,
+                    Summary = dbGameView.Summary,
+                    ThumbImageUrl = dbGameView.ThumbImageUrl
                 };
             }
 
