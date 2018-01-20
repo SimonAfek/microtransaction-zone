@@ -9,9 +9,14 @@ namespace DIHMT.Controllers
     {
         public ActionResult Index()
         {
-            return RedirectToAction("Game", new { id = 47551 });
+            // return RedirectToAction("Game", new { id = 47551 });
 
-            // return View();
+            return View();
+        }
+
+        public ActionResult Donate()
+        {
+            return View();
         }
 
         public ActionResult About()
