@@ -36,15 +36,21 @@ namespace DIHMT.Static
         /// game in the database
         /// </summary>
         /// <param name="dGame">The game to be updated</param>
-        /// <param name="gbGame">The fresh GiantBomb-supplied game object</param>
-        private static void UpdateGameFromGb(DisplayGame dGame, Game gbGame)
+        /// <param name="includeGenres">Indicates whether or not the DbGameGenres-table should be updated, too</param>
+        private static void UpdateGameFromGb(DisplayGame dGame, bool includeGenres = false)
         {
+            var gbGame = GbGateway.GetGame(dGame.Id);
             var dbGame = CreateDbGameObjectWithoutNavigation(gbGame);
 
             dbGame.RatingId = (int) (Models.Rating) Enum.Parse(typeof(Models.Rating), dGame.Rating);
             dbGame.RatingExplanation = dGame.RatingExplanation;
 
             DbAccess.SaveGame(dbGame);
+
+            if (!includeGenres || gbGame.Genres == null || !gbGame.Genres.Any()) return;
+
+            var dbGameGenres = CreateDbGameGenresListWithoutNavigation(gbGame);
+            DbAccess.SaveGameGenres(dbGameGenres);
         }
 
         private static List<DbGamePlatform> CreateDbGamePlatformsListWithoutNavigation(Game gbGame)
@@ -54,14 +60,20 @@ namespace DIHMT.Static
             return platforms?.Select(p => new DbGamePlatform { GameId = gbGame.Id, PlatformId = p.Id }).ToList();
         }
 
+        private static List<DbGameGenre> CreateDbGameGenresListWithoutNavigation(Game gbGame)
+        {
+            return gbGame.Genres?.Select(g => new DbGameGenre { GameId = gbGame.Id, GenreId = g.Id} ).ToList();
+        }
+
         /// <summary>
         /// Pulls any necessary information on the game from
         /// GiantBomb, and then returns a DisplayGame object that
         /// is as updated as it needs to be.
         /// </summary>
         /// <param name="id">Id of the game to be returned</param>
+        /// <param name="includeGenres">Whether to look for genre info or not</param>
         /// <returns></returns>
-        public static async Task<DisplayGame> RefreshDisplayGame(int id)
+        public static async Task<DisplayGame> RefreshDisplayGame(int id, bool includeGenres = false)
         {
             var displayGame = CreateDisplayGameObject(id);
 
@@ -74,10 +86,15 @@ namespace DIHMT.Static
                 displayGame = CreateDisplayGameObject(id);
             }
 
+            if (includeGenres && (displayGame.Genres == null || !displayGame.Genres.Any()))
+            {
+                UpdateGameFromGb(displayGame, true);
+                displayGame = CreateDisplayGameObject(id);
+            }
+
             if ((DateTime.UtcNow - displayGame.LastUpdated).Days >= 7)
             {
-                var gbGame = await GbGateway.GetGameAsync(id);
-                UpdateGameFromGb(displayGame, gbGame);
+                UpdateGameFromGb(displayGame);
                 displayGame = CreateDisplayGameObject(id);
             }
 
@@ -93,9 +110,14 @@ namespace DIHMT.Static
         {
             var dbGame = CreateDbGameObjectWithoutNavigation(input);
             var dbGamePlatforms = CreateDbGamePlatformsListWithoutNavigation(input);
-
+            
             DbAccess.SaveGame(dbGame);
             DbAccess.SaveGamePlatforms(dbGamePlatforms);
+
+            if (input.Genres == null || !input.Genres.Any()) return;
+
+            var dbGameGenres = CreateDbGameGenresListWithoutNavigation(input);
+            DbAccess.SaveGameGenres(dbGameGenres);
         }
 
         /// <summary>
@@ -149,6 +171,12 @@ namespace DIHMT.Static
                         Id = x.DbPlatform.Id,
                         ImageUrl = x.DbPlatform.ImageUrl,
                         Name = x.DbPlatform.Name
+                    }).ToList(),
+
+                    Genres = dbGameView.DbGameGenres.Select(x => new DisplayGameGenre
+                    {
+                        Id = x.DbGenre.Id,
+                        Name = x.DbGenre.Name
                     }).ToList(),
 
                     Rating = dbGameView.DbRating.Name,

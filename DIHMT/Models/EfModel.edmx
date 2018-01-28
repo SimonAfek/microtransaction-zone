@@ -19,6 +19,14 @@
           <Property Name="ThumbImageUrl" Type="nvarchar" MaxLength="1000" />
           <Property Name="GbSiteDetailUrl" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="DbGameGenre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="GameId" Type="int" />
+          <Property Name="GenreId" Type="int" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="DbGamePlatform">
           <Key>
             <PropertyRef Name="Id" />
@@ -26,6 +34,13 @@
           <Property Name="GameId" Type="int" />
           <Property Name="PlatformId" Type="int" />
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DbGenre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="DbPlatform">
           <Key>
@@ -43,8 +58,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DIHMT.dbo.DbGameWithRating' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <Association Name="FK__DbGame__RatingId__5070F446">
           <End Role="DbRating" Type="Self.DbRating" Multiplicity="1" />
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="*" />
@@ -81,9 +94,35 @@ warning 6002: The table/view 'DIHMT.dbo.DbGameWithRating' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DbGameGenre_GameId">
+          <End Role="DbGame" Type="Self.DbGame" Multiplicity="0..1" />
+          <End Role="DbGameGenre" Type="Self.DbGameGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DbGame">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DbGameGenre">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DbGameGenre_GenreId">
+          <End Role="DbGenre" Type="Self.DbGenre" Multiplicity="0..1" />
+          <End Role="DbGameGenre" Type="Self.DbGameGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DbGenre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DbGameGenre">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EntitiesStoreContainer">
           <EntitySet Name="DbGame" EntityType="Self.DbGame" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DbGameGenre" EntityType="Self.DbGameGenre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGamePlatform" EntityType="Self.DbGamePlatform" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DbGenre" EntityType="Self.DbGenre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbPlatform" EntityType="Self.DbPlatform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbRating" EntityType="Self.DbRating" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__DbGame__RatingId__5070F446" Association="Self.FK__DbGame__RatingId__5070F446">
@@ -97,6 +136,14 @@ warning 6002: The table/view 'DIHMT.dbo.DbGameWithRating' does not have a primar
           <AssociationSet Name="FK__DbGamePla__Platf__52593CB8" Association="Self.FK__DbGamePla__Platf__52593CB8">
             <End Role="DbPlatform" EntitySet="DbPlatform" />
             <End Role="DbGamePlatform" EntitySet="DbGamePlatform" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DbGameGenre_GameId" Association="Self.FK_DbGameGenre_GameId">
+            <End Role="DbGame" EntitySet="DbGame" />
+            <End Role="DbGameGenre" EntitySet="DbGameGenre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DbGameGenre_GenreId" Association="Self.FK_DbGameGenre_GenreId">
+            <End Role="DbGenre" EntitySet="DbGenre" />
+            <End Role="DbGameGenre" EntitySet="DbGameGenre" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -118,6 +165,7 @@ warning 6002: The table/view 'DIHMT.dbo.DbGameWithRating' does not have a primar
           <Property Name="SmallImageUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="ThumbImageUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="GbSiteDetailUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DbGameGenres" Relationship="Entities.FK_DbGameGenre_GameId" FromRole="DbGame" ToRole="DbGameGenre" />
         </EntityType>
         <EntityType Name="DbGamePlatform">
           <Key>
@@ -200,7 +248,59 @@ warning 6002: The table/view 'DIHMT.dbo.DbGameWithRating' does not have a primar
             <End Role="DbPlatform" EntitySet="DbPlatforms" />
             <End Role="DbGamePlatform" EntitySet="DbGamePlatforms" />
           </AssociationSet>
+          <EntitySet Name="DbGameGenres" EntityType="Entities.DbGameGenre" />
+          <EntitySet Name="DbGenres" EntityType="Entities.DbGenre" />
+          <AssociationSet Name="FK_DbGameGenre_GameId" Association="Entities.FK_DbGameGenre_GameId">
+            <End Role="DbGame" EntitySet="DbGames" />
+            <End Role="DbGameGenre" EntitySet="DbGameGenres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DbGameGenre_GenreId" Association="Entities.FK_DbGameGenre_GenreId">
+            <End Role="DbGenre" EntitySet="DbGenres" />
+            <End Role="DbGameGenre" EntitySet="DbGameGenres" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="DbGameGenre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="GameId" Type="Int32" />
+          <Property Name="GenreId" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="DbGame" Relationship="Entities.FK_DbGameGenre_GameId" FromRole="DbGameGenre" ToRole="DbGame" />
+          <NavigationProperty Name="DbGenre" Relationship="Entities.FK_DbGameGenre_GenreId" FromRole="DbGameGenre" ToRole="DbGenre" />
+        </EntityType>
+        <EntityType Name="DbGenre">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DbGameGenres" Relationship="Entities.FK_DbGameGenre_GenreId" FromRole="DbGenre" ToRole="DbGameGenre" />
+        </EntityType>
+        <Association Name="FK_DbGameGenre_GameId">
+          <End Type="Entities.DbGame" Role="DbGame" Multiplicity="0..1" />
+          <End Type="Entities.DbGameGenre" Role="DbGameGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DbGame">
+			    <PropertyRef Name="Id" />
+			</Principal>
+            <Dependent Role="DbGameGenre">
+			    <PropertyRef Name="GameId" />
+			</Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DbGameGenre_GenreId">
+          <End Type="Entities.DbGenre" Role="DbGenre" Multiplicity="0..1" />
+          <End Type="Entities.DbGameGenre" Role="DbGameGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DbGenre">
+			    <PropertyRef Name="Id" />
+			</Principal>
+            <Dependent Role="DbGameGenre">
+			    <PropertyRef Name="GenreId" />
+			</Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -246,6 +346,23 @@ warning 6002: The table/view 'DIHMT.dbo.DbGameWithRating' does not have a primar
               <MappingFragment StoreEntitySet="DbRating">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DbGameGenres">
+            <EntityTypeMapping TypeName="Entities.DbGameGenre">
+              <MappingFragment StoreEntitySet="DbGameGenre">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DbGenres">
+            <EntityTypeMapping TypeName="Entities.DbGenre">
+              <MappingFragment StoreEntitySet="DbGenre">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

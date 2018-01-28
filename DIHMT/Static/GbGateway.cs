@@ -18,7 +18,7 @@ namespace DIHMT.Static
         {
             var client = new GiantBombRestClient(ApiKey);
 
-            return await RateLimiter.Perform(() => client.GetGameAsync(id));
+            return await RateLimiter.Perform(() => client.GetGame(id));
         }
 
         public static async Task<List<Game>> SearchAsync(string q, int page)
@@ -28,6 +28,13 @@ namespace DIHMT.Static
             var results = await RateLimiter.Perform(() => client.SearchForGames(q, page, 10));
 
             return results.ToList();
+        }
+
+        public static Game GetGame(int id)
+        {
+            var client = new GiantBombRestClient(ApiKey);
+
+            return RateLimiter.Perform(() => client.GetGame(id)).Result;
         }
     }
 }

@@ -24,6 +24,26 @@
         }
     }
 </p>
+
+@if (Model.Genres != null && Model.Genres.Any())
+{
+<p>
+    Genres:
+    @for (var i = 0; i < Model.Genres.Count; i++)
+    {
+        if (i < Model.Genres.Count - 1)
+        {
+            <text>@Model.Genres[i].Name (id @Model.Genres[i].Id) | </text>
+        }
+
+        else
+        {
+            <text>@Model.Genres[i].Name (id @Model.Genres[i].Id)</text>
+        }
+    }
+</p>
+}
+
 <p>@Model.Summary (For more info about this game, check out <a href="@Model.GbSiteDetailUrl" target="_blank">its entry on the Giant Bomb Wiki.</a>)</p>
 
 <h4>Rating</h4>

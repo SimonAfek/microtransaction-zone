@@ -35,7 +35,7 @@ namespace DIHMT.Controllers
 
         public async Task<ActionResult> Game(int id)
         {
-            var displayGame = await GameHelpers.RefreshDisplayGame(id);
+            var displayGame = await GameHelpers.RefreshDisplayGame(id, true);
 
             return View(displayGame);
         }

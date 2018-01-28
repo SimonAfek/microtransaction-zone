@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using DIHMT.Models;
 using DIHMT.Static;
-using GiantBomb.Api.Model;
 using Rating = DIHMT.Models.Rating;
 
 namespace DIHMT.Controllers

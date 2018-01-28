@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f73e80777d7b49d1a6074469dfba9e1e" Name="Diagram1">
+      <Diagram DiagramId="f73e80777d7b49d1a6074469dfba9e1e" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="Entities.DbGame" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Entities.DbGamePlatform" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Entities.DbPlatform" Width="1.5" PointX="8.125" PointY="1.125" IsExpanded="true" />
@@ -12,6 +12,10 @@
         <AssociationConnector Association="Entities.FK__DbGame__RatingId__286302EC" ManuallyRouted="false" />
         <AssociationConnector Association="Entities.FK__DbGamePla__GameI__29572725" ManuallyRouted="false" />
         <AssociationConnector Association="Entities.FK__DbGamePla__Platf__2A4B4B5E" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Entities.DbGameGenre" Width="1.5" PointX="5.25" PointY="4.875" />
+        <EntityTypeShape EntityType="Entities.DbGenre" Width="1.5" PointX="3" PointY="6" />
+        <AssociationConnector Association="Entities.FK_DbGameGenre_GameId" />
+        <AssociationConnector Association="Entities.FK_DbGameGenre_GenreId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using DIHMT.Models;
@@ -72,6 +73,7 @@ namespace DIHMT.Static
                 {
                     results = ctx.DbGames
                         .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
+                        .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
                         .Include(x => x.DbRating)
                         .FirstOrDefault(x => x.Id == id);
                 }
@@ -124,6 +126,19 @@ namespace DIHMT.Static
                 using (var ctx = new DIHMTEntities())
                 {
                     ctx.DbGamePlatforms.AddRange(input);
+
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
+        internal static void SaveGameGenres(IEnumerable<DbGameGenre> input)
+        {
+            lock (Lock)
+            {
+                using (var ctx = new DIHMTEntities())
+                {
+                    ctx.DbGameGenres.AddRange(input);
 
                     ctx.SaveChanges();
                 }

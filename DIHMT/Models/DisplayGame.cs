@@ -15,6 +15,7 @@ namespace DIHMT.Models
         public string ThumbImageUrl { get; set; }
         public string GbSiteDetailUrl { get; set; }
         public List<DisplayGamePlatform> Platforms { get; set; }
+        public List<DisplayGameGenre> Genres { get; set; }
     }
 
     public class DisplayGamePlatform
@@ -23,5 +24,11 @@ namespace DIHMT.Models
         public string Name { get; set; }
         public string Abbreviation { get; set; }
         public string ImageUrl { get; set; }
+    }
+
+    public class DisplayGameGenre
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }
