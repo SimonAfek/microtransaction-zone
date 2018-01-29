@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using DIHMT.Models;
 using GiantBomb.Api.Model;
@@ -23,7 +24,6 @@ namespace DIHMT.Static
                 Id = input.Id,
                 Name = input.Name,
                 Summary = input.Deck,
-                RatingId = (int)Models.Rating.Unrated,
                 LastUpdated = DateTime.UtcNow,
                 SmallImageUrl = input.Image.SmallUrl,
                 ThumbImageUrl = input.Image.ThumbUrl,
@@ -42,7 +42,7 @@ namespace DIHMT.Static
             var gbGame = GbGateway.GetGame(dGame.Id);
             var dbGame = CreateDbGameObjectWithoutNavigation(gbGame);
 
-            dbGame.RatingId = (int) (Models.Rating) Enum.Parse(typeof(Models.Rating), dGame.Rating);
+            dbGame.IsRated = dGame.IsRated;
             dbGame.RatingExplanation = dGame.RatingExplanation;
 
             DbAccess.SaveGame(dbGame);
@@ -179,7 +179,15 @@ namespace DIHMT.Static
                         Name = x.DbGenre.Name
                     }).ToList(),
 
-                    Rating = dbGameView.DbRating.Name,
+                    Ratings = dbGameView.DbGameRatings.Select(x => new DisplayGameRating
+                    {
+                        Id = x.DbRating.Id,
+                        Description = x.DbRating.Description,
+                        ImageUrl = x.DbRating.ImageUrl,
+                        Name = x.DbRating.Name
+                    }).ToList(),
+
+                    IsRated = dbGameView.IsRated,
                     RatingExplanation = dbGameView.RatingExplanation,
                     SmallImageUrl = dbGameView.SmallImageUrl,
                     Summary = dbGameView.Summary,

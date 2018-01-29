@@ -21,7 +21,7 @@
             <h3 style="display: inline">@v.Name - </h3>@v.Platforms[0].Abbreviation
             <img src="@v.ThumbImageUrl" alt="" style="display: block; margin-left: auto; margin-right: auto;"/>
             <p><strong>Quick rundown:</strong> @v.RatingExplanation</p>
-            <p><a class="btn btn-default" href="@Url.Action("Game", new { id = v.Id })">Details</a></p>
+            <p><a class="btn btn-default" href="@Url.Action("Index", "Game", new { id = v.Id })">Details</a></p>
         </div>
     }
 </div>

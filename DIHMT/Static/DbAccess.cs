@@ -74,7 +74,7 @@ namespace DIHMT.Static
                     results = ctx.DbGames
                         .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
                         .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
-                        .Include(x => x.DbRating)
+                        .Include(x => x.DbGameRatings.Select(y => y.DbRating))
                         .FirstOrDefault(x => x.Id == id);
                 }
             }
