@@ -20,7 +20,10 @@ namespace DIHMT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitRating(RatingInputModel input)
         {
-            GameHelpers.SubmitRating(input);
+            if (ModelState.IsValid)
+            {
+                GameHelpers.SubmitRating(input);
+            }
 
             return RedirectToAction("Index", new { id = input.Id });
         }

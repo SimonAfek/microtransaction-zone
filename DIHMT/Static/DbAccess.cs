@@ -164,7 +164,7 @@ namespace DIHMT.Static
                         ctx.DbGameRatings.RemoveRange(ctx.DbGameRatings.Where(x => x.GameId == input.Id));
                         
                         // Add ratings from input
-                        ctx.DbGameRatings.AddRange(input.Flags.Select(x => new DbGameRating { GameId = input.Id, RatingId = x }));
+                        ctx.DbGameRatings.AddRange(input.Flags?.Select(x => new DbGameRating { GameId = input.Id, RatingId = x }) ?? new List<DbGameRating>());
 
                         ctx.SaveChanges();
                     }

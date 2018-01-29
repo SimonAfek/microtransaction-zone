@@ -230,6 +230,19 @@ namespace DIHMT.Static
 
         public static void SubmitRating(RatingInputModel input)
         {
+            input.Flags = input.Flags ?? new List<int>();
+
+            if (input.ValueProposition != 0)
+            {
+                input.Flags.Add(input.ValueProposition);
+            }
+
+            if (input.HorseArmorTier != 0)
+            {
+                // Magic numbers ugh I hate it I'm so sorry
+                input.Flags.Add(input.HorseArmorTier + 2);
+            }
+
             DbAccess.SaveGameRating(input);
         }
     }

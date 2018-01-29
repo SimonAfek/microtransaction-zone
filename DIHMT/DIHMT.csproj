@@ -348,6 +348,7 @@
     </Content>
     <Content Include="Views\Home\Donate.cshtml" />
     <Content Include="Views\Game\Index.cshtml" />
+    <Content Include="Views\Game\Submit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
