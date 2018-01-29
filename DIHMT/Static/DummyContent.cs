@@ -24,6 +24,17 @@ namespace DIHMT.Static
                 }
             },
 
+            Ratings = new List<DisplayGameRating>
+            {
+                new DisplayGameRating
+                {
+                    Description = "This is a sample full description for a flag.",
+                    Id = 666,
+                    Name = "Sample Flag"
+                }
+            },
+
+            IsRated = true,
             RatingExplanation = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel erat in nibh auctor accumsan. Curabitur id rutrum ex. Nullam sit amet est aliquet, facilisis turpis sed, hendrerit orci.",
             SmallImageUrl = "https://dummyimage.com/300x3:4/551a8b/000000",
             Summary = "Aliquam eu pulvinar orci. Duis sodales, urna nec vulputate ullamcorper, ex erat luctus orci, non hendrerit sapien tortor vitae purus. Ut eu pharetra ligula, eu tincidunt nunc.",

@@ -6,11 +6,11 @@
 
 <h2>@Model.Name</h2>
 
-<img src="@Model.SmallImageUrl"/>
+<img src="@Model.SmallImageUrl" />
 
 <h4>About this game</h4>
 <p>
-    Platforms: 
+    Platforms:
     @for (var i = 0; i < Model.Platforms.Count; i++)
     {
         if (i < Model.Platforms.Count - 1)
@@ -46,18 +46,34 @@
 
 <p>@Model.Summary (For more info about this game, check out <a href="@Model.GbSiteDetailUrl" target="_blank">its entry on the Giant Bomb Wiki.</a>)</p>
 
-@*<h4>Rating</h4>
-<p>@Model.Rating</p>*@
-
-<h4>Explanation</h4>
-<p>
-    @if (string.IsNullOrEmpty(Model.RatingExplanation))
+@if (Model.IsRated)
+{
+    if (Model.Ratings != null && Model.Ratings.Any())
     {
-        <i>No reason for this game's rating is available.</i>
+        <h4>Quick monetization info</h4>
+
+        foreach (var v in Model.Ratings)
+        {
+            <p><strong>@v.Name:</strong> @v.Description</p>
+        }
     }
 
     else
     {
-        @Model.RatingExplanation
+        <p>This game does not fulfill the conditions for any of our monetization classifications - please see the description below for further info.</p>
     }
-</p>
+
+
+    <h4>More information</h4>
+    <p>
+        @if (string.IsNullOrEmpty(Model.RatingExplanation))
+        {
+            <i>No reason for this game's rating is available.</i>
+        }
+
+        else
+        {
+            @Model.RatingExplanation
+        }
+    </p>
+}

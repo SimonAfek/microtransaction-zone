@@ -227,5 +227,10 @@ namespace DIHMT.Static
 
             return retval;
         }
+
+        public static void SubmitRating(RatingInputModel input)
+        {
+            DbAccess.SaveGameRating(input);
+        }
     }
 }
