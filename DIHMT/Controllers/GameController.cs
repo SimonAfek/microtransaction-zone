@@ -22,7 +22,7 @@ namespace DIHMT.Controllers
         {
             GameHelpers.SubmitRating(input);
 
-            return Content("Rating submitted");
+            return RedirectToAction("Index", new { id = input.Id });
         }
     }
 }
