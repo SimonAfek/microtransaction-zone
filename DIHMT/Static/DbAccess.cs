@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using DIHMT.Models;
 using GiantBomb.Api.Model;
 
@@ -74,7 +75,7 @@ namespace DIHMT.Static
                     results = ctx.DbGames
                         .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
                         .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
-                        .Include(x => x.DbRating)
+                        .Include(x => x.DbGameRatings.Select(y => y.DbRating))
                         .FirstOrDefault(x => x.Id == id);
                 }
             }
@@ -132,7 +133,7 @@ namespace DIHMT.Static
             }
         }
 
-        internal static void SaveGameGenres(IEnumerable<DbGameGenre> input)
+        public static void SaveGameGenres(IEnumerable<DbGameGenre> input)
         {
             lock (Lock)
             {
@@ -142,6 +143,40 @@ namespace DIHMT.Static
 
                     ctx.SaveChanges();
                 }
+            }
+        }
+
+        public static void SaveGameRating(RatingInputModel input)
+        {
+            lock (Lock)
+            {
+                using (var ctx = new DIHMTEntities())
+                {
+                    var game = ctx.DbGames.FirstOrDefault(x => x.Id == input.Id);
+
+                    if (game != null)
+                    {
+                        // Set IsRated & update explanation
+                        game.IsRated = true;
+                        game.RatingExplanation = input.RatingExplanation;
+
+                        // Remove current ratings
+                        ctx.DbGameRatings.RemoveRange(ctx.DbGameRatings.Where(x => x.GameId == input.Id));
+                        
+                        // Add ratings from input
+                        ctx.DbGameRatings.AddRange(input.Flags?.Select(x => new DbGameRating { GameId = input.Id, RatingId = x }) ?? new List<DbGameRating>());
+
+                        ctx.SaveChanges();
+                    }
+                }
+            }
+        }
+
+        internal static List<DbRating> GetRatings()
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                return ctx.DbRatings.ToList();
             }
         }
     }

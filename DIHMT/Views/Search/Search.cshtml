@@ -11,15 +11,15 @@
     {
         <hr />
         <div>
-            <h3><a href="@Url.Action("Game", "Home", new { id = item.Id })">@item.Name</a></h3>
-            <a href="@Url.Action("Game", "Home", new { id = item.Id })">
+            <h3><a href="@Url.Action("Index", "Game", new { id = item.Id })">@item.Name</a></h3>
+            <a href="@Url.Action("Index", "Game", new { id = item.Id })">
                 <img src="@item.ThumbImageUrl" />
             </a>
             <br />
             <strong>Game summary:</strong> @item.Summary
             <br />
-            <strong>Rating: </strong> @item.Rating
-            <br />
+            @*<strong>Rating: </strong> @item.Rating
+            <br />*@
             @if (!string.IsNullOrEmpty(item.RatingExplanation))
             {
                 <strong>Reasoning: </strong> @item.RatingExplanation

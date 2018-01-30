@@ -12,12 +12,12 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Summary" Type="nvarchar" MaxLength="2000" />
-          <Property Name="RatingId" Type="int" Nullable="false" />
           <Property Name="RatingExplanation" Type="nvarchar" MaxLength="2000" />
           <Property Name="LastUpdated" Type="datetime" Nullable="false" />
           <Property Name="SmallImageUrl" Type="nvarchar" MaxLength="1000" />
           <Property Name="ThumbImageUrl" Type="nvarchar" MaxLength="1000" />
           <Property Name="GbSiteDetailUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsRated" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="DbGameGenre">
           <Key>
@@ -34,6 +34,14 @@
           <Property Name="GameId" Type="int" />
           <Property Name="PlatformId" Type="int" />
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DbGameRating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameId" Type="int" Nullable="false" />
+          <Property Name="RatingId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DbGenre">
           <Key>
@@ -56,20 +64,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="400" />
         </EntityType>
-        <Association Name="FK__DbGame__RatingId__5070F446">
-          <End Role="DbRating" Type="Self.DbRating" Multiplicity="1" />
-          <End Role="DbGame" Type="Self.DbGame" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DbRating">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DbGame">
-              <PropertyRef Name="RatingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__DbGamePla__GameI__5165187F">
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="0..1" />
           <End Role="DbGamePlatform" Type="Self.DbGamePlatform" Multiplicity="*" />
@@ -118,17 +116,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DbGameRating_GameId">
+          <End Role="DbGame" Type="Self.DbGame" Multiplicity="1" />
+          <End Role="DbGameRating" Type="Self.DbGameRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DbGame">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DbGameRating">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DbGameRating_RatingId">
+          <End Role="DbRating" Type="Self.DbRating" Multiplicity="1" />
+          <End Role="DbGameRating" Type="Self.DbGameRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DbRating">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DbGameRating">
+              <PropertyRef Name="RatingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EntitiesStoreContainer">
           <EntitySet Name="DbGame" EntityType="Self.DbGame" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGameGenre" EntityType="Self.DbGameGenre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGamePlatform" EntityType="Self.DbGamePlatform" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DbGameRating" EntityType="Self.DbGameRating" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGenre" EntityType="Self.DbGenre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbPlatform" EntityType="Self.DbPlatform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbRating" EntityType="Self.DbRating" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__DbGame__RatingId__5070F446" Association="Self.FK__DbGame__RatingId__5070F446">
-            <End Role="DbRating" EntitySet="DbRating" />
-            <End Role="DbGame" EntitySet="DbGame" />
-          </AssociationSet>
           <AssociationSet Name="FK__DbGamePla__GameI__5165187F" Association="Self.FK__DbGamePla__GameI__5165187F">
             <End Role="DbGame" EntitySet="DbGame" />
             <End Role="DbGamePlatform" EntitySet="DbGamePlatform" />
@@ -145,6 +164,14 @@
             <End Role="DbGenre" EntitySet="DbGenre" />
             <End Role="DbGameGenre" EntitySet="DbGameGenre" />
           </AssociationSet>
+          <AssociationSet Name="FK_DbGameRating_GameId" Association="Self.FK_DbGameRating_GameId">
+            <End Role="DbGame" EntitySet="DbGame" />
+            <End Role="DbGameRating" EntitySet="DbGameRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DbGameRating_RatingId" Association="Self.FK_DbGameRating_RatingId">
+            <End Role="DbRating" EntitySet="DbRating" />
+            <End Role="DbGameRating" EntitySet="DbGameRating" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -157,15 +184,15 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Summary" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="RatingId" Type="Int32" Nullable="false" />
           <Property Name="RatingExplanation" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DbRating" Relationship="Self.FK__DbGame__RatingId__286302EC" FromRole="DbGame" ToRole="DbRating" />
           <NavigationProperty Name="DbGamePlatforms" Relationship="Self.FK__DbGamePla__GameI__29572725" FromRole="DbGame" ToRole="DbGamePlatform" />
           <Property Name="SmallImageUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="ThumbImageUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="GbSiteDetailUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DbGameGenres" Relationship="Entities.FK_DbGameGenre_GameId" FromRole="DbGame" ToRole="DbGameGenre" />
+          <Property Name="IsRated" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DbGameRatings" Relationship="Entities.FK_DbGameRating_GameId" FromRole="DbGame" ToRole="DbGameRating" />
         </EntityType>
         <EntityType Name="DbGamePlatform">
           <Key>
@@ -187,26 +214,6 @@
           <Property Name="Abbreviation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DbGamePlatforms" Relationship="Self.FK__DbGamePla__Platf__2A4B4B5E" FromRole="DbPlatform" ToRole="DbGamePlatform" />
         </EntityType>
-        <EntityType Name="DbRating">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="DbGames" Relationship="Self.FK__DbGame__RatingId__286302EC" FromRole="DbRating" ToRole="DbGame" />
-        </EntityType>
-        <Association Name="FK__DbGame__RatingId__286302EC">
-          <End Role="DbRating" Type="Self.DbRating" Multiplicity="1" />
-          <End Role="DbGame" Type="Self.DbGame" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DbRating">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DbGame">
-              <PropertyRef Name="RatingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__DbGamePla__GameI__29572725">
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="0..1" />
           <End Role="DbGamePlatform" Type="Self.DbGamePlatform" Multiplicity="*" />
@@ -235,11 +242,6 @@
           <EntitySet Name="DbGames" EntityType="Self.DbGame" />
           <EntitySet Name="DbGamePlatforms" EntityType="Self.DbGamePlatform" />
           <EntitySet Name="DbPlatforms" EntityType="Self.DbPlatform" />
-          <EntitySet Name="DbRatings" EntityType="Self.DbRating" />
-          <AssociationSet Name="FK__DbGame__RatingId__286302EC" Association="Self.FK__DbGame__RatingId__286302EC">
-            <End Role="DbRating" EntitySet="DbRatings" />
-            <End Role="DbGame" EntitySet="DbGames" />
-          </AssociationSet>
           <AssociationSet Name="FK__DbGamePla__GameI__29572725" Association="Self.FK__DbGamePla__GameI__29572725">
             <End Role="DbGame" EntitySet="DbGames" />
             <End Role="DbGamePlatform" EntitySet="DbGamePlatforms" />
@@ -257,6 +259,16 @@
           <AssociationSet Name="FK_DbGameGenre_GenreId" Association="Entities.FK_DbGameGenre_GenreId">
             <End Role="DbGenre" EntitySet="DbGenres" />
             <End Role="DbGameGenre" EntitySet="DbGameGenres" />
+          </AssociationSet>
+          <EntitySet Name="DbGameRatings" EntityType="Entities.DbGameRating" />
+          <EntitySet Name="DbRatings" EntityType="Entities.DbRating" />
+          <AssociationSet Name="FK_DbGameRating_GameId" Association="Entities.FK_DbGameRating_GameId">
+            <End Role="DbGame" EntitySet="DbGames" />
+            <End Role="DbGameRating" EntitySet="DbGameRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DbGameRating_RatingId" Association="Entities.FK_DbGameRating_RatingId">
+            <End Role="DbRating" EntitySet="DbRatings" />
+            <End Role="DbGameRating" EntitySet="DbGameRatings" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="DbGameGenre">
@@ -301,6 +313,50 @@
 			</Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DbGameRating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameId" Type="Int32" Nullable="false" />
+          <Property Name="RatingId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DbGame" Relationship="Entities.FK_DbGameRating_GameId" FromRole="DbGameRating" ToRole="DbGame" />
+          <NavigationProperty Name="DbRating" Relationship="Entities.FK_DbGameRating_RatingId" FromRole="DbGameRating" ToRole="DbRating" />
+        </EntityType>
+        <EntityType Name="DbRating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DbGameRatings" Relationship="Entities.FK_DbGameRating_RatingId" FromRole="DbRating" ToRole="DbGameRating" />
+        </EntityType>
+        <Association Name="FK_DbGameRating_GameId">
+          <End Type="Entities.DbGame" Role="DbGame" Multiplicity="1" />
+          <End Type="Entities.DbGameRating" Role="DbGameRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DbGame">
+			  <PropertyRef Name="Id" />
+			</Principal>
+            <Dependent Role="DbGameRating">
+			  <PropertyRef Name="GameId" />
+			</Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DbGameRating_RatingId">
+          <End Type="Entities.DbRating" Role="DbRating" Multiplicity="1" />
+          <End Type="Entities.DbGameRating" Role="DbGameRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DbRating">
+			  <PropertyRef Name="Id" />
+			</Principal>
+            <Dependent Role="DbGameRating">
+			  <PropertyRef Name="RatingId" />
+			</Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -310,13 +366,13 @@
           <EntitySetMapping Name="DbGames">
             <EntityTypeMapping TypeName="Entities.DbGame">
               <MappingFragment StoreEntitySet="DbGame">
+                <ScalarProperty Name="IsRated" ColumnName="IsRated" />
                 <ScalarProperty Name="GbSiteDetailUrl" ColumnName="GbSiteDetailUrl" />
                 <ScalarProperty Name="ThumbImageUrl" ColumnName="ThumbImageUrl" />
                 <ScalarProperty Name="SmallImageUrl" ColumnName="SmallImageUrl" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Summary" ColumnName="Summary" />
-                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
                 <ScalarProperty Name="RatingExplanation" ColumnName="RatingExplanation" />
                 <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
               </MappingFragment>
@@ -341,14 +397,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DbRatings">
-            <EntityTypeMapping TypeName="Entities.DbRating">
-              <MappingFragment StoreEntitySet="DbRating">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DbGameGenres">
             <EntityTypeMapping TypeName="Entities.DbGameGenre">
               <MappingFragment StoreEntitySet="DbGameGenre">
@@ -361,6 +409,25 @@
           <EntitySetMapping Name="DbGenres">
             <EntityTypeMapping TypeName="Entities.DbGenre">
               <MappingFragment StoreEntitySet="DbGenre">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DbGameRatings">
+            <EntityTypeMapping TypeName="Entities.DbGameRating">
+              <MappingFragment StoreEntitySet="DbGameRating">
+                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DbRatings">
+            <EntityTypeMapping TypeName="Entities.DbRating">
+              <MappingFragment StoreEntitySet="DbRating">
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

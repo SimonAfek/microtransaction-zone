@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using DIHMT.Models;
 using DIHMT.Static;
-using Rating = DIHMT.Models.Rating;
 
 namespace DIHMT.Controllers
 {
@@ -25,8 +24,8 @@ namespace DIHMT.Controllers
                     var searchResultRanked = new List<DisplayGame>();
 
                     // Move all the unrated results to the bottom of the list
-                    searchResultRanked.AddRange(searchResult.Where(x => x.Rating != Rating.Unrated.ToString()));
-                    searchResultRanked.AddRange(searchResult.Where(x => x.Rating == Rating.Unrated.ToString()));
+                    searchResultRanked.AddRange(searchResult.Where(x => x.IsRated));
+                    searchResultRanked.AddRange(searchResult.Where(x => !x.IsRated));
 
                     games.AddRange(searchResultRanked.Skip((page - 1) * PageLimit).Take(PageLimit));
 
