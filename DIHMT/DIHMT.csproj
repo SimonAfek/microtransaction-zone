@@ -261,7 +261,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EfModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\RatingEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Static\DummyContent.cs" />
     <Compile Include="Static\GameHelpers.cs" />

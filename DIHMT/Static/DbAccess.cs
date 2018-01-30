@@ -171,5 +171,13 @@ namespace DIHMT.Static
                 }
             }
         }
+
+        internal static List<DbRating> GetRatings()
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                return ctx.DbRatings.ToList();
+            }
+        }
     }
 }

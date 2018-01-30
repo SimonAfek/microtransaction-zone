@@ -1,4 +1,6 @@
-﻿@model DIHMT.Models.RatingInputModel
+﻿@using DIHMT.Models
+@using DIHMT.Static
+@model RatingInputModel
 
 @using (Html.BeginForm("SubmitRating", "Game"))
 {
@@ -22,6 +24,16 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.HorseArmorTier, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.HorseArmorTier, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Flags, htmlAttributes: new { @class = "control-label col-md-2 "})
+            <div class="col-md-10">
+                @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.MultiValueFlags.Contains(x.Id)))
+                {
+                    <p><label><input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)"> @v.Name</label></p>
+                }
             </div>
         </div>
 

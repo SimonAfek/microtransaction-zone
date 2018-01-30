@@ -243,7 +243,14 @@ namespace DIHMT.Static
                 input.Flags.Add(input.HorseArmorTier + 2);
             }
 
+            input.Flags.Sort();
+
             DbAccess.SaveGameRating(input);
+        }
+
+        public static List<DbRating> GetRatings()
+        {
+            return DbAccess.GetRatings();
         }
     }
 }

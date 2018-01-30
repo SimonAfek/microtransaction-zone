@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using DIHMT.Models;
 using DIHMT.Static;
-using Rating = DIHMT.Models.Rating;
 
 namespace DIHMT.Controllers
 {

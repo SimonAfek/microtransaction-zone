@@ -5,6 +5,7 @@ namespace DIHMT.Models
 {
     public class RatingInputModel
     {
+        public int[] MultiValueFlags => new[] { 1, 2, 3, 4 };
         [Required]
         public int Id { get; set; }
         [Range(0, 2)]
