@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using DIHMT.Models;
 
 namespace DIHMT.Static
 {
     public static class SearchHelpers
     {
-        public static async Task<List<DisplayGame>> SearchGamesInDb(string q)
+        public static List<DisplayGame> SearchGamesInDb(string q)
         {
             var retval = new List<DisplayGame>();
 
@@ -20,10 +19,7 @@ namespace DIHMT.Static
                 return retval;
             }
 
-            foreach (var i in dbGames.Select(x => x.Id))
-            {
-                retval.Add(await GameHelpers.RefreshDisplayGame(i));
-            }
+            retval.AddRange(dbGames.Select(x => x.Id).Select(GameHelpers.CreateDisplayGameObject));
 
             return retval;
         }

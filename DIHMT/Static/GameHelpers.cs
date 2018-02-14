@@ -149,7 +149,7 @@ namespace DIHMT.Static
         /// </summary>
         /// <param name="id">Id of the game to retrieve</param>
         /// <returns></returns>
-        private static DisplayGame CreateDisplayGameObject(int id)
+        public static DisplayGame CreateDisplayGameObject(int id)
         {
             var dbGameView = DbAccess.GetDbGameView(id);
 

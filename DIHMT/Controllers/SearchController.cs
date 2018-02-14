@@ -17,7 +17,7 @@ namespace DIHMT.Controllers
 
             if (!string.IsNullOrEmpty(q))
             {
-                var searchResult = await SearchHelpers.SearchGamesInDb(q);
+                var searchResult = SearchHelpers.SearchGamesInDb(q);
 
                 if (searchResult.Count > (page - 1) * PageLimit)
                 {
@@ -32,9 +32,7 @@ namespace DIHMT.Controllers
                     // Dispatch a Task on a different thread to ask GB for games
                     // related to the query, and add any results we don't yet have
                     // to our own DB.
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                    Task.Run(() => GameHelpers.SearchGbAndCacheResults(q, page));
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                    GameHelpers.SearchGbAndCacheResults(q, page);
                 }
             }
 
