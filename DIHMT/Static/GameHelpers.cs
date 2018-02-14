@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using DIHMT.Models;
 using GiantBomb.Api.Model;
@@ -184,7 +183,8 @@ namespace DIHMT.Static
                         Id = x.DbRating.Id,
                         Description = x.DbRating.Description,
                         ImageUrl = x.DbRating.ImageUrl,
-                        Name = x.DbRating.Name
+                        Name = x.DbRating.Name,
+                        ShortDescription = x.DbRating.ShortDescription
                     }).ToList(),
 
                     IsRated = dbGameView.IsRated,
@@ -231,17 +231,6 @@ namespace DIHMT.Static
         public static void SubmitRating(RatingInputModel input)
         {
             input.Flags = input.Flags ?? new List<int>();
-
-            if (input.ValueProposition != 0)
-            {
-                input.Flags.Add(input.ValueProposition);
-            }
-
-            if (input.HorseArmorTier != 0)
-            {
-                // Magic numbers ugh I hate it I'm so sorry
-                input.Flags.Add(input.HorseArmorTier + 2);
-            }
 
             input.Flags.Sort();
 

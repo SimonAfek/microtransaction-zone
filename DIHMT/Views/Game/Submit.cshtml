@@ -12,25 +12,36 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ValueProposition, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ValueProposition, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ValueProposition, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.HorseArmorTier, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HorseArmorTier, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HorseArmorTier, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-        <div class="form-group">
             @Html.LabelFor(model => model.Flags, htmlAttributes: new { @class = "control-label col-md-2 "})
             <div class="col-md-10">
-                @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.MultiValueFlags.Contains(x.Id)))
+                <p>
+                    <label>
+                        <input type="checkbox" name="Flags" value="@((int) EnumRating.Spotless)" checked="@Model.Flags.Contains((int) EnumRating.Spotless)"/> Spotless
+                    </label>
+                </p>
+                
+                <p>
+                    <strong>Horse armor: </strong>
+                    <ul>
+                        <li>
+                            <label>
+                                <input type="radio" name="Flags" value="-1" checked="@(!(Model.Flags.Contains((int)EnumRating.HorseArmor) || Model.Flags.Contains((int)EnumRating.BulkOrderHorseArmor)))" /> None
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="Flags" value="@((int)EnumRating.HorseArmor)" checked="@Model.Flags.Contains((int)EnumRating.HorseArmor)" /> Some
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="Flags" value="@((int)EnumRating.BulkOrderHorseArmor)" checked="@Model.Flags.Contains((int)EnumRating.BulkOrderHorseArmor)"/> A lot
+                            </label>
+                        </li>
+                    </ul>
+                </p>
+
+                @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.MultiValueFlags.Contains(x.Id) && x.Id > (int)EnumRating.Spotless))
                 {
                     <p><label><input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)"> @v.Name</label></p>
                 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DbGame">
           <Key>
             <PropertyRef Name="Id" />
@@ -67,8 +67,9 @@
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
           <Property Name="ImageUrl" Type="nvarchar" MaxLength="400" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
-        <Association Name="FK__DbGamePla__GameI__5165187F">
+        <Association Name="FK__DbGamePla__GameI__31EC6D26">
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="0..1" />
           <End Role="DbGamePlatform" Type="Self.DbGamePlatform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -80,7 +81,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DbGamePla__Platf__52593CB8">
+        <Association Name="FK__DbGamePla__Platf__32E0915F">
           <End Role="DbPlatform" Type="Self.DbPlatform" Multiplicity="0..1" />
           <End Role="DbGamePlatform" Type="Self.DbGamePlatform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -148,11 +149,11 @@
           <EntitySet Name="DbGenre" EntityType="Self.DbGenre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbPlatform" EntityType="Self.DbPlatform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbRating" EntityType="Self.DbRating" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__DbGamePla__GameI__5165187F" Association="Self.FK__DbGamePla__GameI__5165187F">
+          <AssociationSet Name="FK__DbGamePla__GameI__31EC6D26" Association="Self.FK__DbGamePla__GameI__31EC6D26">
             <End Role="DbGame" EntitySet="DbGame" />
             <End Role="DbGamePlatform" EntitySet="DbGamePlatform" />
           </AssociationSet>
-          <AssociationSet Name="FK__DbGamePla__Platf__52593CB8" Association="Self.FK__DbGamePla__Platf__52593CB8">
+          <AssociationSet Name="FK__DbGamePla__Platf__32E0915F" Association="Self.FK__DbGamePla__Platf__32E0915F">
             <End Role="DbPlatform" EntitySet="DbPlatform" />
             <End Role="DbGamePlatform" EntitySet="DbGamePlatform" />
           </AssociationSet>
@@ -332,6 +333,7 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="ImageUrl" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DbGameRatings" Relationship="Entities.FK_DbGameRating_RatingId" FromRole="DbRating" ToRole="DbGameRating" />
+          <Property Name="ShortDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_DbGameRating_GameId">
           <End Type="Entities.DbGame" Role="DbGame" Multiplicity="1" />
@@ -426,6 +428,7 @@
           <EntitySetMapping Name="DbRatings">
             <EntityTypeMapping TypeName="Entities.DbRating">
               <MappingFragment StoreEntitySet="DbRating">
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

@@ -20,7 +20,7 @@ namespace DIHMT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitRating(RatingInputModel input)
         {
-            if (ModelState.IsValid)
+            if (input.Valid)
             {
                 GameHelpers.SubmitRating(input);
             }

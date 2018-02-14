@@ -296,6 +296,8 @@
     </Content>
     <Content Include="ConnectionStrings.config" />
     <None Include="Properties\PublishProfiles\dihmt - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\microtransaction.zone - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\microtransaction.zone - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Models\EfModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
