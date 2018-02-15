@@ -6,7 +6,8 @@ namespace DIHMT.Models
 {
     public class RatingInputModel
     {
-        public List<int> MultiValueFlags => new List<int> { 1, 2 };
+        public List<int> MonetizationFlags => new List<int> { 1, 2, 4, 5, 6, 7, 8, 9 };
+        public bool IsSpotless => Flags.Contains((int)EnumRating.Spotless);
         [Required]
         public int Id { get; set; }
         public string RatingExplanation { get; set; }
@@ -14,7 +15,7 @@ namespace DIHMT.Models
         private List<int> _flags;
         public List<int> Flags
         {
-            get => _flags?.Where(x => x >= (int) EnumRating.HorseArmor && x <= (int) EnumRating.F2P).ToList();
+            get => _flags?.Where(x => x >= (int)EnumRating.HorseArmor && x <= (int)EnumRating.F2P).ToList();
             set => _flags = value?.Where(x => x >= (int)EnumRating.HorseArmor && x <= (int)EnumRating.F2P).ToList();
         }
 

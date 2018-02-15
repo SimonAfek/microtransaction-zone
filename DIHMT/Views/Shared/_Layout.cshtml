@@ -47,5 +47,15 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $('input[class="spotless-checkbox"]').click(function() {
+            if ($(this).is(":checked")) {
+                $(".monetization-input").prop({ disabled: true, checked: false });
+                $(".check-when-spotless").prop({ checked: true });
+            } else {
+                $(".monetization-input").prop({ disabled: false });
+            }
+        });
+    </script>
 </body>
 </html>

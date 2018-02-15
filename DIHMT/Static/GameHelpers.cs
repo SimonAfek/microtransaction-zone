@@ -129,16 +129,18 @@ namespace DIHMT.Static
         {
             var rawResults = await GbGateway.SearchAsync(q, page);
 
-            if (rawResults.Any())
+            if (!rawResults.Any())
             {
-                var filteredResults = FilterOutUnsupportedPlatforms(rawResults);
+                return;
+            }
 
-                foreach (var v in filteredResults)
+            var filteredResults = FilterOutUnsupportedPlatforms(rawResults);
+
+            foreach (var v in filteredResults)
+            {
+                if (!GameExistsInDb(v.Id))
                 {
-                    if (!GameExistsInDb(v.Id))
-                    {
-                        SaveGameToDb(v);
-                    }
+                    SaveGameToDb(v);
                 }
             }
         }
@@ -212,16 +214,20 @@ namespace DIHMT.Static
             foreach (var i in input)
             {
                 // Some games don't have platforms
-                if (i.Platforms != null && i.Platforms.Count > 0)
+                if (i.Platforms == null || i.Platforms.Count <= 0)
                 {
-                    foreach (var j in i.Platforms)
+                    continue;
+                }
+
+                foreach (var j in i.Platforms)
+                {
+                    if (!platforms.Contains(j.Id))
                     {
-                        if (platforms.Contains(j.Id))
-                        {
-                            retval.Add(i);
-                            break;
-                        }
+                        continue;
                     }
+
+                    retval.Add(i);
+                    break;
                 }
             }
 
