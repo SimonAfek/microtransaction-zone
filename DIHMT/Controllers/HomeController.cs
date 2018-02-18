@@ -9,8 +9,6 @@ namespace DIHMT.Controllers
     {
         public ActionResult Index()
         {
-            // return RedirectToAction("Game", new { id = 47551 });
-
             return View();
         }
 
@@ -35,7 +33,7 @@ namespace DIHMT.Controllers
 
         public async Task<ActionResult> Game(int id)
         {
-            var displayGame = await GameHelpers.RefreshDisplayGame(id, true);
+            var displayGame = GameHelpers.RefreshDisplayGame(id, true);
 
             return View(displayGame);
         }

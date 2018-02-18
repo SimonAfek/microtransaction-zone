@@ -11,7 +11,7 @@ namespace DIHMT.Controllers
         [HttpGet]
         public async Task<ActionResult> Index(int id)
         {
-            var displayGame = await GameHelpers.RefreshDisplayGame(id, true);
+            var displayGame = GameHelpers.RefreshDisplayGame(id, true);
 
             return View(displayGame);
         }

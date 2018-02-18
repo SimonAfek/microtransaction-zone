@@ -38,7 +38,7 @@ namespace DIHMT.Controllers
 
             if (!games.Any()) // Ask GB for games instead
             {
-                var rawResults = await GbGateway.SearchAsync(q, page);
+                var rawResults = GbGateway.Search(q, page);
 
                 if (rawResults.Any())
                 {
@@ -51,7 +51,10 @@ namespace DIHMT.Controllers
                             GameHelpers.SaveGameToDb(v);
                         }
 
-                        games.Add(await GameHelpers.RefreshDisplayGame(v.Id));
+                        // Not using RefreshDisplayGame here, since having to wait for
+                        // potentially up to 10 games to be pulled from GB
+                        // is a super duper bad idea
+                        games.Add(GameHelpers.CreateDisplayGameObject(v.Id));
                     }
                 }
             }

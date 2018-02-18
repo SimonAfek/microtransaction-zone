@@ -72,13 +72,13 @@ namespace DIHMT.Static
         /// <param name="id">Id of the game to be returned</param>
         /// <param name="includeGenres">Whether to look for genre info or not</param>
         /// <returns></returns>
-        public static async Task<DisplayGame> RefreshDisplayGame(int id, bool includeGenres = false)
+        public static DisplayGame RefreshDisplayGame(int id, bool includeGenres = false)
         {
             var displayGame = CreateDisplayGameObject(id);
 
             if (displayGame == null)
             {
-                var gbGame = await GbGateway.GetGameAsync(id);
+                var gbGame = GbGateway.GetGame(id);
 
                 SaveGameToDb(gbGame);
 
@@ -125,9 +125,9 @@ namespace DIHMT.Static
         /// </summary>
         /// <param name="q">Query</param>
         /// <param name="page">Page number</param>
-        public static async void SearchGbAndCacheResults(string q, int page)
+        public static void SearchGbAndCacheResults(string q, int page)
         {
-            var rawResults = await GbGateway.SearchAsync(q, page);
+            var rawResults = GbGateway.Search(q, page);
 
             if (!rawResults.Any())
             {
