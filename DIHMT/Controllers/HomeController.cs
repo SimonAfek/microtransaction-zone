@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using DIHMT.Static;
+﻿using System.Web.Mvc;
 
 namespace DIHMT.Controllers
 {
@@ -29,13 +26,6 @@ namespace DIHMT.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-
-        public async Task<ActionResult> Game(int id)
-        {
-            var displayGame = GameHelpers.RefreshDisplayGame(id, true);
-
-            return View(displayGame);
         }
     }
 }

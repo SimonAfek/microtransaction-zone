@@ -11,9 +11,9 @@
     {
         <hr />
         <div>
-            <h3><a href="@Url.Action("Index", "Game", new { id = item.Id })">@item.Name</a></h3>
-            <a href="@Url.Action("Index", "Game", new { id = item.Id })">
-                <img src="@item.ThumbImageUrl" />
+            <h3><a href="@Url.Action("Game", "Game", new { id = item.Id })">@item.Name</a></h3>
+            <a href="@Url.Action("Game", "Game", new { id = item.Id })">
+                <img src="@item.ThumbImageUrl" alt=""/>
             </a>
             <br />
             <strong>Game summary:</strong> @item.Summary

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using DIHMT.Models;
 using DIHMT.Static;
 
@@ -9,7 +8,7 @@ namespace DIHMT.Controllers
     {
         // GET: Game
         [HttpGet]
-        public async Task<ActionResult> Index(int id)
+        public ActionResult Index(int id)
         {
             var displayGame = GameHelpers.RefreshDisplayGame(id, true);
 

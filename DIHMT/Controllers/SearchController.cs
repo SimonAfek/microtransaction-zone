@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using DIHMT.Models;
 using DIHMT.Static;
@@ -11,7 +10,7 @@ namespace DIHMT.Controllers
     {
         private const int PageLimit = 10;
 
-        public async Task<ActionResult> Search(string q, int page = 1)
+        public ActionResult Search(string q, int page = 1)
         {
             var games = new List<DisplayGame>();
 
