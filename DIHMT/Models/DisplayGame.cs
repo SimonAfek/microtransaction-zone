@@ -26,10 +26,7 @@ namespace DIHMT.Models
                 return new RatingInputModel
                 {
                     Id = Id,
-                    Flags = Ratings?
-                            .Select(x => x.Id)
-                            .ToList()
-                            ?? new List<int>(),
+                    Flags = Ratings?.Select(x => x.Id).ToList() ?? new List<int>(),
                     RatingExplanation = RatingExplanation
                 };
             }

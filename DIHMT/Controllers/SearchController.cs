@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using DIHMT.Models;
 using DIHMT.Static;
@@ -31,7 +32,7 @@ namespace DIHMT.Controllers
                     // Dispatch a Task on a different thread to ask GB for games
                     // related to the query, and add any results we don't yet have
                     // to our own DB.
-                    GameHelpers.SearchGbAndCacheResults(q, page);
+                    Task.Run(() => GameHelpers.SearchGbAndCacheResults(q, page));
                 }
             }
 
