@@ -1,8 +1,4 @@
-﻿using System.Web;
-using System.Web.Mvc;
-using DIHMT.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
+﻿using System.Web.Mvc;
 
 namespace DIHMT.Controllers
 {
