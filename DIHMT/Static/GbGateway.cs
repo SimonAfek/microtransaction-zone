@@ -51,9 +51,12 @@ namespace DIHMT.Static
         {
             var now = DateTime.UtcNow;
 
-            if (now < _lastRequest.AddMilliseconds(RequestIntervalInMilliseconds))
+            var earliestAllowableRequestTime = _lastRequest.AddMilliseconds(RequestIntervalInMilliseconds);
+            var msToSleep = (earliestAllowableRequestTime - now).Milliseconds;
+
+            if (msToSleep > 0)
             {
-                Thread.Sleep(RequestIntervalInMilliseconds - (now - _lastRequest).Milliseconds);
+                Thread.Sleep(msToSleep);
             }
         }
     }

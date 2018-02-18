@@ -42,6 +42,8 @@ namespace DIHMT.Static
 
             dbGame.IsRated = dGame.IsRated;
             dbGame.RatingExplanation = dGame.RatingExplanation;
+            dbGame.RatingLastUpdated = dGame.RatingLastUpdated;
+            dbGame.LastUpdated = DateTime.UtcNow;
 
             DbAccess.SaveGame(dbGame);
 
@@ -112,7 +114,10 @@ namespace DIHMT.Static
             DbAccess.SaveGame(dbGame);
             DbAccess.SaveGamePlatforms(dbGamePlatforms);
 
-            if (input.Genres == null || !input.Genres.Any()) return;
+            if (input.Genres == null || !input.Genres.Any())
+            {
+                return;
+            }
 
             var dbGameGenres = CreateDbGameGenresListWithoutNavigation(input);
             DbAccess.SaveGameGenres(dbGameGenres);
@@ -260,6 +265,7 @@ namespace DIHMT.Static
 
                 IsRated = input.IsRated,
                 RatingExplanation = input.RatingExplanation,
+                RatingLastUpdated = input.RatingLastUpdated,
                 SmallImageUrl = input.SmallImageUrl,
                 Summary = input.Summary,
                 ThumbImageUrl = input.ThumbImageUrl

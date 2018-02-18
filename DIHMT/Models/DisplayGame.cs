@@ -10,6 +10,7 @@ namespace DIHMT.Models
         public string Name { get; set; }
         public string Summary { get; set; }
         public string RatingExplanation { get; set; }
+        public DateTime? RatingLastUpdated { get; set; }
         public DateTime LastUpdated { get; set; }
         public string SmallImageUrl { get; set; }
         public string ThumbImageUrl { get; set; }
