@@ -18,6 +18,7 @@
           <Property Name="ThumbImageUrl" Type="nvarchar" MaxLength="1000" />
           <Property Name="GbSiteDetailUrl" Type="nvarchar" MaxLength="500" />
           <Property Name="IsRated" Type="bit" Nullable="false" />
+          <Property Name="RatingLastUpdated" Type="datetime" />
         </EntityType>
         <EntityType Name="DbGameGenre">
           <Key>
@@ -194,6 +195,7 @@
           <NavigationProperty Name="DbGameGenres" Relationship="Entities.FK_DbGameGenre_GameId" FromRole="DbGame" ToRole="DbGameGenre" />
           <Property Name="IsRated" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="DbGameRatings" Relationship="Entities.FK_DbGameRating_GameId" FromRole="DbGame" ToRole="DbGameRating" />
+          <Property Name="RatingLastUpdated" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="DbGamePlatform">
           <Key>
@@ -368,6 +370,7 @@
           <EntitySetMapping Name="DbGames">
             <EntityTypeMapping TypeName="Entities.DbGame">
               <MappingFragment StoreEntitySet="DbGame">
+                <ScalarProperty Name="RatingLastUpdated" ColumnName="RatingLastUpdated" />
                 <ScalarProperty Name="IsRated" ColumnName="IsRated" />
                 <ScalarProperty Name="GbSiteDetailUrl" ColumnName="GbSiteDetailUrl" />
                 <ScalarProperty Name="ThumbImageUrl" ColumnName="ThumbImageUrl" />

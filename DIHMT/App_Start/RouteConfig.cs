@@ -16,7 +16,7 @@ namespace DIHMT
 
             routes.MapRoute(
                 name: "Game",
-                url: "Game/{id}",
+                url: "Game",
                 defaults: new { controller = "Game", action = "Index" });
 
             routes.MapRoute(

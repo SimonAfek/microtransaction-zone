@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using DIHMT.Models;
@@ -154,8 +155,9 @@ namespace DIHMT.Static
 
                     if (game != null)
                     {
-                        // Set IsRated & update explanation
+                        // Set IsRated + RatingLastUpdated & update explanation
                         game.IsRated = true;
+                        game.RatingLastUpdated = DateTime.UtcNow;
                         game.RatingExplanation = input.RatingExplanation;
 
                         // Remove current ratings
@@ -175,6 +177,20 @@ namespace DIHMT.Static
             using (var ctx = new DIHMTEntities())
             {
                 return ctx.DbRatings.ToList();
+            }
+        }
+
+        public static List<DbGame> GetRecentlyRatedGames(int numOfGames)
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                return ctx.DbGames
+                    .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
+                    .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
+                    .Include(x => x.DbGameRatings.Select(y => y.DbRating))
+                    .OrderByDescending(x => x.RatingLastUpdated)
+                    .Take(numOfGames)
+                    .ToList();
             }
         }
     }

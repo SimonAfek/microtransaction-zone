@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using DIHMT.Models;
 using GiantBomb.Api.Model;
 
@@ -159,42 +158,7 @@ namespace DIHMT.Static
 
             if (dbGameView != null)
             {
-                result = new DisplayGame
-                {
-                    GbSiteDetailUrl = dbGameView.GbSiteDetailUrl,
-                    Id = dbGameView.Id,
-                    LastUpdated = dbGameView.LastUpdated,
-                    Name = dbGameView.Name,
-
-                    Platforms = dbGameView.DbGamePlatforms.Select(x => new DisplayGamePlatform
-                    {
-                        Abbreviation = x.DbPlatform.Abbreviation,
-                        Id = x.DbPlatform.Id,
-                        ImageUrl = x.DbPlatform.ImageUrl,
-                        Name = x.DbPlatform.Name
-                    }).ToList(),
-
-                    Genres = dbGameView.DbGameGenres.Select(x => new DisplayGameGenre
-                    {
-                        Id = x.DbGenre.Id,
-                        Name = x.DbGenre.Name
-                    }).ToList(),
-
-                    Ratings = dbGameView.DbGameRatings.Select(x => new DisplayGameRating
-                    {
-                        Id = x.DbRating.Id,
-                        Description = x.DbRating.Description,
-                        ImageUrl = x.DbRating.ImageUrl,
-                        Name = x.DbRating.Name,
-                        ShortDescription = x.DbRating.ShortDescription
-                    }).ToList(),
-
-                    IsRated = dbGameView.IsRated,
-                    RatingExplanation = dbGameView.RatingExplanation,
-                    SmallImageUrl = dbGameView.SmallImageUrl,
-                    Summary = dbGameView.Summary,
-                    ThumbImageUrl = dbGameView.ThumbImageUrl
-                };
+                result = DbGameToDisplayGame(dbGameView);
             }
 
             return result;
@@ -246,6 +210,60 @@ namespace DIHMT.Static
         public static List<DbRating> GetRatings()
         {
             return DbAccess.GetRatings();
+        }
+
+        public static List<DisplayGame> GetRecentlyRatedGames(int numOfGames)
+        {
+            var dbGames = DbAccess.GetRecentlyRatedGames(numOfGames);
+
+            var retval = new List<DisplayGame>();
+
+            foreach (var v in dbGames)
+            {
+                retval.Add(DbGameToDisplayGame(v));
+            }
+
+            return retval;
+        }
+
+        private static DisplayGame DbGameToDisplayGame(DbGame input)
+        {
+            return new DisplayGame
+            {
+                GbSiteDetailUrl = input.GbSiteDetailUrl,
+                Id = input.Id,
+                LastUpdated = input.LastUpdated,
+                Name = input.Name,
+
+                Platforms = input.DbGamePlatforms.Select(x => new DisplayGamePlatform
+                {
+                    Abbreviation = x.DbPlatform.Abbreviation,
+                    Id = x.DbPlatform.Id,
+                    ImageUrl = x.DbPlatform.ImageUrl,
+                    Name = x.DbPlatform.Name
+                }).ToList(),
+
+                Genres = input.DbGameGenres.Select(x => new DisplayGameGenre
+                {
+                    Id = x.DbGenre.Id,
+                    Name = x.DbGenre.Name
+                }).ToList(),
+
+                Ratings = input.DbGameRatings.Select(x => new DisplayGameRating
+                {
+                    Id = x.DbRating.Id,
+                    Description = x.DbRating.Description,
+                    ImageUrl = x.DbRating.ImageUrl,
+                    Name = x.DbRating.Name,
+                    ShortDescription = x.DbRating.ShortDescription
+                }).ToList(),
+
+                IsRated = input.IsRated,
+                RatingExplanation = input.RatingExplanation,
+                SmallImageUrl = input.SmallImageUrl,
+                Summary = input.Summary,
+                ThumbImageUrl = input.ThumbImageUrl
+            };
         }
     }
 }
