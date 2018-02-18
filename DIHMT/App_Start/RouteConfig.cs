@@ -15,6 +15,11 @@ namespace DIHMT
                 defaults: new { controller = "Search", action = "Search" });
 
             routes.MapRoute(
+                name: "Game",
+                url: "Game/{id}",
+                defaults: new { controller = "Game", action = "Index" });
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
