@@ -21,12 +21,7 @@ namespace DIHMT.Static
             {
                 var client = new GiantBombRestClient(ApiKey);
 
-                var now = DateTime.UtcNow;
-
-                if (now < _lastRequest.AddMilliseconds(RequestIntervalInMilliseconds))
-                {
-                    Thread.Sleep(RequestIntervalInMilliseconds - (now - _lastRequest).Milliseconds);
-                }
+                WaitToProceed();
 
                 var retval = client.GetGame(id);
 
@@ -42,18 +37,23 @@ namespace DIHMT.Static
             {
                 var client = new GiantBombRestClient(ApiKey);
 
-                var now = DateTime.UtcNow;
-
-                if (now < _lastRequest.AddMilliseconds(RequestIntervalInMilliseconds))
-                {
-                    Thread.Sleep(RequestIntervalInMilliseconds - (now - _lastRequest).Milliseconds);
-                }
+                WaitToProceed();
 
                 var retval = client.SearchForGames(q, page, 10).ToList();
 
                 _lastRequest = DateTime.UtcNow;
 
                 return retval;
+            }
+        }
+
+        private static void WaitToProceed()
+        {
+            var now = DateTime.UtcNow;
+
+            if (now < _lastRequest.AddMilliseconds(RequestIntervalInMilliseconds))
+            {
+                Thread.Sleep(RequestIntervalInMilliseconds - (now - _lastRequest).Milliseconds);
             }
         }
     }
