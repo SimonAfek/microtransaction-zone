@@ -193,5 +193,25 @@ namespace DIHMT.Static
                     .ToList();
             }
         }
+
+        internal static void SavePendingRating(RatingInputModel input)
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                var pendingRatingObject = new PendingSubmission
+                {
+                    GameId = input.Id,
+                    RatingExplanation = input.RatingExplanation
+                };
+
+                ctx.PendingSubmissions.Add(pendingRatingObject);
+
+                ctx.SaveChanges();
+
+                ctx.PendingDbGameRatings.AddRange(input.Flags?.Select(x => new PendingDbGameRating { PendingSubmissionId = pendingRatingObject.Id, RatingId = x }) ?? new List<PendingDbGameRating>());
+
+                ctx.SaveChanges();
+            }
+        }
     }
 }

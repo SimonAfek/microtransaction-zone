@@ -263,6 +263,12 @@
     </Compile>
     <Compile Include="Models\DisplayGame.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PendingDbGameRating.cs">
+      <DependentUpon>EfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PendingSubmission.cs">
+      <DependentUpon>EfModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RatingInputModel.cs" />
     <Compile Include="Models\SearchResult.cs" />
     <Compile Include="Startup.cs" />

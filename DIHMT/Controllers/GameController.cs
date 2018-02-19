@@ -21,7 +21,7 @@ namespace DIHMT.Controllers
         {
             if (input.Valid)
             {
-                GameHelpers.SubmitRating(input);
+                GameHelpers.SubmitRating(input, Request.IsAuthenticated);
             }
 
             return RedirectToAction("Index", new { id = input.Id });

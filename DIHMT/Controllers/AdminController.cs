@@ -93,6 +93,7 @@ namespace DIHMT.Controllers
 
         // GET: /Admin/Register
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ActionResult Register()
         {
             return View();
@@ -100,6 +101,7 @@ namespace DIHMT.Controllers
 
         // POST: /Admin/Register
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {

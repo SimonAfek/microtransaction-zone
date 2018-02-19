@@ -28,7 +28,7 @@ namespace DIHMT.Static
                 GbSiteDetailUrl = input.SiteDetailUrl
             };
         }
-
+        
         /// <summary>
         /// Updates all non-DIHMT-specific fields of the
         /// game in the database
@@ -203,13 +203,20 @@ namespace DIHMT.Static
             return retval;
         }
 
-        public static void SubmitRating(RatingInputModel input)
+        public static void SubmitRating(RatingInputModel input, bool isAuthenticated)
         {
             input.Flags = input.Flags ?? new List<int>();
 
             input.Flags.Sort();
 
-            DbAccess.SaveGameRating(input);
+            if (isAuthenticated)
+            {
+                DbAccess.SaveGameRating(input);
+            }
+            else
+            {
+                DbAccess.SavePendingRating(input);
+            }
         }
 
         public static List<DbRating> GetRatings()
