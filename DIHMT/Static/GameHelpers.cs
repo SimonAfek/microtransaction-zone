@@ -203,6 +203,21 @@ namespace DIHMT.Static
             return retval;
         }
 
+        internal static List<PendingDisplayModel> GetPendingSubmissionsList()
+        {
+            var rawDbValues = DbAccess.GetPendingSubmissionsList();
+
+            return rawDbValues.Select(x => new PendingDisplayModel
+            {
+                Id = x.Id,
+                GameId = x.GameId,
+                GameName = x.DbGame.Name,
+                RatingExplanation = x.RatingExplanation,
+                SubmitterIp = x.SubmitterIp,
+                TimeOfSubmission = x.TimeOfSubmission
+            }).ToList();
+        }
+
         public static void SubmitRating(RatingInputModel input, bool isAuthenticated)
         {
             input.Flags = input.Flags ?? new List<int>();

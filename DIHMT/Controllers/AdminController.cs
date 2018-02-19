@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 using DIHMT.Models;
+using DIHMT.Static;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -168,13 +169,13 @@ namespace DIHMT.Controllers
         }
 
         [HttpGet]
-        public ActionResult Pending(int id)
+        public ActionResult Pending(int? id)
         {
-            if (id == default(int))
+            if (!id.HasValue)
             {
+                var pendingRatings = GameHelpers.GetPendingSubmissionsList();
 
-
-                return View();
+                return View("Pending_List", pendingRatings);
             }
 
             return null;

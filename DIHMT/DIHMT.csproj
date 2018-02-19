@@ -266,6 +266,7 @@
     <Compile Include="Models\PendingDbGameRating.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PendingDisplayModel.cs" />
     <Compile Include="Models\PendingSubmission.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>
@@ -384,6 +385,7 @@
     <Content Include="Views\Admin\Register.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Admin\Pending_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

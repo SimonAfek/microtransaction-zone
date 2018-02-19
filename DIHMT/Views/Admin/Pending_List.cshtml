@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DIHMT.Models.PendingDisplayModel>
+
+@{
+    ViewBag.Title = "Pending";
+}
+
+<h2>Pending</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GameName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShortExplanation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeOfSubmission)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubmitterIp)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Id.ToString(), "Pending", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GameName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortExplanation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeOfSubmission)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubmitterIp)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Pending", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

@@ -215,5 +215,15 @@ namespace DIHMT.Static
                 ctx.SaveChanges();
             }
         }
+
+        internal static List<PendingSubmission> GetPendingSubmissionsList()
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                return ctx.PendingSubmissions
+                    .Include(x => x.DbGame)
+                    .OrderBy(x => x.DbGame.Id).ToList();
+            }
+        }
     }
 }
