@@ -85,7 +85,7 @@ namespace DIHMT.Static
         public static List<DbPlatform> GetPlatforms(ICollection<Platform> platforms)
         {
             List<DbPlatform> results;
-            var ids = (from p in platforms select p.Id).ToList();
+            var ids = platforms.Select(x => x.Id).ToList();
 
             using (var ctx = new DIHMTEntities())
             {

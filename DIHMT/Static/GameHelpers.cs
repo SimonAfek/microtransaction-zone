@@ -47,7 +47,10 @@ namespace DIHMT.Static
 
             DbAccess.SaveGame(dbGame);
 
-            if (!includeGenres || gbGame.Genres == null || !gbGame.Genres.Any()) return;
+            if (!includeGenres || gbGame.Genres == null || !gbGame.Genres.Any())
+            {
+                return;
+            }
 
             var dbGameGenres = CreateDbGameGenresListWithoutNavigation(gbGame);
             DbAccess.SaveGameGenres(dbGameGenres);
