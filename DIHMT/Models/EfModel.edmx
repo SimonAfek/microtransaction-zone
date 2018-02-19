@@ -43,7 +43,6 @@
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GameId" Type="int" Nullable="false" />
           <Property Name="RatingId" Type="int" Nullable="false" />
-          <Property Name="Public" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="DbGenre">
           <Key>
@@ -326,7 +325,6 @@
           <Property Name="RatingId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DbGame" Relationship="Entities.FK_DbGameRating_GameId" FromRole="DbGameRating" ToRole="DbGame" />
           <NavigationProperty Name="DbRating" Relationship="Entities.FK_DbGameRating_RatingId" FromRole="DbGameRating" ToRole="DbRating" />
-          <Property Name="Public" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="DbRating">
           <Key>
@@ -424,7 +422,6 @@
           <EntitySetMapping Name="DbGameRatings">
             <EntityTypeMapping TypeName="Entities.DbGameRating">
               <MappingFragment StoreEntitySet="DbGameRating">
-                <ScalarProperty Name="Public" ColumnName="Public" />
                 <ScalarProperty Name="RatingId" ColumnName="RatingId" />
                 <ScalarProperty Name="GameId" ColumnName="GameId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

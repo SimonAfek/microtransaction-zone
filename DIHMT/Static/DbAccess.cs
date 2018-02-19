@@ -63,7 +63,7 @@ namespace DIHMT.Static
             return result;
         }
 
-        public static DbGame GetDbGameView(int id, bool publicOnly = true)
+        public static DbGame GetDbGameView(int id)
         {
             DbGame results;
 
@@ -76,11 +76,6 @@ namespace DIHMT.Static
                         .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
                         .Include(x => x.DbGameRatings.Select(y => y.DbRating))
                         .FirstOrDefault(x => x.Id == id);
-
-                    if (publicOnly && results?.DbGameRatings != null && results.DbGameRatings.Any())
-                    {
-                        results.DbGameRatings = results.DbGameRatings.Where(x => x.Public).ToList();
-                    }
                 }
             }
 
@@ -189,20 +184,13 @@ namespace DIHMT.Static
         {
             using (var ctx = new DIHMTEntities())
             {
-                var retval = ctx.DbGames
+                return ctx.DbGames
                     .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
                     .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
                     .Include(x => x.DbGameRatings.Select(y => y.DbRating))
                     .OrderByDescending(x => x.RatingLastUpdated)
                     .Take(numOfGames)
                     .ToList();
-
-                foreach (var v in retval.Where(x => x.DbGameRatings != null && x.DbGameRatings.Any()))
-                {
-                    v.DbGameRatings = v.DbGameRatings.Where(x => x.Public).ToList();
-                }
-
-                return retval;
             }
         }
     }
