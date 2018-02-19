@@ -14,7 +14,8 @@ namespace DIHMT.Controllers
         private ApplicationSignInManager _signInManager;
         private AppUserManager _userManager;
         private RoleManager<AppRole> _roleManager;
-
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
+        
         public ApplicationSignInManager SignInManager
         {
             get => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
@@ -129,6 +130,7 @@ namespace DIHMT.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateRole(string roleName)
         {
             if (!_roleManager.RoleExists(roleName))
@@ -139,6 +141,7 @@ namespace DIHMT.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult AddRoleToUser(string username, string roleName)
         {
             try
@@ -147,10 +150,10 @@ namespace DIHMT.Controllers
             }
             catch
             {
-                return View("Error", "Home");
+                return View("Error");
             }
 
-            return View("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: /Admin/LogOff
@@ -161,9 +164,7 @@ namespace DIHMT.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
-
-        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
-
+        
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -178,8 +179,8 @@ namespace DIHMT.Controllers
             {
                 return Redirect(returnUrl);
             }
+
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

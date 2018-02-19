@@ -17,6 +17,7 @@ namespace DIHMT.Models
         public long Id { get; set; }
         public int GameId { get; set; }
         public int RatingId { get; set; }
+        public bool Public { get; set; }
     
         public virtual DbGame DbGame { get; set; }
         public virtual DbRating DbRating { get; set; }

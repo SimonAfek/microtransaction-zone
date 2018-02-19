@@ -63,7 +63,7 @@ namespace DIHMT.Static
             return result;
         }
 
-        public static DbGame GetDbGameView(int id)
+        public static DbGame GetDbGameView(int id, bool publicOnly = true)
         {
             DbGame results;
 
@@ -76,6 +76,11 @@ namespace DIHMT.Static
                         .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
                         .Include(x => x.DbGameRatings.Select(y => y.DbRating))
                         .FirstOrDefault(x => x.Id == id);
+
+                    if (publicOnly && results?.DbGameRatings != null && results.DbGameRatings.Any())
+                    {
+                        results.DbGameRatings = results.DbGameRatings.Where(x => x.Public).ToList();
+                    }
                 }
             }
 
@@ -162,7 +167,7 @@ namespace DIHMT.Static
 
                         // Remove current ratings
                         ctx.DbGameRatings.RemoveRange(ctx.DbGameRatings.Where(x => x.GameId == input.Id));
-                        
+
                         // Add ratings from input
                         ctx.DbGameRatings.AddRange(input.Flags?.Select(x => new DbGameRating { GameId = input.Id, RatingId = x }) ?? new List<DbGameRating>());
 
@@ -184,13 +189,20 @@ namespace DIHMT.Static
         {
             using (var ctx = new DIHMTEntities())
             {
-                return ctx.DbGames
+                var retval = ctx.DbGames
                     .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
                     .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
                     .Include(x => x.DbGameRatings.Select(y => y.DbRating))
                     .OrderByDescending(x => x.RatingLastUpdated)
                     .Take(numOfGames)
                     .ToList();
+
+                foreach (var v in retval.Where(x => x.DbGameRatings != null && x.DbGameRatings.Any()))
+                {
+                    v.DbGameRatings = v.DbGameRatings.Where(x => x.Public).ToList();
+                }
+
+                return retval;
             }
         }
     }
