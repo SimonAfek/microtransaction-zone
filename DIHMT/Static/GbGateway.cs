@@ -13,7 +13,7 @@ namespace DIHMT.Static
         private static string ApiKey => WebConfigurationManager.AppSettings["GiantBombApiKey"];
         private static readonly object Lock = new object();
         private static DateTime _lastRequest = DateTime.MinValue;
-        private const int RequestIntervalInMilliseconds = 1050;
+        private const int RequestIntervalInMilliseconds = 1001;
 
         public static Game GetGame(int id)
         {
