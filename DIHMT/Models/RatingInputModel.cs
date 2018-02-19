@@ -11,6 +11,7 @@ namespace DIHMT.Models
         [Required]
         public int Id { get; set; }
         public string RatingExplanation { get; set; }
+        public string SubmitterIp { get; set; }
 
         private List<int> _flags;
         public List<int> Flags

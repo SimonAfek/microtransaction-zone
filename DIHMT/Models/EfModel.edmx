@@ -85,6 +85,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GameId" Type="int" Nullable="false" />
           <Property Name="RatingExplanation" Type="nvarchar" MaxLength="4000" />
+          <Property Name="TimeOfSubmission" Type="datetime" Nullable="false" />
+          <Property Name="SubmitterIp" Type="nvarchar" MaxLength="15" Nullable="false" />
         </EntityType>
         <Association Name="FK__DbGamePla__GameI__31EC6D26">
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="0..1" />
@@ -466,6 +468,8 @@
           <Property Name="RatingExplanation" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DbGame" Relationship="Entities.FK_GameId_Game_Id" FromRole="PendingSubmission" ToRole="DbGame" />
           <NavigationProperty Name="PendingDbGameRatings" Relationship="Entities.FK_PendingDbGameRating_PendingSubmission" FromRole="PendingSubmission" ToRole="PendingDbGameRating" />
+          <Property Name="TimeOfSubmission" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SubmitterIp" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_GameId_Game_Id">
           <End Type="Entities.DbGame" Role="DbGame" Multiplicity="1">
@@ -597,6 +601,8 @@
           <EntitySetMapping Name="PendingSubmissions">
             <EntityTypeMapping TypeName="Entities.PendingSubmission">
               <MappingFragment StoreEntitySet="PendingSubmission">
+                <ScalarProperty Name="SubmitterIp" ColumnName="SubmitterIp" />
+                <ScalarProperty Name="TimeOfSubmission" ColumnName="TimeOfSubmission" />
                 <ScalarProperty Name="RatingExplanation" ColumnName="RatingExplanation" />
                 <ScalarProperty Name="GameId" ColumnName="GameId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

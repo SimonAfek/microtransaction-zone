@@ -166,7 +166,20 @@ namespace DIHMT.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
-        
+
+        [HttpGet]
+        public ActionResult Pending(int id)
+        {
+            if (id == default(int))
+            {
+
+
+                return View();
+            }
+
+            return null;
+        }
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

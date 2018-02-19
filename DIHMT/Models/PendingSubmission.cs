@@ -23,6 +23,8 @@ namespace DIHMT.Models
         public int Id { get; set; }
         public int GameId { get; set; }
         public string RatingExplanation { get; set; }
+        public System.DateTime TimeOfSubmission { get; set; }
+        public string SubmitterIp { get; set; }
     
         public virtual DbGame DbGame { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

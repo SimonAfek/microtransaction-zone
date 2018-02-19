@@ -201,7 +201,9 @@ namespace DIHMT.Static
                 var pendingRatingObject = new PendingSubmission
                 {
                     GameId = input.Id,
-                    RatingExplanation = input.RatingExplanation
+                    RatingExplanation = input.RatingExplanation,
+                    TimeOfSubmission = DateTime.UtcNow,
+                    SubmitterIp = input.SubmitterIp
                 };
 
                 ctx.PendingSubmissions.Add(pendingRatingObject);
