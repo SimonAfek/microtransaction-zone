@@ -18,6 +18,11 @@
         <EntityTypeShape EntityType="Entities.DbRating" Width="1.5" PointX="6" PointY="9" />
         <AssociationConnector Association="Entities.FK_DbGameRating_GameId" />
         <AssociationConnector Association="Entities.FK_DbGameRating_RatingId" />
+        <EntityTypeShape EntityType="Entities.PendingDbGameRating" Width="1.5" PointX="8.25" PointY="11.125" />
+        <EntityTypeShape EntityType="Entities.PendingSubmission" Width="1.5" PointX="5.25" PointY="13.125" />
+        <AssociationConnector Association="Entities.FK_GameId_Game_Id" />
+        <AssociationConnector Association="Entities.FK_PendingDbGameRating_Rating" />
+        <AssociationConnector Association="Entities.FK_PendingDbGameRating_PendingSubmission" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
