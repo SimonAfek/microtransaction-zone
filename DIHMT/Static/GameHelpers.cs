@@ -206,19 +206,22 @@ namespace DIHMT.Static
             return retval;
         }
 
+        internal static Tuple<DisplayGame, PendingDisplayModel> GetPendingSubmissionWithCurrentRating(int id)
+        {
+            var pendingRaw = DbAccess.GetPendingSubmission(id);
+
+            var pending = new PendingDisplayModel(pendingRaw);
+
+            var currentRating = CreateDisplayGameObject(pendingRaw.GameId);
+
+            return new Tuple<DisplayGame, PendingDisplayModel>(currentRating, pending);
+        }
+
         internal static List<PendingDisplayModel> GetPendingSubmissionsList()
         {
             var rawDbValues = DbAccess.GetPendingSubmissionsList();
 
-            return rawDbValues.Select(x => new PendingDisplayModel
-            {
-                Id = x.Id,
-                GameId = x.GameId,
-                GameName = x.DbGame.Name,
-                RatingExplanation = x.RatingExplanation,
-                SubmitterIp = x.SubmitterIp,
-                TimeOfSubmission = x.TimeOfSubmission
-            }).ToList();
+            return rawDbValues.Select(x => new PendingDisplayModel(x)).ToList();
         }
 
         public static void SubmitRating(RatingInputModel input, bool isAuthenticated)

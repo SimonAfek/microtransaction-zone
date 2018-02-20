@@ -216,6 +216,17 @@ namespace DIHMT.Static
             }
         }
 
+        internal static PendingSubmission GetPendingSubmission(int id)
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                return ctx.PendingSubmissions
+                    .Include(x => x.DbGame)
+                    .Include(x => x.PendingDbGameRatings.Select(y => y.DbRating))
+                    .FirstOrDefault();
+            }
+        }
+
         internal static List<PendingSubmission> GetPendingSubmissionsList()
         {
             using (var ctx = new DIHMTEntities())

@@ -178,7 +178,9 @@ namespace DIHMT.Controllers
                 return View("Pending_List", pendingRatings);
             }
 
-            return null;
+            var pending = GameHelpers.GetPendingSubmissionWithCurrentRating(id.Value);
+
+            return View(pending);
         }
 
         private void AddErrors(IdentityResult result)
