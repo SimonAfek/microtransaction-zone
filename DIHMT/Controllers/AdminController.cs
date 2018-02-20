@@ -53,6 +53,7 @@ namespace DIHMT.Controllers
         }
 
         // GET: /Admin/Login
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -133,6 +134,7 @@ namespace DIHMT.Controllers
             return View(model);
         }
 
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         public ActionResult CreateRole(string roleName)
         {
@@ -144,6 +146,7 @@ namespace DIHMT.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         public ActionResult AddRoleToUser(string username, string roleName)
         {
