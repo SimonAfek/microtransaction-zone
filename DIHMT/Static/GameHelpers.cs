@@ -210,6 +210,11 @@ namespace DIHMT.Static
         {
             var pendingRaw = DbAccess.GetPendingSubmission(id);
 
+            if (pendingRaw == null)
+            {
+                return null;
+            }
+
             var pending = new PendingDisplayModel(pendingRaw);
 
             var currentRating = CreateDisplayGameObject(pendingRaw.GameId);

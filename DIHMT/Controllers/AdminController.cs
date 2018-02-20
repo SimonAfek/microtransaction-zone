@@ -171,16 +171,17 @@ namespace DIHMT.Controllers
         [HttpGet]
         public ActionResult Pending(int? id)
         {
-            if (!id.HasValue)
-            {
-                var pendingRatings = GameHelpers.GetPendingSubmissionsList();
+            var pending = id.HasValue ? GameHelpers.GetPendingSubmissionWithCurrentRating(id.Value) : null;
 
-                return View("Pending_List", pendingRatings);
+            if (pending != null)
+            {
+                return View(pending);
             }
 
-            var pending = GameHelpers.GetPendingSubmissionWithCurrentRating(id.Value);
+            var pendingRatings = GameHelpers.GetPendingSubmissionsList();
 
-            return View(pending);
+            return View("Pending_List", pendingRatings);
+
         }
 
         private void AddErrors(IdentityResult result)
