@@ -8,7 +8,7 @@
 
 <h2><a href="@Url.Action("Index", "Game", new { id = Model.Item2.GameId })" target="_blank">@Model.Item2.GameName</a></h2>
 
-@if (Model.Item1 == null)
+@if (!Model.Item1.IsRated)
 {
     <h3>This game currently has no rating</h3>
     <br />
