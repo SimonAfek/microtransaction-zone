@@ -206,6 +206,15 @@ namespace DIHMT.Static
             return retval;
         }
 
+        /// <summary>
+        /// Returns a Tuple containing a pending rating, as well as the current entry
+        /// of the game that the pending rating is for
+        /// </summary>
+        /// <param name="id">Id of the pending rating to get</param>
+        /// <returns>
+        /// A Tuple - Item1 is the entry as it exists now on the public-facing site,
+        /// Item2 is the requested pending rating as a PendingDisplayModel
+        /// </returns>
         internal static Tuple<DisplayGame, PendingDisplayModel> GetPendingSubmissionWithCurrentRating(int id)
         {
             var pendingRaw = DbAccess.GetPendingSubmission(id);
@@ -222,6 +231,12 @@ namespace DIHMT.Static
             return new Tuple<DisplayGame, PendingDisplayModel>(currentRating, pending);
         }
 
+        /// <summary>
+        /// Retrieves all pending submissions in the database.
+        /// </summary>
+        /// <returns>
+        /// All currently existing pending submissions, cast to PendingDisplayModels.
+        /// </returns>
         internal static List<PendingDisplayModel> GetPendingSubmissionsList()
         {
             var rawDbValues = DbAccess.GetPendingSubmissionsList();

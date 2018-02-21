@@ -184,7 +184,6 @@ namespace DIHMT.Controllers
             var pendingRatings = GameHelpers.GetPendingSubmissionsList();
 
             return View("Pending_List", pendingRatings);
-
         }
 
         private void AddErrors(IdentityResult result)

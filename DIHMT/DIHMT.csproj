@@ -417,7 +417,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53100</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53100/</IISUrl>
+          <IISUrl>http://localhost:51234/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
