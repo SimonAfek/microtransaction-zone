@@ -1,0 +1,96 @@
+﻿@using DIHMT.Models
+@using DIHMT.Static
+
+@model PendingDisplayModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>PendingSubmission</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GameId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GameId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GameId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RatingExplanation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RatingExplanation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TimeOfSubmission, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TimeOfSubmission, new { htmlAttributes = new { @class = "form-control", disabled = "true" } })
+                @Html.ValidationMessageFor(model => model.TimeOfSubmission, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubmitterIp, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SubmitterIp, new { htmlAttributes = new { @class = "form-control", disabled = "true" } })
+                @Html.ValidationMessageFor(model => model.SubmitterIp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.LabelFor(model => Model.RatingModel.Flags, htmlAttributes: new { @class = "control-label col-md-2 " })
+        <div class="col-md-10">
+            <p>
+                <label>
+                    <input type="checkbox" name="Flags" value="@((int) EnumRating.Spotless)" checked="@Model.RatingModel.IsSpotless" class="spotless-checkbox" /> Spotless
+                </label>
+            </p>
+
+            <p>
+                <strong>Horse armor: </strong>
+                <ul>
+                    <li>
+                        <label>
+                            <input type="radio" name="Flags" value="-1" checked="@(!(Model.RatingModel.Flags.Contains((int)EnumRating.HorseArmor) || Model.RatingModel.Flags.Contains((int)EnumRating.BulkOrderHorseArmor)))" class="check-when-spotless" /> None
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="radio" name="Flags" value="@((int)EnumRating.HorseArmor)" checked="@Model.RatingModel.Flags.Contains((int)EnumRating.HorseArmor)" class="monetization-input" disabled="@Model.RatingModel.IsSpotless" /> Some
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="radio" name="Flags" value="@((int)EnumRating.BulkOrderHorseArmor)" checked="@Model.RatingModel.Flags.Contains((int)EnumRating.BulkOrderHorseArmor)" class="monetization-input" disabled="@Model.RatingModel.IsSpotless" /> A lot
+                        </label>
+                    </li>
+                </ul>
+            </p>
+
+            @foreach (var v in GameHelpers.GetRatings().Where(x => Model.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumRating.Spotless))
+            {
+                <p><label><input type="checkbox" name="Flags" value="@v.Id" checked="@Model.RatingModel.Flags.Contains(v.Id)" class="monetization-input" disabled="@Model.RatingModel.IsSpotless" /> @v.Name</label></p>
+            }
+
+            @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumRating.Spotless))
+            {
+                <p><label><input type="checkbox" name="Flags" value="@v.Id" checked="@Model.RatingModel.Flags.Contains(v.Id)" /> @v.Name</label></p>
+            }
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@Html.ActionLink("Back to List", "Pending")

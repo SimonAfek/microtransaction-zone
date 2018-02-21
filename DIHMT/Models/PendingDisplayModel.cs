@@ -20,6 +20,13 @@ namespace DIHMT.Models
         public string SubmitterIp { get; set; }
         public List<int> Flags { get; set; }
 
+        public RatingInputModel RatingModel => new RatingInputModel
+        {
+            Id = Id,
+            Flags = Flags ?? new List<int>(),
+            RatingExplanation = RatingExplanation
+        };
+
         public PendingDisplayModel()
         {
 

@@ -1,0 +1,74 @@
+﻿@using DIHMT.Models
+@using DIHMT.Static
+@model Tuple<DisplayGame, PendingDisplayModel>
+
+@{
+    ViewBag.Title = $"Pending - {Model.Item2.GameName}";
+}
+
+<h2><a href="@Url.Action("Index", "Game", new { id = Model.Item2.GameId })" target="_blank">@Model.Item2.GameName</a></h2>
+
+@if (Model.Item1 == null)
+{
+    <h3>This game currently has no rating</h3>
+    <br/>
+    @Html.Partial("Pending_Partial", Model.Item2)
+}
+
+else
+{
+    <div class="col-md-6">
+        <h3>Existing rating</h3>
+
+        <p>
+            <label>
+                <input type="checkbox" name="Flags" checked="@Model.Item1.RatingModel.IsSpotless" disabled /> Spotless
+            </label>
+        </p>
+
+        <p>
+            <strong>Horse armor: </strong>
+            <ul>
+                <li>
+                    <label>
+                        <input type="radio" name="Flags" checked="@(!(Model.Item1.RatingModel.Flags.Contains((int) EnumRating.HorseArmor) || Model.Item1.RatingModel.Flags.Contains((int) EnumRating.BulkOrderHorseArmor)))" disabled /> None
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains((int) EnumRating.HorseArmor)" disabled /> Some
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains((int) EnumRating.BulkOrderHorseArmor)" disabled /> A lot
+                    </label>
+                </li>
+            </ul>
+        </p>
+
+        @foreach (var v in GameHelpers.GetRatings().Where(x => Model.Item1.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumRating.Spotless))
+        {
+            <p><label><input type="checkbox" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains(v.Id)" disabled /> @v.Name</label></p>
+        }
+
+        @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.Item1.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumRating.Spotless))
+        {
+            <p><label><input type="checkbox" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains(v.Id)" disabled /> @v.Name</label></p>
+        }
+        
+        <div class="form-group">
+            <p>
+                @Html.LabelFor(model => model.Item1.RatingExplanation, htmlAttributes: new {@class = "control-label"})
+            </p>
+            <p>
+                @Html.EditorFor(model => model.Item1.RatingExplanation, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Item1.RatingExplanation, "", new {@class = "text-danger"})
+            </p>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        @Html.Partial("Pending_Partial", Model.Item2)
+    </div>
+}

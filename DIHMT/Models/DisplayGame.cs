@@ -20,18 +20,12 @@ namespace DIHMT.Models
         public List<DisplayGamePlatform> Platforms { get; set; }
         public List<DisplayGameGenre> Genres { get; set; }
 
-        public RatingInputModel RatingModel
+        public RatingInputModel RatingModel => new RatingInputModel
         {
-            get
-            {
-                return new RatingInputModel
-                {
-                    Id = Id,
-                    Flags = Ratings?.Select(x => x.Id).ToList() ?? new List<int>(),
-                    RatingExplanation = RatingExplanation
-                };
-            }
-        }
+            Id = Id,
+            Flags = Ratings?.Select(x => x.Id).ToList() ?? new List<int>(),
+            RatingExplanation = RatingExplanation
+        };
     }
 
     public class DisplayGameRating
