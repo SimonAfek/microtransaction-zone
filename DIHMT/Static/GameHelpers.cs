@@ -28,7 +28,7 @@ namespace DIHMT.Static
                 GbSiteDetailUrl = input.SiteDetailUrl
             };
         }
-        
+
         /// <summary>
         /// Updates all non-DIHMT-specific fields of the
         /// game in the database
@@ -65,7 +65,7 @@ namespace DIHMT.Static
 
         private static List<DbGameGenre> CreateDbGameGenresListWithoutNavigation(Game gbGame)
         {
-            return gbGame.Genres?.Select(g => new DbGameGenre { GameId = gbGame.Id, GenreId = g.Id} ).ToList();
+            return gbGame.Genres?.Select(g => new DbGameGenre { GameId = gbGame.Id, GenreId = g.Id }).ToList();
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace DIHMT.Static
         {
             var dbGame = CreateDbGameObjectWithoutNavigation(input);
             var dbGamePlatforms = CreateDbGamePlatformsListWithoutNavigation(input);
-            
+
             DbAccess.SaveGame(dbGame);
             DbAccess.SaveGamePlatforms(dbGamePlatforms);
 

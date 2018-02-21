@@ -16,7 +16,7 @@ namespace DIHMT.Controllers
         private AppUserManager _userManager;
         private RoleManager<AppRole> _roleManager;
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
-        
+
         public ApplicationSignInManager SignInManager
         {
             get => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
