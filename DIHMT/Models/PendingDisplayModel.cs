@@ -11,6 +11,7 @@ namespace DIHMT.Models
         public int GameId { get; set; }
         [DisplayName("Game")]
         public string GameName { get; set; }
+        public string Basically { get; set; }
         public string RatingExplanation { get; set; }
         [DisplayName("Description")]
         public string ShortExplanation => RatingExplanation.Length > 50 ? $"{RatingExplanation.Substring(0, 46)}..." : RatingExplanation;
@@ -24,6 +25,7 @@ namespace DIHMT.Models
         {
             Id = Id,
             Flags = Flags ?? new List<int>(),
+            Basically = Basically,
             RatingExplanation = RatingExplanation
         };
 
@@ -37,6 +39,7 @@ namespace DIHMT.Models
             Id = input.Id;
             GameId = input.GameId;
             GameName = input.DbGame.Name;
+            Basically = input.Basically;
             RatingExplanation = input.RatingExplanation;
             SubmitterIp = input.SubmitterIp;
             TimeOfSubmission = input.TimeOfSubmission;

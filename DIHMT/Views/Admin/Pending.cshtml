@@ -31,23 +31,23 @@ else
             <ul>
                 <li>
                     <label>
-                        <input type="radio" name="Flags" checked="@(!(Model.Item1.RatingModel.Flags.Contains((int) EnumRating.HorseArmor) || Model.Item1.RatingModel.Flags.Contains((int) EnumRating.BulkOrderHorseArmor)))" disabled /> None
+                        <input type="radio" name="Flags" checked="@(!(Model.Item1.RatingModel.Flags.Contains((int) EnumTag.HorseArmor) || Model.Item1.RatingModel.Flags.Contains((int) EnumTag.BulkOrderHorseArmor)))" disabled /> None
                     </label>
                 </li>
                 <li>
                     <label>
-                        <input type="radio" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains((int) EnumRating.HorseArmor)" disabled /> Some
+                        <input type="radio" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains((int) EnumTag.HorseArmor)" disabled /> Some
                     </label>
                 </li>
                 <li>
                     <label>
-                        <input type="radio" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains((int) EnumRating.BulkOrderHorseArmor)" disabled /> A lot
+                        <input type="radio" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains((int) EnumTag.BulkOrderHorseArmor)" disabled /> A lot
                     </label>
                 </li>
             </ul>
         </p>
 
-        @foreach (var v in GameHelpers.GetRatings().Where(x => Model.Item1.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumRating.Spotless))
+        @foreach (var v in GameHelpers.GetRatings().Where(x => Model.Item1.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
         {
             <p>
                 <label>
@@ -56,7 +56,7 @@ else
             </p>
         }
 
-        @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.Item1.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumRating.Spotless))
+        @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.Item1.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
         {
             <p>
                 <label>

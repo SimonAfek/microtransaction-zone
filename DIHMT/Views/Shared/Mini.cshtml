@@ -1,0 +1,26 @@
+﻿@using DIHMT.Models
+@model DisplayGame
+
+@for (var i = 0; i < Model.Platforms.Count; i++)
+{
+    var write = i == Model.Platforms.Count - 1 ? Model.Platforms[i].Abbreviation : $"{Model.Platforms[i].Abbreviation} | ";
+    
+    @: @write
+}
+<img src="@Model.ThumbImageUrl" alt="" style="display: block; margin-left: auto; margin-right: auto;" />
+
+@if (!string.IsNullOrEmpty(Model.Basically))
+{
+    <p>
+        <strong>Basically, @Model.Name...</strong> @Model.Basically
+    </p>
+}
+
+<p>
+    <a class="btn btn-default" href="@Url.Action("Index", "Game", new {id = Model.Id})">Details</a>
+</p>
+
+@foreach (var k in Model.Ratings ?? new List<DisplayGameRating>())
+{
+    <p><strong>@k.Name:</strong> @k.ShortDescription</p>
+}

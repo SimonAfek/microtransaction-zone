@@ -158,6 +158,7 @@ namespace DIHMT.Static
                         // Set IsRated + RatingLastUpdated & update explanation
                         game.IsRated = true;
                         game.RatingLastUpdated = DateTime.UtcNow;
+                        game.Basically = input.Basically;
                         game.RatingExplanation = input.RatingExplanation;
 
                         // Remove current ratings
@@ -202,6 +203,7 @@ namespace DIHMT.Static
                 {
                     GameId = input.Id,
                     RatingExplanation = input.RatingExplanation,
+                    Basically = input.Basically,
                     TimeOfSubmission = DateTime.UtcNow,
                     SubmitterIp = input.SubmitterIp
                 };

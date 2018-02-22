@@ -388,6 +388,7 @@
     <Content Include="Views\Admin\Pending_List.cshtml" />
     <Content Include="Views\Admin\Pending.cshtml" />
     <Content Include="Views\Admin\Pending_Partial.cshtml" />
+    <Content Include="Views\Shared\Mini.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

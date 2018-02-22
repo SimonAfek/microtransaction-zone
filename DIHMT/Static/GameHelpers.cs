@@ -41,6 +41,7 @@ namespace DIHMT.Static
             var dbGame = CreateDbGameObjectWithoutNavigation(gbGame);
 
             dbGame.IsRated = dGame.IsRated;
+            dbGame.Basically = dGame.Basically;
             dbGame.RatingExplanation = dGame.RatingExplanation;
             dbGame.RatingLastUpdated = dGame.RatingLastUpdated;
             dbGame.LastUpdated = DateTime.UtcNow;
@@ -312,10 +313,11 @@ namespace DIHMT.Static
                 }).ToList(),
 
                 IsRated = input.IsRated,
+                Basically = input.Basically,
                 RatingExplanation = input.RatingExplanation,
                 RatingLastUpdated = input.RatingLastUpdated,
                 SmallImageUrl = input.SmallImageUrl,
-                Summary = input.Summary,
+                GameSummary = input.Summary,
                 ThumbImageUrl = input.ThumbImageUrl
             };
         }

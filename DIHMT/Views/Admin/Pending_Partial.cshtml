@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <p>
                 <label>
-                    <input type="checkbox" name="Flags" value="@((int) EnumRating.Spotless)" checked="@Model.RatingModel.IsSpotless" class="spotless-checkbox" /> Spotless
+                    <input type="checkbox" name="Flags" value="@((int) EnumTag.Spotless)" checked="@Model.RatingModel.IsSpotless" class="spotless-checkbox" /> Spotless
                 </label>
             </p>
 
@@ -24,23 +24,23 @@
                 <ul>
                     <li>
                         <label>
-                            <input type="radio" name="Flags" value="-1" checked="@(!(Model.RatingModel.Flags.Contains((int)EnumRating.HorseArmor) || Model.RatingModel.Flags.Contains((int)EnumRating.BulkOrderHorseArmor)))" class="check-when-spotless" /> None
+                            <input type="radio" name="Flags" value="-1" checked="@(!(Model.RatingModel.Flags.Contains((int)EnumTag.HorseArmor) || Model.RatingModel.Flags.Contains((int)EnumTag.BulkOrderHorseArmor)))" class="check-when-spotless" /> None
                         </label>
                     </li>
                     <li>
                         <label>
-                            <input type="radio" name="Flags" value="@((int)EnumRating.HorseArmor)" checked="@Model.RatingModel.Flags.Contains((int)EnumRating.HorseArmor)" class="monetization-input" disabled="@Model.RatingModel.IsSpotless" /> Some
+                            <input type="radio" name="Flags" value="@((int)EnumTag.HorseArmor)" checked="@Model.RatingModel.Flags.Contains((int)EnumTag.HorseArmor)" class="monetization-input" disabled="@Model.RatingModel.IsSpotless" /> Some
                         </label>
                     </li>
                     <li>
                         <label>
-                            <input type="radio" name="Flags" value="@((int)EnumRating.BulkOrderHorseArmor)" checked="@Model.RatingModel.Flags.Contains((int)EnumRating.BulkOrderHorseArmor)" class="monetization-input" disabled="@Model.RatingModel.IsSpotless" /> A lot
+                            <input type="radio" name="Flags" value="@((int)EnumTag.BulkOrderHorseArmor)" checked="@Model.RatingModel.Flags.Contains((int)EnumTag.BulkOrderHorseArmor)" class="monetization-input" disabled="@Model.RatingModel.IsSpotless" /> A lot
                         </label>
                     </li>
                 </ul>
             </p>
 
-            @foreach (var v in GameHelpers.GetRatings().Where(x => Model.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumRating.Spotless))
+            @foreach (var v in GameHelpers.GetRatings().Where(x => Model.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
             {
                 <p>
                     <label>
@@ -49,7 +49,7 @@
                 </p>
             }
 
-            @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumRating.Spotless))
+            @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
             {
                 <p>
                     <label>

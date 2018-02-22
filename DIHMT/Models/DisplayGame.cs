@@ -8,7 +8,8 @@ namespace DIHMT.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Summary { get; set; }
+        public string GameSummary { get; set; }
+        public string Basically { get; set; }
         public string RatingExplanation { get; set; }
         public DateTime? RatingLastUpdated { get; set; }
         public DateTime LastUpdated { get; set; }
@@ -24,8 +25,11 @@ namespace DIHMT.Models
         {
             Id = Id,
             Flags = Ratings?.Select(x => x.Id).ToList() ?? new List<int>(),
+            Basically = Basically,
             RatingExplanation = RatingExplanation
         };
+
+        public DisplayGame() { }
     }
 
     public class DisplayGameRating

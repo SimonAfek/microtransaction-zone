@@ -19,6 +19,7 @@
           <Property Name="GbSiteDetailUrl" Type="nvarchar" MaxLength="500" />
           <Property Name="IsRated" Type="bit" Nullable="false" />
           <Property Name="RatingLastUpdated" Type="datetime" />
+          <Property Name="Basically" Type="nvarchar" MaxLength="280" />
         </EntityType>
         <EntityType Name="DbGameGenre">
           <Key>
@@ -86,7 +87,8 @@
           <Property Name="GameId" Type="int" Nullable="false" />
           <Property Name="RatingExplanation" Type="nvarchar" MaxLength="4000" />
           <Property Name="TimeOfSubmission" Type="datetime" Nullable="false" />
-          <Property Name="SubmitterIp" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="SubmitterIp" Type="nvarchar" MaxLength="45" Nullable="false" />
+          <Property Name="Basically" Type="nvarchar" MaxLength="280" />
         </EntityType>
         <Association Name="FK__DbGamePla__GameI__31EC6D26">
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="0..1" />
@@ -269,6 +271,7 @@
           <NavigationProperty Name="DbGameRatings" Relationship="Entities.FK_DbGameRating_GameId" FromRole="DbGame" ToRole="DbGameRating" />
           <Property Name="RatingLastUpdated" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PendingSubmissions" Relationship="Entities.FK_GameId_Game_Id" FromRole="DbGame" ToRole="PendingSubmission" />
+          <Property Name="Basically" Type="String" MaxLength="280" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DbGamePlatform">
           <Key>
@@ -360,7 +363,7 @@
             <End Role="PendingSubmission" EntitySet="PendingSubmissions" />
             <End Role="PendingDbGameRating" EntitySet="PendingDbGameRatings" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="DbGameGenre">
           <Key>
             <PropertyRef Name="Id" />
@@ -469,8 +472,9 @@
           <NavigationProperty Name="DbGame" Relationship="Entities.FK_GameId_Game_Id" FromRole="PendingSubmission" ToRole="DbGame" />
           <NavigationProperty Name="PendingDbGameRatings" Relationship="Entities.FK_PendingDbGameRating_PendingSubmission" FromRole="PendingSubmission" ToRole="PendingDbGameRating" />
           <Property Name="TimeOfSubmission" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="SubmitterIp" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-        </EntityType>
+          <Property Name="SubmitterIp" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="Basically" Type="String" MaxLength="280" FixedLength="false" Unicode="true" />
+          </EntityType>
         <Association Name="FK_GameId_Game_Id">
           <End Type="Entities.DbGame" Role="DbGame" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -511,7 +515,7 @@
 			</Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -520,6 +524,7 @@
           <EntitySetMapping Name="DbGames">
             <EntityTypeMapping TypeName="Entities.DbGame">
               <MappingFragment StoreEntitySet="DbGame">
+                <ScalarProperty Name="Basically" ColumnName="Basically" />
                 <ScalarProperty Name="RatingLastUpdated" ColumnName="RatingLastUpdated" />
                 <ScalarProperty Name="IsRated" ColumnName="IsRated" />
                 <ScalarProperty Name="GbSiteDetailUrl" ColumnName="GbSiteDetailUrl" />
@@ -601,6 +606,7 @@
           <EntitySetMapping Name="PendingSubmissions">
             <EntityTypeMapping TypeName="Entities.PendingSubmission">
               <MappingFragment StoreEntitySet="PendingSubmission">
+                <ScalarProperty Name="Basically" ColumnName="Basically" />
                 <ScalarProperty Name="SubmitterIp" ColumnName="SubmitterIp" />
                 <ScalarProperty Name="TimeOfSubmission" ColumnName="TimeOfSubmission" />
                 <ScalarProperty Name="RatingExplanation" ColumnName="RatingExplanation" />

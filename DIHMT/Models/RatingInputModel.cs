@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -7,17 +8,20 @@ namespace DIHMT.Models
     public class RatingInputModel
     {
         public List<int> MonetizationFlags => new List<int> { 1, 2, 4, 5, 6, 7, 8, 9 };
-        public bool IsSpotless => Flags.Contains((int)EnumRating.Spotless);
+        public bool IsSpotless => Flags.Contains((int)EnumTag.Spotless);
         [Required]
         public int Id { get; set; }
+        [DisplayName("Basically...")]
+        public string Basically { get; set; }
+        [DisplayName("Detailed explanation")]
         public string RatingExplanation { get; set; }
         public string SubmitterIp { get; set; }
 
         private List<int> _flags;
         public List<int> Flags
         {
-            get => _flags?.Where(x => x >= (int)EnumRating.HorseArmor && x <= (int)EnumRating.F2P).ToList();
-            set => _flags = value?.Where(x => x >= (int)EnumRating.HorseArmor && x <= (int)EnumRating.F2P).ToList();
+            get => _flags?.Where(x => x >= (int)EnumTag.HorseArmor && x <= (int)EnumTag.F2P).ToList();
+            set => _flags = value?.Where(x => x >= (int)EnumTag.HorseArmor && x <= (int)EnumTag.F2P).ToList();
         }
 
         public bool Valid
@@ -29,18 +33,18 @@ namespace DIHMT.Models
                     return false;
                 }
 
-                if (Flags.Contains((int)EnumRating.Spotless) &&
-                    (Flags.Contains((int)EnumRating.ExpansiveExpansions) ||
-                     Flags.Contains((int)EnumRating.Lootboxes) ||
-                     Flags.Contains((int)EnumRating.MoneyHole) ||
-                     Flags.Contains((int)EnumRating.NotJustCosmetic) ||
-                     Flags.Contains((int)EnumRating.Subscription) ||
-                     Flags.Contains((int)EnumRating.SingleplayerUntouched)))
+                if (Flags.Contains((int)EnumTag.Spotless) &&
+                    (Flags.Contains((int)EnumTag.ExpansiveExpansions) ||
+                     Flags.Contains((int)EnumTag.Lootboxes) ||
+                     Flags.Contains((int)EnumTag.MoneyHole) ||
+                     Flags.Contains((int)EnumTag.NotJustCosmetic) ||
+                     Flags.Contains((int)EnumTag.Subscription) ||
+                     Flags.Contains((int)EnumTag.SingleplayerUntouched)))
                 {
                     return false;
                 }
 
-                if (Flags.Contains((int)EnumRating.HorseArmor) && Flags.Contains((int)EnumRating.BulkOrderHorseArmor))
+                if (Flags.Contains((int)EnumTag.HorseArmor) && Flags.Contains((int)EnumTag.BulkOrderHorseArmor))
                 {
                     return false;
                 }
@@ -50,7 +54,7 @@ namespace DIHMT.Models
         }
     }
 
-    public enum EnumRating
+    public enum EnumTag
     {
         HorseArmor = 1,
         BulkOrderHorseArmor = 2,
