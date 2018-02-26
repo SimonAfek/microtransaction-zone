@@ -223,6 +223,7 @@ namespace DIHMT.Static
             using (var ctx = new DIHMTEntities())
             {
                 return ctx.PendingSubmissions
+                    .Where(x => x.Id == id)
                     .Include(x => x.DbGame)
                     .Include(x => x.PendingDbGameRatings.Select(y => y.DbRating))
                     .FirstOrDefault();

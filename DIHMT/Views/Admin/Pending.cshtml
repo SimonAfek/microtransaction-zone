@@ -48,30 +48,38 @@ else
         </p>
 
         @foreach (var v in GameHelpers.GetRatings().Where(x => Model.Item1.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
-        {
-            <p>
-                <label>
-                    <input type="checkbox" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains(v.Id)" disabled /> @v.Name
-                </label>
-            </p>
-        }
+    {
+        <p>
+            <label>
+                <input type="checkbox" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains(v.Id)" disabled /> @v.Name
+            </label>
+        </p>
+}
 
         @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.Item1.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
-        {
-            <p>
-                <label>
-                    <input type="checkbox" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains(v.Id)" disabled /> @v.Name
-                </label>
-            </p>
-        }
+    {
+        <p>
+            <label>
+                <input type="checkbox" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains(v.Id)" disabled /> @v.Name
+            </label>
+        </p>
+}
 
         <div class="form-group">
             <p>
-                @Html.LabelFor(model => model.Item1.RatingExplanation, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.Item1.RatingExplanation, htmlAttributes: new { @class = "control-label col-md-2" })
             </p>
             <p>
-                @Html.EditorFor(model => model.Item1.RatingExplanation, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Item1.RatingExplanation, "", new { @class = "text-danger" })
+                <textarea name="RatingExplanation" class="wide-input" rows="10" cols="100" maxlength="4000">@Model.Item1.RatingExplanation</textarea>
+            </p>
+        </div>
+
+        <div class="form-group">
+            <p>
+                @Html.LabelFor(model => model.Item1.Basically, htmlAttributes: new { @class = "control-label col-md-2 " })
+            </p>
+            <p>
+                <input type="text" name="Basically" size="280" value="@Model.Item1.Basically" class="wide-input" maxlength="280" />
             </p>
         </div>
     </div>

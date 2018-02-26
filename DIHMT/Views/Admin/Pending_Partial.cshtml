@@ -59,14 +59,23 @@
             }
         </div>
 
-        <p>
-            @Html.LabelFor(model => model.RatingExplanation, htmlAttributes: new { @class = "control-label" })
-        </p>
-        <p>
-            @Html.EditorFor(model => model.RatingExplanation, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
-        </p>
+        <div class="form-group">
+            <p>
+                @Html.LabelFor(model => model.RatingExplanation, htmlAttributes: new { @class = "control-label col-md-2" })
+            </p>
+            <p>
+                <textarea name="RatingExplanation" class="wide-input" rows="10" cols="100" maxlength="4000">@Model.RatingExplanation</textarea>
+            </p>
+        </div>
 
+        <div class="form-group">
+            <p>
+                @Html.LabelFor(model => model.Basically, htmlAttributes: new { @class = "control-label col-md-2 " })
+            </p>
+            <p>
+                <input type="text" name="Basically" size="280" value="@Model.Basically" class="wide-input" maxlength="280" />
+            </p>
+        </div>
 
         <p>
             @Html.LabelFor(model => model.TimeOfSubmission, htmlAttributes: new { @class = "control-label" })
