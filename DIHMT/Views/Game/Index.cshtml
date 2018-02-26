@@ -44,7 +44,7 @@
     </p>
 }
 
-<p>@Model.Summary (For more info about this game, check out <a href="@Model.GbSiteDetailUrl" target="_blank">its entry on the Giant Bomb Wiki.</a>)</p>
+<p>@Model.GameSummary (For more info about this game, check out <a href="@Model.GbSiteDetailUrl" target="_blank">its entry on the Giant Bomb Wiki.</a>)</p>
 
 @if (Model.IsRated)
 {
@@ -73,7 +73,7 @@
 
         else
         {
-            @Model.RatingExplanation
+            @Html.Raw(HttpUtility.HtmlEncode(Model.RatingExplanation).Replace("\n", "<br/>"))
         }
     </p>
 }

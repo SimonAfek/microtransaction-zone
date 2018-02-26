@@ -16,7 +16,7 @@
             <div class="col-md-10">
                 <p>
                     <label>
-                        <input type="checkbox" name="Flags" value="@((int) EnumRating.Spotless)" checked="@Model.IsSpotless" class="spotless-checkbox"/> Spotless
+                        <input type="checkbox" name="Flags" value="@((int) EnumTag.Spotless)" checked="@Model.IsSpotless" class="spotless-checkbox"/> Spotless
                     </label>
                 </p>
                 
@@ -25,38 +25,45 @@
                     <ul>
                         <li>
                             <label>
-                                <input type="radio" name="Flags" value="-1" checked="@(!(Model.Flags.Contains((int)EnumRating.HorseArmor) || Model.Flags.Contains((int)EnumRating.BulkOrderHorseArmor)))" class="check-when-spotless" /> None
+                                <input type="radio" name="Flags" value="-1" checked="@(!(Model.Flags.Contains((int)EnumTag.HorseArmor) || Model.Flags.Contains((int)EnumTag.BulkOrderHorseArmor)))" class="check-when-spotless" /> None
                             </label>
                         </li>
                         <li>
                             <label>
-                                <input type="radio" name="Flags" value="@((int)EnumRating.HorseArmor)" checked="@Model.Flags.Contains((int)EnumRating.HorseArmor)" class="monetization-input" disabled="@Model.IsSpotless" /> Some
+                                <input type="radio" name="Flags" value="@((int)EnumTag.HorseArmor)" checked="@Model.Flags.Contains((int)EnumTag.HorseArmor)" class="monetization-input" disabled="@Model.IsSpotless" /> Some
                             </label>
                         </li>
                         <li>
                             <label>
-                                <input type="radio" name="Flags" value="@((int)EnumRating.BulkOrderHorseArmor)" checked="@Model.Flags.Contains((int)EnumRating.BulkOrderHorseArmor)" class="monetization-input" disabled="@Model.IsSpotless"/> A lot
+                                <input type="radio" name="Flags" value="@((int)EnumTag.BulkOrderHorseArmor)" checked="@Model.Flags.Contains((int)EnumTag.BulkOrderHorseArmor)" class="monetization-input" disabled="@Model.IsSpotless"/> A lot
                             </label>
                         </li>
                     </ul>
                 </p>
 
-                @foreach (var v in GameHelpers.GetRatings().Where(x => Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumRating.Spotless))
+                @foreach (var v in GameHelpers.GetRatings().Where(x => Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
                 {
-                    <p><label><input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="monetization-input" disabled="@Model.IsSpotless"> @v.Name</label></p>
+                    <p><label><input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="monetization-input" disabled="@Model.IsSpotless" /> @v.Name</label></p>
                 }
                 
-                @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumRating.Spotless))
+                @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
                 {
-                    <p><label><input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)"> @v.Name</label></p>
+                    <p><label><input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" /> @v.Name</label></p>
                 }
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Basically, htmlAttributes: new { @class = "control-label col-md-2 "})
+            <div class="col-md-10">
+                <input type="text" name="Basically" size="280" value="@Model.Basically" class="wide-input" maxlength="280" />
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.RatingExplanation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.RatingExplanation, new { htmlAttributes = new { @class = "form-control" } })
+                <textarea name="RatingExplanation" class="wide-input" rows="10" cols="100" maxlength="4000">@Model.RatingExplanation</textarea>
                 @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using DIHMT.Models;
 using GiantBomb.Api.Model;
 
@@ -42,11 +41,17 @@ namespace DIHMT.Static
             var dbGame = CreateDbGameObjectWithoutNavigation(gbGame);
 
             dbGame.IsRated = dGame.IsRated;
+            dbGame.Basically = dGame.Basically;
             dbGame.RatingExplanation = dGame.RatingExplanation;
+            dbGame.RatingLastUpdated = dGame.RatingLastUpdated;
+            dbGame.LastUpdated = DateTime.UtcNow;
 
             DbAccess.SaveGame(dbGame);
 
-            if (!includeGenres || gbGame.Genres == null || !gbGame.Genres.Any()) return;
+            if (!includeGenres || gbGame.Genres == null || !gbGame.Genres.Any())
+            {
+                return;
+            }
 
             var dbGameGenres = CreateDbGameGenresListWithoutNavigation(gbGame);
             DbAccess.SaveGameGenres(dbGameGenres);
@@ -61,7 +66,7 @@ namespace DIHMT.Static
 
         private static List<DbGameGenre> CreateDbGameGenresListWithoutNavigation(Game gbGame)
         {
-            return gbGame.Genres?.Select(g => new DbGameGenre { GameId = gbGame.Id, GenreId = g.Id} ).ToList();
+            return gbGame.Genres?.Select(g => new DbGameGenre { GameId = gbGame.Id, GenreId = g.Id }).ToList();
         }
 
         /// <summary>
@@ -109,11 +114,14 @@ namespace DIHMT.Static
         {
             var dbGame = CreateDbGameObjectWithoutNavigation(input);
             var dbGamePlatforms = CreateDbGamePlatformsListWithoutNavigation(input);
-            
+
             DbAccess.SaveGame(dbGame);
             DbAccess.SaveGamePlatforms(dbGamePlatforms);
 
-            if (input.Genres == null || !input.Genres.Any()) return;
+            if (input.Genres == null || !input.Genres.Any())
+            {
+                return;
+            }
 
             var dbGameGenres = CreateDbGameGenresListWithoutNavigation(input);
             DbAccess.SaveGameGenres(dbGameGenres);
@@ -159,42 +167,7 @@ namespace DIHMT.Static
 
             if (dbGameView != null)
             {
-                result = new DisplayGame
-                {
-                    GbSiteDetailUrl = dbGameView.GbSiteDetailUrl,
-                    Id = dbGameView.Id,
-                    LastUpdated = dbGameView.LastUpdated,
-                    Name = dbGameView.Name,
-
-                    Platforms = dbGameView.DbGamePlatforms.Select(x => new DisplayGamePlatform
-                    {
-                        Abbreviation = x.DbPlatform.Abbreviation,
-                        Id = x.DbPlatform.Id,
-                        ImageUrl = x.DbPlatform.ImageUrl,
-                        Name = x.DbPlatform.Name
-                    }).ToList(),
-
-                    Genres = dbGameView.DbGameGenres.Select(x => new DisplayGameGenre
-                    {
-                        Id = x.DbGenre.Id,
-                        Name = x.DbGenre.Name
-                    }).ToList(),
-
-                    Ratings = dbGameView.DbGameRatings.Select(x => new DisplayGameRating
-                    {
-                        Id = x.DbRating.Id,
-                        Description = x.DbRating.Description,
-                        ImageUrl = x.DbRating.ImageUrl,
-                        Name = x.DbRating.Name,
-                        ShortDescription = x.DbRating.ShortDescription
-                    }).ToList(),
-
-                    IsRated = dbGameView.IsRated,
-                    RatingExplanation = dbGameView.RatingExplanation,
-                    SmallImageUrl = dbGameView.SmallImageUrl,
-                    Summary = dbGameView.Summary,
-                    ThumbImageUrl = dbGameView.ThumbImageUrl
-                };
+                result = DbGameToDisplayGame(dbGameView);
             }
 
             return result;
@@ -234,18 +207,131 @@ namespace DIHMT.Static
             return retval;
         }
 
-        public static void SubmitRating(RatingInputModel input)
+        /// <summary>
+        /// Returns a Tuple containing a pending rating, as well as the current entry
+        /// of the game that the pending rating is for
+        /// </summary>
+        /// <param name="id">Id of the pending rating to get</param>
+        /// <returns>
+        /// A Tuple - Item1 is the entry as it exists now on the public-facing site,
+        /// Item2 is the requested pending rating as a PendingDisplayModel
+        /// </returns>
+        internal static Tuple<DisplayGame, PendingDisplayModel> GetPendingSubmissionWithCurrentRating(int id)
+        {
+            var pendingRaw = DbAccess.GetPendingSubmission(id);
+
+            if (pendingRaw == null)
+            {
+                return null;
+            }
+
+            var pending = new PendingDisplayModel(pendingRaw);
+
+            var currentRating = CreateDisplayGameObject(pendingRaw.GameId);
+
+            return new Tuple<DisplayGame, PendingDisplayModel>(currentRating, pending);
+        }
+
+        /// <summary>
+        /// Retrieves all pending submissions in the database.
+        /// </summary>
+        /// <returns>
+        /// All currently existing pending submissions, cast to PendingDisplayModels.
+        /// </returns>
+        internal static List<PendingDisplayModel> GetPendingSubmissionsList()
+        {
+            var rawDbValues = DbAccess.GetPendingSubmissionsList();
+
+            return rawDbValues.Select(x => new PendingDisplayModel(x)).ToList();
+        }
+
+        public static void SubmitRating(RatingInputModel input, bool isAuthenticated)
         {
             input.Flags = input.Flags ?? new List<int>();
 
             input.Flags.Sort();
 
-            DbAccess.SaveGameRating(input);
+            if (isAuthenticated)
+            {
+                DbAccess.SaveGameRating(input);
+            }
+            else
+            {
+                DbAccess.SavePendingRating(input);
+            }
+        }
+
+        public static void HandlePostPending(PendingDisplayModel input)
+        {
+            if (input.SubmitAction == "Approve")
+            {
+                DbAccess.ApprovePendingRating(input);
+            }
+            else
+            {
+                DbAccess.RejectPendingRating(input);
+            }
         }
 
         public static List<DbRating> GetRatings()
         {
             return DbAccess.GetRatings();
+        }
+
+        public static List<DisplayGame> GetRecentlyRatedGames(int numOfGames)
+        {
+            var dbGames = DbAccess.GetRecentlyRatedGames(numOfGames);
+
+            var retval = new List<DisplayGame>();
+
+            foreach (var v in dbGames)
+            {
+                retval.Add(DbGameToDisplayGame(v));
+            }
+
+            return retval;
+        }
+
+        private static DisplayGame DbGameToDisplayGame(DbGame input)
+        {
+            return new DisplayGame
+            {
+                GbSiteDetailUrl = input.GbSiteDetailUrl,
+                Id = input.Id,
+                LastUpdated = input.LastUpdated,
+                Name = input.Name,
+
+                Platforms = input.DbGamePlatforms.Select(x => new DisplayGamePlatform
+                {
+                    Abbreviation = x.DbPlatform.Abbreviation,
+                    Id = x.DbPlatform.Id,
+                    ImageUrl = x.DbPlatform.ImageUrl,
+                    Name = x.DbPlatform.Name
+                }).ToList(),
+
+                Genres = input.DbGameGenres.Select(x => new DisplayGameGenre
+                {
+                    Id = x.DbGenre.Id,
+                    Name = x.DbGenre.Name
+                }).ToList(),
+
+                Ratings = input.DbGameRatings.Select(x => new DisplayGameRating
+                {
+                    Id = x.DbRating.Id,
+                    Description = x.DbRating.Description,
+                    ImageUrl = x.DbRating.ImageUrl,
+                    Name = x.DbRating.Name,
+                    ShortDescription = x.DbRating.ShortDescription
+                }).ToList(),
+
+                IsRated = input.IsRated,
+                Basically = input.Basically,
+                RatingExplanation = input.RatingExplanation,
+                RatingLastUpdated = input.RatingLastUpdated,
+                SmallImageUrl = input.SmallImageUrl,
+                GameSummary = input.Summary,
+                ThumbImageUrl = input.ThumbImageUrl
+            };
         }
     }
 }

@@ -18,21 +18,21 @@ namespace DIHMT.Models
 
     public class AppRole : IdentityRole
     {
-        public AppRole() { }
+        public AppRole() : base() { }
         public AppRole(string name) : base(name) { }
         // extra properties here 
     }
 
-    public class ApplicationDbContext : IdentityDbContext<AppUser>
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
-        public ApplicationDbContext()
-            : base("DIHMTEntities", throwIfV1Schema: false)
+        public AppDbContext()
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
-        public static ApplicationDbContext Create()
+        public static AppDbContext Create()
         {
-            return new ApplicationDbContext();
+            return new AppDbContext();
         }
     }
 }

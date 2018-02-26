@@ -12,23 +12,22 @@ namespace DIHMT.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DbRating
+    public partial class PendingSubmission
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DbRating()
+        public PendingSubmission()
         {
-            this.DbGameRatings = new HashSet<DbGameRating>();
             this.PendingDbGameRatings = new HashSet<PendingDbGameRating>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string ImageUrl { get; set; }
-        public string ShortDescription { get; set; }
+        public int GameId { get; set; }
+        public string RatingExplanation { get; set; }
+        public System.DateTime TimeOfSubmission { get; set; }
+        public string SubmitterIp { get; set; }
+        public string Basically { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DbGameRating> DbGameRatings { get; set; }
+        public virtual DbGame DbGame { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PendingDbGameRating> PendingDbGameRatings { get; set; }
     }

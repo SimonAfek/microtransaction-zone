@@ -16,17 +16,10 @@
 </div>
 
 <div class="row">
-    @foreach (var v in DummyContent.DummyDisplayGameList(3))
+    @foreach (var v in GameHelpers.GetRecentlyRatedGames(3))
     {
         <div class="col-md-4" style="border: 1px; border-style: dotted;">
-            <h3 style="display: inline">@v.Name - </h3>@v.Platforms[0].Abbreviation
-            <img src="@v.ThumbImageUrl" alt="" style="display: block; margin-left: auto; margin-right: auto;" />
-            <p><strong>Quick rundown:</strong> @v.RatingExplanation</p>
-            <p><a class="btn btn-default" href="@Url.Action("Index", "Game", new { id = v.Id })">Details</a></p>
-            @foreach (var k in v.Ratings ?? new List<DisplayGameRating>())
-            {
-                <p><strong>@k.Name:</strong> @k.Description</p>
-            }
+            @Html.Partial("Mini", v)
         </div>
     }
 </div>

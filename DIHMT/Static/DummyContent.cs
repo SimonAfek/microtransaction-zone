@@ -36,8 +36,9 @@ namespace DIHMT.Static
 
             IsRated = true,
             RatingExplanation = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel erat in nibh auctor accumsan. Curabitur id rutrum ex. Nullam sit amet est aliquet, facilisis turpis sed, hendrerit orci.",
+            Basically = "A video game",
             SmallImageUrl = "https://dummyimage.com/300x3:4/551a8b/000000",
-            Summary = "Aliquam eu pulvinar orci. Duis sodales, urna nec vulputate ullamcorper, ex erat luctus orci, non hendrerit sapien tortor vitae purus. Ut eu pharetra ligula, eu tincidunt nunc.",
+            GameSummary = "Aliquam eu pulvinar orci. Duis sodales, urna nec vulputate ullamcorper, ex erat luctus orci, non hendrerit sapien tortor vitae purus. Ut eu pharetra ligula, eu tincidunt nunc.",
             ThumbImageUrl = "https://dummyimage.com/150x3:4/551a8b/000000"
         };
 

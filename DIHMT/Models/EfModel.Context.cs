@@ -32,5 +32,7 @@ namespace DIHMT.Models
         public virtual DbSet<DbGenre> DbGenres { get; set; }
         public virtual DbSet<DbGameRating> DbGameRatings { get; set; }
         public virtual DbSet<DbRating> DbRatings { get; set; }
+        public virtual DbSet<PendingDbGameRating> PendingDbGameRatings { get; set; }
+        public virtual DbSet<PendingSubmission> PendingSubmissions { get; set; }
     }
 }

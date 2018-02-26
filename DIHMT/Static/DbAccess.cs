@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using DIHMT.Models;
@@ -84,7 +85,7 @@ namespace DIHMT.Static
         public static List<DbPlatform> GetPlatforms(ICollection<Platform> platforms)
         {
             List<DbPlatform> results;
-            var ids = (from p in platforms select p.Id).ToList();
+            var ids = platforms.Select(x => x.Id).ToList();
 
             using (var ctx = new DIHMTEntities())
             {
@@ -154,13 +155,15 @@ namespace DIHMT.Static
 
                     if (game != null)
                     {
-                        // Set IsRated & update explanation
+                        // Set IsRated + RatingLastUpdated & update explanation
                         game.IsRated = true;
+                        game.RatingLastUpdated = DateTime.UtcNow;
+                        game.Basically = input.Basically;
                         game.RatingExplanation = input.RatingExplanation;
 
                         // Remove current ratings
                         ctx.DbGameRatings.RemoveRange(ctx.DbGameRatings.Where(x => x.GameId == input.Id));
-                        
+
                         // Add ratings from input
                         ctx.DbGameRatings.AddRange(input.Flags?.Select(x => new DbGameRating { GameId = input.Id, RatingId = x }) ?? new List<DbGameRating>());
 
@@ -175,6 +178,116 @@ namespace DIHMT.Static
             using (var ctx = new DIHMTEntities())
             {
                 return ctx.DbRatings.ToList();
+            }
+        }
+
+        public static List<DbGame> GetRecentlyRatedGames(int numOfGames)
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                return ctx.DbGames
+                    .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
+                    .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
+                    .Include(x => x.DbGameRatings.Select(y => y.DbRating))
+                    .OrderByDescending(x => x.RatingLastUpdated)
+                    .Take(numOfGames)
+                    .ToList();
+            }
+        }
+
+        internal static void SavePendingRating(RatingInputModel input)
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                var pendingRatingObject = new PendingSubmission
+                {
+                    GameId = input.Id,
+                    RatingExplanation = input.RatingExplanation,
+                    Basically = input.Basically,
+                    TimeOfSubmission = DateTime.UtcNow,
+                    SubmitterIp = input.SubmitterIp
+                };
+
+                ctx.PendingSubmissions.Add(pendingRatingObject);
+
+                ctx.SaveChanges();
+
+                ctx.PendingDbGameRatings.AddRange(input.Flags?.Select(x => new PendingDbGameRating { PendingSubmissionId = pendingRatingObject.Id, RatingId = x }) ?? new List<PendingDbGameRating>());
+
+                ctx.SaveChanges();
+            }
+        }
+
+        internal static PendingSubmission GetPendingSubmission(int id)
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                return ctx.PendingSubmissions
+                    .Where(x => x.Id == id)
+                    .Include(x => x.DbGame)
+                    .Include(x => x.PendingDbGameRatings.Select(y => y.DbRating))
+                    .FirstOrDefault();
+            }
+        }
+
+        internal static List<PendingSubmission> GetPendingSubmissionsList()
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                return ctx.PendingSubmissions
+                    .Include(x => x.DbGame)
+                    .OrderBy(x => x.DbGame.Id).ToList();
+            }
+        }
+
+        public static void ApprovePendingRating(PendingDisplayModel input)
+        {
+            lock (Lock)
+            {
+                using (var ctx = new DIHMTEntities())
+                {
+                    var game = ctx.DbGames.FirstOrDefault(x => x.Id == input.GameId);
+
+                    if (game != null)
+                    {
+                        // Set IsRated + RatingLastUpdated & update explanation
+                        game.IsRated = true;
+                        game.RatingLastUpdated = DateTime.UtcNow;
+                        game.Basically = input.Basically;
+                        game.RatingExplanation = input.RatingExplanation;
+
+                        // Remove current ratings
+                        ctx.DbGameRatings.RemoveRange(ctx.DbGameRatings.Where(x => x.GameId == input.GameId));
+
+                        // Add ratings from input
+                        ctx.DbGameRatings.AddRange(input.Flags?.Select(x => new DbGameRating { GameId = input.GameId, RatingId = x }) ?? new List<DbGameRating>());
+
+                        // Remove pending ratings
+                        ctx.PendingDbGameRatings.RemoveRange(ctx.PendingDbGameRatings.Where(x => x.RatingId == input.Id));
+
+                        // Remove pending submission
+                        ctx.PendingSubmissions.Remove(ctx.PendingSubmissions.First(x => x.Id == input.Id));
+
+                        ctx.SaveChanges();
+                    }
+                }
+            }
+        }
+
+        public static void RejectPendingRating(PendingDisplayModel input)
+        {
+            lock (Lock)
+            {
+                using (var ctx = new DIHMTEntities())
+                {
+                    // Remove pending ratings
+                    ctx.PendingDbGameRatings.RemoveRange(ctx.PendingDbGameRatings.Where(x => x.RatingId == input.Id));
+
+                    // Remove pending submission
+                    ctx.PendingSubmissions.Remove(ctx.PendingSubmissions.First(x => x.Id == input.Id));
+
+                    ctx.SaveChanges();
+                }
             }
         }
     }

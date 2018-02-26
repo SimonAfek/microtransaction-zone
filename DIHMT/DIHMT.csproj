@@ -235,9 +235,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Models\AdminViewModels.cs" />
     <Compile Include="Models\DbGame.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>
@@ -261,6 +263,13 @@
     </Compile>
     <Compile Include="Models\DisplayGame.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PendingDbGameRating.cs">
+      <DependentUpon>EfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PendingDisplayModel.cs" />
+    <Compile Include="Models\PendingSubmission.cs">
+      <DependentUpon>EfModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RatingInputModel.cs" />
     <Compile Include="Models\SearchResult.cs" />
     <Compile Include="Startup.cs" />
@@ -373,6 +382,13 @@
     <Content Include="Views\Game\Submit.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Admin\Register.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Admin\Pending_List.cshtml" />
+    <Content Include="Views\Admin\Pending.cshtml" />
+    <Content Include="Views\Admin\Pending_Partial.cshtml" />
+    <Content Include="Views\Shared\Mini.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -402,7 +418,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53100</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53100/</IISUrl>
+          <IISUrl>http://localhost:51234/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

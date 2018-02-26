@@ -21,7 +21,9 @@ namespace DIHMT.Controllers
         {
             if (input.Valid)
             {
-                GameHelpers.SubmitRating(input);
+                input.SubmitterIp = Request.UserHostAddress?.Length > 45 ? Request.UserHostAddress.Substring(0, 45) : Request.UserHostAddress ?? string.Empty;
+
+                GameHelpers.SubmitRating(input, Request.IsAuthenticated);
             }
 
             return RedirectToAction("Index", new { id = input.Id });

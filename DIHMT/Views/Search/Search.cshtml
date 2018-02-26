@@ -16,13 +16,13 @@
                 <img src="@item.ThumbImageUrl" alt=""/>
             </a>
             <br />
-            <strong>Game summary:</strong> @item.Summary
+            <strong>Game summary:</strong> @item.GameSummary
             <br />
             @*<strong>Rating: </strong> @item.Rating
             <br />*@
-            @if (!string.IsNullOrEmpty(item.RatingExplanation))
+            @if (!string.IsNullOrEmpty(item.Basically))
             {
-                <strong>Reasoning: </strong> @item.RatingExplanation
+                <strong>Basically, @item.Name</strong> @item.Basically
             }
             else
             {
