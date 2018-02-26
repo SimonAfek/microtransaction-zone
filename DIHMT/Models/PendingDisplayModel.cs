@@ -19,7 +19,13 @@ namespace DIHMT.Models
         public DateTime TimeOfSubmission { get; set; }
         [DisplayName("Submitter's IP")]
         public string SubmitterIp { get; set; }
-        public List<int> Flags { get; set; }
+        public string SubmitAction { get; set; }
+        private List<int> _flags;
+        public List<int> Flags
+        {
+            get => _flags?.Where(x => x >= (int)EnumTag.HorseArmor && x <= (int)EnumTag.F2P).ToList();
+            set => _flags = value?.Where(x => x >= (int)EnumTag.HorseArmor && x <= (int)EnumTag.F2P).ToList();
+        }
 
         public RatingInputModel RatingModel => new RatingInputModel
         {

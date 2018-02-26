@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using DIHMT.Models;
@@ -184,6 +185,18 @@ namespace DIHMT.Controllers
             var pendingRatings = GameHelpers.GetPendingSubmissionsList();
 
             return View("Pending_List", pendingRatings);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Pending(PendingDisplayModel input)
+        {
+            if (input.RatingModel.Valid)
+            {
+                GameHelpers.HandlePostPending(input);
+            }
+
+            return RedirectToAction("Index", "Game", new { id = input.GameId });
         }
 
         private void AddErrors(IdentityResult result)

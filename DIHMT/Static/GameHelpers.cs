@@ -261,6 +261,18 @@ namespace DIHMT.Static
             }
         }
 
+        public static void HandlePostPending(PendingDisplayModel input)
+        {
+            if (input.SubmitAction == "Approve")
+            {
+                DbAccess.ApprovePendingRating(input);
+            }
+            else
+            {
+                DbAccess.RejectPendingRating(input);
+            }
+        }
+
         public static List<DbRating> GetRatings()
         {
             return DbAccess.GetRatings();
