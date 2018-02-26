@@ -28,8 +28,6 @@ namespace DIHMT.Models
             Basically = Basically,
             RatingExplanation = RatingExplanation
         };
-
-        public DisplayGame() { }
     }
 
     public class DisplayGameRating
