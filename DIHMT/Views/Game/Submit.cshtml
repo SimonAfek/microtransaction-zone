@@ -5,21 +5,21 @@
 @using (Html.BeginForm("SubmitRating", "Game"))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Flags, htmlAttributes: new { @class = "control-label col-md-2 "})
+            @Html.LabelFor(model => model.Flags, htmlAttributes: new { @class = "control-label col-md-2 " })
             <div class="col-md-10">
                 <p>
                     <label>
-                        <input type="checkbox" name="Flags" value="@((int) EnumTag.Spotless)" checked="@Model.IsSpotless" class="spotless-checkbox"/> Spotless
+                        <input type="checkbox" name="Flags" value="@((int) EnumTag.Spotless)" checked="@Model.IsSpotless" class="spotless-checkbox" /> Spotless
                     </label>
                 </p>
-                
+
                 <p>
                     <strong>Horse armor: </strong>
                     <ul>
@@ -35,7 +35,7 @@
                         </li>
                         <li>
                             <label>
-                                <input type="radio" name="Flags" value="@((int)EnumTag.BulkOrderHorseArmor)" checked="@Model.Flags.Contains((int)EnumTag.BulkOrderHorseArmor)" class="monetization-input" disabled="@Model.IsSpotless"/> A lot
+                                <input type="radio" name="Flags" value="@((int)EnumTag.BulkOrderHorseArmor)" checked="@Model.Flags.Contains((int)EnumTag.BulkOrderHorseArmor)" class="monetization-input" disabled="@Model.IsSpotless" /> A lot
                             </label>
                         </li>
                     </ul>
@@ -45,16 +45,16 @@
                 {
                     <p><label><input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="monetization-input" disabled="@Model.IsSpotless" /> @v.Name</label></p>
                 }
-                
+
                 @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
                 {
                     <p><label><input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" /> @v.Name</label></p>
                 }
             </div>
         </div>
-        
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Basically, htmlAttributes: new { @class = "control-label col-md-2 "})
+            @Html.LabelFor(model => model.Basically, htmlAttributes: new { @class = "control-label col-md-2 " })
             <div class="col-md-10">
                 <input type="text" name="Basically" size="280" value="@Model.Basically" class="wide-input" maxlength="280" />
             </div>
@@ -67,13 +67,32 @@
                 @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label col-md-2 "})
+            @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label col-md-2 " })
             <div class="col-md-10 input-fields-wrap">
-                <div>
-                    <input type="text" name="Links" maxlength="500" />
-                </div>
+                @if (Model.Links != null && Model.Links.Any())
+                {
+                    for (var i = 0; i < Model.Links.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" value="@Model.Links[i]" />
+                        }
+                        else
+                        {
+                            <div>
+                                <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" value="@Model.Links[i]" /> <a href="#" class="remove_field">[-]</a>
+                            </div>
+                        }
+                    }
+                }
+                else
+                {
+                    <div>
+                        <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" />
+                    </div>
+                }
             </div>
             <div class="col-md-offset-2 col-md-10">
                 <a href="#" class="add-field-element">[+]</a>

@@ -75,6 +75,22 @@
         {
             @Html.Raw(HttpUtility.HtmlEncode(Model.RatingExplanation).Replace("\n", "<br/>"))
         }
+        
+        @if (Model.Links != null && Model.Links.Any())
+        {
+            <p>
+                External links with further information:
+            </p>
+
+            <ul>
+                @foreach (var v in Model.Links)
+                {
+                    <li>
+                        <a href="@v" target="_blank">@v</a>
+                    </li>
+                }
+            </ul>
+        }
     </p>
 }
 

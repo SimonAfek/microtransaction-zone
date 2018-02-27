@@ -77,6 +77,42 @@
                 <textarea name="RatingExplanation" class="wide-input" rows="10" cols="100" maxlength="4000">@Model.RatingExplanation</textarea>
             </p>
         </div>
+        
+        <div class="form-group">
+            <p>
+                @Html.LabelFor(model => model.Links, htmlAttributes: new {@class = "control-label col-md-2 "})
+            </p>
+            
+            <p>
+                <div class="col-md-10 input-fields-wrap">
+                    @if (Model.Links != null && Model.Links.Any())
+                    {
+                        for (var i = 0; i < Model.Links.Count; i++)
+                        {
+                            if (i == 0)
+                            {
+                                <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" value="@Model.Links[i]" />
+                            }
+                            else
+                            {
+                                <div>
+                                    <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" value="@Model.Links[i]" /> <a href="#" class="remove_field">[-]</a>
+                                </div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <div>
+                            <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" />
+                        </div>
+                    }
+                </div>
+                <div class="col-md-offset-2 col-md-10">
+                    <a href="#" class="add-field-element">[+]</a>
+                </div>
+            </p>
+        </div>
 
         <p>
             @Html.LabelFor(model => model.TimeOfSubmission, htmlAttributes: new { @class = "control-label" })
@@ -93,7 +129,8 @@
             @Html.EditorFor(model => model.SubmitterIp, new { htmlAttributes = new { @class = "form-control", disabled = "true" } })
             @Html.ValidationMessageFor(model => model.SubmitterIp, "", new { @class = "text-danger" })
         </p>
-
+        
+        
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" name="SubmitAction" id="ApproveButton" value="Approve" class="btn btn-success" />

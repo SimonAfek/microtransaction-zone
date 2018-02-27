@@ -16,7 +16,6 @@ namespace DIHMT.Models
         public string Basically { get; set; }
         [DisplayName("Detailed explanation")]
         public string RatingExplanation { get; set; }
-        public List<string> Links { get; set; }
         public string SubmitterIp { get; set; }
 
         private List<int> _flags;
@@ -25,6 +24,14 @@ namespace DIHMT.Models
             get => _flags;
             set => _flags = value?.Where(x => x >= (int)EnumTag.HorseArmor && x <= (int)EnumTag.F2P).ToList();
         }
+
+        private List<string> _links;
+        public List<string> Links
+        {
+            get => _links;
+            set => _links = value?.Where(x => !string.IsNullOrEmpty(x)).ToList() ?? new List<string>();
+        }
+
 
         public bool Valid
         {

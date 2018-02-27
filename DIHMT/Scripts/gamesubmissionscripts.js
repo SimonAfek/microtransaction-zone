@@ -4,13 +4,13 @@
     var wrapper = $(".input-fields-wrap"); // Fields wrapper
     var addButton = $(".add-field-element"); // Class name of "Add new input"-element
 
-    var x = 1; // Initial text box count
+    var x = $(".links-input").length; // Initial text box count
 
     $(addButton).click(function (e) { // On add input button click
         e.preventDefault();
         if (x < maxFields) { // True unless the field count is at capacity
             x++; // Increment count of text boxes
-            $(wrapper).append('<div><input type="text" name="Links" maxlength="500" /> <a href="#" class="remove_field">[-]</a></div>'); // Add input box with corresponding remove-button
+            $(wrapper).append('<div><input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" /> <a href="#" class="remove_field">[-]</a></div>'); // Add input box with corresponding remove-button
         }
     });
 
