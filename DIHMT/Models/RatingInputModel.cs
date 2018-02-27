@@ -49,6 +49,16 @@ namespace DIHMT.Models
                     return false;
                 }
 
+                if (Basically != null && Basically.Length > 280)
+                {
+                    return false;
+                }
+
+                if (RatingExplanation != null && RatingExplanation.Length > 4000)
+                {
+                    return false;
+                }
+
                 return true;
             }
         }
