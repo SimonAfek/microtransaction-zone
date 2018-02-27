@@ -5,27 +5,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f73e80777d7b49d1a6074469dfba9e1e" Name="Diagram1" ZoomLevel="93">
-        <EntityTypeShape EntityType="Entities.DbGame" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Entities.DbGamePlatform" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Entities.DbPlatform" Width="1.5" PointX="8.125" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.DbGame" Width="1.5" PointX="8.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.DbGamePlatform" Width="1.5" PointX="10.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entities.DbPlatform" Width="1.5" PointX="13.625" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="Entities.FK__DbGamePla__GameI__29572725" ManuallyRouted="false" />
         <AssociationConnector Association="Entities.FK__DbGamePla__Platf__2A4B4B5E" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Entities.DbGameGenre" Width="1.5" PointX="5.25" PointY="4.875" />
-        <EntityTypeShape EntityType="Entities.DbGenre" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="Entities.DbGameGenre" Width="1.5" PointX="4.125" PointY="4.75" />
+        <EntityTypeShape EntityType="Entities.DbGenre" Width="1.5" PointX="1.875" PointY="5.625" />
         <AssociationConnector Association="Entities.FK_DbGameGenre_GameId" />
         <AssociationConnector Association="Entities.FK_DbGameGenre_GenreId" />
-        <EntityTypeShape EntityType="Entities.DbGameRating" Width="1.5" PointX="8.25" PointY="5" />
-        <EntityTypeShape EntityType="Entities.DbRating" Width="1.5" PointX="6" PointY="9" />
+        <EntityTypeShape EntityType="Entities.DbGameRating" Width="1.5" PointX="13.75" PointY="5" />
+        <EntityTypeShape EntityType="Entities.DbRating" Width="1.5" PointX="11.5" PointY="9" />
         <AssociationConnector Association="Entities.FK_DbGameRating_GameId" />
         <AssociationConnector Association="Entities.FK_DbGameRating_RatingId" />
-        <EntityTypeShape EntityType="Entities.PendingDbGameRating" Width="1.5" PointX="8.25" PointY="11.125" />
-        <EntityTypeShape EntityType="Entities.PendingSubmission" Width="1.5" PointX="5.25" PointY="13.125" />
+        <EntityTypeShape EntityType="Entities.PendingDbGameRating" Width="1.5" PointX="13.75" PointY="11.125" />
+        <EntityTypeShape EntityType="Entities.PendingSubmission" Width="1.5" PointX="10.75" PointY="13.125" />
         <AssociationConnector Association="Entities.FK_GameId_Game_Id" />
         <AssociationConnector Association="Entities.FK_PendingDbGameRating_Rating" />
         <AssociationConnector Association="Entities.FK_PendingDbGameRating_PendingSubmission" />
-        <EntityTypeShape EntityType="Entities.DbGameLink" Width="1.5" PointX="5.25" PointY="17.5" />
+        <EntityTypeShape EntityType="Entities.DbGameLink" Width="1.5" PointX="3.625" PointY="1.375" />
         <AssociationConnector Association="Entities.FK_DbGameLink_DbGame_Id" />
-        <EntityTypeShape EntityType="Entities.PendingGameLink" Width="1.5" PointX="7.5" PointY="14.75" />
+        <EntityTypeShape EntityType="Entities.PendingGameLink" Width="1.5" PointX="9.75" PointY="8" />
         <AssociationConnector Association="Entities.FK_PendingGameLink_PendingSubmission_Id" />
         </Diagram>
     </edmx:Diagrams>
