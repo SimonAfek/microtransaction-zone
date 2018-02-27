@@ -15,6 +15,7 @@ namespace DIHMT.Models
         public string Basically { get; set; }
         [DisplayName("Detailed explanation")]
         public string RatingExplanation { get; set; }
+        public List<string> Links { get; set; }
         public string SubmitterIp { get; set; }
 
         private List<int> _flags;

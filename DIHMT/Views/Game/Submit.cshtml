@@ -67,6 +67,18 @@
                 @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
             </div>
         </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label col-md-2 "})
+            <div class="col-md-10 input-fields-wrap">
+                <div>
+                    <input type="text" name="Links" maxlength="500" />
+                </div>
+            </div>
+            <div class="col-md-offset-2 col-md-10">
+                <a href="#" class="add-field-element">[+]</a>
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
