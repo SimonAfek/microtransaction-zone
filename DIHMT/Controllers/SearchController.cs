@@ -68,5 +68,18 @@ namespace DIHMT.Controllers
 
             return View(retval);
         }
+
+        public ActionResult AdvancedSearch(
+            string q,
+            List<int> blockFlags,
+            List<int> allowFlags,
+            List<int> platforms,
+            List<int> genres
+        )
+        {
+            var results = SearchHelpers.AdvancedSearch(q, blockFlags, allowFlags, platforms, genres);
+
+            return null;
+        }
     }
 }

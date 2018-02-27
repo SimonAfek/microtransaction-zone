@@ -7,8 +7,6 @@ namespace DIHMT.Controllers
 {
     public class GameController : Controller
     {
-        private static string IpSalt => WebConfigurationManager.AppSettings["IpSalt"];
-
         // GET: Game
         [HttpGet]
         public ActionResult Index(int id)
@@ -22,9 +20,9 @@ namespace DIHMT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitRating(RatingInputModel input)
         {
-            if (input.Valid)
+            if (input.Valid && Request.UserHostAddress != null)
             {
-                input.SubmitterIp = Request.UserHostAddress?.Length > 45 ? Request.UserHostAddress.Substring(0, 45) : Request.UserHostAddress ?? string.Empty;
+                input.SubmitterIp = Request.IsAuthenticated ? string.Empty : CryptHelper.Hash(Request.UserHostAddress);
 
                 GameHelpers.SubmitRating(input, Request.IsAuthenticated);
             }

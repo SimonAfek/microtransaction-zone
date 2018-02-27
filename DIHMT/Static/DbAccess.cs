@@ -33,6 +33,43 @@ namespace DIHMT.Static
             }
         }
 
+        public static List<DbGame> AdvancedSearch(string[] query, List<int> blockFlags, List<int> allowFlags, List<int> platforms, List<int> genres)
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                var games = ctx.DbGames
+                    .Where(x => x.IsRated)
+                    .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
+                    .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
+                    .Include(x => x.DbGameRatings.Select(y => y.DbRating))
+                    .Include(x => x.DbGameLinks);
+
+                if (query != null && query.Any())
+                {
+                    games = games.Where(q => query.All(k => q.Name.Contains(k)));
+                }
+
+                if (genres != null && genres.Any())
+                {
+                    games = games.Where(x => x.DbGameGenres.Select(y => y.GenreId).Intersect(genres).Any());
+                }
+
+                if (platforms != null && platforms.Any())
+                {
+                    games = games.Where(x => x.DbGamePlatforms.Select(y => y.PlatformId).Intersect(platforms).Any());
+                }
+
+                if (blockFlags != null && blockFlags.Any())
+                {
+                    games = games.Where(x =>
+                        !x.DbGameRatings.Select(y => y.RatingId).Intersect(blockFlags).Any()
+                        || x.DbGameRatings.Select(y => y.RatingId).Intersect(allowFlags).Any());
+                }
+
+                return games.ToList();
+            }
+        }
+
         public static bool GameExistsInDb(int id)
         {
             bool result;
@@ -172,7 +209,7 @@ namespace DIHMT.Static
                         ctx.DbGameLinks.RemoveRange(ctx.DbGameLinks.Where(x => x.GameId == input.Id));
 
                         // Add links from input
-                        ctx.DbGameLinks.AddRange(input.Links?.Select(x => new DbGameLink {GameId = input.Id, Link = x}) ?? new List<DbGameLink>());
+                        ctx.DbGameLinks.AddRange(input.Links?.Select(x => new DbGameLink { GameId = input.Id, Link = x }) ?? new List<DbGameLink>());
 
                         ctx.SaveChanges();
                     }

@@ -14,8 +14,8 @@ namespace DIHMT.Models
     
     public partial class DbGamePlatform
     {
-        public Nullable<int> GameId { get; set; }
-        public Nullable<int> PlatformId { get; set; }
+        public int GameId { get; set; }
+        public int PlatformId { get; set; }
         public int Id { get; set; }
     
         public virtual DbGame DbGame { get; set; }
