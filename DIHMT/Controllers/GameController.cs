@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web.Configuration;
+using System.Web.Mvc;
 using DIHMT.Models;
 using DIHMT.Static;
 
@@ -6,6 +7,8 @@ namespace DIHMT.Controllers
 {
     public class GameController : Controller
     {
+        private static string IpSalt => WebConfigurationManager.AppSettings["IpSalt"];
+
         // GET: Game
         [HttpGet]
         public ActionResult Index(int id)
