@@ -246,6 +246,9 @@
     <Compile Include="Models\DbGameGenre.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DbGameLink.cs">
+      <DependentUpon>EfModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DbGamePlatform.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>
@@ -267,6 +270,9 @@
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PendingDisplayModel.cs" />
+    <Compile Include="Models\PendingGameLink.cs">
+      <DependentUpon>EfModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PendingSubmission.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>

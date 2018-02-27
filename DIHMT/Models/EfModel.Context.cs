@@ -34,5 +34,7 @@ namespace DIHMT.Models
         public virtual DbSet<DbRating> DbRatings { get; set; }
         public virtual DbSet<PendingDbGameRating> PendingDbGameRatings { get; set; }
         public virtual DbSet<PendingSubmission> PendingSubmissions { get; set; }
+        public virtual DbSet<DbGameLink> DbGameLinks { get; set; }
+        public virtual DbSet<PendingGameLink> PendingGameLinks { get; set; }
     }
 }

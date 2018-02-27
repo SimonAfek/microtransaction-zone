@@ -29,6 +29,14 @@
           <Property Name="GenreId" Type="int" />
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="DbGameLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameId" Type="int" Nullable="false" />
+          <Property Name="Link" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
         <EntityType Name="DbGamePlatform">
           <Key>
             <PropertyRef Name="Id" />
@@ -78,6 +86,14 @@
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PendingSubmissionId" Type="int" Nullable="false" />
           <Property Name="RatingId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PendingGameLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PendingSubmissionId" Type="int" Nullable="false" />
+          <Property Name="Link" Type="nvarchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <EntityType Name="PendingSubmission">
           <Key>
@@ -135,6 +151,20 @@
             </Principal>
             <Dependent Role="DbGameGenre">
               <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DbGameLink_DbGame_Id">
+          <End Role="DbGame" Type="Self.DbGame" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DbGameLink" Type="Self.DbGameLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DbGame">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DbGameLink">
+              <PropertyRef Name="GameId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -202,15 +232,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PendingGameLink_PendingSubmission_Id">
+          <End Role="PendingSubmission" Type="Self.PendingSubmission" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PendingGameLink" Type="Self.PendingGameLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PendingSubmission">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PendingGameLink">
+              <PropertyRef Name="PendingSubmissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EntitiesStoreContainer">
           <EntitySet Name="DbGame" EntityType="Self.DbGame" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGameGenre" EntityType="Self.DbGameGenre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DbGameLink" EntityType="Self.DbGameLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGamePlatform" EntityType="Self.DbGamePlatform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGameRating" EntityType="Self.DbGameRating" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGenre" EntityType="Self.DbGenre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbPlatform" EntityType="Self.DbPlatform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbRating" EntityType="Self.DbRating" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PendingDbGameRating" EntityType="Self.PendingDbGameRating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PendingGameLink" EntityType="Self.PendingGameLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PendingSubmission" EntityType="Self.PendingSubmission" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__DbGamePla__GameI__31EC6D26" Association="Self.FK__DbGamePla__GameI__31EC6D26">
             <End Role="DbGame" EntitySet="DbGame" />
@@ -227,6 +273,10 @@
           <AssociationSet Name="FK_DbGameGenre_GenreId" Association="Self.FK_DbGameGenre_GenreId">
             <End Role="DbGenre" EntitySet="DbGenre" />
             <End Role="DbGameGenre" EntitySet="DbGameGenre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DbGameLink_DbGame_Id" Association="Self.FK_DbGameLink_DbGame_Id">
+            <End Role="DbGame" EntitySet="DbGame" />
+            <End Role="DbGameLink" EntitySet="DbGameLink" />
           </AssociationSet>
           <AssociationSet Name="FK_DbGameRating_GameId" Association="Self.FK_DbGameRating_GameId">
             <End Role="DbGame" EntitySet="DbGame" />
@@ -247,6 +297,10 @@
           <AssociationSet Name="FK_PendingDbGameRating_Rating" Association="Self.FK_PendingDbGameRating_Rating">
             <End Role="DbRating" EntitySet="DbRating" />
             <End Role="PendingDbGameRating" EntitySet="PendingDbGameRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PendingGameLink_PendingSubmission_Id" Association="Self.FK_PendingGameLink_PendingSubmission_Id">
+            <End Role="PendingSubmission" EntitySet="PendingSubmission" />
+            <End Role="PendingGameLink" EntitySet="PendingGameLink" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -272,6 +326,7 @@
           <Property Name="RatingLastUpdated" Type="DateTime" Precision="3" />
           <NavigationProperty Name="PendingSubmissions" Relationship="Entities.FK_GameId_Game_Id" FromRole="DbGame" ToRole="PendingSubmission" />
           <Property Name="Basically" Type="String" MaxLength="280" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DbGameLinks" Relationship="Entities.FK_DbGameLink_DbGame_Id" FromRole="DbGame" ToRole="DbGameLink" />
         </EntityType>
         <EntityType Name="DbGamePlatform">
           <Key>
@@ -362,6 +417,16 @@
           <AssociationSet Name="FK_PendingDbGameRating_PendingSubmission" Association="Entities.FK_PendingDbGameRating_PendingSubmission">
             <End Role="PendingSubmission" EntitySet="PendingSubmissions" />
             <End Role="PendingDbGameRating" EntitySet="PendingDbGameRatings" />
+          </AssociationSet>
+          <EntitySet Name="DbGameLinks" EntityType="Entities.DbGameLink" />
+          <AssociationSet Name="FK_DbGameLink_DbGame_Id" Association="Entities.FK_DbGameLink_DbGame_Id">
+            <End Role="DbGame" EntitySet="DbGames" />
+            <End Role="DbGameLink" EntitySet="DbGameLinks" />
+          </AssociationSet>
+          <EntitySet Name="PendingGameLinks" EntityType="Entities.PendingGameLink" />
+          <AssociationSet Name="FK_PendingGameLink_PendingSubmission_Id" Association="Entities.FK_PendingGameLink_PendingSubmission_Id">
+            <End Role="PendingSubmission" EntitySet="PendingSubmissions" />
+            <End Role="PendingGameLink" EntitySet="PendingGameLinks" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="DbGameGenre">
@@ -474,6 +539,7 @@
           <Property Name="TimeOfSubmission" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="SubmitterIp" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="Basically" Type="String" MaxLength="280" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PendingGameLinks" Relationship="Entities.FK_PendingGameLink_PendingSubmission_Id" FromRole="PendingSubmission" ToRole="PendingGameLink" />
           </EntityType>
         <Association Name="FK_GameId_Game_Id">
           <End Type="Entities.DbGame" Role="DbGame" Multiplicity="1">
@@ -511,6 +577,52 @@
 			  <PropertyRef Name="Id" />
 			</Principal>
             <Dependent Role="PendingDbGameRating">
+			  <PropertyRef Name="PendingSubmissionId" />
+			</Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DbGameLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameId" Type="Int32" Nullable="false" />
+          <Property Name="Link" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DbGame" Relationship="Entities.FK_DbGameLink_DbGame_Id" FromRole="DbGameLink" ToRole="DbGame" />
+        </EntityType>
+        <Association Name="FK_DbGameLink_DbGame_Id">
+          <End Type="Entities.DbGame" Role="DbGame" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Entities.DbGameLink" Role="DbGameLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DbGame">
+			  <PropertyRef Name="Id" />
+			</Principal>
+            <Dependent Role="DbGameLink">
+			  <PropertyRef Name="GameId" />
+			</Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PendingGameLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PendingSubmissionId" Type="Int32" Nullable="false" />
+          <Property Name="Link" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PendingSubmission" Relationship="Entities.FK_PendingGameLink_PendingSubmission_Id" FromRole="PendingGameLink" ToRole="PendingSubmission" />
+        </EntityType>
+        <Association Name="FK_PendingGameLink_PendingSubmission_Id">
+          <End Type="Entities.PendingSubmission" Role="PendingSubmission" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Entities.PendingGameLink" Role="PendingGameLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PendingSubmission">
+			  <PropertyRef Name="Id" />
+			</Principal>
+            <Dependent Role="PendingGameLink">
 			  <PropertyRef Name="PendingSubmissionId" />
 			</Dependent>
           </ReferentialConstraint>
@@ -611,6 +723,24 @@
                 <ScalarProperty Name="TimeOfSubmission" ColumnName="TimeOfSubmission" />
                 <ScalarProperty Name="RatingExplanation" ColumnName="RatingExplanation" />
                 <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DbGameLinks">
+            <EntityTypeMapping TypeName="Entities.DbGameLink">
+              <MappingFragment StoreEntitySet="DbGameLink">
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PendingGameLinks">
+            <EntityTypeMapping TypeName="Entities.PendingGameLink">
+              <MappingFragment StoreEntitySet="PendingGameLink">
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="PendingSubmissionId" ColumnName="PendingSubmissionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
