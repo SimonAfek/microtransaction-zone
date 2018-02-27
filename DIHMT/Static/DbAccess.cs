@@ -75,6 +75,7 @@ namespace DIHMT.Static
                         .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
                         .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
                         .Include(x => x.DbGameRatings.Select(y => y.DbRating))
+                        .Include(x => x.DbGameLinks)
                         .FirstOrDefault(x => x.Id == id);
                 }
             }
@@ -167,6 +168,12 @@ namespace DIHMT.Static
                         // Add ratings from input
                         ctx.DbGameRatings.AddRange(input.Flags?.Select(x => new DbGameRating { GameId = input.Id, RatingId = x }) ?? new List<DbGameRating>());
 
+                        // Remove current links
+                        ctx.DbGameLinks.RemoveRange(ctx.DbGameLinks.Where(x => x.GameId == input.Id));
+
+                        // Add links from input
+                        ctx.DbGameLinks.AddRange(input.Links?.Select(x => new DbGameLink {GameId = input.Id, Link = x}) ?? new List<DbGameLink>());
+
                         ctx.SaveChanges();
                     }
                 }
@@ -189,6 +196,7 @@ namespace DIHMT.Static
                     .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
                     .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
                     .Include(x => x.DbGameRatings.Select(y => y.DbRating))
+                    .Include(x => x.DbGameLinks)
                     .OrderByDescending(x => x.RatingLastUpdated)
                     .Take(numOfGames)
                     .ToList();
@@ -214,6 +222,8 @@ namespace DIHMT.Static
 
                 ctx.PendingDbGameRatings.AddRange(input.Flags?.Select(x => new PendingDbGameRating { PendingSubmissionId = pendingRatingObject.Id, RatingId = x }) ?? new List<PendingDbGameRating>());
 
+                ctx.PendingGameLinks.AddRange(input.Links?.Select(x => new PendingGameLink { PendingSubmissionId = pendingRatingObject.Id, Link = x }) ?? new List<PendingGameLink>());
+
                 ctx.SaveChanges();
             }
         }
@@ -226,6 +236,7 @@ namespace DIHMT.Static
                     .Where(x => x.Id == id)
                     .Include(x => x.DbGame)
                     .Include(x => x.PendingDbGameRatings.Select(y => y.DbRating))
+                    .Include(x => x.PendingGameLinks)
                     .FirstOrDefault();
             }
         }
@@ -259,11 +270,20 @@ namespace DIHMT.Static
                         // Remove current ratings
                         ctx.DbGameRatings.RemoveRange(ctx.DbGameRatings.Where(x => x.GameId == input.GameId));
 
+                        // Remove current links
+                        ctx.DbGameLinks.RemoveRange(ctx.DbGameLinks.Where(x => x.GameId == input.GameId));
+
                         // Add ratings from input
-                        ctx.DbGameRatings.AddRange(input.Flags?.Select(x => new DbGameRating { GameId = input.GameId, RatingId = x }) ?? new List<DbGameRating>());
+                        ctx.DbGameRatings.AddRange(input.RatingModel.Flags?.Select(x => new DbGameRating { GameId = input.GameId, RatingId = x }) ?? new List<DbGameRating>());
+
+                        // Add links from input
+                        ctx.DbGameLinks.AddRange(input.RatingModel.Links?.Select(x => new DbGameLink { GameId = input.GameId, Link = x }) ?? new List<DbGameLink>());
 
                         // Remove pending ratings
                         ctx.PendingDbGameRatings.RemoveRange(ctx.PendingDbGameRatings.Where(x => x.RatingId == input.Id));
+
+                        // Remove pending links
+                        ctx.PendingGameLinks.RemoveRange(ctx.PendingGameLinks.Where(x => x.PendingSubmissionId == input.Id));
 
                         // Remove pending submission
                         ctx.PendingSubmissions.Remove(ctx.PendingSubmissions.First(x => x.Id == input.Id));
@@ -282,6 +302,9 @@ namespace DIHMT.Static
                 {
                     // Remove pending ratings
                     ctx.PendingDbGameRatings.RemoveRange(ctx.PendingDbGameRatings.Where(x => x.RatingId == input.Id));
+
+                    // Remove pending links
+                    ctx.PendingGameLinks.RemoveRange(ctx.PendingGameLinks.Where(x => x.PendingSubmissionId == input.Id));
 
                     // Remove pending submission
                     ctx.PendingSubmissions.Remove(ctx.PendingSubmissions.First(x => x.Id == input.Id));

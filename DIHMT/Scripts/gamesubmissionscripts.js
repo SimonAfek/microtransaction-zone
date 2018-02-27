@@ -1,14 +1,16 @@
 ﻿$(function () {
-    var maxFields = 10; //maximum input boxes allowed
-    var wrapper = $(".input-fields-wrap"); //Fields wrapper
+    // https://www.sanwebe.com/2013/03/addremove-input-fields-dynamically-with-jquery
+    var maxFields = 10; // Maximum input boxes allowed
+    var wrapper = $(".input-fields-wrap"); // Fields wrapper
+    var addButton = $(".add-field-element"); // Class name of "Add new input"-element
 
-    var x = 1; //initial text box count
+    var x = 1; // Initial text box count
 
-    $(".add-field-element").click(function (e) { //on add input button click
+    $(addButton).click(function (e) { // On add input button click
         e.preventDefault();
-        if (x < maxFields) { //max input box allowed
-            x++; //text box increment
-            $(wrapper).append('<div><input type="text" name="Links" maxlength="500" /> <a href="#" class="remove_field">[-]</a></div>'); //add input box
+        if (x < maxFields) { // True unless the field count is at capacity
+            x++; // Increment count of text boxes
+            $(wrapper).append('<div><input type="text" name="Links" maxlength="500" /> <a href="#" class="remove_field">[-]</a></div>'); // Add input box with corresponding remove-button
         }
     });
 

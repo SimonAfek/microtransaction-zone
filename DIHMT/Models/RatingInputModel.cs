@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace DIHMT.Models
         private List<int> _flags;
         public List<int> Flags
         {
-            get => _flags?.Where(x => x >= (int)EnumTag.HorseArmor && x <= (int)EnumTag.F2P).ToList();
+            get => _flags;
             set => _flags = value?.Where(x => x >= (int)EnumTag.HorseArmor && x <= (int)EnumTag.F2P).ToList();
         }
 
@@ -56,6 +57,11 @@ namespace DIHMT.Models
                 }
 
                 if (RatingExplanation != null && RatingExplanation.Length > 4000)
+                {
+                    return false;
+                }
+
+                if (Links.Any(x => !Uri.IsWellFormedUriString(x, UriKind.Absolute)))
                 {
                     return false;
                 }

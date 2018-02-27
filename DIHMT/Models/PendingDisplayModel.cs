@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Web.Mvc.Html;
 
 namespace DIHMT.Models
 {
@@ -20,17 +21,14 @@ namespace DIHMT.Models
         [DisplayName("Submitter's IP")]
         public string SubmitterIp { get; set; }
         public string SubmitAction { get; set; }
-        private List<int> _flags;
-        public List<int> Flags
-        {
-            get => _flags?.Where(x => x >= (int)EnumTag.HorseArmor && x <= (int)EnumTag.F2P).ToList();
-            set => _flags = value?.Where(x => x >= (int)EnumTag.HorseArmor && x <= (int)EnumTag.F2P).ToList();
-        }
+        public List<int> Flags { get; set; }
+        public List<string> Links { get; set; }
 
         public RatingInputModel RatingModel => new RatingInputModel
         {
             Id = Id,
             Flags = Flags ?? new List<int>(),
+            Links = Links ?? new List<string>(),
             Basically = Basically,
             RatingExplanation = RatingExplanation
         };
@@ -57,6 +55,15 @@ namespace DIHMT.Models
             catch (ObjectDisposedException)
             {
                 Flags = new List<int>();
+            }
+
+            try
+            {
+                Links = input.PendingGameLinks?.Select(x => x.Link).ToList() ?? new List<string>();
+            }
+            catch (ObjectDisposedException)
+            {
+                Links = new List<string>();
             }
         }
     }

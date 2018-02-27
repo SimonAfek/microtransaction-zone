@@ -324,6 +324,8 @@ namespace DIHMT.Static
                     ShortDescription = x.DbRating.ShortDescription
                 }).ToList(),
 
+                Links = input.DbGameLinks.Select(x => x.Link).ToList(),
+
                 IsRated = input.IsRated,
                 Basically = input.Basically,
                 RatingExplanation = input.RatingExplanation,
