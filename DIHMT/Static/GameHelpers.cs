@@ -167,7 +167,7 @@ namespace DIHMT.Static
 
             if (dbGameView != null)
             {
-                result = DbGameToDisplayGame(dbGameView);
+                result = new DisplayGame(dbGameView);
             }
 
             return result;
@@ -286,54 +286,10 @@ namespace DIHMT.Static
 
             foreach (var v in dbGames)
             {
-                retval.Add(DbGameToDisplayGame(v));
+                retval.Add(new DisplayGame(v));
             }
 
             return retval;
-        }
-
-        private static DisplayGame DbGameToDisplayGame(DbGame input)
-        {
-            return new DisplayGame
-            {
-                GbSiteDetailUrl = input.GbSiteDetailUrl,
-                Id = input.Id,
-                LastUpdated = input.LastUpdated,
-                Name = input.Name,
-
-                Platforms = input.DbGamePlatforms.Select(x => new DisplayGamePlatform
-                {
-                    Abbreviation = x.DbPlatform.Abbreviation,
-                    Id = x.DbPlatform.Id,
-                    ImageUrl = x.DbPlatform.ImageUrl,
-                    Name = x.DbPlatform.Name
-                }).ToList(),
-
-                Genres = input.DbGameGenres.Select(x => new DisplayGameGenre
-                {
-                    Id = x.DbGenre.Id,
-                    Name = x.DbGenre.Name
-                }).ToList(),
-
-                Ratings = input.DbGameRatings.Select(x => new DisplayGameRating
-                {
-                    Id = x.DbRating.Id,
-                    Description = x.DbRating.Description,
-                    ImageUrl = x.DbRating.ImageUrl,
-                    Name = x.DbRating.Name,
-                    ShortDescription = x.DbRating.ShortDescription
-                }).ToList(),
-
-                Links = input.DbGameLinks.Select(x => x.Link).ToList(),
-
-                IsRated = input.IsRated,
-                Basically = input.Basically,
-                RatingExplanation = input.RatingExplanation,
-                RatingLastUpdated = input.RatingLastUpdated,
-                SmallImageUrl = input.SmallImageUrl,
-                GameSummary = input.Summary,
-                ThumbImageUrl = input.ThumbImageUrl
-            };
         }
     }
 }

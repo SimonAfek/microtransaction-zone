@@ -30,6 +30,52 @@ namespace DIHMT.Models
             Basically = Basically,
             RatingExplanation = RatingExplanation
         };
+
+        public DisplayGame()
+        {
+
+        }
+
+        public DisplayGame(DbGame input)
+        {
+            GbSiteDetailUrl = input.GbSiteDetailUrl;
+            Id = input.Id;
+            LastUpdated = input.LastUpdated;
+            Name = input.Name;
+
+            Platforms = input.DbGamePlatforms.Select(x => new DisplayGamePlatform
+            {
+                Abbreviation = x.DbPlatform.Abbreviation,
+                Id = x.DbPlatform.Id,
+                ImageUrl = x.DbPlatform.ImageUrl,
+                Name = x.DbPlatform.Name
+            }).ToList();
+
+            Genres = input.DbGameGenres.Select(x => new DisplayGameGenre
+            {
+                Id = x.DbGenre.Id,
+                Name = x.DbGenre.Name
+            }).ToList();
+
+            Ratings = input.DbGameRatings.Select(x => new DisplayGameRating
+            {
+                Id = x.DbRating.Id,
+                Description = x.DbRating.Description,
+                ImageUrl = x.DbRating.ImageUrl,
+                Name = x.DbRating.Name,
+                ShortDescription = x.DbRating.ShortDescription
+            }).ToList();
+
+            Links = input.DbGameLinks.Select(x => x.Link).ToList();
+
+            IsRated = input.IsRated;
+            Basically = input.Basically;
+            RatingExplanation = input.RatingExplanation;
+            RatingLastUpdated = input.RatingLastUpdated;
+            SmallImageUrl = input.SmallImageUrl;
+            GameSummary = input.Summary;
+            ThumbImageUrl = input.ThumbImageUrl;
+        }
     }
 
     public class DisplayGameRating

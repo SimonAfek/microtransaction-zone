@@ -63,23 +63,41 @@ namespace DIHMT.Controllers
             {
                 Page = page,
                 Results = games,
-                Query = q
+                Query = q,
+                IsAdvanced = false
             };
 
             return View(retval);
         }
 
-        public ActionResult AdvancedSearch(
+        public ActionResult Advanced(
             string q,
+            List<int> requireFlags,
             List<int> blockFlags,
             List<int> allowFlags,
             List<int> platforms,
-            List<int> genres
+            List<int> genres,
+            int page = 1
         )
         {
-            var results = SearchHelpers.AdvancedSearch(q, blockFlags, allowFlags, platforms, genres);
+            var results = SearchHelpers.AdvancedSearch(q, requireFlags, blockFlags, allowFlags, platforms, genres);
 
-            return null;
+            var games = results.Skip((page - 1) * PageLimit).Take(PageLimit).ToList();
+
+            var retval = new SearchResult
+            {
+                Page = page,
+                Results = games,
+                Query = q,
+                AllowFlags = allowFlags,
+                BlockFlags = blockFlags,
+                RequireFlags = requireFlags,
+                Genres = genres,
+                Platforms = platforms,
+                IsAdvanced = true
+            };
+
+            return View("Search", retval);
         }
     }
 }

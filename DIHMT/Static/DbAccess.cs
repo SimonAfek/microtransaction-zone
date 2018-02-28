@@ -33,7 +33,13 @@ namespace DIHMT.Static
             }
         }
 
-        public static List<DbGame> AdvancedSearch(string[] query, List<int> blockFlags, List<int> allowFlags, List<int> platforms, List<int> genres)
+        public static List<DbGame> AdvancedSearch(
+            string[] query,
+            List<int> requireFlags,
+            List<int> blockFlags,
+            List<int> allowFlags,
+            List<int> platforms,
+            List<int> genres)
         {
             using (var ctx = new DIHMTEntities())
             {
@@ -59,11 +65,26 @@ namespace DIHMT.Static
                     games = games.Where(x => x.DbGamePlatforms.Select(y => y.PlatformId).Intersect(platforms).Any());
                 }
 
+                if (requireFlags != null && requireFlags.Any())
+                {
+                    // Avoids warning about implicit closure
+                    var allowFlagsSeparateList = allowFlags.Select(x => x).ToList();
+
+                    games = games.Where(x => 
+                        x.DbGameRatings.Select(y => y.RatingId).Intersect(requireFlags).Any()
+                        || x.DbGameRatings.Select(y => y.RatingId).Intersect(allowFlagsSeparateList).Any()
+                    );
+                }
+
                 if (blockFlags != null && blockFlags.Any())
                 {
+                    // Avoids warning about implicit closure
+                    var allowFlagsSeparateList = allowFlags.Select(x => x).ToList();
+
                     games = games.Where(x =>
                         !x.DbGameRatings.Select(y => y.RatingId).Intersect(blockFlags).Any()
-                        || x.DbGameRatings.Select(y => y.RatingId).Intersect(allowFlags).Any());
+                        || x.DbGameRatings.Select(y => y.RatingId).Intersect(allowFlagsSeparateList).Any()
+                    );
                 }
 
                 return games.ToList();

@@ -15,23 +15,27 @@ namespace DIHMT.Static
 
             var dbGames = DbAccess.GameSearch(qArray);
 
-            if (!dbGames.Any())
+            if (dbGames.Any())
             {
-                return retval;
+                retval.AddRange(dbGames.Select(x => x.Id).Select(GameHelpers.CreateDisplayGameObject));
             }
-
-            retval.AddRange(dbGames.Select(x => x.Id).Select(GameHelpers.CreateDisplayGameObject));
 
             return retval;
         }
 
-        public static List<DisplayGame> AdvancedSearch(string q, List<int> blockFlags, List<int> allowFlags, List<int> platforms, List<int> genres)
+        public static List<DisplayGame> AdvancedSearch(
+            string q,
+            List<int> requireFlags,
+            List<int> blockFlags,
+            List<int> allowFlags,
+            List<int> platforms,
+            List<int> genres)
         {
             var qArray = q?.Split(' ');
 
-            var rawDbValues = DbAccess.AdvancedSearch(qArray, blockFlags, allowFlags, platforms, genres);
+            var rawDbValues = DbAccess.AdvancedSearch(qArray, requireFlags, blockFlags, allowFlags, platforms, genres);
 
-            throw new NotImplementedException();
+            return rawDbValues.Select(x => new DisplayGame(x)).ToList();
         }
     }
 }
