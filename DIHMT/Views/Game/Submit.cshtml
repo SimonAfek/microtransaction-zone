@@ -43,12 +43,20 @@
 
                 @foreach (var v in GameHelpers.GetRatings().Where(x => Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
                 {
-                    <p><label><input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="monetization-input" disabled="@Model.IsSpotless" /> @v.Name</label></p>
+                    <p>
+                        <label>
+                            <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="monetization-input" disabled="@Model.IsSpotless"/> @v.Name
+                        </label>
+                    </p>
                 }
 
                 @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
                 {
-                    <p><label><input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" /> @v.Name</label></p>
+                    <p>
+                        <label>
+                            <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)"/> @v.Name
+                        </label>
+                    </p>
                 }
             </div>
         </div>
