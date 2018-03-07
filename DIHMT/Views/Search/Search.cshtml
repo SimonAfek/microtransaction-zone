@@ -13,7 +13,7 @@
         <div>
             <h3><a href="@Url.Action("Index", "Game", new { id = item.Id })">@item.Name</a></h3>
             <a href="@Url.Action("Index", "Game", new { id = item.Id })">
-                <img src="@item.ThumbImageUrl" alt="" />
+                <img src="@item.SmallImageUrl" alt="" />
             </a>
             <br />
             <strong>Game summary:</strong> @item.GameSummary
