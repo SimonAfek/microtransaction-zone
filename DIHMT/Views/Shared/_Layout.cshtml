@@ -3,28 +3,32 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,700,700i,900,900i" integrity="sha384-dRuekDpcuHkrR+9p1mtK0eHliCj6lAW1F/dkqLzKgw5sJdTYOKK4mxQMwFsXVfay" crossorigin="anonymous">
     <title>@ViewBag.Title - MICROTRANSACTION.ZONE</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+
+    <!-- testing w/o this div: <div class="navbar navbar-inverse navbar-fixed-top"> -->
+
+    <div class="navbar bg-dark navbar-dark navbar-fixed-top navbar-expand-sm">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                 @Html.ActionLink("MICROTRANSACTION.ZONE", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <!-- testing without nav toggle <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("MICROTRANSACTION.ZONE", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </button> -->
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>
+
+                <ul class="nav navbar-nav justify-content-end">
+                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="nav-item">@Html.ActionLink("About", "About", "Home")</li>
+                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="nav-item">
                         <strong style="color: white;">Search: </strong>
                         <form action="@Url.Action("Search", "Search")">
                             <input type="text" name="q">
@@ -32,20 +36,23 @@
                     </li>
                     @Html.Partial("_LoginPartial")
                 </ul>
-            </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - MICROTRANSACTION.ZONE</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/gamesubmissionscripts")
-    @RenderSection("scripts", required: false)
-</body>
-</html>
+    </div>
+    <!-- testing w/o this div: </div> -->
+
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - MICROTRANSACTION.ZONE</p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/gamesubmissionscripts")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>
