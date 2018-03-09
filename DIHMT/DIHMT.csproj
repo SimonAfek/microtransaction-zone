@@ -322,6 +322,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EfModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\MZLogo.svg" />
     <Content Include="Models\EfModel.edmx.diagram">
       <DependentUpon>EfModel.edmx</DependentUpon>
     </Content>

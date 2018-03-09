@@ -11,35 +11,32 @@
 <body>
 
 
-    <!-- testing w/o this div: <div class="navbar navbar-inverse navbar-fixed-top"> -->
 
-    <div class="navbar bg-dark navbar-dark navbar-fixed-top navbar-expand-sm">
-        <div class="container">
-            <div class="navbar-header">
-                 @Html.ActionLink("MICROTRANSACTION.ZONE", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <!-- testing without nav toggle <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button> -->
+
+    <nav class="nav navbar navbar-dark fixed-top navbar-expand-sm">
+        <div class="container justify-content-between">
+
+            <div class="navbar-brand">
+                <img class="nav-logo d-inline-block" src="~/Images/MZLogo.svg" alt="Microtransaction.zone Logo">
+                <div class="navbar-text d-none d-sm-inline-block">@Html.ActionLink("MICROTRANSACTION.ZONE", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</div>
             </div>
 
-                <ul class="nav navbar-nav justify-content-end">
-                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="nav-item">@Html.ActionLink("About", "About", "Home")</li>
-                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li class="nav-item">
-                        <strong style="color: white;">Search: </strong>
-                        <form action="@Url.Action("Search", "Search")">
-                            <input type="text" name="q">
-                        </form>
-                    </li>
-                    @Html.Partial("_LoginPartial")
-                </ul>
+            @Html.Partial("_LoginPartial")
+
+            <div class="navbar-nav">
+                @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-item nav-link" })
+                @Html.ActionLink("About", "About", "Home", new { @class = "nav-item nav-link" })
+                @Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-item nav-link" })
+                <form action="@Url.Action("Search", "Search")">
+                    <input type="text" name="q" placeholder="Search All Games">
+                </form>
+            </div>
+
+           
+
         </div>
 
-    </div>
-    <!-- testing w/o this div: </div> -->
+    </nav>
 
 
         <div class="container body-content">
