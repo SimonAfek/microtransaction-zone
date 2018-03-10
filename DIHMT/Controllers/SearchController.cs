@@ -70,11 +70,6 @@ namespace DIHMT.Controllers
             return View(retval);
         }
 
-        public ActionResult AdvancedForm()
-        {
-            return View();
-        }
-
         public ActionResult Advanced(
             string q,
             List<int> requireFlags,
@@ -90,6 +85,17 @@ namespace DIHMT.Controllers
             allowFlags = allowFlags?.Where(x => x >= 0).ToList() ?? new List<int>();
             platforms = platforms?.Where(x => x >= 0).ToList() ?? new List<int>();
             genres = genres?.Where(x => x >= 0).ToList() ?? new List<int>();
+
+            // Determine if we're showing results or displaying the form
+            if (string.IsNullOrEmpty(q)
+                && !requireFlags.Any()
+                && !blockFlags.Any()
+                && !allowFlags.Any()
+                && !platforms.Any()
+                && !genres.Any())
+            {
+                return View();
+            }
 
             var results = SearchHelpers.AdvancedSearch(q, requireFlags, blockFlags, allowFlags, platforms, genres);
 
