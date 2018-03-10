@@ -70,6 +70,11 @@ namespace DIHMT.Controllers
             return View(retval);
         }
 
+        public ActionResult Advanced()
+        {
+            return View();
+        }
+
         public ActionResult Advanced(
             string q,
             List<int> requireFlags,
@@ -80,6 +85,12 @@ namespace DIHMT.Controllers
             int page = 1
         )
         {
+            requireFlags = requireFlags?.Where(x => x >= 0).ToList() ?? new List<int>();
+            blockFlags = blockFlags?.Where(x => x >= 0).ToList() ?? new List<int>();
+            allowFlags = allowFlags?.Where(x => x >= 0).ToList() ?? new List<int>();
+            platforms = platforms?.Where(x => x >= 0).ToList() ?? new List<int>();
+            genres = genres?.Where(x => x >= 0).ToList() ?? new List<int>();
+
             var results = SearchHelpers.AdvancedSearch(q, requireFlags, blockFlags, allowFlags, platforms, genres);
 
             var games = results.Skip((page - 1) * PageLimit).Take(PageLimit).ToList();

@@ -24,9 +24,9 @@
             @Html.Partial("_LoginPartial")
 
             <div class="navbar-nav">
-                @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-item nav-link" })
-                @Html.ActionLink("About", "About", "Home", new { @class = "nav-item nav-link" })
-                @Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-item nav-link" })
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-item nav-link" })
+                @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-item nav-link" })
+                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-item nav-link" })
                 <form action="@Url.Action("Search", "Search")">
                     <input type="text" name="q" placeholder="Search All Games">
                 </form>
