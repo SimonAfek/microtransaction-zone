@@ -50,7 +50,7 @@ namespace DIHMT.Static
                     .Include(x => x.DbGameRatings.Select(y => y.DbRating))
                     .Include(x => x.DbGameLinks);
 
-                if (query != null && query.Any())
+                if (query != null && query.Any(x => !string.IsNullOrEmpty(x)))
                 {
                     games = games.Where(q => query.All(k => q.Name.Contains(k)));
                 }

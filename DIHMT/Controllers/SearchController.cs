@@ -70,7 +70,7 @@ namespace DIHMT.Controllers
             return View(retval);
         }
 
-        public ActionResult Advanced()
+        public ActionResult AdvancedForm()
         {
             return View();
         }
