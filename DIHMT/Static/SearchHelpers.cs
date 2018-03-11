@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DIHMT.Models;
 
@@ -17,7 +16,7 @@ namespace DIHMT.Static
 
             if (dbGames.Any())
             {
-                retval.AddRange(dbGames.Select(x => x.Id).Select(GameHelpers.CreateDisplayGameObject));
+                retval.AddRange(dbGames.Select(x => new DisplayGame(x)));
             }
 
             return retval;

@@ -187,7 +187,7 @@ namespace DIHMT.Static
             foreach (var i in input)
             {
                 // Some games don't have platforms
-                if (i.Platforms == null || i.Platforms.Count <= 0)
+                if (i.Platforms == null || !i.Platforms.Any())
                 {
                     continue;
                 }
@@ -282,14 +282,7 @@ namespace DIHMT.Static
         {
             var dbGames = DbAccess.GetRecentlyRatedGames(numOfGames);
 
-            var retval = new List<DisplayGame>();
-
-            foreach (var v in dbGames)
-            {
-                retval.Add(new DisplayGame(v));
-            }
-
-            return retval;
+            return dbGames.Select(x => new DisplayGame(x)).ToList();
         }
     }
 }

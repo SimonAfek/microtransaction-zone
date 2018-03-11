@@ -17,7 +17,12 @@ namespace DIHMT.Static
 
             using (var ctx = new DIHMTEntities())
             {
-                var dbResults = ctx.DbGames.Where(q => query.All(k => q.Name.Contains(k)));
+                var dbResults = ctx.DbGames
+                    .Where(q => query.All(k => q.Name.Contains(k)))
+                    .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
+                    .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
+                    .Include(x => x.DbGameRatings.Select(y => y.DbRating))
+                    .Include(x => x.DbGameLinks);
 
                 results = dbResults.Any() ? dbResults.ToList() : results;
             }
