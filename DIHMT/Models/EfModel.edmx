@@ -103,7 +103,7 @@
           <Property Name="GameId" Type="int" Nullable="false" />
           <Property Name="RatingExplanation" Type="nvarchar" MaxLength="4000" />
           <Property Name="TimeOfSubmission" Type="datetime" Nullable="false" />
-          <Property Name="SubmitterIp" Type="nvarchar" MaxLength="256" />
+          <Property Name="SubmitterIp" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Basically" Type="nvarchar" MaxLength="280" />
         </EntityType>
         <Association Name="FK__DbGamePla__GameI__31EC6D26">
@@ -537,7 +537,7 @@
           <NavigationProperty Name="DbGame" Relationship="Entities.FK_GameId_Game_Id" FromRole="PendingSubmission" ToRole="DbGame" />
           <NavigationProperty Name="PendingDbGameRatings" Relationship="Entities.FK_PendingDbGameRating_PendingSubmission" FromRole="PendingSubmission" ToRole="PendingDbGameRating" />
           <Property Name="TimeOfSubmission" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="SubmitterIp" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SubmitterIp" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Basically" Type="String" MaxLength="280" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PendingGameLinks" Relationship="Entities.FK_PendingGameLink_PendingSubmission_Id" FromRole="PendingSubmission" ToRole="PendingGameLink" />
           </EntityType>
