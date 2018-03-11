@@ -8,17 +8,12 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+
+
 <body>
-<<<<<<< HEAD
-
-
-
 
     <nav class="nav navbar  fixed-top navbar-expand-sm">
-=======
-<<<<<<< HEAD
-    <div class="navbar navbar-inverse navbar-fixed-top">
->>>>>>> 653708fe36dc8c5830811d1074388ad24496cd62
+
         <div class="container">
 
             <div class="navbar-nav d-inline-flex flex-row">
@@ -37,11 +32,9 @@
                 <img class="nav-logo d-inline-block" src="~/Images/MZLogo.svg" alt="Microtransaction.zone Logo">
                 <div class="navbar-text d-none d-sm-inline-block">@Html.ActionLink("Microtransaction.zone", "Index", "Home", new { @class = "navbar-brand" })</div>
             </div>
-<<<<<<< HEAD
 
             @Html.Partial("_LoginPartial")
 
-            
             <div class="navbar-nav d-flex flex-row">
                 @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })
                 @Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })
@@ -53,36 +46,6 @@
                 <input type="text" name="q" placeholder="Search All Games">
             </form>
 
-
-=======
-=======
-
-
-
-
-    <nav class="nav navbar navbar-dark fixed-top navbar-expand-sm">
-        <div class="container justify-content-between">
-
-            <div class="navbar-brand">
-                <img class="nav-logo d-inline-block" src="~/Images/MZLogo.svg" alt="Microtransaction.zone Logo">
-                <div class="navbar-text d-none d-sm-inline-block">@Html.ActionLink("MICROTRANSACTION.ZONE", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</div>
-            </div>
-
-            @Html.Partial("_LoginPartial")
-
-            <div class="navbar-nav">
-                @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-item nav-link" })
-                @Html.ActionLink("About", "About", "Home", new { @class = "nav-item nav-link" })
-                @Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-item nav-link" })
-                <form action="@Url.Action("Search", "Search")">
-                    <input type="text" name="q" placeholder="Search All Games">
-                </form>
-            </div>
-
-           
-
->>>>>>> parent of bba74a4... nav's not there yet, still—time to fix columns
->>>>>>> 653708fe36dc8c5830811d1074388ad24496cd62
         </div>
 
     </nav>

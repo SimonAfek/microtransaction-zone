@@ -15,7 +15,6 @@
 /* >>> NAVBAR <<< */
 .nav {
     background-color: #1a1a1a;
-<<<<<<< HEAD
     height: 50px;
     font-weight: 700;
     color: white;
@@ -23,7 +22,6 @@
 }
 
 .navbar-brand {
-
     color: white;
 }
 
@@ -38,28 +36,21 @@
 
 .nav-link:hover {
     color: white;
-=======
 }
 
 .nav-logo {
     width:60px;
     margin-right:20px;
->>>>>>> 653708fe36dc8c5830811d1074388ad24496cd62
 }
 
 .navbar-nav {
 
 }
 
-<<<<<<< HEAD
 .nav-logo {
-    width:60px;
-    margin-right:20px;
-    float:left;
-=======
-.navbar-brand {
-
->>>>>>> 653708fe36dc8c5830811d1074388ad24496cd62
+    width: 60px;
+    margin-right: 20px;
+    float: left;
 }
 
 /*targets Giant Bomb images on front page and in searches*/
