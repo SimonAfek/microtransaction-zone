@@ -21,10 +21,10 @@
                 <a href="@Url.Action("Index", "Home")">
                     <img class="nav-logo" src=@Url.Content("~/Images/MZLogo.svg") alt="Microtransaction.zone Logo">
                 </a>
-                @Html.ActionLink("Microtransaction.zone", "Index", "Home", new { @id = "nav-link" })
-                @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })
-                @Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })
-                @Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link" })
+                @Html.ActionLink("Microtransaction.zone", "Index", "Home", null, new { @id = "nav-link" })
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
+                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
 
             </div>
 
@@ -36,9 +36,9 @@
             @Html.Partial("_LoginPartial")
 
             <div class="navbar-nav d-flex flex-row">
-                @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })
-                @Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })
-                @Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link" })
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
+                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
 
             </div> -->
 

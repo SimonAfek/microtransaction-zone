@@ -1,0 +1,104 @@
+﻿@using DIHMT.Models
+@{
+    ViewBag.Title = "Advanced Search";
+}
+
+<h2>Advanced Search</h2>
+
+@using (@Html.BeginForm("Advanced", "Search", FormMethod.Get))
+{
+    <br /><br /><br /><br />
+    <!-- The above is temporary 'cause the navbar is obscuring page content -->
+
+    <label class="col-md-2">
+        Search text
+    </label>
+    <div class="col-md-10">
+        @Html.TextBox("q", string.Empty, new { @class = "wide-input" })
+    </div>
+
+    <hr />
+
+    <label class="col-md-2">
+        I'm only interested in games tagged "Spotless"
+    </label>
+    <div class="col-md-10">
+        <label>
+            <input type="radio" name="requireFlags" value="@((int)EnumTag.Spotless)" /> Yes&nbsp;&nbsp;
+        </label>
+        <label>
+            <input type="radio" name="requireFlags" value="-1" checked /> No
+        </label>
+    </div>
+
+    <hr />
+
+    <label class="col-md-2">
+        I'm not interested in games with the following tags
+    </label>
+    <div class="col-md-10">
+        <p>
+            <label>
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.HorseArmor)" /> Horse Armor
+            </label>
+        </p>
+        <p>
+            <label>
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.BulkOrderHorseArmor)" /> Bulk Order Horse Armor
+            </label>
+        </p>
+        <p>
+            <label>
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.ExpansiveExpansions)" /> Expansive Expansions
+            </label>
+        </p>
+
+        <p>
+            <label>
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.Lootboxes)" /> It's Not Gambling, We Swear
+            </label>
+        </p>
+
+        <p>
+            <label>
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.MoneyHole)" /> Infinite Money Hole
+            </label>
+        </p>
+
+        <p>
+            <label>
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.NotJustCosmetic)" /> It's Not Just Cosmetic
+            </label>
+        </p>
+
+        <p>
+            <label>
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.Subscription)" /> But First, You'll Need A Contract
+            </label>
+        </p>
+    </div>
+
+    <hr />
+
+    <label class="col-md-2">
+        I'm willing to make an exception for games with the following tags
+    </label>
+    <div class="col-md-10">
+        <p>
+            <label>
+                <input type="checkbox" name="allowFlags" value="@((int) EnumTag.SingleplayerUntouched)" /> Table For One
+            </label>
+        </p>
+        <p>
+            <label>
+                <input type="checkbox" name="allowFlags" value="@((int) EnumTag.F2P)" /> Free To Play
+            </label>
+        </p>
+    </div>
+
+    <hr />
+
+    <div class="offset-md-2 col-md-10">
+        <input type="Submit" value="Let's take a look then" />
+    </div>
+}
