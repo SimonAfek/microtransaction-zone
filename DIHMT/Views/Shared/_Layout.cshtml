@@ -8,12 +8,12 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+
+
 <body>
 
-
-
-
     <nav class="nav navbar  fixed-top navbar-expand-sm">
+
         <div class="container">
 
             <div class="navbar-nav d-inline-flex flex-row">
@@ -35,7 +35,6 @@
 
             @Html.Partial("_LoginPartial")
 
-            
             <div class="navbar-nav d-flex flex-row">
                 @Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })
                 @Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })
@@ -46,7 +45,6 @@
             <form class="d-inline" action="@Url.Action("Search", "Search")">
                 <input type="text" name="q" placeholder="Search All Games">
             </form>
-
 
         </div>
 

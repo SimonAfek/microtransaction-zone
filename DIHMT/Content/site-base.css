@@ -22,7 +22,6 @@
 }
 
 .navbar-brand {
-
     color: white;
 }
 
@@ -39,14 +38,19 @@
     color: white;
 }
 
+.nav-logo {
+    width:60px;
+    margin-right:20px;
+}
+
 .navbar-nav {
 
 }
 
 .nav-logo {
-    width:60px;
-    margin-right:20px;
-    float:left;
+    width: 60px;
+    margin-right: 20px;
+    float: left;
 }
 
 /*targets Giant Bomb images on front page and in searches*/
