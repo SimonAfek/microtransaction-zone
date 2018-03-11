@@ -11,9 +11,9 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Flags, htmlAttributes: new { @class = "control-label col-md-2 " })
-            <div class="col-md-10">
+        <div class="form-group row no-gutters">
+            @Html.LabelFor(model => model.Flags, htmlAttributes: new { @class = "control-label col-sm-2 " })
+            <div>
                 <p>
                     <label>
                         <input type="checkbox" name="Flags" value="@((int) EnumTag.Spotless)" checked="@Model.IsSpotless" class="spotless-checkbox" /> Spotless
@@ -61,24 +61,24 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Basically, htmlAttributes: new { @class = "control-label col-md-2 " })
-            <div class="col-md-10">
-                <input type="text" name="Basically" size="280" value="@Model.Basically" class="wide-input" maxlength="280" />
+        <div class="form-group row no-gutters">
+            @Html.LabelFor(model => model.Basically, htmlAttributes: new { @class = "control-label col-sm-2 " })
+            <div>
+                <input type="text" size="280" name="Basically" value="@Model.Basically" class="wide-input" maxlength="280" />
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RatingExplanation, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <div class="form-group row no-gutters">
+            @Html.LabelFor(model => model.RatingExplanation, htmlAttributes: new { @class = "control-label col-sm-2" })
+            <div>
                 <textarea name="RatingExplanation" class="wide-input" rows="10" cols="100" maxlength="4000">@Model.RatingExplanation</textarea>
                 @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label col-md-2 " })
-            <div class="col-md-10 input-fields-wrap">
+        <div class="form-group row no-gutters">
+            @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label col-sm-2 " })
+            <div class="input-fields-wrap">
                 @if (Model.Links != null && Model.Links.Any())
                 {
                     for (var i = 0; i < Model.Links.Count; i++)
@@ -102,13 +102,13 @@
                     </div>
                 }
             </div>
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-sm-offset-1">
                 <a href="#" class="add-field-element">[+]</a>
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+        <div class="form-group row">
+            <div class="col-sm-offset-1 col-sm-2">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
