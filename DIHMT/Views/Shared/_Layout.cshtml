@@ -8,31 +8,43 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+
+
 <body>
 
+    <nav class="nav navbar  fixed-top navbar-expand-sm">
 
+        <div class="container">
 
+            <div class="navbar-nav d-inline-flex flex-row">
+                
+                <a href="@Url.Action("Index", "Home")">
+                    <img class="nav-logo" src=@Url.Content("~/Images/MZLogo.svg") alt="Microtransaction.zone Logo">
+                </a>
+                @Html.ActionLink("Microtransaction.zone", "Index", "Home", null, new { @id = "nav-link" })
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
+                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
 
-    <nav class="nav navbar navbar-dark fixed-top navbar-expand-sm">
-        <div class="container justify-content-between">
+            </div>
 
-            <div class="navbar-brand">
+            <!-- TESTING old: <div class="navbar-brand">
                 <img class="nav-logo d-inline-block" src="~/Images/MZLogo.svg" alt="Microtransaction.zone Logo">
-                <div class="navbar-text d-none d-sm-inline-block">@Html.ActionLink("MICROTRANSACTION.ZONE", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</div>
+                <div class="navbar-text d-none d-sm-inline-block">@Html.ActionLink("Microtransaction.zone", "Index", "Home", new { @class = "navbar-brand" })</div>
             </div>
 
             @Html.Partial("_LoginPartial")
 
-            <div class="navbar-nav">
-                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-item nav-link" })
-                @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-item nav-link" })
-                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-item nav-link" })
-                <form action="@Url.Action("Search", "Search")">
-                    <input type="text" name="q" placeholder="Search All Games">
-                </form>
-            </div>
+            <div class="navbar-nav d-flex flex-row">
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
+                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
 
-           
+            </div> -->
+
+            <form class="d-inline" action="@Url.Action("Search", "Search")">
+                <input type="text" name="q" placeholder="Search All Games">
+            </form>
 
         </div>
 
