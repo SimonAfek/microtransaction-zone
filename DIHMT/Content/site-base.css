@@ -1,0 +1,54 @@
+﻿body {
+    margin: 0;
+    font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* >>> TEXT <<< */
+
+/* >>> NAVBAR <<< */
+.nav {
+    background-color: #1a1a1a;
+}
+
+.nav-logo {
+    width:60px;
+    margin-right:20px;
+}
+
+.navbar-nav {
+
+}
+
+.navbar-brand {
+
+}
+
+/*targets Giant Bomb images on front page and in searches*/
+.game-small {
+    max-height:200px;
+}
+
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column */
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.wide-input {
+    max-width: 500px;
+}
