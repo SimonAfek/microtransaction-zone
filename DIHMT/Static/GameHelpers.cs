@@ -171,13 +171,7 @@ namespace DIHMT.Static
 
             var filteredResults = FilterOutUnsupportedPlatforms(rawResults);
 
-            foreach (var v in filteredResults)
-            {
-                if (!GameExistsInDb(v.Id))
-                {
-                    SaveGameToDb(v);
-                }
-            }
+            SaveGamesToDb(filteredResults);
         }
 
         /// <summary>
@@ -198,11 +192,6 @@ namespace DIHMT.Static
             }
 
             return result;
-        }
-
-        public static bool GameExistsInDb(int id)
-        {
-            return DbAccess.GameExistsInDb(id);
         }
 
         public static List<Game> FilterOutUnsupportedPlatforms(List<Game> input)

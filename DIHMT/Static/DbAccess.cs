@@ -95,22 +95,7 @@ namespace DIHMT.Static
                 return games.ToList();
             }
         }
-
-        public static bool GameExistsInDb(int id)
-        {
-            bool result;
-
-            lock (Lock)
-            {
-                using (var ctx = new DIHMTEntities())
-                {
-                    result = ctx.DbGames.FirstOrDefault(x => x.Id == id) != null;
-                }
-            }
-
-            return result;
-        }
-
+        
         public static DbGame GetGame(int id)
         {
             DbGame result;
