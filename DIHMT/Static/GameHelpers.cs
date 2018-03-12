@@ -151,7 +151,10 @@ namespace DIHMT.Static
                 .SelectMany(CreateDbGameGenresListWithoutNavigation)
                 .ToList();
 
-            DbAccess.SaveGameGenres(dbGameGenres);
+            if (dbGameGenres.Any())
+            {
+                DbAccess.SaveGameGenres(dbGameGenres);
+            }
         }
 
         /// <summary>

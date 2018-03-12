@@ -155,7 +155,6 @@ namespace DIHMT.Static
                     ctx.DbGames.AddRange(input);
 
                     ctx.SaveChanges();
-
                 }
 
                 newIds = input.Select(x => x.Id).ToList();
