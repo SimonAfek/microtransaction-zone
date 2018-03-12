@@ -44,18 +44,13 @@ namespace DIHMT.Controllers
                 {
                     var filteredResults = GameHelpers.FilterOutUnsupportedPlatforms(rawResults);
 
-                    foreach (var v in filteredResults)
-                    {
-                        if (!GameHelpers.GameExistsInDb(v.Id))
-                        {
-                            GameHelpers.SaveGameToDb(v);
-                        }
+                    GameHelpers.SaveGamesToDb(filteredResults);
 
-                        // Not using RefreshDisplayGame here, since having to wait for
-                        // potentially up to 10 games to be pulled from GB
-                        // is a super duper bad idea
-                        games.Add(GameHelpers.CreateDisplayGameObject(v.Id));
-                    }
+                    // Not using RefreshDisplayGame here, since having to wait for
+                    // potentially up to 10 games to be pulled from GB
+                    // is a super duper bad idea
+                    games.AddRange(filteredResults.Select(x => GameHelpers.CreateDisplayGameObject(x.Id)));
+
                 }
             }
 

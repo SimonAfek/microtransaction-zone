@@ -159,6 +159,24 @@ namespace DIHMT.Static
             return results;
         }
 
+        public static void SaveListOfNewGames(List<DbGame> input, out List<int> newIds)
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                input = input.Where(x => ctx.DbGames.FirstOrDefault(y => y.Id == x.Id) == null).ToList();
+
+                if (input.Any())
+                {
+                    ctx.DbGames.AddRange(input);
+
+                    ctx.SaveChanges();
+
+                }
+
+                newIds = input.Select(x => x.Id).ToList();
+            }
+        }
+
         public static void SaveGame(DbGame input)
         {
             lock (Lock)
