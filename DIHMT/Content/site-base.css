@@ -1,4 +1,6 @@
-﻿body {
+﻿/*      BODY        */
+
+body {
     margin: 0;
     font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
@@ -10,48 +12,31 @@
     padding-right: 15px;
 }
 
-/* >>> TEXT <<< */
 
-/* >>> NAVBAR <<< */
+
+/*      TYPOGRAPHY      */
+
+a:hover {
+    color: #9f8af9;
+}
+
+a.btn:hover {
+    color: #9f8af9;
+}
+
+
+/*      NAV     */
+
 .nav {
     background-color: #1a1a1a;
-    height: 50px;
-    font-weight: 700;
+    font-weight: 400;
     color: white;
     text-transform: uppercase;
 }
 
-.navbar-brand {
-    color: white;
-}
 
-#navbar.brand {
-    color :white;
-    font-size: 1 rem;
-}
 
-.nav-link {
-    color: #cccccc;
-}
-
-.nav-link:hover {
-    color: white;
-}
-
-.nav-logo {
-    width:60px;
-    margin-right:20px;
-}
-
-.navbar-nav {
-
-}
-
-.nav-logo {
-    width: 60px;
-    margin-right: 20px;
-    float: left;
-}
+/*      UNSORTED        */
 
 /*targets Giant Bomb images on front page and in searches*/
 .game-small {
