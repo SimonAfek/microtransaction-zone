@@ -9,59 +9,59 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 
-
 <body>
 
-    <nav class="nav navbar  fixed-top navbar-expand-sm">
-
+    <nav class="nav navbar navbar-expand-sm">
         <div class="container">
 
-            <div class="navbar-nav d-inline-flex flex-row">
-                
-                <a href="@Url.Action("Index", "Home")">
-                    <img class="nav-logo" src=@Url.Content("~/Images/MZLogo.svg") alt="Microtransaction.zone Logo">
-                </a>
-                @Html.ActionLink("Microtransaction.zone", "Index", "Home", null, new { @id = "nav-link" })
-                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
-                @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
-                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
+            <!--MZ logo-->
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                <img src="/Images/MZLogo.svg" alt="Microtransaction.zone Logo">
+                Microtransaction.zone
+            </a>
+
+            <!-- MZ name -->
+            <!-- MZ nav -->
+            <div class="collapse navbar-collapse justify-content-between" id="navbar1">
+
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
+                    </li>
+
+                </ul>
+
+                <!-- MZ search -->
+                <form class="d-inline" action="@Url.Action("Search", "Search")">
+                    <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search All Games">
+                    <!-- creates 2 lines when hitting lg or smaller: <button class="btn btn-outline-primary my-2 my-sm-0 navbar-expand-xl" type="submit">Search</button> -->
+                </form>
 
             </div>
-
-            <!-- TESTING old: <div class="navbar-brand">
-                <img class="nav-logo d-inline-block" src="~/Images/MZLogo.svg" alt="Microtransaction.zone Logo">
-                <div class="navbar-text d-none d-sm-inline-block">@Html.ActionLink("Microtransaction.zone", "Index", "Home", new { @class = "navbar-brand" })</div>
-            </div>
-
-            @Html.Partial("_LoginPartial")
-
-            <div class="navbar-nav d-flex flex-row">
-                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
-                @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
-                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
-
-            </div> -->
-
-            <form class="d-inline" action="@Url.Action("Search", "Search")">
-                <input type="text" name="q" placeholder="Search All Games">
-            </form>
 
         </div>
-
     </nav>
 
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - MICROTRANSACTION.ZONE</p>
+        </footer>
+    </div>
 
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - MICROTRANSACTION.ZONE</p>
-            </footer>
-        </div>
-
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/gamesubmissionscripts")
-        @RenderSection("scripts", required: false)
-    </body>
-    </html>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/gamesubmissionscripts")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -5,10 +5,18 @@
     ViewBag.Title = "MICROTRANSACTION.ZONE";
 }
 
-<div class="col-md-12">
+<!-- original placeholder: <div class="col-md-12">
     <img src="@DummyContent.DummyImage(900, 200)" alt="" style="display: block; margin-left: auto; margin-right: auto;" />
     <br />
     <p><a href="@Url.Action("About")" class="btn btn-primary btn-lg">About MICROTRANSACTION.ZONE</a></p>
+</div> -->
+
+<div class="search-xl">
+    <form class="searchbar-xl" action="@Url.Action("Search", "Search")">
+        <input class="form-control form-control-lg col-sm-12" type="text" name="q" placeholder="Search All Games">
+        <button class="btn btn-outline-primary col-sm-2" type="submit">Search</button>
+        <button class="btn btn-outline-secondary col-sm-3" type="submit">Advanced Search</button>
+    </form>
 </div>
 
 <div class="row">
