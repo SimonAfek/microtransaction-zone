@@ -16,22 +16,37 @@ body {
 
 /*      TYPOGRAPHY      */
 
-a:hover {
-    color: #9f8af9;
-}
-
-a.btn:hover {
-    color: #9f8af9;
-}
 
 
 /*      NAV     */
 
 .nav {
     background-color: #1a1a1a;
-    font-weight: 400;
-    color: white;
+    font-weight: 700;
     text-transform: uppercase;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+nav > div > div > ul > li > a {
+    color: #ccc;
+}
+
+nav > div > div > ul > li > a:hover {
+    color: #fff;
+}
+
+nav > div > a {
+    color: #9f8af9;
+}
+
+nav > div > a:hover {
+    color: #9f8af9;
+}
+
+nav > div > a > img {
+    margin-right: 10px;
+    width: 50px;
 }
 
 

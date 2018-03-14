@@ -12,16 +12,17 @@
 
 <body>
 
-    <nav class="nav navbar navbar-expand-lg">
+    <nav class="nav navbar navbar-expand-sm">
     <div class="container">
 
         <!--MZ logo-->
-        <a href="@Url.Action("Index", "Home")">
-            <img class="nav-logo" src=@Url.Content("~/Images/MZLogo.svg") alt="Microtransaction.zone Logo">
+        <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+            <img src="/Images/MZLogo.svg" alt="Microtransaction.zone Logo">
+            Microtransaction.zone
         </a>
 
         <!-- MZ name -->
-        @Html.ActionLink("Microtransaction.zone", "Index", "Home", null, new { @class = "navbar-brand" })
+        
 
         <!-- MZ nav -->
         <div class="collapse navbar-collapse justify-content-between" id="navbar1">
@@ -49,33 +50,9 @@
             </form>
 
         </div>
+
     </div>
     </nav>
-
-
-    <!-- testing dummy code <nav class="nav navbar  fixed-top navbar-expand-sm">
-
-        <div class="container">
-
-            <div class="navbar-nav d-inline-flex flex-row">
-
-                <a href="@Url.Action("Index", "Home")">
-                    <img class="nav-logo" src=@Url.Content("~/Images/MZLogo.svg") alt="Microtransaction.zone Logo">
-                </a>
-                @Html.ActionLink("Microtransaction.zone", "Index", "Home", null, new { @class = "navbar-brand" })
-                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
-                @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
-                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
-
-            </div>
-
-            <form class="d-inline" action="@Url.Action("Search", "Search")">
-                <input class="mr-sm-2" type="text" name="q" placeholder="Search All Games">
-            </form>
-
-        </div>
-
-    </nav> -->
 
 
     <div class="container body-content">
