@@ -16,6 +16,10 @@ body {
 
 /*      TYPOGRAPHY      */
 
+::placeholder {
+    text-transform: uppercase;
+}
+
 
 
 /*      NAV     */
@@ -50,8 +54,34 @@ nav > div > a > img {
 }
 
 
+/*      SEARCH XL      */
 
-/*      UNSORTED        */
+.search-xl {
+    margin: 20px auto 20px auto;
+    width: 100%;
+}
+
+.searchbar-xl {
+}
+
+div > form.searchbar-xl > input.form-control {
+    font-weight: 700;
+    border-width: 3px;
+    border-color: #1a1a1a;
+    box-shadow: 0px 1px 2px 2px #ccc;
+}
+
+div > form.searchbar-xl > input.form-control::placeholder {
+    color: #784ef9;
+}
+
+div > form.searchbar-xl > button {
+    margin: 10px 5px 10px auto;
+}
+
+
+
+ /*      UNSORTED        */
 
 /*targets Giant Bomb images on front page and in searches*/
 .game-small {
