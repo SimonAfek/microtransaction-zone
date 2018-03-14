@@ -10,16 +10,24 @@ namespace DIHMT.Models
     {
         public int Id { get; set; }
         public int GameId { get; set; }
+
         [DisplayName("Game")]
         public string GameName { get; set; }
+
         public string Basically { get; set; }
         public string RatingExplanation { get; set; }
+
         [DisplayName("Description")]
         public string ShortExplanation => RatingExplanation.Length > 50 ? $"{RatingExplanation.Substring(0, 46)}..." : RatingExplanation;
+
         [DisplayName("Submission timestamp")]
         public DateTime TimeOfSubmission { get; set; }
-        [DisplayName("Submitter's IP")]
+
         public string SubmitterIp { get; set; }
+
+        [DisplayName("Hash of submitter's IP")]
+        public string ShortSubmitterIp => SubmitterIp.Length > 45 ? $"{SubmitterIp.Substring(0, 40)}..." : SubmitterIp;
+
         public string SubmitAction { get; set; }
         public List<int> Flags { get; set; }
         public List<string> Links { get; set; }

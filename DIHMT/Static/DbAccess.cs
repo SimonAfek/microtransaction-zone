@@ -95,21 +95,6 @@ namespace DIHMT.Static
                 return games.ToList();
             }
         }
-        
-        public static DbGame GetGame(int id)
-        {
-            DbGame result;
-
-            lock (Lock)
-            {
-                using (var ctx = new DIHMTEntities())
-                {
-                    result = ctx.DbGames.FirstOrDefault(x => x.Id == id);
-                }
-            }
-
-            return result;
-        }
 
         public static DbGame GetDbGameView(int id)
         {
@@ -174,7 +159,6 @@ namespace DIHMT.Static
                         ctx.Entry(existingRecord).CurrentValues.SetValues(input);
                         ctx.Entry(existingRecord).State = EntityState.Modified;
                     }
-
                     else
                     {
                         ctx.DbGames.Add(input);
