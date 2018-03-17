@@ -50,7 +50,6 @@ namespace DIHMT.Controllers
                     // potentially up to 10 games to be pulled from GB
                     // is a super duper bad idea
                     games.AddRange(filteredResults.Select(x => GameHelpers.CreateDisplayGameObject(x.Id)));
-
                 }
             }
 
