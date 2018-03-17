@@ -21,7 +21,7 @@
             @Html.DisplayNameFor(model => model.TimeOfSubmission)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SubmitterIp)
+            @Html.DisplayNameFor(model => model.ShortSubmitterIp)
         </th>
         <th></th>
     </tr>
@@ -42,7 +42,7 @@
                 @Html.DisplayFor(modelItem => item.TimeOfSubmission)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SubmitterIp)
+                @Html.DisplayFor(modelItem => item.ShortSubmitterIp)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Pending", new { id = item.Id })

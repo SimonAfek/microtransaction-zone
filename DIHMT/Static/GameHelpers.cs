@@ -107,7 +107,7 @@ namespace DIHMT.Static
 
         /// <summary>
         /// Saves a GbGame object to the database, including
-        /// relevant GamePlatform-rows
+        /// relevant GamePlatform and GameGenre-rows
         /// </summary>
         /// <param name="input">The object to save</param>
         public static void SaveGameToDb(Game input)
@@ -128,6 +128,36 @@ namespace DIHMT.Static
         }
 
         /// <summary>
+        /// Saves multiple GbGame objects to the database, including
+        /// relevaing joining rows. Ignores games that already exist in the DB.
+        /// </summary>
+        /// <param name="input">A list of objects to save</param>
+        public static void SaveGamesToDb(List<Game> input)
+        {
+            var dbGames = input.Select(CreateDbGameObjectWithoutNavigation).ToList();
+
+            DbAccess.SaveListOfNewGames(dbGames, out var newGameIds);
+
+            var dbGamePlatforms = input
+                .Where(x => newGameIds.Contains(x.Id))
+                .SelectMany(CreateDbGamePlatformsListWithoutNavigation)
+                .ToList();
+
+            DbAccess.SaveGamePlatforms(dbGamePlatforms);
+
+            var dbGameGenres = input
+                .Where(x => newGameIds.Contains(x.Id))
+                .Where(x => x.Genres != null && x.Genres.Any())
+                .SelectMany(CreateDbGameGenresListWithoutNavigation)
+                .ToList();
+
+            if (dbGameGenres.Any())
+            {
+                DbAccess.SaveGameGenres(dbGameGenres);
+            }
+        }
+
+        /// <summary>
         /// Queries GB's search engine for games, and adds any results
         /// to our DB that don't yet exist there.
         /// </summary>
@@ -144,13 +174,7 @@ namespace DIHMT.Static
 
             var filteredResults = FilterOutUnsupportedPlatforms(rawResults);
 
-            foreach (var v in filteredResults)
-            {
-                if (!GameExistsInDb(v.Id))
-                {
-                    SaveGameToDb(v);
-                }
-            }
+            SaveGamesToDb(filteredResults);
         }
 
         /// <summary>
@@ -171,11 +195,6 @@ namespace DIHMT.Static
             }
 
             return result;
-        }
-
-        public static bool GameExistsInDb(int id)
-        {
-            return DbAccess.GameExistsInDb(id);
         }
 
         public static List<Game> FilterOutUnsupportedPlatforms(List<Game> input)

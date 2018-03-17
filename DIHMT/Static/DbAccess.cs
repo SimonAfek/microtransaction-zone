@@ -96,36 +96,6 @@ namespace DIHMT.Static
             }
         }
 
-        public static bool GameExistsInDb(int id)
-        {
-            bool result;
-
-            lock (Lock)
-            {
-                using (var ctx = new DIHMTEntities())
-                {
-                    result = ctx.DbGames.FirstOrDefault(x => x.Id == id) != null;
-                }
-            }
-
-            return result;
-        }
-
-        public static DbGame GetGame(int id)
-        {
-            DbGame result;
-
-            lock (Lock)
-            {
-                using (var ctx = new DIHMTEntities())
-                {
-                    result = ctx.DbGames.FirstOrDefault(x => x.Id == id);
-                }
-            }
-
-            return result;
-        }
-
         public static DbGame GetDbGameView(int id)
         {
             DbGame results;
@@ -159,6 +129,23 @@ namespace DIHMT.Static
             return results;
         }
 
+        public static void SaveListOfNewGames(List<DbGame> input, out List<int> newIds)
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                input = input.Where(x => ctx.DbGames.FirstOrDefault(y => y.Id == x.Id) == null).ToList();
+
+                if (input.Any())
+                {
+                    ctx.DbGames.AddRange(input);
+
+                    ctx.SaveChanges();
+                }
+
+                newIds = input.Select(x => x.Id).ToList();
+            }
+        }
+
         public static void SaveGame(DbGame input)
         {
             lock (Lock)
@@ -172,7 +159,6 @@ namespace DIHMT.Static
                         ctx.Entry(existingRecord).CurrentValues.SetValues(input);
                         ctx.Entry(existingRecord).State = EntityState.Modified;
                     }
-
                     else
                     {
                         ctx.DbGames.Add(input);
