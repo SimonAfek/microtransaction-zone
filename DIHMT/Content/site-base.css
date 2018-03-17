@@ -1,9 +1,9 @@
 ﻿/*      BODY        */
 
 body {
-    margin: 0;
     font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
+    margin: 0;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -16,6 +16,18 @@ body {
 
 /*      TYPOGRAPHY      */
 
+.page-title {
+    background-color: #784ef9;
+    border-radius: 0.25rem;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 20px auto 20px auto;
+    padding: 10px 20px 10px 20px;
+    text-transform: uppercase;
+    width: 100%;
+}
+
 ::placeholder {
     text-transform: uppercase;
 }
@@ -27,9 +39,9 @@ body {
 .nav {
     background-color: #1a1a1a;
     font-weight: 700;
-    text-transform: uppercase;
     padding-left: 0;
     padding-right: 0;
+    text-transform: uppercase;
 }
 
 nav > div > div > ul > li > a {
@@ -54,21 +66,18 @@ nav > div > a > img {
 }
 
 
+
 /*      SEARCH XL      */
 
 .search-xl {
     margin: 20px auto 20px auto;
-    width: 100%;
-}
-
-.searchbar-xl {
 }
 
 div > form.searchbar-xl > input.form-control {
-    font-weight: 700;
-    border-width: 3px;
     border-color: #1a1a1a;
+    border-width: 3px;
     box-shadow: 0px 1px 2px 2px #ccc;
+    font-weight: 700;
 }
 
 div > form.searchbar-xl > input.form-control::placeholder {
@@ -76,18 +85,55 @@ div > form.searchbar-xl > input.form-control::placeholder {
 }
 
 div > form.searchbar-xl > button {
-    margin: 10px 5px 10px auto;
+    margin: 10px 5px 0 auto;
 }
 
 
 
- /*      UNSORTED        */
+/*      GAME LIST       */
+
+.list-item-box {
+    background-color: #1a1a1a;
+    border-radius: 1rem;
+    color: white;
+    margin: 5px 0 auto 0;
+}
+
+.list-item-text {
+    padding: 25px 35px 25px 35px;
+}
+
+.game-name {
+    color: #9f8af9;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
 
 /*targets Giant Bomb images on front page and in searches*/
 .game-small {
-    max-height:200px;
+    background-color: #784ef9; 
+    border-right: 1px solid white;
+    float: left;
+    height: 300px;
+    width: 300px;
+    margin-right: 35px;
+    position: relative;
 }
 
+.game-img-small {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%)
+}
+
+
+
+/*      UNSORTED        */
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column */
