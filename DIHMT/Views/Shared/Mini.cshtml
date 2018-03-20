@@ -22,7 +22,7 @@
     {
         <p>
             <strong>Basically, @Model.Name...</strong> @Model.Basically
-            <a href="@Url.Action("Index", "Game", new {id = Model.Id})">[ Details ]</a>
+            <a href="@Url.Action("Index", "Game", new {id = Model.Id})">[&nbspDetails&nbsp]</a>
         </p>
     }
 
@@ -34,6 +34,10 @@
 
     @foreach (var k in Model.Ratings ?? new List<DisplayGameRating>())
     {
-        <p><strong>@k.Name:</strong> @k.ShortDescription</p>
+        <img src="@k.ImageUrl" class="flag-img" />
+        <p>
+            <strong>@k.Name:</strong> @k.ShortDescription
+            
+        </p>
     }
 </div>

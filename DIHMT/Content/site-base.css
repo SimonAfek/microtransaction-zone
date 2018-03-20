@@ -133,6 +133,15 @@ div > form.searchbar-xl > button {
 
 
 
+/*      FLAGS       */
+
+.flag-img {
+    height: 50px;
+    width: 50px;
+}
+
+
+
 /*      UNSORTED        */
 
 /* Override the default bootstrap behavior where horizontal description lists 
