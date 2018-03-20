@@ -16,6 +16,7 @@
 
         @: @write
 
+
     }
 
     @if (!string.IsNullOrEmpty(Model.Basically))
@@ -26,7 +27,7 @@
         </p>
     }
 
-    
+
 
     <!-- maybe integrate button later <p>
         <a class="btn btn-outline-primary" href="@Url.Action("Index", "Game", new {id = Model.Id})">Details</a>
@@ -34,14 +35,12 @@
 
     @foreach (var k in Model.Ratings ?? new List<DisplayGameRating>())
     {
-        <a href="@Url.Action("Index", "Home")">
-            <img src="@k.ImageUrl" class="flag-img"
-                 data-toggle="popover"
-                 data-placement="top"
-                 data-trigger="hover"
-                 title="@k.Name"
-                 data-content="@k.ShortDescription"/>
-        </a>
+        <img src="@k.ImageUrl" class="flag-img"
+             data-toggle="popover"
+             data-placement="top"
+             data-trigger="hover"
+             title="@k.Name"
+             data-content="@k.ShortDescription" />
 
         <p>
             <strong>@k.Name:</strong> @k.ShortDescription
@@ -49,12 +48,3 @@
     }
 
 </div>
-
-
-<script>
-
-    $(function () {
-        $('[data-toggle="popover"]').popover();
-    })
-
-</script>
