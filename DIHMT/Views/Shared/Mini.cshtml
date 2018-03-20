@@ -34,10 +34,27 @@
 
     @foreach (var k in Model.Ratings ?? new List<DisplayGameRating>())
     {
-        <img src="@k.ImageUrl" class="flag-img" />
+        <a href="@Url.Action("Index", "Home")">
+            <img src="@k.ImageUrl" class="flag-img"
+                 data-toggle="popover"
+                 data-placement="top"
+                 data-trigger="hover"
+                 title="@k.Name"
+                 data-content="@k.ShortDescription"/>
+        </a>
+
         <p>
             <strong>@k.Name:</strong> @k.ShortDescription
-            
         </p>
     }
+
 </div>
+
+
+<script>
+
+    $(function () {
+        $('[data-toggle="popover"]').popover();
+    })
+
+</script>
