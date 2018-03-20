@@ -34,22 +34,23 @@ namespace DIHMT.Controllers
                     // to our own DB.
                     Task.Run(() => GameHelpers.SearchGbAndCacheResults(q, page));
                 }
-            }
 
-            if (!games.Any()) // Ask GB for games instead
-            {
-                var rawResults = GbGateway.Search(q, page);
 
-                if (rawResults.Any())
+                if (!games.Any()) // Ask GB for games instead
                 {
-                    var filteredResults = GameHelpers.FilterOutUnsupportedPlatforms(rawResults);
+                    var rawResults = GbGateway.Search(q, page);
 
-                    GameHelpers.SaveGamesToDb(filteredResults);
+                    if (rawResults.Any())
+                    {
+                        var filteredResults = GameHelpers.FilterOutUnsupportedPlatforms(rawResults);
 
-                    // Not using RefreshDisplayGame here, since having to wait for
-                    // potentially up to 10 games to be pulled from GB
-                    // is a super duper bad idea
-                    games.AddRange(filteredResults.Select(x => GameHelpers.CreateDisplayGameObject(x.Id)));
+                        GameHelpers.SaveGamesToDb(filteredResults);
+
+                        // Not using RefreshDisplayGame here, since having to wait for
+                        // potentially up to 10 games to be pulled from GB
+                        // is a super duper bad idea
+                        games.AddRange(filteredResults.Select(x => GameHelpers.CreateDisplayGameObject(x.Id)));
+                    }
                 }
             }
 

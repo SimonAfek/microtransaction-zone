@@ -16,7 +16,7 @@
             <div>
                 <p>
                     <label>
-                        <input type="checkbox" name="Flags" value="@((int) EnumTag.Spotless)" checked="@Model.IsSpotless" class="spotless-checkbox" /> Spotless
+                        <input type="checkbox" name="Flags" value="@((int)EnumTag.Spotless)" checked="@Model.IsSpotless" class="spotless-checkbox" /> Spotless
                     </label>
                 </p>
 
@@ -45,7 +45,7 @@
                 {
                     <p>
                         <label>
-                            <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="monetization-input" disabled="@Model.IsSpotless"/> @v.Name
+                            <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="monetization-input" disabled="@Model.IsSpotless" /> @v.Name
                         </label>
                     </p>
                 }
@@ -54,7 +54,7 @@
                 {
                     <p>
                         <label>
-                            <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)"/> @v.Name
+                            <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" /> @v.Name
                         </label>
                     </p>
                 }
