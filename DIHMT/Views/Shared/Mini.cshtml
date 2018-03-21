@@ -7,7 +7,7 @@
 </div>
 
 <div class="list-item-text">
-    <div class="game-name">@Model.Name</div>
+    <p class="m-0"><div class="game-name">@Model.Name</div>
 
     @for (var i = 0; i < Model.Platforms.Count; i++)
     {
@@ -18,33 +18,25 @@
 
 
     }
+    </p>
 
     @if (!string.IsNullOrEmpty(Model.Basically))
     {
-        <p>
-            <strong>Basically, @Model.Name...</strong> @Model.Basically
-            <a href="@Url.Action("Index", "Game", new {id = Model.Id})">[&nbspDetails&nbsp]</a>
-        </p>
+    <p>
+        <strong>Basically, @Model.Name...</strong> @Model.Basically&nbsp;- 
+        <a href="@Url.Action("Index", "Game", new {id = Model.Id})">Details</a>
+    </p>
     }
 
 
 
-    <!-- maybe integrate button later <p>
-        <a class="btn btn-outline-primary" href="@Url.Action("Index", "Game", new {id = Model.Id})">Details</a>
+    <!-- button is too big with current formatting <p>
+        <a class="btn btn-primary" href="@Url.Action("Index", "Game", new {id = Model.Id})">Details</a>
     </p> -->
 
     @foreach (var k in Model.Ratings ?? new List<DisplayGameRating>())
     {
-        <img src="@k.ImageUrl" class="flag-img"
-             data-toggle="popover"
-             data-placement="top"
-             data-trigger="hover"
-             title="@k.Name"
-             data-content="@k.ShortDescription" />
-
-        <p>
-            <strong>@k.Name:</strong> @k.ShortDescription
-        </p>
+        <img src="@k.ImageUrl" class="flag-img" data-toggle="popover" data-placement="right" data-trigger="hover" title="@k.Name" data-content="@k.ShortDescription" />
     }
 
 </div>
