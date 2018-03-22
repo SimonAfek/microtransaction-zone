@@ -2,12 +2,12 @@
 @model DisplayGame
 
 
-<div class="game-small">
+<div class="game-small col-4">
     <img class="game-img-small" src="@Model.SmallImageUrl" alt="" />
 </div>
 
 <div class="list-item-text">
-    <p class="m-0"><div class="game-name">@Model.Name</div>
+    <p class="m-0"><a href="@Url.Action("Index", "Game", new {id = Model.Id})" class="game-name">@Model.Name</a><br />
 
     @for (var i = 0; i < Model.Platforms.Count; i++)
     {

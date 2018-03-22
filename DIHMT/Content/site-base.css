@@ -1,8 +1,16 @@
 ﻿/*  HEX COLORS   */
 /*  MZ-indigo           #784ef9 */
 /*  MZ-indigo-light     #9f8af9 */
+/*  MZ-indigo-hover     #bfb1fb */
 /*  MZ-indigo-dark      #3f3882 */
 /*  MZ-gray-dark        #1a1a1a */
+
+
+/*  BREAKPOINTS  */
+/*  small = min-width: 576px    */
+/*  medium = min-width: 768px   */
+/*  large = min-width: 992px    */
+/*  x-large = min-width: 1200px */
 
 
 /*      BODY        */
@@ -11,16 +19,28 @@ body {
     color: #1a1a1a;
     font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
-    margin: 0;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    margin-top: 90px;
-    padding-left: 15px;
-    padding-right: 15px;
+    margin-top: 65px;
 }
 
+a {
+    color: #9f8af9;
+}
+
+a:visited {
+
+}
+
+a:hover {
+    color: #bfb1fb;
+}
+
+a:active {
+
+}
 
 
 /*      TYPOGRAPHY      */
@@ -88,10 +108,16 @@ body {
 
 .nav {
     background-color: #1a1a1a;
+    font-size: .9rem;
     font-weight: 700;
     padding-left: 0;
     padding-right: 0;
     text-transform: uppercase;
+}
+
+.navbar-brand {
+    font-size: 1rem;
+    margin-right: 10px;
 }
 
 nav > div > div > ul > li > a {
@@ -112,9 +138,53 @@ nav > div > a:hover {
 
 nav > div > a > img {
     margin-right: 10px;
+    margin-left: 10px;
     width: 50px;
 }
 
+.navbar-toggler {
+
+}
+
+
+
+
+
+/*      SIDEBAR      */
+
+.sidebar {
+    background-color: #1a1a1a;
+    color: white;
+    font-size: .75rem;
+    font-weight: 500;
+    height: 100%;
+    padding: 20px;
+}
+
+.blog {
+    margin-bottom: 40px;
+}
+
+.blog-post-date {
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.blog-post-title {
+
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.blog-post-body {
+
+}
+
+.divider {
+    border: .5px solid white;
+}
 
 
 /*      SEARCH XL      */
@@ -139,28 +209,6 @@ div > form.searchbar-xl > button {
 }
 
 
-/*      NEWS        */
-
-.news-box {
-
-}
-
-.date-text {
-    background-color: #1a1a1a;
-    border-radius: .5rem;
-    color: white;
-    font-weight: 700;
-    float: left;
-    height: 90px;
-    padding: 15px;
-}
-
-.news-box {
-    border: 1px solid black;
-    padding-left: 10px;
-}
-
-
 
 /*      GAME LIST       */
 
@@ -175,14 +223,12 @@ div > form.searchbar-xl > button {
 }
 
 .game-name {
-    color: #9f8af9;
     font-size: 1.25rem;
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .list-item-text > p > a {
-    color: #9f8af9; 
     font-weight: 700;
 }
 
@@ -207,13 +253,34 @@ div > form.searchbar-xl > button {
     transform: translate(0, -50%)
 }
 
+@media (max-width: 1199px) {
+    .game-small {
+        height: 250px;
+        width: 250px;
+    }
+}
+
+@media (max-width: 991px) {
+    .game-small {
+        height: 200px;
+        width: 200px;
+    }
+}
+
+@media (max-width: 767px) {
+    .game-small {
+        height: 150px;
+        width: 150px;
+    }
+}
+
 
 
 /*      FLAGS       */
 
 .flag-img {
-    height: 70px;
-    width: 70px;
+    height: 50px;
+    width: 50px;
     margin-right: 10px;
 }
 
@@ -237,3 +304,24 @@ textarea {
 .wide-input {
     max-width: 500px;
 }
+
+
+
+/*      NEWS        
+
+.date-text {
+    background-color: #1a1a1a;
+    border-radius: .5rem;
+    color: white;
+    font-weight: 700;
+    float: left;
+    height: 90px;
+    padding: 15px;
+}
+
+.news-box {
+    border: 1px solid black;
+    padding-left: 10px;
+}
+
+*/

@@ -10,28 +10,42 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var el = document.getElementByClass('game-img-small');
+
+            (window.onresize = function () {
+                el.style.width = el.clientHeight + 'px';
+            })();
+        });
+    </script>
+
 </head>
 
 <body>
 
-    <nav class="nav navbar navbar-expand-sm fixed-top">
+    <nav class="nav navbar navbar-expand-md d-flex fixed-top">
         <div class="container">
 
-            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+            <a class="navbar-brand align-self-center" href="@Url.Action("Index", "Home")">
                 <img src="~/Images/MZLogo.svg" alt="Microtransaction.zone Logo"> Microtransaction.zone
             </a>
 
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
             <div class="collapse navbar-collapse justify-content-between" id="navbar1">
 
-                <ul class="navbar-nav">
+                <ul class="navbar-nav col-lg-6">
                     <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Donate", "Donate", "Home", null, new { @class = "nav-link" })</li>
                 </ul>
 
-                <form class="d-inline" action="@Url.Action("Search", "Search")">
-                    <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search All Games">
+                <form class="d-none d-lg-block" action="@Url.Action("Search", "Search")">
+                    <input class="form-control" type="text" name="q" placeholder="Search All Games">
                     <!-- creates 2 lines when hitting lg or smaller: <button class="btn btn-outline-primary my-2 my-sm-0 navbar-expand-xl" type="submit">Search</button> -->
                 </form>
 
@@ -40,7 +54,7 @@
         </div>
     </nav>
 
-    <div class="container body-content">
+    <div class="body-content">
         @RenderBody()
         <hr />
         <footer>
