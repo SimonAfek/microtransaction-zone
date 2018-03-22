@@ -1,42 +1,64 @@
 ﻿@using DIHMT.Models
+@using DIHMT.Static
 @model DisplayGame
-
 
 <div class="game-small col-4">
     <img class="game-img-small" src="@Model.SmallImageUrl" alt="" />
 </div>
 
 <div class="list-item-text">
-    <p class="m-0"><a href="@Url.Action("Index", "Game", new {id = Model.Id})" class="game-name">@Model.Name</a><br />
+    <p class="m-0">
+        <a href="@Url.Action("Index", "Game", new { id = Model.Id })" class="game-name">@Model.Name</a><br />
+        @for (var i = 0; i < Model.Platforms.Count; i++)
+        {
+            var write = i == Model.Platforms.Count - 1 ? Model.Platforms[i].Abbreviation : $"{Model.Platforms[i].Abbreviation} | ";
 
-    @for (var i = 0; i < Model.Platforms.Count; i++)
-    {
-
-        var write = i == Model.Platforms.Count - 1 ? Model.Platforms[i].Abbreviation : $"{Model.Platforms[i].Abbreviation} | ";
-
-        @: @write
-
-
-    }
+            @: @write
+        }
     </p>
 
     @if (!string.IsNullOrEmpty(Model.Basically))
     {
-    <p>
-        <strong>Basically, @Model.Name...</strong> @Model.Basically&nbsp;- 
-        <a href="@Url.Action("Index", "Game", new {id = Model.Id})">Details</a>
-    </p>
+        <p>
+            <strong>Basically, @Model.Name...</strong> @Model.Basically&nbsp;-
+            <a href="@Url.Action("Index", "Game", new { id = Model.Id })">Details</a>
+        </p>
     }
-
-
 
     <!-- button is too big with current formatting <p>
-        <a class="btn btn-primary" href="@Url.Action("Index", "Game", new {id = Model.Id})">Details</a>
+        <a class="btn btn-primary" href="@Url.Action("Index", "Game", new { id = Model.Id })">Details</a>
     </p> -->
 
-    @foreach (var k in Model.Ratings ?? new List<DisplayGameRating>())
+    @foreach (var k in GameHelpers.GetRatings())
     {
-        <img src="@k.ImageUrl" class="flag-img" data-toggle="popover" data-placement="right" data-trigger="hover" title="@k.Name" data-content="@k.ShortDescription" />
-    }
+        // I should not have made these two tiered versions of each other this is so stupid
+        if (k.Id == (int)EnumTag.HorseArmor || k.Id == (int)EnumTag.BulkOrderHorseArmor)
+        {
+            // If this one is active, display the icon
+            if (Model.Ratings.Any(x => x.Id == k.Id))
+            {
+                <img src="@k.ImageUrl" class="flag-img" data-toggle="popover" data-placement="right" data-trigger="hover" title="@k.Name" data-content="@k.ShortDescription" />
+            }
 
+            // If this is the iteration for normal horse armor
+            // and neither one is active, display the inactive icon
+            if (k.Id == (int)EnumTag.HorseArmor && !Model.Ratings.Any(x => x.Id == (int)EnumTag.HorseArmor || x.Id == (int)EnumTag.BulkOrderHorseArmor))
+            {
+                <img src="@k.ImageUrl" class="flag-img inactive-flag-img" data-toggle="popover" data-placement="right" data-trigger="hover" title="@k.Name" data-content="@k.ShortDescription" />
+            }
+        }
+
+        else
+        {
+            if (Model.Ratings.Any(x => x.Id == k.Id))
+            {
+                <img src="@k.ImageUrl" class="flag-img" data-toggle="popover" data-placement="right" data-trigger="hover" title="@k.Name" data-content="@k.ShortDescription" />
+            }
+
+            else
+            {
+                <img src="@k.ImageUrl" class="flag-img inactive-flag-img" data-toggle="popover" data-placement="right" data-trigger="hover" title="@k.Name" data-content="@k.ShortDescription" />
+            }
+        }
+    }
 </div>

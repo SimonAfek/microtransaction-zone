@@ -294,7 +294,15 @@ namespace DIHMT.Static
 
         public static List<DbRating> GetRatings()
         {
-            return DbAccess.GetRatings();
+            var rawRatings = DbAccess.GetRatings();
+
+            // Moving "Spotless" to the top of the list...
+            // Maybe making a "DisplayOrder"-column in the DB would be better.
+            // For now, you must deal with my heinous sins
+            var sorted = new List<DbRating> { rawRatings.First(x => x.Id == (int)EnumTag.Spotless) };
+            sorted.AddRange(rawRatings.Where(x => x.Id != (int)EnumTag.Spotless));
+
+            return sorted;
         }
 
         public static List<DisplayGame> GetRecentlyRatedGames(int numOfGames)

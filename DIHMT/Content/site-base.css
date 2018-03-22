@@ -5,13 +5,11 @@
 /*  MZ-indigo-dark      #3f3882 */
 /*  MZ-gray-dark        #1a1a1a */
 
-
 /*  BREAKPOINTS  */
 /*  small = min-width: 576px    */
 /*  medium = min-width: 768px   */
 /*  large = min-width: 992px    */
 /*  x-large = min-width: 1200px */
-
 
 /*      BODY        */
 
@@ -42,7 +40,6 @@ a:active {
 
 }
 
-
 /*      TYPOGRAPHY      */
 
 .page-title {
@@ -60,8 +57,6 @@ a:active {
     font-weight: 700;
     text-transform: uppercase;
 }
-
-
 
 /*      BUTTONS      */
 
@@ -84,14 +79,11 @@ a:active {
     background-color: #aaa;
 }
 
-
-
 /*      POPOVER     */
 
 .popover {
 
 }
-
 
 .popover-header {
     background-color: #784ef9;
@@ -101,8 +93,6 @@ a:active {
 .popover-body {
     margin-bottom: 5px;   
 }
-
-
 
 /*      NAV     */
 
@@ -146,10 +136,6 @@ nav > div > a > img {
 
 }
 
-
-
-
-
 /*      SIDEBAR      */
 
 .sidebar {
@@ -186,7 +172,6 @@ nav > div > a > img {
     border: .5px solid white;
 }
 
-
 /*      SEARCH XL      */
 
 .search-xl {
@@ -207,8 +192,6 @@ div > form.searchbar-xl > input.form-control::placeholder {
 div > form.searchbar-xl > button {
     margin: 10px 5px 0 auto;
 }
-
-
 
 /*      GAME LIST       */
 
@@ -274,8 +257,6 @@ div > form.searchbar-xl > button {
     }
 }
 
-
-
 /*      FLAGS       */
 
 .flag-img {
@@ -284,7 +265,9 @@ div > form.searchbar-xl > button {
     margin-right: 10px;
 }
 
-
+.inactive-flag-img {
+    opacity: 0.3;
+}
 
 /*      UNSORTED        */
 
@@ -304,8 +287,6 @@ textarea {
 .wide-input {
     max-width: 500px;
 }
-
-
 
 /*      NEWS        
 
