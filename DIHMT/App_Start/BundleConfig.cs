@@ -25,12 +25,14 @@ namespace DIHMT
                         "~/Scripts/gamesubmissionscripts.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
-
+                        "~/Scripts/umd/popper.js",
+                        "~/Scripts/bootstrap.js",
+                        "~/Scripts/respond.js",
+                        "~/Scripts/initialize-popper.js"));
+            
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site-base.css"));
+                        "~/Content/bootstrap.css",
+                        "~/Content/site-base.css"));
         }
     }
 }
