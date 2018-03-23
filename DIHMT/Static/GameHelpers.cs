@@ -143,7 +143,10 @@ namespace DIHMT.Static
                 .SelectMany(CreateDbGamePlatformsListWithoutNavigation)
                 .ToList();
 
-            DbAccess.SaveGamePlatforms(dbGamePlatforms);
+            if (dbGamePlatforms.Any())
+            {
+                DbAccess.SaveGamePlatforms(dbGamePlatforms);
+            }
 
             var dbGameGenres = input
                 .Where(x => newGameIds.Contains(x.Id))

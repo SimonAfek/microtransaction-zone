@@ -1,5 +1,4 @@
-﻿using System.Web.Configuration;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using DIHMT.Models;
 using DIHMT.Static;
 
