@@ -1,4 +1,7 @@
 ﻿@using DIHMT.Models
+@using DIHMT.Static
+@model AdvancedSearchViewModel
+
 @{
     ViewBag.Title = "Advanced Search";
 }
@@ -15,6 +18,28 @@
     </label>
     <div class="col-md-10">
         @Html.TextBox("q", string.Empty, new { @class = "wide-input" })
+    </div>
+
+    <hr />
+
+    <label class="col-md-2">
+        I'm looking for games in the following genres...
+    </label>
+    <div class="col-md-10">
+        @Html.ListBoxFor(x => x.Genres, new MultiSelectList(Model.Genres, nameof(DbGenre.Id), nameof(DbGenre.Name)), new { Name = "genres", Size = "10" })
+        <br />
+        (Leave this blank and we'll show games regardless of genre)
+    </div>
+
+    <hr />
+
+    <label class="col-md-2">
+        I'm looking for games on the following platforms...
+    </label>
+    <div class="col-md-10">
+        @Html.ListBoxFor(x => x.Platforms, new MultiSelectList(Model.Platforms, nameof(DbPlatform.Id), nameof(DbPlatform.Name)), new {Name = "platforms", Size = "10"})
+        <br />
+        (Leave this blank and we'll show games regardless of platform)
     </div>
 
     <hr />

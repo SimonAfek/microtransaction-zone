@@ -362,5 +362,13 @@ namespace DIHMT.Static
                 }
             }
         }
+
+        public static List<DbGenre> GetGenres()
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                return ctx.DbGenres.ToList();
+            }
+        }
     }
 }

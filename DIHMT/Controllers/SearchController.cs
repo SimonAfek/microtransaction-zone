@@ -89,7 +89,10 @@ namespace DIHMT.Controllers
                 && !platforms.Any()
                 && !genres.Any())
             {
-                return View();
+                var viewModelGenres = GameHelpers.GetGenres();
+                var viewModelPlatforms = GameHelpers.GetPlatforms();
+
+                return View(new AdvancedSearchViewModel { Genres = viewModelGenres, Platforms = viewModelPlatforms });
             }
 
             var results = SearchHelpers.AdvancedSearch(q, requireFlags, blockFlags, allowFlags, platforms, genres);

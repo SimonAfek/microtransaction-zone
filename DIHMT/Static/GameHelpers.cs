@@ -314,5 +314,15 @@ namespace DIHMT.Static
 
             return dbGames.Select(x => new DisplayGame(x)).ToList();
         }
+
+        public static List<DbGenre> GetGenres()
+        {
+            return DbAccess.GetGenres();
+        }
+
+        public static List<DbPlatform> GetPlatforms()
+        {
+            return DbAccess.GetPlatforms();
+        }
     }
 }
