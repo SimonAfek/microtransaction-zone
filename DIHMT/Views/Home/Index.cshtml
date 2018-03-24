@@ -16,19 +16,11 @@
                 </form>
             </div>
 
-            <!-- if news goes at top of page: <div class="page-title">News</div>
-                S
-            <div class="date-text">2018<br />Apr 30</div>
-            <div class="news-box clearfix column">
-                    <p>Updates to Microtransaction.zone<br />
-                    A summary sentence and/or first sentence of the post, which can only go down up to two lines in large and extra large mode.</p>
-            </div> -->
-
-            <div class="page-title">Recently Rated Games</div>
-            <div class="column">
+            <div class="page-title" id="page-title">Recently Rated Games</div>
+            <div class="column no-gutters">
                 @foreach (var v in GameHelpers.GetRecentlyRatedGames(3))
                 {
-                    <div class="list-item-box clearfix">
+                    <div class="list-item clearfix">
                         @Html.Partial("Mini", v)
                     </div>
                 }
@@ -66,7 +58,7 @@
 
             <div class="d-none d-xl-block">
                 <!-- Twitter Feed Start: temporary inline CSS/script; fix later -->
-                <a class="twitter-timeline" data-height="400" data-theme="dark" data-link-color="#9266CC" href="https://twitter.com/TaylorBartman?ref_src=twsrc%5Etfw">Twitter Feed</a>
+                <a class="twitter-timeline" data-height="500" data-dnt="true" data-theme="dark" href="https://twitter.com/MTXZone?ref_src=twsrc%5Etfw">Tweets by MTXZone</a>
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 <!-- Twitter Feed End-->
             </div>
