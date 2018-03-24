@@ -43,12 +43,12 @@ namespace DIHMT.Models
                 }
 
                 if (Flags.Contains((int)EnumTag.Spotless) &&
-                    (Flags.Contains((int)EnumTag.ExpansiveExpansions) ||
-                     Flags.Contains((int)EnumTag.Lootboxes) ||
-                     Flags.Contains((int)EnumTag.MoneyHole) ||
-                     Flags.Contains((int)EnumTag.NotJustCosmetic) ||
-                     Flags.Contains((int)EnumTag.Subscription) ||
-                     Flags.Contains((int)EnumTag.SingleplayerUntouched)))
+                   (Flags.Contains((int)EnumTag.ExpansiveExpansions) ||
+                    Flags.Contains((int)EnumTag.Lootboxes) ||
+                    Flags.Contains((int)EnumTag.MoneyHole) ||
+                    Flags.Contains((int)EnumTag.NotJustCosmetic) ||
+                    Flags.Contains((int)EnumTag.Subscription) ||
+                    Flags.Contains((int)EnumTag.SingleplayerUntouched)))
                 {
                     return false;
                 }

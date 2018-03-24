@@ -16,36 +16,15 @@
             <div>
                 <p>
                     <label>
-                        <input type="checkbox" name="Flags" value="@((int)EnumTag.Spotless)" checked="@Model.IsSpotless" class="spotless-checkbox" /> Spotless
+                        <input type="checkbox" name="Flags" value="@((int)EnumTag.Spotless)" checked="@Model.IsSpotless" class="@($"spotless-checkbox submission-checkbox-{(int)EnumTag.Spotless} submission-checkbox")" /> Spotless
                     </label>
                 </p>
 
-                <p>
-                    <strong>Horse armor: </strong>
-                    <ul>
-                        <li>
-                            <label>
-                                <input type="radio" name="Flags" value="-1" checked="@(!(Model.Flags.Contains((int)EnumTag.HorseArmor) || Model.Flags.Contains((int)EnumTag.BulkOrderHorseArmor)))" class="check-when-spotless" /> None
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="radio" name="Flags" value="@((int)EnumTag.HorseArmor)" checked="@Model.Flags.Contains((int)EnumTag.HorseArmor)" class="monetization-input" disabled="@Model.IsSpotless" /> Some
-                            </label>
-                        </li>
-                        <li>
-                            <label>
-                                <input type="radio" name="Flags" value="@((int)EnumTag.BulkOrderHorseArmor)" checked="@Model.Flags.Contains((int)EnumTag.BulkOrderHorseArmor)" class="monetization-input" disabled="@Model.IsSpotless" /> A lot
-                            </label>
-                        </li>
-                    </ul>
-                </p>
-
-                @foreach (var v in GameHelpers.GetRatings().Where(x => Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
+                @foreach (var v in GameHelpers.GetRatings().Where(x => Model.MonetizationFlags.Contains(x.Id)))
                 {
                     <p>
                         <label>
-                            <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="monetization-input" disabled="@Model.IsSpotless" /> @v.Name
+                            <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="@($"monetization-input submission-checkbox-{v.Id} submission-checkbox")" disabled="@Model.IsSpotless" /> @v.Name
                         </label>
                     </p>
                 }
@@ -54,7 +33,7 @@
                 {
                     <p>
                         <label>
-                            <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" /> @v.Name
+                            <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="@($"submission-checkbox-{v.Id}submission-checkbox")" /> @v.Name
                         </label>
                     </p>
                 }
@@ -85,7 +64,9 @@
                     {
                         if (i == 0)
                         {
-                            <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" value="@Model.Links[i]" />
+                            <div>
+                                <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" value="@Model.Links[i]" />
+                            </div>
                         }
                         else
                         {

@@ -1,25 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,700,700i,900,900i" crossorigin="anonymous">
     <title>@ViewBag.Title - MICROTRANSACTION.ZONE</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var el = document.getElementByClass('game-img-small');
-
-            (window.onresize = function () {
-                el.style.width = el.clientHeight + 'px';
-            })();
-        });
-    </script>
-
 </head>
 
 <body>
@@ -68,25 +55,25 @@
     @RenderSection("scripts", required: false)
 
 
-<!--    <script>
+    <!--    <script>
 
-        // injects scrollspy
-        $('body').scrollspy({ target: '#search-xl' })
+            // injects scrollspy
+            $('body').scrollspy({ target: '#search-xl' })
 
-        // refreshes after add/remove of element
-        $('[data-spy="scroll"]').each(function () {
-            var $spy = $(this).scrollspy('refresh')
-        })
+            // refreshes after add/remove of element
+            $('[data-spy="scroll"]').each(function () {
+                var $spy = $(this).scrollspy('refresh')
+            })
 
-        // creates event
-        $('[data-spy="scroll"]').on('activate.bs.scrollspy', function () {
-            // do something…
-            // var x = $("d-none")
-            // $("#page-title").empty().html(x)
+            // creates event
+            $('[data-spy="scroll"]').on('activate.bs.scrollspy', function () {
+                // do something…
+                // var x = $("d-none")
+                // $("#page-title").empty().html(x)
 
-            // $("div.page-title").html(function()
-        })
-    </script> -->
+                // $("div.page-title").html(function()
+            })
+        </script> -->
 
 
 
