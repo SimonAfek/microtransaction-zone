@@ -11,12 +11,15 @@
 /*  large = min-width: 992px    */
 /*  x-large = min-width: 1200px */
 
+
+
 /*      BODY        */
 
 body {
     color: #1a1a1a;
     font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
+    position: relative;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -40,6 +43,8 @@ a:active {
 
 }
 
+
+
 /*      TYPOGRAPHY      */
 
 .page-title {
@@ -57,6 +62,8 @@ a:active {
     font-weight: 700;
     text-transform: uppercase;
 }
+
+
 
 /*      BUTTONS      */
 
@@ -79,6 +86,8 @@ a:active {
     background-color: #aaa;
 }
 
+
+
 /*      POPOVER     */
 
 .popover {
@@ -93,6 +102,8 @@ a:active {
 .popover-body {
     margin-bottom: 5px;   
 }
+
+
 
 /*      NAV     */
 
@@ -136,6 +147,8 @@ nav > div > a > img {
 
 }
 
+
+
 /*      SIDEBAR      */
 
 .sidebar {
@@ -172,6 +185,8 @@ nav > div > a > img {
     border: .5px solid white;
 }
 
+
+
 /*      SEARCH XL      */
 
 .search-xl {
@@ -193,16 +208,23 @@ div > form.searchbar-xl > button {
     margin: 10px 5px 0 auto;
 }
 
+
+
 /*      GAME LIST       */
+
+.list-item {
+
+}
 
 .list-item-box {
     background-color: #1a1a1a;
     color: white;
-    margin: 10px 0 0 0;
+    margin: 20px 0 0 0;
 }
 
 .list-item-text {
-    padding: 25px 35px 25px 35px;
+    min-height: 200px;
+    padding: 25px 35px 0 25px;
 }
 
 .game-name {
@@ -219,9 +241,10 @@ div > form.searchbar-xl > button {
 .game-small {
     background-color: #9f8af9;
     border-right: 1px solid white;
+    display: block;
     float: left;
-    height: 300px;
-    width: 300px;
+    height: 200px;
+    width: 200px;
     margin-right: 35px;
     position: relative;
 }
@@ -233,14 +256,7 @@ div > form.searchbar-xl > button {
     max-height: 100%;
     position: relative;
     top: 50%;
-    transform: translate(0, -50%)
-}
-
-@media (max-width: 1199px) {
-    .game-small {
-        height: 250px;
-        width: 250px;
-    }
+    transform: translateY(-50%)
 }
 
 @media (max-width: 991px) {
@@ -257,17 +273,38 @@ div > form.searchbar-xl > button {
     }
 }
 
+
+
 /*      FLAGS       */
+
+.flag-container {
+    background-color: #1a1a1a;
+    border-top: 1px solid white;
+    margin-top: -16px;
+    padding: 20px 25px 20px 25px;
+}
+
+.flag-row {
+    display: flex;
+}
+
+@media (max-width: 767px) {
+    .flag-row {
+        display: block;
+    }
+}
 
 .flag-img {
     height: 50px;
     width: 50px;
-    margin-right: 10px;
+    margin: 7px;
 }
 
 .inactive-flag-img {
     opacity: 0.3;
 }
+
+
 
 /*      UNSORTED        */
 
@@ -287,22 +324,3 @@ textarea {
 .wide-input {
     max-width: 500px;
 }
-
-/*      NEWS        
-
-.date-text {
-    background-color: #1a1a1a;
-    border-radius: .5rem;
-    color: white;
-    font-weight: 700;
-    float: left;
-    height: 90px;
-    padding: 15px;
-}
-
-.news-box {
-    border: 1px solid black;
-    padding-left: 10px;
-}
-
-*/

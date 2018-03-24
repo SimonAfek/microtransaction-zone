@@ -67,6 +67,30 @@
     @Scripts.Render("~/bundles/gamesubmissionscripts")
     @RenderSection("scripts", required: false)
 
+
+    <script>
+
+        // injects scrollspy
+        $('body').scrollspy({ target: '#search-xl' })
+
+        // refreshes after add/remove of element
+        $('[data-spy="scroll"]').each(function () {
+            var $spy = $(this).scrollspy('refresh')
+        })
+
+        // creates event
+        $('[data-spy="scroll"]').on('activate.bs.scrollspy', function () {
+            // do something…
+            // var x = $("d-none")
+            // $("#page-title").empty().html(x)
+
+            // $("div.page-title").html(function()
+        })
+    </script>
+
+
+
+
 </body>
 
 </html>
