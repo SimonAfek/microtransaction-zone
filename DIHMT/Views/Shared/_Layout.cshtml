@@ -10,16 +10,6 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var el = document.getElementByClass('game-img-small');
-
-            (window.onresize = function () {
-                el.style.width = el.clientHeight + 'px';
-            })();
-        });
-    </script>
-
 </head>
 
 <body>
@@ -66,30 +56,6 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/gamesubmissionscripts")
     @RenderSection("scripts", required: false)
-
-
-<!--    <script>
-
-        // injects scrollspy
-        $('body').scrollspy({ target: '#search-xl' })
-
-        // refreshes after add/remove of element
-        $('[data-spy="scroll"]').each(function () {
-            var $spy = $(this).scrollspy('refresh')
-        })
-
-        // creates event
-        $('[data-spy="scroll"]').on('activate.bs.scrollspy', function () {
-            // do something…
-            // var x = $("d-none")
-            // $("#page-title").empty().html(x)
-
-            // $("div.page-title").html(function()
-        })
-    </script> -->
-
-
-
 
 </body>
 
