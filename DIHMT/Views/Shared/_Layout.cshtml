@@ -18,10 +18,10 @@
         <div class="container">
 
             <a class="navbar-brand align-self-center" href="@Url.Action("Index", "Home")">
-                <img src="~/Images/MZLogo.svg" alt="Microtransaction.zone Logo"> Microtransaction.zone
+                <img class="d-none d-sm-inline" src="~/Images/MZLogo.svg" alt="Microtransaction.zone Logo"> Microtransaction.zone
             </a>
 
-            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -46,8 +46,8 @@
 
     <div class="body-content">
         @RenderBody()
-        <hr />
         <footer>
+            <hr />
             <p>&copy; @DateTime.Now.Year - MICROTRANSACTION.ZONE</p>
         </footer>
     </div>
