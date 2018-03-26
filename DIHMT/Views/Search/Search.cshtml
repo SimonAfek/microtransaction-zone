@@ -6,49 +6,49 @@
 
 <div class="container">
 
-@if (Model.Results.Any())
-{
-    <div class="page-title">Search results</div>
-    foreach (var item in Model.Results)
+    @if (Model.Results.Any())
     {
-        <hr />
-        @Html.Partial("Mini", item)
-    } <!-- for each result -->
-}
+        <div class="page-title">Search results</div>
+        foreach (var item in Model.Results)
+        {
+            <hr />
+            @Html.Partial("Mini", item)
+        } // For each result
+    } // if model results any
 
-else
-{
-    <h2>No results found</h2>
-}
-
-<hr />
-
-@if (Model.Page > 1)
-{
-    if (Model.IsAdvanced)
-    {
-        <a href="@(Url.Action("Advanced", "Search") + Model.AdvancedQueryStringWithoutPageNumber + (Model.Page - 1))">&lt;== Prev</a>
-    }
     else
     {
-        <a href="@Url.Action("Search", "Search", new { q = Model.Query, page = Model.Page - 1})">&lt;== Prev</a>
+        <h2>No results found</h2>
     }
-    <text>&nbsp;|&nbsp;</text>
-}
 
-<strong>@Model.Page</strong>
+    <hr />
 
-@if (Model.Results.Any())
-{
-    <text>&nbsp;|&nbsp;</text>
-    if (Model.IsAdvanced)
+    @if (Model.Page > 1)
     {
-        <a href="@(Url.Action("Advanced", "Search") + Model.AdvancedQueryStringWithoutPageNumber + (Model.Page + 1))">Next ==&gt;</a>
+        if (Model.IsAdvanced)
+        {
+            <a href="@(Url.Action("Advanced", "Search") + Model.AdvancedQueryStringWithoutPageNumber + (Model.Page - 1))">&lt;== Prev</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Search", "Search", new { q = Model.Query, page = Model.Page - 1})">&lt;== Prev</a>
+        }
+        <text>&nbsp;|&nbsp;</text>
     }
-    else
-    {
-        <a href="@Url.Action("Search", "Search", new { q = Model.Query, page = Model.Page + 1})">Next ==&gt;</a>
-    }
-}
 
-</div> <!-- container -->
+    <strong>@Model.Page</strong>
+
+    @if (Model.Results.Any())
+    {
+        <text>&nbsp;|&nbsp;</text>
+        if (Model.IsAdvanced)
+        {
+            <a href="@(Url.Action("Advanced", "Search") + Model.AdvancedQueryStringWithoutPageNumber + (Model.Page + 1))">Next ==&gt;</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Search", "Search", new { q = Model.Query, page = Model.Page + 1})">Next ==&gt;</a>
+        }
+    }
+
+</div> @* Container *@
