@@ -12,36 +12,9 @@
     foreach (var item in Model.Results)
     {
         <hr />
-        <div class="list-item-box">
-
-            <!-- image --> <div class="game-small">
-                <a href="@Url.Action("Index", "Game", new { id = item.Id })">
-                    <img class="game-img-search" src="@item.SmallImageUrl" alt="" />
-                </a>
-            </div>
-
-            <div class="list-item-text"><a href="@Url.Action("Index", "Game", new { id = item.Id })" class="game-name">@item.Name</a>
-
-
-            <!-- add later <strong>Game summary:</strong> @item.GameSummary -->
-
-
-
-            @if (!string.IsNullOrEmpty(item.Basically))
-            {
-                <p>
-                    <strong>Basically, @item.Name...</strong> @item.Basically&nbsp;-
-                    <a href="@Url.Action("Index", "Game")">Details</a>
-                </p>
-            }
-            else
-            {
-                <em>There is no available reasoning for this game's rating.</em>
-            }
-            </div>
-        </div>
+        @Html.Partial("Mini", item)
     } <!-- for each result -->
-} <!-- if model results any -->
+}
 
 else
 {
