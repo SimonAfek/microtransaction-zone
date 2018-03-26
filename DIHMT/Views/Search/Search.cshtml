@@ -4,31 +4,44 @@
     ViewBag.Title = "Search";
 }
 
+<div class="container">
+
 @if (Model.Results.Any())
 {
-    <h2>Search results</h2>
+    <div class="page-title">Search results</div>
     foreach (var item in Model.Results)
     {
         <hr />
-        <div>
-            <h3><a href="@Url.Action("Index", "Game", new { id = item.Id })">@item.Name</a></h3>
-            <a href="@Url.Action("Index", "Game", new { id = item.Id })">
-                <img src="@item.SmallImageUrl" alt="" />
-            </a>
-            <br />
-            <strong>Game summary:</strong> @item.GameSummary
-            <br />
+        <div class="list-item-box">
+
+            <!-- image --> <div class="game-small">
+                <a href="@Url.Action("Index", "Game", new { id = item.Id })">
+                    <img class="game-img-search" src="@item.SmallImageUrl" alt="" />
+                </a>
+            </div>
+
+            <div class="list-item-text"><a href="@Url.Action("Index", "Game", new { id = item.Id })" class="game-name">@item.Name</a>
+
+
+            <!-- add later <strong>Game summary:</strong> @item.GameSummary -->
+
+
+
             @if (!string.IsNullOrEmpty(item.Basically))
             {
-                <strong>Basically, @item.Name</strong> @item.Basically
+                <p>
+                    <strong>Basically, @item.Name...</strong> @item.Basically&nbsp;-
+                    <a href="@Url.Action("Index", "Game")">Details</a>
+                </p>
             }
             else
             {
                 <em>There is no available reasoning for this game's rating.</em>
             }
+            </div>
         </div>
-    }
-}
+    } <!-- for each result -->
+} <!-- if model results any -->
 
 else
 {
@@ -64,3 +77,5 @@ else
         <a href="@Url.Action("Search", "Search", new { q = Model.Query, page = Model.Page + 1})">Next ==&gt;</a>
     }
 }
+
+</div> <!-- container -->

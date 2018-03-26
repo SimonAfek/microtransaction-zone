@@ -108,7 +108,6 @@ a:hover {
 
 .navbar-brand {
     font-size: 1rem;
-    margin-left: 15px;
 }
 
 @media (max-width: 767px) {
@@ -292,6 +291,15 @@ div > form.searchbar-xl > button {
     position: relative;
     top: 50%;
     transform: translateY(-50%)
+}
+
+.game-img-search {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+
 }
 
 
