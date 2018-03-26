@@ -5,7 +5,7 @@
 /*  MZ-indigo-dark      #3f3882 */
 /*  MZ-gray-dark        #1a1a1a */
 
-/*  BREAKPOINTS  */
+/*  BOOTSTRAP BREAKPOINTS  */
 /*  small = min-width: 576px    */
 /*  medium = min-width: 768px   */
 /*  large = min-width: 992px    */
@@ -22,7 +22,6 @@ body {
 
 }
 
-/* Set padding to keep content from hitting the edges */
 .body-content {
     margin-top: 65px;
 }
@@ -31,21 +30,9 @@ a {
     color: #9f8af9;
 }
 
-a:visited {
-
-}
-
 a:hover {
     color: #bfb1fb;
 }
-
-a:active {
-
-}
-
-
-
-/*      TYPOGRAPHY      */
 
 .page-title {
     background-color: #1a1a1a;
@@ -58,9 +45,16 @@ a:active {
     width: 100%;
 }
 
+/* in which VS tells me this valid pseudo-element isn't valid*/
 ::placeholder {
     font-weight: 700;
     text-transform: uppercase;
+}
+
+@media (max-width: 767px) {
+    ::placeholder {
+        font-size: 1.15rem;
+    }
 }
 
 
@@ -90,10 +84,6 @@ a:active {
 
 /*      POPOVER     */
 
-.popover {
-
-}
-
 .popover-header {
     background-color: #784ef9;
     color: white;
@@ -118,7 +108,18 @@ a:active {
 
 .navbar-brand {
     font-size: 1rem;
-    margin-right: 10px;
+    margin-left: 15px;
+}
+
+@media (max-width: 767px) {
+    .navbar-brand {
+        margin-left: 20px;
+    }
+}
+
+.navbar-toggler {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 nav > div > div > ul > li > a {
@@ -138,13 +139,17 @@ nav > div > a:hover {
 }
 
 nav > div > a > img {
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 15px;
     width: 50px;
 }
 
-.navbar-toggler {
-
+@media (max-width: 767px) {
+    .nav-item {
+        padding-left: 15px;
+    }
+    .nav-item:hover {
+        background-color: #3f3882;
+    }
 }
 
 
@@ -177,10 +182,6 @@ nav > div > a > img {
     text-transform: uppercase;
 }
 
-.blog-post-body {
-
-}
-
 .divider {
     border: .5px solid white;
 }
@@ -190,7 +191,14 @@ nav > div > a > img {
 /*      SEARCH XL      */
 
 .search-xl {
-    margin: 20px auto 40px auto;
+    margin: 20px 0 40px 0;
+}
+
+@media (max-width: 575px) {
+    div > form.searchbar-xl > input.form-control {
+        max-width: 545px;
+        width: 100%;
+    }
 }
 
 div > form.searchbar-xl > input.form-control {
@@ -205,16 +213,12 @@ div > form.searchbar-xl > input.form-control::placeholder {
 }
 
 div > form.searchbar-xl > button {
-    margin: 10px 5px 0 auto;
+    margin: 10px auto 10px auto;
 }
 
 
 
 /*      GAME LIST       */
-
-.list-item {
-
-}
 
 .list-item-box {
     background-color: #1a1a1a;
@@ -227,17 +231,24 @@ div > form.searchbar-xl > button {
     padding: 25px 35px 0 25px;
 }
 
-.game-name {
-    font-size: 1.25rem;
-    font-weight: 700;
-    text-transform: uppercase;
+/* small textbox */
+@media (max-width: 767px) {
+    .list-item-text {
+        min-height: 175px;
+        padding: 20px;
+    }
 }
 
 .list-item-text > p > a {
     font-weight: 700;
 }
 
-/*targets Giant Bomb images on front page and in searches*/
+.game-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
 .game-small {
     background-color: #9f8af9;
     border-right: 1px solid white;
@@ -249,6 +260,30 @@ div > form.searchbar-xl > button {
     position: relative;
 }
 
+/* small img */
+@media (max-width: 767px) {
+    .game-small {
+        border-right: none;
+        float: none;
+        height: 150px;
+        max-width: 510px;
+        margin-right: 0;
+        width: 100%;
+    }
+}
+
+/* x-small img */
+@media (max-width: 575px) {
+    .game-small {
+        border-right: none;
+        float: none;
+        height: 150px;
+        max-width: 545px;
+        margin-right: 0;
+        width: 100%;
+    }
+}
+
 .game-img-small {
     display: block;
     margin: auto;
@@ -257,20 +292,6 @@ div > form.searchbar-xl > button {
     position: relative;
     top: 50%;
     transform: translateY(-50%)
-}
-
-@media (max-width: 991px) {
-    .game-small {
-        height: 200px;
-        width: 200px;
-    }
-}
-
-@media (max-width: 767px) {
-    .game-small {
-        height: 150px;
-        width: 150px;
-    }
 }
 
 
@@ -284,12 +305,19 @@ div > form.searchbar-xl > button {
     padding: 20px 25px 20px 25px;
 }
 
+@media (max-width: 767px) {
+    .flag-container {
+        padding: 15px 15px 20px 15px;
+    }
+}
+
 .flag-row {
     display: flex;
 }
 
 @media (max-width: 767px) {
     .flag-row {
+        text-align: center;
         display: block;
     }
 }
@@ -304,6 +332,18 @@ div > form.searchbar-xl > button {
     opacity: 0.3;
 }
 
+
+
+/*      FOOTER      */
+
+footer {
+    margin-top: 50px;
+    text-align: center;
+}
+
+footer > p {
+    padding: 20px;
+}
 
 
 /*      UNSORTED        */
