@@ -48,7 +48,9 @@ namespace DIHMT.Models
                     Flags.Contains((int)EnumTag.MoneyHole) ||
                     Flags.Contains((int)EnumTag.NotJustCosmetic) ||
                     Flags.Contains((int)EnumTag.Subscription) ||
-                    Flags.Contains((int)EnumTag.SingleplayerUntouched)))
+                    Flags.Contains((int)EnumTag.SingleplayerUntouched) ||
+                    Flags.Contains((int)EnumTag.HorseArmor) ||
+                    Flags.Contains((int)EnumTag.BulkOrderHorseArmor)))
                 {
                     return false;
                 }
