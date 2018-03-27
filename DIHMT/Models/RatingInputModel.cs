@@ -8,7 +8,7 @@ namespace DIHMT.Models
 {
     public class RatingInputModel
     {
-        public List<int> MonetizationFlags => new List<int> { 1, 2, 4, 5, 6, 7, 8, 9 };
+        public int[] MonetizationFlags => new[] { 1, 2, 4, 5, 6, 7, 8, 9 };
         public bool IsSpotless => Flags.Contains((int)EnumTag.Spotless);
         [Required]
         public int Id { get; set; }

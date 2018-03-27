@@ -4,6 +4,8 @@
 
 @using (Html.BeginForm("SubmitRating", "Game"))
 {
+    var ratings = GameHelpers.GetRatings();
+
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -20,7 +22,7 @@
                     </label>
                 </p>
 
-                @foreach (var v in GameHelpers.GetRatings().Where(x => Model.MonetizationFlags.Contains(x.Id)))
+                @foreach (var v in ratings.Where(x => Model.MonetizationFlags.Contains(x.Id)))
                 {
                     <p>
                         <label>
@@ -29,7 +31,7 @@
                     </p>
                 }
 
-                @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
+                @foreach (var v in ratings.Where(x => !Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
                 {
                     <p>
                         <label>
