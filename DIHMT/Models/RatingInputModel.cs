@@ -8,7 +8,7 @@ namespace DIHMT.Models
 {
     public class RatingInputModel
     {
-        public List<int> MonetizationFlags => new List<int> { 1, 2, 4, 5, 6, 7, 8, 9 };
+        public int[] MonetizationFlags => new[] { 1, 2, 4, 5, 6, 7, 8, 9 };
         public bool IsSpotless => Flags.Contains((int)EnumTag.Spotless);
         [Required]
         public int Id { get; set; }
@@ -43,12 +43,14 @@ namespace DIHMT.Models
                 }
 
                 if (Flags.Contains((int)EnumTag.Spotless) &&
-                    (Flags.Contains((int)EnumTag.ExpansiveExpansions) ||
-                     Flags.Contains((int)EnumTag.Lootboxes) ||
-                     Flags.Contains((int)EnumTag.MoneyHole) ||
-                     Flags.Contains((int)EnumTag.NotJustCosmetic) ||
-                     Flags.Contains((int)EnumTag.Subscription) ||
-                     Flags.Contains((int)EnumTag.SingleplayerUntouched)))
+                   (Flags.Contains((int)EnumTag.ExpansiveExpansions) ||
+                    Flags.Contains((int)EnumTag.Lootboxes) ||
+                    Flags.Contains((int)EnumTag.MoneyHole) ||
+                    Flags.Contains((int)EnumTag.NotJustCosmetic) ||
+                    Flags.Contains((int)EnumTag.Subscription) ||
+                    Flags.Contains((int)EnumTag.SingleplayerUntouched) ||
+                    Flags.Contains((int)EnumTag.HorseArmor) ||
+                    Flags.Contains((int)EnumTag.BulkOrderHorseArmor)))
                 {
                     return false;
                 }

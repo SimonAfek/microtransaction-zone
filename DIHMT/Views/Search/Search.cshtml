@@ -6,76 +6,49 @@
 
 <div class="container">
 
-@if (Model.Results.Any())
-{
-    <div class="page-title">Search results</div>
-    foreach (var item in Model.Results)
+    @if (Model.Results.Any())
     {
-        <hr />
-        <div class="list-item-box">
+        <div class="page-title">Search results</div>
+        foreach (var item in Model.Results)
+        {
+            <hr />
+            @Html.Partial("Mini", item)
+        } // For each result
+    } // if model results any
 
-            <!-- image --> <div class="game-small">
-                <a href="@Url.Action("Index", "Game", new { id = item.Id })">
-                    <img class="game-img-search" src="@item.SmallImageUrl" alt="" />
-                </a>
-            </div>
-
-            <div class="list-item-text"><a href="@Url.Action("Index", "Game", new { id = item.Id })" class="game-name">@item.Name</a>
-
-
-            <!-- add later <strong>Game summary:</strong> @item.GameSummary -->
-
-
-
-            @if (!string.IsNullOrEmpty(item.Basically))
-            {
-                <p>
-                    <strong>Basically, @item.Name...</strong> @item.Basically&nbsp;-
-                    <a href="@Url.Action("Index", "Game")">Details</a>
-                </p>
-            }
-            else
-            {
-                <em>There is no available reasoning for this game's rating.</em>
-            }
-            </div>
-        </div>
-    } <!-- for each result -->
-} <!-- if model results any -->
-
-else
-{
-    <h2>No results found</h2>
-}
-
-<hr />
-
-@if (Model.Page > 1)
-{
-    if (Model.IsAdvanced)
-    {
-        <a href="@(Url.Action("Advanced", "Search") + Model.AdvancedQueryStringWithoutPageNumber + (Model.Page - 1))">&lt;== Prev</a>
-    }
     else
     {
-        <a href="@Url.Action("Search", "Search", new { q = Model.Query, page = Model.Page - 1})">&lt;== Prev</a>
+        <h2>No results found</h2>
     }
-    <text>&nbsp;|&nbsp;</text>
-}
 
-<strong>@Model.Page</strong>
+    <hr />
 
-@if (Model.Results.Any())
-{
-    <text>&nbsp;|&nbsp;</text>
-    if (Model.IsAdvanced)
+    @if (Model.Page > 1)
     {
-        <a href="@(Url.Action("Advanced", "Search") + Model.AdvancedQueryStringWithoutPageNumber + (Model.Page + 1))">Next ==&gt;</a>
+        if (Model.IsAdvanced)
+        {
+            <a href="@(Url.Action("Advanced", "Search") + Model.AdvancedQueryStringWithoutPageNumber + (Model.Page - 1))">&lt;== Prev</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Search", "Search", new { q = Model.Query, page = Model.Page - 1})">&lt;== Prev</a>
+        }
+        <text>&nbsp;|&nbsp;</text>
     }
-    else
-    {
-        <a href="@Url.Action("Search", "Search", new { q = Model.Query, page = Model.Page + 1})">Next ==&gt;</a>
-    }
-}
 
-</div> <!-- container -->
+    <strong>@Model.Page</strong>
+
+    @if (Model.Results.Any())
+    {
+        <text>&nbsp;|&nbsp;</text>
+        if (Model.IsAdvanced)
+        {
+            <a href="@(Url.Action("Advanced", "Search") + Model.AdvancedQueryStringWithoutPageNumber + (Model.Page + 1))">Next ==&gt;</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Search", "Search", new { q = Model.Query, page = Model.Page + 1})">Next ==&gt;</a>
+        }
+    }
+
+</div> @* Container *@

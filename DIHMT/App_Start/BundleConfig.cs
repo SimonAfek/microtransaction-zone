@@ -28,7 +28,7 @@ namespace DIHMT
                         "~/Scripts/umd/popper.js",
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/respond.js",
-                        "~/Scripts/initialize-popper.js"));
+                        "~/Scripts/initialize-site.js"));
             
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/bootstrap.css",
