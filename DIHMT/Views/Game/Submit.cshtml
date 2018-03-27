@@ -66,9 +66,7 @@
                     {
                         if (i == 0)
                         {
-                            <div>
-                                <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" value="@Model.Links[i]" />
-                            </div>
+                            <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" value="@Model.Links[i]" /> <a href="#" class="add-field-element">[+]</a>
                         }
                         else
                         {
@@ -81,12 +79,9 @@
                 else
                 {
                     <div>
-                        <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" />
+                        <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" /> <a href="#" class="add-field-element">[+]</a>
                     </div>
                 }
-            </div>
-            <div class="col-sm-offset-1">
-                <a href="#" class="add-field-element">[+]</a>
             </div>
         </div>
 
