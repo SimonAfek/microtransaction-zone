@@ -4,96 +4,117 @@
     ViewBag.Title = @Model.Name;
 }
 
-<h2>@Model.Name</h2>
-
-<img src="@Model.SmallImageUrl" />
-
-<h4>About this game</h4>
-<p>
-    Platforms:
-    @for (var i = 0; i < Model.Platforms.Count; i++)
-    {
-        if (i < Model.Platforms.Count - 1)
-        {
-            <text>@Model.Platforms[i].Abbreviation | </text>
-        }
-
-        else
-        {
-            @Model.Platforms[i].Abbreviation
-        }
-    }
-</p>
-
-@if (Model.Genres != null && Model.Genres.Any())
-{
-    <p>
-        Genres:
-        @for (var i = 0; i < Model.Genres.Count; i++)
-        {
-            if (i < Model.Genres.Count - 1)
-            {
-                <text>@Model.Genres[i].Name | </text>
-            }
-
-            else
-            {
-                <text>@Model.Genres[i].Name</text>
-            }
-        }
-    </p>
-}
-
-<p>@Model.GameSummary (For more info about this game, check out <a href="@Model.GbSiteDetailUrl" target="_blank">its entry on the Giant Bomb Wiki.</a>)</p>
-
-@if (Model.IsRated)
-{
-    if (Model.Ratings != null && Model.Ratings.Any())
-    {
-        <h4>Quick monetization info</h4>
-
-        foreach (var v in Model.Ratings)
-        {
-            <p><strong>@v.Name:</strong> @v.ShortDescription</p>
-        }
-    }
-
-    else
-    {
-        <p>This game does not fulfill the conditions for any of our monetization classifications - please see the description below for further info.</p>
-    }
-
-
-    <h4>More information</h4>
-    <p>
-        @if (string.IsNullOrEmpty(Model.RatingExplanation))
-        {
-            <i>No reason for this game's rating is available.</i>
-        }
-
-        else
-        {
-            @Html.Raw(HttpUtility.HtmlEncode(Model.RatingExplanation).Replace("\n", "<br/>"))
-        }
+<div class="container">
+    <div class="row">
         
-        @if (Model.Links != null && Model.Links.Any())
-        {
-            <p>
-                External links with further information:
-            </p>
+        <div class="col-lg-9 col-md-12">
 
-            <ul>
-                @foreach (var v in Model.Links)
+            @Html.Partial("SearchbarXL", "Search")
+            
+            <div class="page-title">Game Details</div>
+
+            <div class="game-info-box">
+
+                <div class="game-large">
+                    <img class="game-img-large" src="@Model.SmallImageUrl" alt="@Model.Name" />
+                </div>
+
+                <h1>@Model.Name</h1>
+
+                <h4>About this game</h4>
+                <p>
+                    Platforms:
+                    @for (var i = 0; i < Model.Platforms.Count; i++)
+                    {
+                        if (i < Model.Platforms.Count - 1)
+                        {
+                            <text>@Model.Platforms[i].Abbreviation | </text>
+                        }
+
+                        else
+                        {
+                            @Model.Platforms[i].Abbreviation
+                        }
+                    }
+                </p>
+
+                @if (Model.Genres != null && Model.Genres.Any())
                 {
-                    <li>
-                        <a href="@v" target="_blank">@v</a>
-                    </li>
+                <p>
+                    Genres:
+                    @for (var i = 0; i < Model.Genres.Count; i++)
+                    {
+                        if (i < Model.Genres.Count - 1)
+                        {
+                            <text>@Model.Genres[i].Name | </text>
+                        }
+
+                        else
+                        {
+                                <text>@Model.Genres[i].Name</text>
+                        }
+                    }
+                </p>
                 }
-            </ul>
-        }
-    </p>
+
+            </div>
+
+            <p>@Model.GameSummary (For more info about this game, check out <a href="@Model.GbSiteDetailUrl" target="_blank">its entry on the Giant Bomb Wiki.</a>)</p>
+
+            @if (Model.IsRated)
+            {
+                if (Model.Ratings != null && Model.Ratings.Any())
+                {
+                    <h4>Quick monetization info</h4>
+
+                    foreach (var v in Model.Ratings)
+                    {
+                        <p><strong>@v.Name:</strong> @v.ShortDescription</p>
+                    }
+                }
+
+                else
+                {
+                        <p>This game does not fulfill the conditions for any of our monetization classifications - please see the description below for further info.</p>
+                }
+
+
+            <h4>More information</h4>
+            <p>
+                @if (string.IsNullOrEmpty(Model.RatingExplanation))
+                {
+                    <i>No reason for this game's rating is available.</i>
+                }
+
+                else
+                {
+                    @Html.Raw(HttpUtility.HtmlEncode(Model.RatingExplanation).Replace("\n", "<br/>"))
+                }
+
+            @if (Model.Links != null && Model.Links.Any())
+            {
+                <p>External links with further information:</p>
+
+                <ul>
+                    @foreach (var v in Model.Links)
+                    {
+                        <li>
+                            <a href="@v" target="_blank">@v</a>
+                        </li>
+                    }
+                </ul>
+            }
+            </p>
 }
+            
+            <h3>Submit/edit rating</h3>
 
-<h3>Submit/edit rating</h3>
+            @Html.Partial("Submit", Model.RatingModel)
 
-@Html.Partial("Submit", Model.RatingModel)
+    </div>
+
+    <div class="col-lg-3 d-none d-lg-block">
+        @Html.Partial("Sidebar")
+    </div>
+
+</div>

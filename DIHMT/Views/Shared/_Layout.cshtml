@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,700,700i,900,900i" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,700,700i" crossorigin="anonymous">
     <title>@ViewBag.Title - MICROTRANSACTION.ZONE</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -31,8 +31,9 @@
                     <li class="nav-item">@Html.ActionLink("Donate", "Donate", "Home", null, new { @class = "nav-link" })</li>
                 </ul>
 
-                <form class="d-none d-lg-block" action="@Url.Action("Search", "Search")">
+                <form class="d-none d-lg-inline-flex form-horizontal" action="@Url.Action("Search", "Search")">
                     <input class="form-control" type="text" name="q" placeholder="Search All Games">
+                    <button class="btn btn-primary"><img class="search-icon" src="~/Images/SearchWhite-01.svg" /></button>
                     <!-- creates 2 lines when hitting lg or smaller: <button class="btn btn-outline-primary my-2 my-sm-0 navbar-expand-xl" type="submit">Search</button> -->
                 </form>
 

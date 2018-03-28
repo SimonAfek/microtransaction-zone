@@ -8,21 +8,29 @@
     </div>
 
     <div class="list-item-text">
-        <p class="m-0">
-            <a href="@Url.Action("Index", "Game", new { id = Model.Id })" class="game-name">@Model.Name</a><br />
+        <p class="game-platform">
+            <strong><a href="@Url.Action("Index", "Game", new { id = Model.Id })" class="game-name">@Model.Name</a></strong>
+            <br />
             @for (var i = 0; i < Model.Platforms.Count; i++)
             {
                 var write = i == Model.Platforms.Count - 1 ? Model.Platforms[i].Abbreviation : $"{Model.Platforms[i].Abbreviation} | ";
 
-                @: @write
+                @: <span class="platform">@write</span>
             }
         </p>
 
         @if (!string.IsNullOrEmpty(Model.Basically))
         {
             <p>
-                <strong>Basically, @Model.Name...</strong> @Model.Basically&nbsp;-
+                <b>Basically, @Model.Name...</b> @Model.Basically&nbsp;-
                 <a href="@Url.Action("Index", "Game", new { id = Model.Id })">Details</a>
+            </p>
+        }
+
+        else
+        {
+            <p>
+                <i>No summary description available.</i>
             </p>
         }
 

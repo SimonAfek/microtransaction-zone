@@ -23,11 +23,18 @@ body {
 }
 
 .body-content {
-    margin-top: 65px;
+    margin-top: 55px;
+}
+
+@media (max-width: 767px) {
+    .body-content {
+        margin-top: 48px;
+    }
 }
 
 a {
     color: #9f8af9;
+    transition: all 0.1s linear;
 }
 
 a:hover {
@@ -45,6 +52,10 @@ a:hover {
     width: 100%;
 }
 
+h1 {
+    font-size: 2rem;
+}
+
 /* in which VS tells me this valid pseudo-element isn't valid*/
 ::placeholder {
     font-weight: 700;
@@ -55,6 +66,16 @@ a:hover {
     ::placeholder {
         font-size: 1.15rem;
     }
+}
+
+.game-platform {
+    line-height: 1.25;
+    margin: 0 0 10px 0;
+}
+
+.platform {
+    font-weight: 700;
+    font-size: .8rem;
 }
 
 
@@ -99,6 +120,7 @@ a:hover {
 
 .nav {
     background-color: #1a1a1a;
+    border-bottom: 1px solid #cccccc;
     font-size: .9rem;
     font-weight: 700;
     padding-left: 0;
@@ -112,7 +134,7 @@ a:hover {
 
 @media (max-width: 767px) {
     .navbar-brand {
-        margin-left: 20px;
+        margin-left: 15px;
     }
 }
 
@@ -151,6 +173,11 @@ nav > div > a > img {
     }
 }
 
+.search-icon {
+    height: 20px;
+    width: 20px;
+}
+
 
 
 /*      SIDEBAR      */
@@ -160,12 +187,28 @@ nav > div > a > img {
     color: white;
     font-size: .75rem;
     font-weight: 500;
+    max-height: 1193px;
     height: 100%;
     padding: 20px;
 }
 
 .blog {
     margin-bottom: 40px;
+}
+
+.blog-name {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.blog-name:hover {
+    color: #9f8af9;
+    text-decoration: none;
+}
+
+.divider-top {
+    border: 1px solid #9f8af9;
+    margin-top: 5px;
 }
 
 .blog-post-date {
@@ -188,7 +231,6 @@ nav > div > a > img {
 
 
 /*      SEARCH XL      */
-
 .search-xl {
     margin: 20px 0 40px 0;
 }
@@ -245,6 +287,7 @@ div > form.searchbar-xl > button {
 .game-name {
     font-size: 1.25rem;
     font-weight: 700;
+    line-height: 1;
     text-transform: uppercase;
 }
 
@@ -257,6 +300,16 @@ div > form.searchbar-xl > button {
     width: 200px;
     margin-right: 35px;
     position: relative;
+}
+
+.game-img-small {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%)
 }
 
 /* small img */
@@ -283,24 +336,58 @@ div > form.searchbar-xl > button {
     }
 }
 
-.game-img-small {
+
+
+
+/*      GAME INFO PAGE       */
+
+.game-info-box {
+    background-color: #1a1a1a;
+    color: white;
+    margin: 20px 0 0 0;
+}
+
+.game-large {
+    background-color: #9f8af9;
+    border-right: 1px solid white;
     display: block;
-    margin: auto;
+    padding: 0;
+    height: 300px;
+    width: 100%;
+}
+
+.game-img-large {
+    display: block;
+    margin: 0 auto 0 auto;
     max-width: 100%;
-    max-height: 100%;
+    height: 300px;
     position: relative;
     top: 50%;
-    transform: translateY(-50%)
+    transform: translateY(-50%);
 }
 
-.game-img-search {
-    display: block;
-    margin: auto;
-    max-width: 100%;
-    max-height: 100%;
-    position: relative;
+/* small img */
+@media (max-width: 767px) {
+    .game-large {
+        height: 250px;
+    }
 
+    .game-img-large {
+        height: 250px;
+    }
 }
+
+/* x-small img */
+@media (max-width: 767px) {
+    .game-large {
+        height: 200px;
+    }
+
+    .game-img-large {
+        height: 200px;
+    }
+}
+
 
 
 
