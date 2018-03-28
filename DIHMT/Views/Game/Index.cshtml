@@ -7,114 +7,135 @@
 <div class="container">
     <div class="row">
         
-        <div class="col-lg-9 col-md-12">
+        <div class="col-lg-9">
 
             @Html.Partial("SearchbarXL", "Search")
-            
-            <div class="page-title">Game Details</div>
+
+
+            <div class="game-large">
+                <img class="game-img-large" src="@Model.SmallImageUrl" alt="@Model.Name" />
+            </div>
 
             <div class="game-info-box">
 
-                <div class="game-large">
-                    <img class="game-img-large" src="@Model.SmallImageUrl" alt="@Model.Name" />
-                </div>
+                <div class="game-platform">
 
-                <h1>@Model.Name</h1>
+                    <p><h1><strong>@Model.Name</strong></h1></p>
 
-                <h4>About this game</h4>
-                <p>
-                    Platforms:
+                    <p>Platform(s)
+                    <br />
                     @for (var i = 0; i < Model.Platforms.Count; i++)
                     {
                         if (i < Model.Platforms.Count - 1)
                         {
-                            <text>@Model.Platforms[i].Abbreviation | </text>
+                            <b> @Model.Platforms[i].Abbreviation | </b>
                         }
 
                         else
                         {
-                            @Model.Platforms[i].Abbreviation
+                            <b> @Model.Platforms[i].Abbreviation </b>
                         }
                     }
-                </p>
+                    </p>
 
-                @if (Model.Genres != null && Model.Genres.Any())
-                {
-                <p>
-                    Genres:
-                    @for (var i = 0; i < Model.Genres.Count; i++)
+                    <p>
+                    Genre(s)
+                    <br />
+                    @if (Model.Genres != null && Model.Genres.Any())
                     {
-                        if (i < Model.Genres.Count - 1)
-                        {
-                            <text>@Model.Genres[i].Name | </text>
-                        }
+                    <span>
 
-                        else
+                        @for (var i = 0; i < Model.Genres.Count; i++)
                         {
-                                <text>@Model.Genres[i].Name</text>
+                            if (i < Model.Genres.Count - 1)
+                            {
+                                <b>@Model.Genres[i].Name | </b>
+                            }
+
+                            else
+                            {
+                                <b>@Model.Genres[i].Name</b>
+                            }
                         }
+                    </span>
                     }
-                </p>
-                }
+                    </p>
+
+                </div>
+
+                <p>@Model.GameSummary</p>
+                <p><i>Game information and image provided by the <a href="@Model.GbSiteDetailUrl" target="_blank">Giant Bomb Wiki</a></i></p>
 
             </div>
 
-            <p>@Model.GameSummary (For more info about this game, check out <a href="@Model.GbSiteDetailUrl" target="_blank">its entry on the Giant Bomb Wiki.</a>)</p>
+            <div class="basic">
 
-            @if (Model.IsRated)
-            {
-                if (Model.Ratings != null && Model.Ratings.Any())
+                @if (Model.IsRated)
                 {
-                    <h4>Quick monetization info</h4>
-
-                    foreach (var v in Model.Ratings)
+                    if (Model.Ratings != null && Model.Ratings.Any())
                     {
-                        <p><strong>@v.Name:</strong> @v.ShortDescription</p>
+                        <h3>Quick Info</h3>
+
+                        foreach (var v in Model.Ratings)
+                        {
+                            <div class="game-flag-box">
+  
+                                    <img class="game-flag-img" src="@v.ImageUrl" />
+                                    <p class="game-flag-description"><b>
+                                        <strong class="flag-name">@v.Name</strong>
+                                        <br />
+                                        @v.ShortDescription
+                                    </b></p>
+
+                            </div>
+                        }
                     }
-                }
 
-                else
-                {
-                        <p>This game does not fulfill the conditions for any of our monetization classifications - please see the description below for further info.</p>
-                }
-
-
-            <h4>More information</h4>
-            <p>
-                @if (string.IsNullOrEmpty(Model.RatingExplanation))
-                {
-                    <i>No reason for this game's rating is available.</i>
-                }
-
-                else
-                {
-                    @Html.Raw(HttpUtility.HtmlEncode(Model.RatingExplanation).Replace("\n", "<br/>"))
-                }
-
-            @if (Model.Links != null && Model.Links.Any())
-            {
-                <p>External links with further information:</p>
-
-                <ul>
-                    @foreach (var v in Model.Links)
+                    else
                     {
-                        <li>
-                            <a href="@v" target="_blank">@v</a>
-                        </li>
+                        <p>This game does not fulfill the conditions for any of our monetization classifications&mdash;please see the description below for further info.</p>
                     }
-                </ul>
-            }
-            </p>
-}
+                
+                <br />
+
+                <h3>Detailed Info</h3>
+                <p>
+                    @if (string.IsNullOrEmpty(Model.RatingExplanation))
+                    {
+                        <i>No reason for this game's rating is available.</i>
+                    }
+
+                    else
+                    {
+                        @Html.Raw(HttpUtility.HtmlEncode(Model.RatingExplanation).Replace("\n", "<br/>"))
+                    }
+
+                    @if (Model.Links != null && Model.Links.Any())
+                    {
+                        <p>External links with further information:</p>
+
+                        <ul>
+                            @foreach (var v in Model.Links)
+                            {
+                                <li>
+                                    <a href="@v" target="_blank">@v</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </p>
+                }       
+            </div>
             
-            <h3>Submit/edit rating</h3>
+            <!-- form width not adapting to mobile sizes yet <h3>Submit/edit rating</h3> -->
 
-            @Html.Partial("Submit", Model.RatingModel)
+            <!-- @Html.Partial("Submit", Model.RatingModel) -->
+
+        </div>
+        
+        <div class="col-lg-3 d-none d-lg-block">
+            @Html.Partial("Sidebar")
+        </div>
 
     </div>
-
-    <div class="col-lg-3 d-none d-lg-block">
-        @Html.Partial("Sidebar")
-    </div>
-
 </div>

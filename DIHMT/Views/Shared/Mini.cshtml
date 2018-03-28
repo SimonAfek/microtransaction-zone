@@ -8,14 +8,14 @@
     </div>
 
     <div class="list-item-text">
-        <p class="game-platform">
-            <strong><a href="@Url.Action("Index", "Game", new { id = Model.Id })" class="game-name">@Model.Name</a></strong>
+        <p class="list-game-platform">
+            <strong><a href="@Url.Action("Index", "Game", new { id = Model.Id })" class="list-game-name">@Model.Name</a></strong>
             <br />
             @for (var i = 0; i < Model.Platforms.Count; i++)
             {
                 var write = i == Model.Platforms.Count - 1 ? Model.Platforms[i].Abbreviation : $"{Model.Platforms[i].Abbreviation} | ";
 
-                @: <span class="platform">@write</span>
+                @: <span class="list-platform">@write</span>
             }
         </p>
 

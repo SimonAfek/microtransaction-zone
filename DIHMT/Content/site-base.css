@@ -32,6 +32,10 @@ body {
     }
 }
 
+.basic {
+    padding: 0px 25px 0 25px;
+}
+
 a {
     color: #9f8af9;
     transition: all 0.1s linear;
@@ -53,7 +57,18 @@ a:hover {
 }
 
 h1 {
+    color: #9f8af9;
     font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+h3 {
+    color: #3f3882; 
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
 }
 
 /* in which VS tells me this valid pseudo-element isn't valid*/
@@ -66,16 +81,6 @@ h1 {
     ::placeholder {
         font-size: 1.15rem;
     }
-}
-
-.game-platform {
-    line-height: 1.25;
-    margin: 0 0 10px 0;
-}
-
-.platform {
-    font-weight: 700;
-    font-size: .8rem;
 }
 
 
@@ -284,11 +289,21 @@ div > form.searchbar-xl > button {
     font-weight: 700;
 }
 
-.game-name {
+.list-game-name {
     font-size: 1.25rem;
     font-weight: 700;
     line-height: 1;
     text-transform: uppercase;
+}
+
+.list-game-platform {
+    line-height: 1.25;
+    margin: 0 0 10px 0;
+}
+
+.list-platform {
+    font-weight: 700;
+    font-size: .8rem;
 }
 
 .game-small {
@@ -344,12 +359,31 @@ div > form.searchbar-xl > button {
 .game-info-box {
     background-color: #1a1a1a;
     color: white;
-    margin: 20px 0 0 0;
+    margin-bottom: 40px;
+    padding: 10px 25px 25px 25px;
+}
+
+@media (max-width: 767px) {
+    .game-info-box {
+        padding: 5px 20px 20px 20px;
+    }
+}
+
+.game-name {
+    line-height: 1;
+}
+
+.game-platform {
+    line-height: 1.25;
+    margin: 0 0 10px 0;
+}
+
+.platform {
+    font-weight: 700;
 }
 
 .game-large {
     background-color: #9f8af9;
-    border-right: 1px solid white;
     display: block;
     padding: 0;
     height: 300px;
@@ -388,6 +422,34 @@ div > form.searchbar-xl > button {
     }
 }
 
+
+
+/*      GAME INFO FLAGS     */
+
+.game-flag-box {
+
+    min-height: 85px;
+    height: 100%;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.game-flag-img {
+    float: left;
+    margin-right: 20px;
+    width: 75px;
+    height: 100%;
+}
+
+.game-flag-description {
+    font-size: 1.1rem;
+    line-height: 1.25;
+    padding-top: 4px;
+}
+
+.flag-name {
+    color: #784ef9;
+}
 
 
 
