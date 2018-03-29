@@ -14,7 +14,7 @@ namespace DIHMT.Models
         public int Id { get; set; }
         [DisplayName("Basically, this game...")]
         public string Basically { get; set; }
-        [DisplayName("Detailed explanation")]
+        [DisplayName("Detailed Info")]
         public string RatingExplanation { get; set; }
         public string SubmitterIp { get; set; }
 

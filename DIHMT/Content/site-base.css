@@ -36,6 +36,16 @@ body {
     padding: 0px 25px 0 25px;
 }
 
+@media (max-width:767px) {
+    .basic {
+        padding: 0px 15px 0 15px;
+    }
+}
+
+.divider-basic {
+    margin: 40px 0 40px 0;
+}
+
 a {
     color: #9f8af9;
     transition: all 0.1s linear;
@@ -81,6 +91,12 @@ h3 {
     ::placeholder {
         font-size: 1.15rem;
     }
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column */
+.dl-horizontal dt {
+    white-space: normal;
 }
 
 
@@ -427,10 +443,12 @@ div > form.searchbar-xl > button {
 /*      GAME INFO FLAGS     */
 
 .game-flag-box {
-
+    display: flex;
+    align-items: center;
     min-height: 85px;
     height: 100%;
     margin-bottom: 5px;
+    padding-top: 6px;
     position: relative;
 }
 
@@ -442,9 +460,9 @@ div > form.searchbar-xl > button {
 }
 
 .game-flag-description {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-weight: 700;
     line-height: 1.25;
-    padding-top: 4px;
 }
 
 .flag-name {
@@ -503,21 +521,58 @@ footer > p {
 }
 
 
-/*      UNSORTED        */
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column */
-.dl-horizontal dt {
-    white-space: normal;
+/*      SUBMISSION      */
+
+.form-group {
+    margin-bottom: 30px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+.form-check {
+    padding-left: 0;
+}
+
+.control-label {
+    color: #3f3882;
+    font-weight: 700;
+    min-width: 200px;
+    padding-left: 0;
+    padding-top: 7px;
+}
+
+.control-label-flags {
+    color: #3f3882;
+    font-weight: 700;
+    min-width: 200px;
+    padding-left: 0;
+
+}
+
+@media (max-width: 1199px) {
+    .control-label {
+        min-width: 170px;
+    }
+}
+
+.wide-input-box >
 input,
 select,
 textarea {
-    max-width: 280px;
+    width: 100%;
 }
 
-.wide-input {
-    max-width: 500px;
+.wide-input-box {
+    width: 100%;
+}
+
+.links-margin {
+    margin-bottom: 10px;
+}
+
+.add-field-element {
+    width: 35px;
+}
+
+.remove_field {
+    width: 35px;
 }

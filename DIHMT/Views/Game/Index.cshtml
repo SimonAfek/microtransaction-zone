@@ -74,19 +74,18 @@
                 {
                     if (Model.Ratings != null && Model.Ratings.Any())
                     {
-                        <h3>Quick Info</h3>
+                        //<h3>Quick Info</h3>
 
                         foreach (var v in Model.Ratings)
                         {
-                            <div class="game-flag-box">
-  
-                                    <img class="game-flag-img" src="@v.ImageUrl" />
-                                    <p class="game-flag-description"><b>
-                                        <strong class="flag-name">@v.Name</strong>
-                                        <br />
-                                        @v.ShortDescription
-                                    </b></p>
+                            <img class="game-flag-img" src="@v.ImageUrl" />
 
+                            <div class="game-flag-box">
+                                <p class="game-flag-description">
+                                    <strong class="flag-name">@v.Name</strong>
+                                    <br />
+                                    @v.ShortDescription
+                                </p>
                             </div>
                         }
                     }
@@ -112,24 +111,26 @@
 
                     @if (Model.Links != null && Model.Links.Any())
                     {
-                        <p>External links with further information:</p>
+                        <h3>External Links</h3>
 
-                        <ul>
+                        <p>
                             @foreach (var v in Model.Links)
                             {
-                                <li>
-                                    <a href="@v" target="_blank">@v</a>
-                                </li>
+                                <a href="@v" target="_blank">@v</a><br />
                             }
-                        </ul>
+                        </p>
                     }
                 </p>
                 }       
-            </div>
-            
-            <!-- form width not adapting to mobile sizes yet <h3>Submit/edit rating</h3> -->
+                
+                <hr class="divider-basic">
 
-            <!-- @Html.Partial("Submit", Model.RatingModel) -->
+            </div>
+
+            <div class="basic">
+                <h3>Submit/Edit Rating</h3>
+                @Html.Partial("Submit", Model.RatingModel)
+            </div>
 
         </div>
         
