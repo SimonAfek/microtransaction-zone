@@ -105,7 +105,10 @@
 
                     else
                     {
-                        @Html.Raw(HttpUtility.HtmlEncode(Model.RatingExplanation).Replace("\n", "<br/>"))
+                        foreach (var v in Model.RatingExplanationArrayOfParagraphs)
+                        {
+                            <p>@v</p>
+                        }
                     }
 
                     @if (Model.Links != null && Model.Links.Any())
