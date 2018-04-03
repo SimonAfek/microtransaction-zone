@@ -22,27 +22,29 @@
 
             <div class="col-md-9">
                 <div class="form-check">
-                        <input type="checkbox" name="Flags" value="@((int)EnumTag.Spotless)" checked="@Model.IsSpotless" class="@($"spotless-checkbox submission-checkbox-{(int)EnumTag.Spotless} submission-checkbox")" />
-                        <label>&ensp;Spotless</label>
+                    <input type="checkbox" name="Flags" value="@((int)EnumTag.Spotless)" checked="@Model.IsSpotless" id="@($"submission-checkbox-{(int)EnumTag.Spotless}")" class="spotless-checkbox submission-checkbox" />
+                    <label for="@($"submission-checkbox-{(int)EnumTag.Spotless}")"></label>
+                    <label>&ensp;Spotless</label>
                 </div>
 
                 @foreach (var v in ratings.Where(x => Model.MonetizationFlags.Contains(x.Id)))
                 {
                     <div class="form-check">    
-                            <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="@($"monetization-input submission-checkbox-{v.Id} submission-checkbox")" disabled="@Model.IsSpotless" />
-                            <label>&ensp;@v.Name</label>
+                        <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="monetization-input submission-checkbox" disabled="@Model.IsSpotless" />
+                        <label for="@($"submission-checkbox-{v.Id}")"></label>
+                        <label>&ensp;@v.Name</label>
                     </div>
                 }
 
                 @foreach (var v in ratings.Where(x => !Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
                 {
                     <div class="form-check">
-                        <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="@($"submission-checkbox-{v.Id} submission-checkbox")" />
+                        <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="submission-checkbox" />
+                        <label for="@($"submission-checkbox-{v.Id}")"></label>
                         <label>&ensp;@v.Name</label>
                     </div>
                 }
             </div>
-
         </div>
 
         <!-- BASICALLY... -->

@@ -19,7 +19,6 @@ body {
     color: #1a1a1a;
     font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
-
 }
 
 .body-content {
@@ -51,9 +50,9 @@ a {
     transition: all 0.1s linear;
 }
 
-a:hover {
-    color: #bfb1fb;
-}
+    a:hover {
+        color: #bfb1fb;
+    }
 
 .page-title {
     background-color: #1a1a1a;
@@ -75,7 +74,7 @@ h1 {
 }
 
 h3 {
-    color: #3f3882; 
+    color: #3f3882;
     font-size: 1.5rem;
     font-weight: 700;
     margin-top: 30px;
@@ -110,18 +109,18 @@ h3 {
     border: 0;
 }
 
-.btn-primary:hover {
-    background-color: #9f8af9;
-}
+    .btn-primary:hover {
+        background-color: #9f8af9;
+    }
 
 .btn-secondary {
     font-weight: 700;
     border: 0;
 }
 
-.btn-secondary:hover {
-    background-color: #aaa;
-}
+    .btn-secondary:hover {
+        background-color: #aaa;
+    }
 
 
 
@@ -134,7 +133,7 @@ h3 {
 }
 
 .popover-body {
-    margin-bottom: 5px;   
+    margin-bottom: 5px;
 }
 
 
@@ -170,30 +169,31 @@ nav > div > div > ul > li > a {
     color: #ccc;
 }
 
-nav > div > div > ul > li > a:hover {
-    color: #fff;
-}
+    nav > div > div > ul > li > a:hover {
+        color: #fff;
+    }
 
 nav > div > a {
     color: #9f8af9;
 }
 
-nav > div > a:hover {
-    color: #9f8af9;
-}
+    nav > div > a:hover {
+        color: #9f8af9;
+    }
 
-nav > div > a > img {
-    margin-right: 15px;
-    width: 50px;
-}
+    nav > div > a > img {
+        margin-right: 15px;
+        width: 50px;
+    }
 
 @media (max-width: 767px) {
     .nav-item {
         padding-left: 15px;
     }
-    .nav-item:hover {
-        background-color: #3f3882;
-    }
+
+        .nav-item:hover {
+            background-color: #3f3882;
+        }
 }
 
 .search-icon {
@@ -224,10 +224,10 @@ nav > div > a > img {
     font-weight: 700;
 }
 
-.blog-name:hover {
-    color: #9f8af9;
-    text-decoration: none;
-}
+    .blog-name:hover {
+        color: #9f8af9;
+        text-decoration: none;
+    }
 
 .divider-top {
     border: 1px solid #9f8af9;
@@ -241,7 +241,6 @@ nav > div > a > img {
 }
 
 .blog-post-title {
-
     font-weight: 700;
     margin-bottom: 5px;
     text-transform: uppercase;
@@ -272,9 +271,9 @@ div > form.searchbar-xl > input.form-control {
     font-weight: 700;
 }
 
-div > form.searchbar-xl > input.form-control::placeholder {
-    color: #9f8af9;
-}
+    div > form.searchbar-xl > input.form-control::placeholder {
+        color: #9f8af9;
+    }
 
 div > form.searchbar-xl > button {
     margin: 10px auto 10px auto;
@@ -343,7 +342,6 @@ div > form.searchbar-xl > button {
     max-width: 100%;
     max-height: 100%;
     position: relative;
-
 }
 
 /* small img */
@@ -521,9 +519,9 @@ footer {
     text-align: center;
 }
 
-footer > p {
-    padding: 20px;
-}
+    footer > p {
+        padding: 20px;
+    }
 
 
 
@@ -550,7 +548,6 @@ footer > p {
     font-weight: 700;
     min-width: 200px;
     padding-left: 0;
-
 }
 
 @media (max-width: 1199px) {
@@ -581,3 +578,215 @@ textarea {
 .remove_field {
     width: 35px;
 }
+
+/* submission checkboxes */
+
+#submission-checkbox-1 {
+    display: none;
+}
+
+    #submission-checkbox-1 + label {
+        background-image: url('/Images/1-1_Horse Armor.svg');
+        opacity: 0.30;
+        height: 50px;
+        width: 50px;
+        display: inline-block;
+        padding: 0 0 0 0;
+    }
+
+    #submission-checkbox-1:checked + label {
+        opacity: 1;
+    }
+
+    #submission-checkbox-1:disabled + label {
+        opacity: 0.15;
+    }
+
+#submission-checkbox-2 {
+    display: none;
+}
+
+    #submission-checkbox-2 + label {
+        background-image: url('/Images/1-1_HorseArmorBO.svg');
+        opacity: 0.30;
+        height: 50px;
+        width: 50px;
+        display: inline-block;
+        padding: 0 0 0 0;
+    }
+
+    #submission-checkbox-2:checked + label {
+        opacity: 1;
+    }
+
+    #submission-checkbox-2:disabled + label {
+        opacity: 0.15;
+    }
+
+#submission-checkbox-3 {
+    display: none;
+}
+
+    #submission-checkbox-3 + label {
+        background-image: url('/Images/1-1_Spotless.svg');
+        opacity: 0.30;
+        height: 50px;
+        width: 50px;
+        display: inline-block;
+        padding: 0 0 0 0;
+    }
+
+    #submission-checkbox-3:checked + label {
+        opacity: 1;
+    }
+
+    #submission-checkbox-3:disabled + label {
+        opacity: 0.15;
+    }
+
+#submission-checkbox-4 {
+    display: none;
+}
+
+    #submission-checkbox-4 + label {
+        background-image: url('/Images/1-1_Expansions.svg');
+        opacity: 0.30;
+        height: 50px;
+        width: 50px;
+        display: inline-block;
+        padding: 0 0 0 0;
+    }
+
+    #submission-checkbox-4:checked + label {
+        opacity: 1;
+    }
+
+    #submission-checkbox-4:disabled + label {
+        opacity: 0.15;
+    }
+
+#submission-checkbox-5 {
+    display: none;
+}
+
+    #submission-checkbox-5 + label {
+        background-image: url('/Images/1-1_NotGambling.svg');
+        opacity: 0.30;
+        height: 50px;
+        width: 50px;
+        display: inline-block;
+        padding: 0 0 0 0;
+    }
+
+    #submission-checkbox-5:checked + label {
+        opacity: 1;
+    }
+
+    #submission-checkbox-5:disabled + label {
+        opacity: 0.15;
+    }
+
+#submission-checkbox-6 {
+    display: none;
+}
+
+    #submission-checkbox-6 + label {
+        background-image: url('/Images/1-1_MoneyHole.svg');
+        opacity: 0.30;
+        height: 50px;
+        width: 50px;
+        display: inline-block;
+        padding: 0 0 0 0;
+    }
+
+    #submission-checkbox-6:checked + label {
+        opacity: 1;
+    }
+
+    #submission-checkbox-6:disabled + label {
+        opacity: 0.15;
+    }
+
+#submission-checkbox-7 {
+    display: none;
+}
+
+    #submission-checkbox-7 + label {
+        background-image: url('/Images/1-1_PayingForPower.svg');
+        opacity: 0.30;
+        height: 50px;
+        width: 50px;
+        display: inline-block;
+        padding: 0 0 0 0;
+    }
+
+    #submission-checkbox-7:checked + label {
+        opacity: 1;
+    }
+
+    #submission-checkbox-7:disabled + label {
+        opacity: 0.15;
+    }
+
+#submission-checkbox-8 {
+    display: none;
+}
+
+    #submission-checkbox-8 + label {
+        background-image: url('/Images/1-1_Contract.svg');
+        opacity: 0.30;
+        height: 50px;
+        width: 50px;
+        display: inline-block;
+        padding: 0 0 0 0;
+    }
+
+    #submission-checkbox-8:checked + label {
+        opacity: 1;
+    }
+
+    #submission-checkbox-8:disabled + label {
+        opacity: 0.15;
+    }
+
+#submission-checkbox-9 {
+    display: none;
+}
+
+    #submission-checkbox-9 + label {
+        background-image: url('/Images/1-1_TableForOne.svg');
+        opacity: 0.30;
+        height: 50px;
+        width: 50px;
+        display: inline-block;
+        padding: 0 0 0 0;
+    }
+
+    #submission-checkbox-9:checked + label {
+        opacity: 1;
+    }
+
+    #submission-checkbox-9:disabled + label {
+        opacity: 0.15;
+    }
+
+#submission-checkbox-10 {
+    display: none;
+}
+
+    #submission-checkbox-10 + label {
+        background-image: url('/Images/1-1_F2P.svg');
+        opacity: 0.30;
+        height: 50px;
+        width: 50px;
+        display: inline-block;
+        padding: 0 0 0 0;
+    }
+
+    #submission-checkbox-10:checked + label {
+        opacity: 1;
+    }
+
+    #submission-checkbox-10:disabled + label {
+        opacity: 0.15;
+    }
