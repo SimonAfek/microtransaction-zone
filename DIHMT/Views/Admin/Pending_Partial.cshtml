@@ -15,52 +15,67 @@
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.GameId)
 
+        <!-- FLAGS -->
+
         <div class="form-group row no-gutters">
-            @Html.LabelFor(model => model.Flags, htmlAttributes: new { @class = "control-label col-sm-2 " })
-            <div>
-                <p>
-                    <label>
-                        <input type="checkbox" name="Flags" value="@((int)EnumTag.Spotless)" checked="@Model.RatingModel.IsSpotless" class="@($"spotless-checkbox submission-checkbox-{(int)EnumTag.Spotless} submission-checkbox")" /> Spotless
-                    </label>
-                </p>
+
+            <div class="col-md-3">@Html.LabelFor(model => model.Flags, htmlAttributes: new { @class = "control-label-flags" })</div>
+
+            <div class="col-md-9">
+                <div class="form-check">
+                    <input type="checkbox" name="Flags" value="@((int)EnumTag.Spotless)" checked="@Model.RatingModel.IsSpotless" id="@($"submission-checkbox-{(int)EnumTag.Spotless}")" class="spotless-checkbox submission-checkbox" />
+                    <label for="@($"submission-checkbox-{(int)EnumTag.Spotless}")"></label>
+                    <label>&ensp;Spotless</label>
+                </div>
 
                 @foreach (var v in ratings.Where(x => Model.RatingModel.MonetizationFlags.Contains(x.Id)))
                 {
-                    <p>
-                        <label>
-                            <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="@($"monetization-input submission-checkbox-{v.Id} submission-checkbox")" disabled="@Model.RatingModel.IsSpotless" /> @v.Name
-                        </label>
-                    </p>
+                    <div class="form-check">
+                        <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="monetization-input submission-checkbox" disabled="@Model.RatingModel.IsSpotless" />
+                        <label for="@($"submission-checkbox-{v.Id}")"></label>
+                        <label>&ensp;@v.Name</label>
+                    </div>
                 }
 
                 @foreach (var v in ratings.Where(x => !Model.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
                 {
-                    <p>
-                        <label>
-                            <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" class="@($"submission-checkbox-{v.Id} submission-checkbox")" /> @v.Name
-                        </label>
-                    </p>
+                    <div class="form-check">
+                        <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="submission-checkbox" />
+                        <label for="@($"submission-checkbox-{v.Id}")"></label>
+                        <label>&ensp;@v.Name</label>
+                    </div>
                 }
             </div>
         </div>
 
-        <div class="form-group row no-gutters">
-            @Html.LabelFor(model => model.Basically, htmlAttributes: new { @class = "control-label col-sm-2 " })
-            <div>
-                <input type="text" size="280" name="Basically" value="@Model.Basically" class="wide-input" maxlength="280" />
-            </div>
-        </div>
+        <!-- BASICALLY... -->
 
         <div class="form-group row no-gutters">
-            @Html.LabelFor(model => model.RatingExplanation, htmlAttributes: new { @class = "control-label col-sm-2" })
-            <div>
-                <textarea name="RatingExplanation" class="wide-input" rows="10" cols="100" maxlength="4000">@Model.RatingExplanation</textarea>
+
+            <div class="col-md-3">@Html.LabelFor(model => model.Basically, htmlAttributes: new { @class = "control-label col-lg-2" })</div>
+
+            <div class="col-md-9 wide-input-box">
+                <input type="text" name="Basically" value="@Model.Basically" class="form-control wide-input" maxlength="280" />
+            </div>
+
+        </div>
+
+        <!-- DETAILED INFO -->
+
+        <p>
+            @Html.LabelFor(model => model.RatingExplanation, htmlAttributes: new { @class = "control-label col-lg-2" })
+        </p>
+        <p>
+            <div class="col-md-9 wide-input-box">
+                <textarea name="RatingExplanation" class="form-control wide-input" rows="10" cols="100" maxlength="4000">@Model.RatingExplanation</textarea>
                 @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </p>
 
-        <div class="form-group row no-gutters">
-            @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label col-sm-2 " })
+        <p>
+            @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label col-lg-2" })
+        </p>
+        <p>
             <div class="input-fields-wrap">
                 @if (Model.Links != null && Model.Links.Any())
                 {
@@ -68,24 +83,26 @@
                     {
                         if (i == 0)
                         {
-                            <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" value="@Model.Links[i]" /> <a href="#" class="add-field-element">[+]</a>
+                            <div class="wide-input-box d-inline-flex form-horizontal links-margin">
+                                <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" value="@Model.Links[i]" />&emsp;<button href="#" class="add-field-element btn btn-primary">+</button>
+                            </div>
                         }
                         else
                         {
-                            <div>
-                                <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" value="@Model.Links[i]" /> <a href="#" class="remove_field">[-]</a>
+                            <div class="wide-input-box d-inline-flex form-horizontal links-margin">
+                                <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" value="@Model.Links[i]" />&emsp;<button href="#" class="remove_field btn btn-primary">-</button>
                             </div>
                         }
                     }
                 }
                 else
                 {
-                    <div>
-                        <input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" /> <a href="#" class="add-field-element">[+]</a>
+                    <div class="wide-input-box d-inline-flex form-horizontal links-margin">
+                        <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" />&emsp;<button href="#" class="add-field-element btn btn-primary">+</button>
                     </div>
                 }
             </div>
-        </div>
+        </p>
 
         <p>
             @Html.LabelFor(model => model.TimeOfSubmission, htmlAttributes: new { @class = "control-label" })
