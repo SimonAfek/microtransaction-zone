@@ -29,5 +29,12 @@ namespace DIHMT.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        // ReSharper disable once InconsistentNaming
+        public ActionResult FAQ()
+        {
+            return View();
+        }
     }
 }

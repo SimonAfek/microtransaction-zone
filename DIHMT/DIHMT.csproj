@@ -450,6 +450,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\SearchbarXL.cshtml" />
     <Content Include="Views\Shared\Sidebar.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
