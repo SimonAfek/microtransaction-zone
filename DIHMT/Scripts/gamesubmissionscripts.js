@@ -1,4 +1,29 @@
 ﻿$(function () {
+    var submissionform = $("#submissionform");
+
+    submissionform.submit(function (e) {
+        e.preventDefault();
+
+        $("#submissionbutton").prop({ disabled: true });
+        $(".successmessage").text("");
+        $(".failuremessage").text("");
+
+        $.ajax({
+            type: submissionform.attr("method"),
+            url: submissionform.attr("action"),
+            data: submissionform.serialize(),
+            success: function (data) {
+                $(".successmessage").text(data);
+            },
+            error: function (data) {
+                $(".failuremessage").text(data.responseText.replace(/^"(.*)"$/, "$1"));
+                $(".submissionbutton").prop({ disabled: false });
+            }
+        });
+    });
+});
+
+$(function () {
     // https://www.sanwebe.com/2013/03/addremove-input-fields-dynamically-with-jquery
     var maxFields = 10; // Maximum input boxes allowed
     var wrapper = $(".input-fields-wrap"); // Fields wrapper
