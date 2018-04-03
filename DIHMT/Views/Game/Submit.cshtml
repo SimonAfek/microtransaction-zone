@@ -77,7 +77,7 @@
 
             <div class="col-md-3">@Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label col-lg-2" })</div>
 
-            <div class="col-md-9">
+            <div class="col-md-9 input-fields-wrap">
                 @if (Model.Links != null && Model.Links.Any())
                 {
                     for (var i = 0; i < Model.Links.Count; i++)

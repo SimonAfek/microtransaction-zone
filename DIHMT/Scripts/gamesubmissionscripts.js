@@ -10,7 +10,7 @@
         e.preventDefault();
         if (x < maxFields) { // True unless the field count is at capacity
             x++; // Increment count of text boxes
-            $(wrapper).append('<div><input type="text" name="Links" size="500" class="wide-input links-input" maxlength="500" /> <a href="#" class="remove_field">[-]</a></div>'); // Add input box with corresponding remove-button
+            $(wrapper).append('<div class="wide-input-box d-inline-flex form-horizontal links-margin"><input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" />&emsp;<button href="#" class="remove_field btn btn-primary">-</button></div >'); // Add input box with corresponding remove-button
         }
     });
 
