@@ -1,19 +1,41 @@
-﻿/*  HEX COLORS   */
-/*  MZ-indigo           #784ef9 */
-/*  MZ-indigo-light     #9f8af9 */
-/*  MZ-indigo-hover     #bfb1fb */
-/*  MZ-indigo-dark      #3f3882 */
-/*  MZ-gray-dark        #1a1a1a */
+﻿/*  HEX COLORS
+        MZ-indigo           #784ef9
+        MZ-indigo-light     #9f8af9
+        MZ-indigo-hover     #bfb1fb
+        MZ-indigo-dark      #3f3882
+        MZ-gray-dark        #1a1a1a 
+*/
 
-/*  BOOTSTRAP BREAKPOINTS  */
-/*  small = min-width: 576px    */
-/*  medium = min-width: 768px   */
-/*  large = min-width: 992px    */
-/*  x-large = min-width: 1200px */
+/*  BOOTSTRAP BREAKPOINTS
+        small = min-width: 576px
+        medium = min-width: 768px
+        large = min-width: 992px
+        x-large = min-width: 1200px 
+*/
+
+/*  CSS INDEX 
+        1. ALL PAGES  
+            a. Typography
+            b. Buttons
+            c. Popovers
+            d. Navigation
+            e. Sidebar
+        2. GAME LIST
+            a. Small Image
+            b. Game List Flags
+        3. GAME INDEX
+            a. Large Image
+            b. Game Index Flags
+        4. SUBMISSION FORM
+            a. Submission Checkboxes
+        5. FOOTER
+*/
 
 
 
-/*      BODY        */
+/*--------------------------*/
+/*      1. ALL PAGES        */
+/*--------------------------*/
 
 body {
     color: #1a1a1a;
@@ -31,8 +53,9 @@ body {
     }
 }
 
+/* this is for body text blocks */
 .basic {
-    padding: 0px 25px 0 25px;
+    padding: 0px 20px 0 20px;
 }
 
 @media (max-width:767px) {
@@ -45,14 +68,7 @@ body {
     margin: 40px 0 40px 0;
 }
 
-a {
-    color: #9f8af9;
-    transition: all 0.1s linear;
-}
-
-    a:hover {
-        color: #bfb1fb;
-    }
+/* a. Typography */
 
 .page-title {
     background-color: #1a1a1a;
@@ -73,13 +89,34 @@ h1 {
     text-transform: uppercase;
 }
 
+h2 {
+    color: #3f3882;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
 h3 {
     color: #3f3882;
     font-size: 1.5rem;
     font-weight: 700;
-    margin-top: 30px;
-    margin-bottom: 15px;
 }
+
+h4 {
+    color: #3f3882;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+a {
+    color: #9f8af9;
+    transition: all 0.1s linear;
+}
+
+    a:hover {
+        color: #bfb1fb;
+    }
 
 /* in which VS tells me this valid pseudo-element isn't valid*/
 ::placeholder {
@@ -99,9 +136,7 @@ h3 {
     white-space: normal;
 }
 
-
-
-/*      BUTTONS      */
+/* b. Buttons */
 
 .btn-primary {
     background-color: #784ef9;
@@ -122,9 +157,7 @@ h3 {
         background-color: #aaa;
     }
 
-
-
-/*      POPOVER     */
+/* Popovers */
 
 .popover-header {
     background-color: #784ef9;
@@ -136,18 +169,19 @@ h3 {
     margin-bottom: 5px;
 }
 
-
-
-/*      NAV     */
+/* c. Navigation */
 
 .nav {
     background-color: #1a1a1a;
-    border-bottom: 1px solid #cccccc;
     font-size: .9rem;
     font-weight: 700;
     padding-left: 0;
     padding-right: 0;
     text-transform: uppercase;
+}
+
+.nav-border {
+    border-bottom: 1px solid #cccccc;
 }
 
 .navbar-brand {
@@ -187,7 +221,12 @@ nav > div > a {
     }
 
 @media (max-width: 767px) {
+    #navbarNavDropdown {
+        margin-top: 10px;
+    }
+
     .nav-item {
+        margin-bottom: 5px;
         padding-left: 15px;
     }
 
@@ -201,9 +240,44 @@ nav > div > a {
     width: 20px;
 }
 
+.dropdown.nav-item:hover {
+    background-color: #1c1c1c;
+}
 
+.dropdown-menu {
+    background-color: #3f3882;
+    border-radius: 0px;
+    transform: translateX(-5%);
+}
 
-/*      SIDEBAR      */
+.dropdown-item {
+    color: #ccc;
+    font-size: .9rem;
+    font-weight: 700;
+    padding-left: 15px;
+    padding-right: 20px;
+}
+
+.dropdown-item:hover {
+    background-color: #3f3882;
+    color: white;
+}
+
+@media (max-width: 991px) {
+    .dropdown-menu {
+        transform: translateX(0%);
+    }
+    .dropdown-item {
+        padding-left: 20px;
+        padding-right: auto;
+    }
+    .dropdown-item:hover {
+        background-color: none;
+        color: white;
+    }
+}
+
+/* d. Sidebar */
 
 .sidebar {
     background-color: #1a1a1a;
@@ -250,9 +324,8 @@ nav > div > a {
     border: .5px solid white;
 }
 
+/* e. XL Search */
 
-
-/*      SEARCH XL      */
 .search-xl {
     margin: 20px 0 40px 0;
 }
@@ -275,13 +348,21 @@ div > form.searchbar-xl > input.form-control {
         color: #9f8af9;
     }
 
-div > form.searchbar-xl > button {
+form.searchbar-xl > button {
     margin: 10px auto 10px auto;
+}
+
+@media (max-width: 991px) {
+    form.searchbar-xl > button {
+        margin: 10px auto auto auto;
+    }
 }
 
 
 
-/*      GAME LIST       */
+/*--------------------------*/
+/*      GAME LIST           */
+/*--------------------------*/
 
 .list-item-box {
     background-color: #1a1a1a;
@@ -323,9 +404,10 @@ div > form.searchbar-xl > button {
     font-size: .8rem;
 }
 
+/* a. Small Image */
+
 .game-small {
     background-color: #9f8af9;
-    /*border-right: 1px solid white;*/
     display: flex;
     align-items: center;
     float: left;
@@ -344,7 +426,6 @@ div > form.searchbar-xl > button {
     position: relative;
 }
 
-/* small img */
 @media (max-width: 767px) {
     .game-small {
         display: block;
@@ -357,7 +438,6 @@ div > form.searchbar-xl > button {
     }
 }
 
-/* x-small img */
 @media (max-width: 575px) {
     .game-small {
         display: block;
@@ -371,110 +451,7 @@ div > form.searchbar-xl > button {
 }
 
 
-
-
-/*      GAME INFO PAGE       */
-
-.game-info-box {
-    background-color: #1a1a1a;
-    color: white;
-    margin-bottom: 40px;
-    padding: 10px 25px 25px 25px;
-}
-
-@media (max-width: 767px) {
-    .game-info-box {
-        padding: 5px 20px 20px 20px;
-    }
-}
-
-.game-name {
-    line-height: 1;
-}
-
-.game-platform {
-    line-height: 1.25;
-    margin: 0 0 10px 0;
-}
-
-.platform {
-    font-weight: 700;
-}
-
-.game-large {
-    background-color: #9f8af9;
-    display: block;
-    padding: 0;
-    height: 300px;
-    width: 100%;
-}
-
-.game-img-large {
-    display: block;
-    margin: 0 auto 0 auto;
-    max-width: 100%;
-    height: 300px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* small img */
-@media (max-width: 767px) {
-    .game-large {
-        height: 250px;
-    }
-
-    .game-img-large {
-        height: 250px;
-    }
-}
-
-/* x-small img */
-@media (max-width: 767px) {
-    .game-large {
-        height: 200px;
-    }
-
-    .game-img-large {
-        height: 200px;
-    }
-}
-
-
-
-/*      GAME INFO FLAGS     */
-
-.game-flag-box {
-    display: flex;
-    align-items: center;
-    min-height: 85px;
-    height: 100%;
-    margin-bottom: 5px;
-    padding-top: 6px;
-    position: relative;
-}
-
-.game-flag-img {
-    float: left;
-    margin-right: 20px;
-    width: 75px;
-    height: 100%;
-}
-
-.game-flag-description {
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1.25;
-}
-
-.flag-name {
-    color: #784ef9;
-}
-
-
-
-/*      FLAGS       */
+/* b. Game List Flags */
 
 .flag-container {
     background-color: #1a1a1a;
@@ -512,20 +489,112 @@ div > form.searchbar-xl > button {
 
 
 
-/*      FOOTER      */
 
-footer {
-    margin-top: 50px;
-    text-align: center;
+/*--------------------------*/
+/*      3. GAME INDEX       */
+/*--------------------------*/
+
+.game-info-box {
+    background-color: #1a1a1a;
+    color: white;
+    margin-bottom: 40px;
+    padding: 10px 25px 25px 25px;
 }
 
-    footer > p {
-        padding: 20px;
+@media (max-width: 767px) {
+    .game-info-box {
+        padding: 5px 20px 20px 20px;
+    }
+}
+
+.game-name {
+    line-height: 1;
+}
+
+.game-platform {
+    line-height: 1.25;
+    margin: 0 0 10px 0;
+}
+
+.platform {
+    font-weight: 700;
+}
+
+/* a. Large Image */
+
+.game-large {
+    background-color: #9f8af9;
+    display: block;
+    padding: 0;
+    height: 300px;
+    width: 100%;
+}
+
+.game-img-large {
+    display: block;
+    margin: 0 auto 0 auto;
+    max-width: 100%;
+    height: 300px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@media (max-width: 767px) {
+    .game-large {
+        height: 250px;
     }
 
+    .game-img-large {
+        height: 250px;
+    }
+}
+
+@media (max-width: 767px) {
+    .game-large {
+        height: 200px;
+    }
+
+    .game-img-large {
+        height: 200px;
+    }
+}
 
 
-/*      SUBMISSION      */
+
+/* b. Game Index Flags */
+
+.game-flag-box {
+    display: flex;
+    align-items: center;
+    min-height: 85px;
+    height: 100%;
+    margin-bottom: 5px;
+    padding-top: 6px;
+    position: relative;
+}
+
+.game-flag-img {
+    float: left;
+    margin-right: 20px;
+    width: 75px;
+    height: 100%;
+}
+
+.game-flag-description {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.flag-name {
+    color: #784ef9;
+}
+
+
+/*--------------------------*/
+/*     4. SUBMISSION FORM   */
+/*--------------------------*/
 
 .successmessage {
     color: green;
@@ -540,7 +609,10 @@ footer {
 }
 
 .form-check {
+    align-items: center;
+    display: flex;
     padding-left: 0;
+    padding-bottom: 10px;
 }
 
 .control-label {
@@ -564,14 +636,14 @@ footer {
     }
 }
 
+.wide-input-box {
+    width: 100%;
+}
+
 .wide-input-box >
 input,
 select,
 textarea {
-    width: 100%;
-}
-
-.wide-input-box {
     width: 100%;
 }
 
@@ -587,7 +659,7 @@ textarea {
     width: 35px;
 }
 
-/* submission checkboxes */
+/* a. Submission Checkboxes */
 
 .submission-checkbox {
     display: none;
@@ -599,7 +671,8 @@ textarea {
         height: 50px;
         width: 50px;
         display: inline-block;
-        padding: 0 0 0 0;
+        padding: 0;
+        margin-right: 7px;
     }
 
     .submission-checkbox:checked + label {
@@ -648,4 +721,32 @@ textarea {
 
 #submission-checkbox-10 + label {
     background-image: url('/Images/1-1_F2P.svg');
+}
+
+
+/*--------------------------*/
+/*      5. FOOTER           */
+/*--------------------------*/
+
+footer {
+    margin-top: 50px;
+    text-align: center;
+}
+
+    footer > p {
+        padding: 20px;
+    }
+
+.login-partial {
+    padding: 20px 0 30px 0;
+}
+
+.login-hello {
+    color: #9d9d9d;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.logout-button {
+    position: relative;
 }

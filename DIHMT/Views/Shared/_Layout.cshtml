@@ -11,7 +11,7 @@
 
 <body>
 
-    <nav class="nav navbar navbar-expand-md d-flex fixed-top">
+    <nav class="nav navbar navbar-expand-md d-flex fixed-top nav-border">
         <div class="container">
 
             <a class="navbar-brand align-self-center" href="@Url.Action("Index", "Home")">
@@ -24,17 +24,23 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbar1">
 
-                <ul class="navbar-nav col-lg-6">
+                <ul class="navbar-nav col-lg-6" id="navbarNavDropdown">
                     <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a>@Html.ActionLink("About", "About", "Home", null, new { @class = "dropdown-item" })</a>
+                            <a>@Html.ActionLink("FAQ", "FAQ", "Home", null, new { @class = "dropdown-item" })</a>
+                            <a>@Html.ActionLink("Submission Guide", "SubmissionGuide", "Home", null, new { @class = "dropdown-item" })</a>
+                            <a>@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "dropdown-item" })</a>
+                        </div>
+                    </li>
                     <li class="nav-item">@Html.ActionLink("Donate", "Donate", "Home", null, new { @class = "nav-link" })</li>
                 </ul>
 
                 <form class="d-none d-lg-inline-flex form-horizontal" action="@Url.Action("Search", "Search")">
                     <input class="form-control" type="text" name="q" placeholder="Search All Games">
                     <button class="btn btn-primary"><img class="search-icon" src="~/Images/SearchWhite-01.svg" /></button>
-                    <!-- creates 2 lines when hitting lg or smaller: <button class="btn btn-outline-primary my-2 my-sm-0 navbar-expand-xl" type="submit">Search</button> -->
                 </form>
 
             </div>
@@ -43,13 +49,27 @@
     </nav>
 
     <div class="body-content">
-        @RenderBody()
-        <footer>
-            <hr />
-            <p>&copy; @DateTime.Now.Year - MICROTRANSACTION.ZONE</p>
-            <p>@Html.Partial("_LoginPartial")</p>
-        </footer>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-9">
+                    @Html.Partial("SearchbarXL", "Search")
+                    @RenderBody()
+                </div>
+
+                <div class="col-lg-3 d-none d-lg-block">
+                    @Html.Partial("Sidebar")
+                </div>
+
+            </div>
+        </div>
     </div>
+
+    <footer>
+        <hr />
+        <p>&copy; @DateTime.Now.Year - MICROTRANSACTION.ZONE</p>
+        @Html.Partial("_LoginPartial")
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

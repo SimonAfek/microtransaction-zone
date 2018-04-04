@@ -5,11 +5,11 @@
     {
         @Html.AntiForgeryToken()
 
-        <ul class="nav navbar-nav navbar-right">
-            <li style="display: block; padding: 10px 15px; color: #9d9d9d; position: relative; line-height: 20px;">
-                Hello @User.Identity.GetUserName()
+        <ul class="nav navbar-nav login-partial">
+            <li class="login-hello">
+                Hello, @User.Identity.GetUserName()!
             </li>
-            <li style="display: block; padding: 10px 15px; position: relative; line-height: 20px;"><input type="submit" value="Logout" /></li>
+            <li class="logout-button"><input class="btn btn-primary" type="submit" value="Logout" /></li>
         </ul>
     }
 }
