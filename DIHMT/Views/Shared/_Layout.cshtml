@@ -11,7 +11,7 @@
 
 <body>
 
-    <nav class="nav navbar navbar-expand-md d-flex fixed-top">
+    <nav class="nav navbar navbar-expand-md d-flex fixed-top nav-border">
         <div class="container">
 
             <a class="navbar-brand align-self-center" href="@Url.Action("Index", "Home")">
@@ -41,7 +41,6 @@
                 <form class="d-none d-lg-inline-flex form-horizontal" action="@Url.Action("Search", "Search")">
                     <input class="form-control" type="text" name="q" placeholder="Search All Games">
                     <button class="btn btn-primary"><img class="search-icon" src="~/Images/SearchWhite-01.svg" /></button>
-                    <!-- creates 2 lines when hitting lg or smaller: <button class="btn btn-outline-primary my-2 my-sm-0 navbar-expand-xl" type="submit">Search</button> -->
                 </form>
 
             </div>
@@ -54,7 +53,7 @@
         <footer>
             <hr />
             <p>&copy; @DateTime.Now.Year - MICROTRANSACTION.ZONE</p>
-            <p>@Html.Partial("_LoginPartial")</p>
+            @Html.Partial("_LoginPartial")
         </footer>
     </div>
 
