@@ -78,7 +78,9 @@
 
         <div class="form-group row no-gutters">
 
-            <div class="col-md-3">@Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label col-lg-2" })</div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label col-lg-2" })
+            </div>
 
             <div class="col-md-9 input-fields-wrap">
                 @if (Model.Links != null && Model.Links.Any())

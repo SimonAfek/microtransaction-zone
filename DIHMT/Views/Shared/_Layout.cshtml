@@ -29,10 +29,10 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="@Url.Action("About", "About")">About MTX.Zone</a>
-                            <a class="dropdown-item" href="@Url.Action("About", "About")">FAQ</a>
-                            <a class="dropdown-item" href="@Url.Action("About", "About")">Submission Guide</a>
-                            <a class="dropdown-item" href="@Url.Action("Contact", "Contact")">Contact</a>
+                            <a>@Html.ActionLink("About", "About", "Home", null, new { @class = "dropdown-item" })</a>
+                            <a>@Html.ActionLink("FAQ", "FAQ", "Home", null, new { @class = "dropdown-item" })</a>
+                            <a>@Html.ActionLink("Submission Guide", "SubmissionGuide", "Home", null, new { @class = "dropdown-item" })</a>
+                            <a>@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "dropdown-item" })</a>
                         </div>
                     </li>
                     <li class="nav-item">@Html.ActionLink("Donate", "Donate", "Home", null, new { @class = "nav-link" })</li>

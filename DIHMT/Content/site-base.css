@@ -588,7 +588,10 @@ footer {
 }
 
 .form-check {
+    align-items: center;
+    display: flex;
     padding-left: 0;
+    padding-bottom: 10px;
 }
 
 .control-label {
@@ -647,7 +650,8 @@ textarea {
         height: 50px;
         width: 50px;
         display: inline-block;
-        padding: 0 0 0 0;
+        padding: 0;
+        margin-right: 7px;
     }
 
     .submission-checkbox:checked + label {
