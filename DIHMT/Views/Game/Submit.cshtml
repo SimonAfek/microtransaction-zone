@@ -3,7 +3,10 @@
 @model RatingInputModel
 
 @using (Html.BeginForm("SubmitRating", "Game", FormMethod.Post, new { id = "submissionform" }))
+
 {
+    <p></p>
+
     var ratings = GameHelpers.GetRatings();
 
     @Html.AntiForgeryToken()

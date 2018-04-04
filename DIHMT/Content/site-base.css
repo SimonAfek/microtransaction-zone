@@ -53,8 +53,9 @@ body {
     }
 }
 
+/* this is for body text blocks */
 .basic {
-    padding: 0px 25px 0 25px;
+    padding: 0px 20px 0 20px;
 }
 
 @media (max-width:767px) {
@@ -88,12 +89,24 @@ h1 {
     text-transform: uppercase;
 }
 
+h2 {
+    color: #3f3882;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
 h3 {
     color: #3f3882;
     font-size: 1.5rem;
     font-weight: 700;
-    margin-top: 30px;
-    margin-bottom: 15px;
+}
+
+h4 {
+    color: #3f3882;
+    font-size: 1.25rem;
+    font-weight: 700;
 }
 
 a {
