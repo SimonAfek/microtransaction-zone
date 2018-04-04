@@ -45,6 +45,8 @@ body {
     margin: 40px 0 40px 0;
 }
 
+
+
 a {
     color: #9f8af9;
     transition: all 0.1s linear;
@@ -187,7 +189,12 @@ nav > div > a {
     }
 
 @media (max-width: 767px) {
+    #navbarNavDropdown {
+        margin-top: 10px;
+    }
+
     .nav-item {
+        margin-bottom: 5px;
         padding-left: 15px;
     }
 
@@ -201,10 +208,46 @@ nav > div > a {
     width: 20px;
 }
 
+.dropdown.nav-item:hover {
+    background-color: #1c1c1c;
+}
+
+.dropdown-menu {
+    background-color: #3f3882;
+    border-radius: 0px;
+    transform: translateX(-5%);
+}
+
+.dropdown-item {
+    color: #ccc;
+    font-size: .9rem;
+    font-weight: 700;
+    padding-left: 15px;
+    padding-right: 20px;
+}
+
+.dropdown-item:hover {
+    background-color: #3f3882;
+    color: white;
+}
+
+@media (max-width: 991px) {
+    .dropdown-menu {
+        transform: translateX(0%);
+    }
+    .dropdown-item {
+        padding-left: 20px;
+        padding-right: auto;
+    }
+    .dropdown-item:hover {
+        background-color: none;
+        color: white;
+    }
+}
+
 
 
 /*      SIDEBAR      */
-
 .sidebar {
     background-color: #1a1a1a;
     color: white;
@@ -275,10 +318,15 @@ div > form.searchbar-xl > input.form-control {
         color: #9f8af9;
     }
 
-div > form.searchbar-xl > button {
+form.searchbar-xl > button {
     margin: 10px auto 10px auto;
 }
 
+@media (max-width: 991px) {
+    form.searchbar-xl > button {
+        margin: 10px auto auto auto;
+    }
+}
 
 
 /*      GAME LIST       */

@@ -24,10 +24,17 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbar1">
 
-                <ul class="navbar-nav col-lg-6">
+                <ul class="navbar-nav col-lg-6" id="navbarNavDropdown">
                     <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="@Url.Action("About", "About")">About MTX.Zone</a>
+                            <a class="dropdown-item" href="@Url.Action("About", "About")">FAQ</a>
+                            <a class="dropdown-item" href="@Url.Action("About", "About")">Submission Guide</a>
+                            <a class="dropdown-item" href="@Url.Action("Contact", "Contact")">Contact</a>
+                        </div>
+                    </li>
                     <li class="nav-item">@Html.ActionLink("Donate", "Donate", "Home", null, new { @class = "nav-link" })</li>
                 </ul>
 
