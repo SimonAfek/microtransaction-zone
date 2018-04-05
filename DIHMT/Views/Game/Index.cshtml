@@ -66,8 +66,6 @@
     {
         if (Model.Ratings != null && Model.Ratings.Any())
         {
-            //<h3>Quick Info</h3>
-
             foreach (var v in Model.Ratings)
             {
                 <img class="game-flag-img" src="@v.ImageUrl" />
@@ -122,6 +120,5 @@
 </div>
 
 <div class="basic">
-    <h3>Submit/Edit Rating</h3>
     @Html.Partial("Submit", Model.RatingModel)
 </div>

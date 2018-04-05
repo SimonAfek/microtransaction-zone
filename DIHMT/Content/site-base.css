@@ -28,6 +28,7 @@
             b. Game Index Flags
         4. SUBMISSION FORM
             a. Submission Checkboxes
+            b. Modal
         5. FOOTER
 */
 
@@ -620,6 +621,7 @@ form.searchbar-xl > button {
     font-weight: 700;
     min-width: 200px;
     padding-left: 0;
+    padding-right: 5px;
     padding-top: 7px;
 }
 
@@ -721,6 +723,21 @@ textarea {
 
 #submission-checkbox-10 + label {
     background-image: url('/Images/1-1_F2P.svg');
+}
+
+
+/* b. Modal */
+
+.modal-lg {
+    width: 900px;
+}
+
+.modal-header {
+    padding: 16px 25px 16px 25px;
+}
+
+.modal-body {
+    padding: 25px;
 }
 
 

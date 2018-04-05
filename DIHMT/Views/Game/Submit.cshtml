@@ -2,11 +2,13 @@
 @using DIHMT.Static
 @model RatingInputModel
 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submission-modal">
+    Submit/Edit Rating
+</button>
+
 @using (Html.BeginForm("SubmitRating", "Game", FormMethod.Post, new { id = "submissionform" }))
 
 {
-    <p></p>
-
     var ratings = GameHelpers.GetRatings();
 
     @Html.AntiForgeryToken()
@@ -14,114 +16,127 @@
     <div class="successmessage"></div>
     <div class="failuremessage"></div>
 
-    <div>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+    <div class="modal fade" id="submission-modal" tabindex="-1" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
 
-        <!-- FLAGS -->
-
-        <div class="form-group row no-gutters">
-
-            <div class="col-md-3">@Html.LabelFor(model => model.Flags, htmlAttributes: new { @class = "control-label-flags" })</div>
-
-            <div class="col-md-9">
-                <div class="form-check">
-                    <input type="checkbox" name="Flags" value="@((int)EnumTag.Spotless)" checked="@Model.IsSpotless" id="@($"submission-checkbox-{(int)EnumTag.Spotless}")" class="spotless-checkbox submission-checkbox" />
-                    <label for="@($"submission-checkbox-{(int)EnumTag.Spotless}")"></label>
-                    <label>&ensp;Spotless</label>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle">Submit/Edit Rating</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
 
-                @foreach (var v in ratings.Where(x => Model.MonetizationFlags.Contains(x.Id)))
-                {
-                    <div class="form-check">    
-                        <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="monetization-input submission-checkbox" disabled="@Model.IsSpotless" />
-                        <label for="@($"submission-checkbox-{v.Id}")"></label>
-                        <label>&ensp;@v.Name</label>
-                    </div>
-                }
+                <div class="modal-body">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
 
-                @foreach (var v in ratings.Where(x => !Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
-                {
-                    <div class="form-check">
-                        <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="submission-checkbox" />
-                        <label for="@($"submission-checkbox-{v.Id}")"></label>
-                        <label>&ensp;@v.Name</label>
-                    </div>
-                }
-            </div>
-        </div>
+                    <!-- FLAGS -->
+                    <div class="form-group row no-gutters">
 
-        <!-- BASICALLY... -->
+                        <div class="col-md-3">@Html.LabelFor(model => model.Flags, htmlAttributes: new { @class = "control-label-flags" })</div>
 
-        <div class="form-group row no-gutters">
-
-            <div class="col-md-3">@Html.LabelFor(model => model.Basically, htmlAttributes: new { @class = "control-label col-lg-2" })</div>
-
-            <div class="col-md-9 wide-input-box">
-                <input type="text" name="Basically" value="@Model.Basically" class="form-control wide-input" maxlength="280" />
-            </div>
-
-        </div>
-
-        <!-- DETAILED INFO -->
-
-        <div class="form-group row no-gutters">
-
-            <div class="col-md-3">@Html.LabelFor(model => model.RatingExplanation, htmlAttributes: new { @class = "control-label col-lg-2" })</div>
-
-            <div class="col-md-9 wide-input-box">
-                <textarea name="RatingExplanation" class="form-control wide-input" rows="10" cols="100" maxlength="4000">@Model.RatingExplanation</textarea>
-                @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
-            </div>
-
-        </div>
-
-
-        <!-- LINKS -->
-
-        <div class="form-group row no-gutters">
-
-            <div class="col-md-3">
-                @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label col-lg-2" })
-            </div>
-
-            <div class="col-md-9 input-fields-wrap">
-                @if (Model.Links != null && Model.Links.Any())
-                {
-                    for (var i = 0; i < Model.Links.Count; i++)
-                    {
-                        if (i == 0)
-                        {
-                            <div class="wide-input-box d-inline-flex form-horizontal links-margin">
-                                <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" value="@Model.Links[i]" />&emsp;<button href="#" class="add-field-element btn btn-primary">+</button>
+                        <div class="col-md-9">
+                            <div class="form-check">
+                                <input type="checkbox" name="Flags" value="@((int)EnumTag.Spotless)" checked="@Model.IsSpotless" id="@($"submission-checkbox-{(int)EnumTag.Spotless}")" class="spotless-checkbox submission-checkbox" />
+                                <label for="@($"submission-checkbox-{(int)EnumTag.Spotless}")"></label>
+                                <label>&ensp;Spotless</label>
                             </div>
-                        }
-                        else
-                        {
-                            <div class="wide-input-box d-inline-flex form-horizontal links-margin">
-                                <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" value="@Model.Links[i]" />&emsp;<button href="#" class="remove_field btn btn-primary">-</button>
-                            </div>
-                        }
-                    }
-                }
-                else
-                {
-                    <div class="wide-input-box d-inline-flex form-horizontal links-margin">
-                        <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" />&emsp;<button href="#" class="add-field-element btn btn-primary">+</button>
+
+                            @foreach (var v in ratings.Where(x => Model.MonetizationFlags.Contains(x.Id)))
+                            {
+                                <div class="form-check">
+                                    <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="monetization-input submission-checkbox" disabled="@Model.IsSpotless" />
+                                    <label for="@($"submission-checkbox-{v.Id}")"></label>
+                                    <label>&ensp;@v.Name</label>
+                                </div>
+                            }
+
+                            @foreach (var v in ratings.Where(x => !Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
+                            {
+                                <div class="form-check">
+                                    <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="submission-checkbox" />
+                                    <label for="@($"submission-checkbox-{v.Id}")"></label>
+                                    <label>&ensp;@v.Name</label>
+                                </div>
+                            }
+                        </div>
                     </div>
-                }
+
+                    <!-- BASICALLY... -->
+                    <div class="form-group row no-gutters">
+
+                        <div class="col-lg-3">@Html.LabelFor(model => model.Basically, htmlAttributes: new { @class = "control-label" })</div>
+
+                        <div class="col-lg-9 wide-input-box">
+                            <input type="text" name="Basically" value="@Model.Basically" class="form-control wide-input" maxlength="280" />
+                        </div>
+
+                    </div>
+
+                    <!-- DETAILED INFO -->
+                    <div class="form-group row no-gutters">
+
+                        <div class="col-lg-3">@Html.LabelFor(model => model.RatingExplanation, htmlAttributes: new { @class = "control-label" })</div>
+
+                        <div class="col-lg-9 wide-input-box">
+                            <textarea name="RatingExplanation" class="form-control wide-input" rows="10" cols="100" maxlength="4000">@Model.RatingExplanation</textarea>
+                            @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+
+                    <!-- LINKS -->
+                    <div class="form-group row no-gutters">
+
+                        <div class="col-lg-3">
+                            @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label" })
+                        </div>
+
+                        <div class="col-lg-9 input-fields-wrap">
+                            @if (Model.Links != null && Model.Links.Any())
+                            {
+                                for (var i = 0; i < Model.Links.Count; i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        <div class="wide-input-box d-inline-flex form-horizontal links-margin">
+                                            <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" value="@Model.Links[i]" />&emsp;<button href="#" class="add-field-element btn btn-primary">+</button>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="wide-input-box d-inline-flex form-horizontal links-margin">
+                                            <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" value="@Model.Links[i]" />&emsp;<button href="#" class="remove_field btn btn-primary">-</button>
+                                        </div>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <div class="wide-input-box d-inline-flex form-horizontal links-margin">
+                                    <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" />&emsp;<button href="#" class="add-field-element btn btn-primary">+</button>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+
+                    <div class="successmessage"></div>
+                    <div class="failuremessage"></div>
+                </div>
+
+                 <!-- FOOTER -->
+                <div class="modal-footer">
+                    <div class="form-group row">
+                        <div class="col-sm-offset-1 col-sm-2">
+                            <input type="submit" value="Save" id="submissionbutton" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            
             </div>
-
         </div>
-        
-        <div class="successmessage"></div>
-        <div class="failuremessage"></div>
-
-        <div class="form-group row">
-            <div class="col-sm-offset-1 col-sm-2">
-                <input type="submit" value="Save" id="submissionbutton" class="btn btn-primary" />
-            </div>
-        </div>
-
     </div>
 }

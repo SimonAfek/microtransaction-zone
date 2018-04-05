@@ -12,7 +12,7 @@ namespace DIHMT.Models
         public bool IsSpotless => Flags.Contains((int)EnumTag.Spotless);
         [Required]
         public int Id { get; set; }
-        [DisplayName("Basically, this game...")]
+        [DisplayName("Basically, this game")]
         public string Basically { get; set; }
         [DisplayName("Detailed Info")]
         public string RatingExplanation { get; set; }
