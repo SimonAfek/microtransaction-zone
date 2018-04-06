@@ -131,11 +131,7 @@ a {
     }
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column */
-.dl-horizontal dt {
-    white-space: normal;
-}
+
 
 /* b. Buttons */
 
@@ -521,6 +517,10 @@ form.searchbar-xl > button {
     font-weight: 700;
 }
 
+.external-links {
+    word-wrap: break-word;
+}
+
 /* a. Large Image */
 
 .game-large {
@@ -675,6 +675,7 @@ textarea {
         display: inline-block;
         padding: 0;
         margin-right: 7px;
+        background-repeat: no-repeat;
     }
 
     .submission-checkbox:checked + label {
@@ -729,8 +730,9 @@ textarea {
 /* b. Modal */
 
 .modal-lg {
-    width: 900px;
+    
 }
+
 
 .modal-header {
     padding: 16px 25px 16px 25px;
