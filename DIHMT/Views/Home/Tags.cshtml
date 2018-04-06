@@ -5,9 +5,26 @@
 <div class="basic">
 
     <h1>About Our Tags</h1>
-    <div class="extra-space"></div>
+
+    <p><i>Wondering about the icons under the games on our site? Here, we give an overview of all the tags you might find. Select a tag below to jump to its entry.</i></p>
+
+    <div class="flag-tablecontents d-block">
+        <div class="flag-row flex-md-row justify-content-around">
+            <a href="#spotless"><img src="~/Images/1-1_Spotless.svg" class="flag-img" alt="Spotless jump" /></a>
+            <a href="#horsearmor"><img src="~/Images/1-1_Horse Armor.svg" class="flag-img" alt="Horse Armor jump" /></a>
+            <a href="#horsearmorbo"><img src="~/Images/1-1_HorseArmorBO.svg" class="flag-img" alt="Bulk Order Horse Armor jump" /></a>
+            <a href="#expansions"><img src="~/Images/1-1_Expansions.svg" class="flag-img" alt="Expansive Expansions jump" /></a>
+            <a href="#notgambling"><img src="~/Images/1-1_NotGambling.svg" class="flag-img" alt="It's Not Gambling, We Swear jump" /></a>
+            <a href="#moneyhole"><img src="~/Images/1-1_MoneyHole.svg" class="flag-img" alt="Infinite Money Hole jump" /></a>
+            <a href="#notjustcosmetic"><img src="~/Images/1-1_NotGambling.svg" class="flag-img" alt="It's Not Just Cosmetic jump" /></a>
+            <a href="#contract"><img src="~/Images/1-1_Contract.svg" class="flag-img" alt="But First, You'll Need a Contract jump" /></a>
+            <a href="#tableforone"><img src="~/Images/1-1_TableForOne.svg" class="flag-img" alt="Table For One jump" /></a>
+            <a href="#f2p"><img src="~/Images/1-1_F2P.svg" class="flag-img" alt="Free To Play jump" /></a>
+        </div>
+    </div>
 
     <!-- Spotless -->
+    <a class="anchor" name="spotless"></a>
     <img class="game-flag-img" src="~/Images/1-1_Spotless.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
@@ -31,6 +48,7 @@
     <hr class="divider-basic">
 
     <!-- Horse Armor -->
+    <a class="anchor" name="horsearmor"></a>
     <img class="game-flag-img" src="~/Images/1-1_Horse Armor.svg" />
 
     <div class="game-flag-box">
@@ -48,6 +66,7 @@
         <i><strong>Note:</strong> "Horse Armor" becomes "Bulk Order Horse Armor" around the point where qualifying DLC costs as much as, or more than, the game itself.</i>
     </p>
 
+    <a class="anchor" name="horsearmorbo"></a>
     <img class="game-flag-img" src="~/Images/1-1_HorseArmorBO.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
@@ -70,6 +89,7 @@
     <hr class="divider-basic">
 
     <!-- Expansions -->
+    <a class="anchor" name="expansions"></a>
     <img class="game-flag-img" src="~/Images/1-1_Expansions.svg" />
 
     <div class="game-flag-box">
@@ -99,6 +119,7 @@
     <hr class="divider-basic">
 
     <!-- Gambling -->
+    <a class="anchor" name="notgambling"></a>
     <img class="game-flag-img" src="~/Images/1-1_NotGambling.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
@@ -115,16 +136,15 @@
 
     <h5>Examples</h5>
     <ul>
-        <li><a href="@Url.Action("Index", "Game", new { id = 48190 })../Game?id=48190">Overwatch</a> provides loot boxes for leveling up, completing certain activities, or in bundles starting at $1.99 for 2.</li>
-        <li>
-            <a href="@Url.Action("Index", "Game", new { id = 54979 })">PlayerUnknown's Battlegrounds</a>, commonly known as PUBG, provides loot crates that can be opened for free, as well as "Desperado crates" that drop in-game or sell for money on the Steam Marketplace.
-            Desperado crates cost $2.50 each to open.
-        </li>
+        <li><a href="@Url.Action("Index", "Game", new { id = 48190 })">Overwatch</a> provides loot boxes for leveling up, completing certain activities, or in bundles starting at $1.99 for 2.</li>
+        <li><a href="@Url.Action("Index", "Game", new { id = 54979 })">PlayerUnknown's Battlegrounds</a>, commonly known as PUBG, provides loot crates that can be opened for free, as well as "Desperado crates" that drop in-game or sell for money on the Steam Marketplace.
+            Desperado crates cost $2.50 each to open.</li>
     </ul>
 
     <hr class="divider-basic">
 
     <!-- Money Hole -->
+    <a class="anchor" name="moneyhole"></a>
     <img class="game-flag-img" src="~/Images/1-1_MoneyHole.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
@@ -141,7 +161,7 @@
     <h5>Examples</h5>
     <ul>
         <li>
-            <a href="../Game?id=36113">Counter Strike: Global Offensive</a> has a market of weapon skins dropped from boxes, which are unlocked with keys. Skins, boxes, and keys can all be bought, traded, and sold with real money via the Steam Marketplace.
+            <a href="@Url.Action("Index", "Game", new { id = 36113 })">Counter Strike: Global Offensive</a> has a market of weapon skins dropped from boxes, which are unlocked with keys. Skins, boxes, and keys can all be bought, traded, and sold with real money via the Steam Marketplace.
             Players can receive, then sell duplicate items.
         </li>
     </ul>
@@ -149,6 +169,7 @@
     <hr class="divider-basic">
 
     <!-- Not Cosmetic -->
+    <a class="anchor" name="notjustcosmetic"></a>
     <img class="game-flag-img" src="~/Images/1-1_PayingForPower.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
@@ -170,6 +191,7 @@
     <hr class="divider-basic">
 
     <!-- Contract -->
+    <a class="anchor" name="contract"></a>
     <img class="game-flag-img" src="~/Images/1-1_Contract.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
@@ -186,13 +208,14 @@
 
     <h5>Examples</h5>
     <ul>
-        <li><a href="Game?id=19783">World of Warcraft</a> and <a href="Game?id=26847">Final Fantasy XIV: A Realm Reborn</a> both have mandatory subscription fees of $15 per month—or less, if purchasing multiple months of service at a time.</li>
-        <li><a href="../Game?id=38206">The Elder Scrolls Online</a> allows players to play for free once the base game is purchased, but also offers a freemium service named ESO Plus that adds bonuses such as DLC access and experience boosts.</li>
+        <li><a href="@Url.Action("Index", "Game", new { id = 19783 })">World of Warcraft</a> and <a href="Game?id=26847">Final Fantasy XIV: A Realm Reborn</a> both have mandatory subscription fees of $15 per month—or less, if purchasing multiple months of service at a time.</li>
+        <li><a href="@Url.Action("Index", "Game", new { id = 38206 })">The Elder Scrolls Online</a> allows players to play for free once the base game is purchased, but also offers a freemium service named ESO Plus that adds bonuses such as DLC access and experience boosts.</li>
     </ul>
 
     <hr class="divider-basic">
 
     <!-- Table -->
+    <a class="anchor" name="tableforone"></a>
     <img class="game-flag-img" src="~/Images/1-1_TableForOne.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
@@ -214,6 +237,7 @@
     <hr class="divider-basic">
 
     <!-- F2P -->
+    <a class="anchor" name="f2p"></a>
     <img class="game-flag-img" src="~/Images/1-1_F2P.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">

@@ -131,6 +131,11 @@ a {
         color: #bfb1fb;
     }
 
+    a.disabled {
+        color: #aaa;
+        pointer-events: none;
+    }
+
 .bold-grey {
     color: #aaa;
     font-weight: 700;
@@ -371,6 +376,34 @@ form.searchbar-xl > button {
         margin: 10px auto auto auto;
     }
 }
+
+
+
+/*--------------------------*/
+/*      ABOUT PAGES         */
+/*--------------------------*/
+
+.anchor {
+    display: block;
+    position: relative;
+    top: -75px;
+    visibility: hidden;
+}
+.flag-tablecontents {
+    border: 1px solid #ccc;
+    border-radius: .25rem;
+    margin-bottom: 2rem;
+    padding: 15px 25px 15px 25px;
+}
+
+    .flag-tablecontents > .flag-row > a > .flag-img {
+        opacity: .6;
+        transition: all 0.1s linear;
+    }
+
+    .flag-tablecontents > .flag-row > a > .flag-img:hover {
+        opacity: 1;
+    }
 
 
 
