@@ -9,16 +9,16 @@
     <p>
         If you want to submit an entry for a game, all you need to do is search for the game, scroll to the bottom, and select Submit/Edit Rating. When you send in a new or edited entry, it will be reviewed by site moderators before being accepted.
         Grammar and spelling may be edited. You do not need an account, and we do not collect any personal data.
-        To prevent abuse, we receive an encrypted version of your IP address, so we can suspend IP addresses without ever knowing information about the submitter. <a href="~/Views/Home/About.cshtml">Read more about our commitment to privacy.</a>
+        To prevent abuse, we temporarily store a cryptographically hashed version of your IP address - this allows us to suspend abusive users without ever needing to know who they are. <a href="@Url.Action("About")">Read more about our commitment to privacy.</a>
     </p>
 
     <br />
 
     <h2>Sections</h2>
 
-    <h4>Flags</h4>
+    <h4>Tags</h4>
     <p>
-        Select all flags that are relevant to the game, according to our Flag Guidelines.
+        Select all tags that are relevant to the game, according to our <a href="@Url.Action("Tags")">Tag Guidelines</a>.
     </p>
 
     <h4>Basically, this game…</h4>
@@ -29,24 +29,24 @@
     <h4>Detailed Info</h4>
     <p>
         This is where you'll describe the specifics of the game's microtransactions. The description should be informational, not opinionated, aiming for as much objectivity as possible.
-        There's no length requirement, so if your write-up is short but says what it needs, that's great. Some questions you might ask yourself when writing:
+        There's no length requirement, so if your write-up is short but says what it needs to, that's great. Some questions you might ask yourself when writing:
     </p>
     <ul>
-        <li><b>What is the most important/notable microtransaction?</b> For instance, a mandatory subscription fee is more important than cosmetic DLC.
-        <li><b>What are the microtransactions?</b> Describe the flags you picked. If it's cosmetic DLC, is it skins, vehicles, etc.?
+        <li><b>What is the most important/notable microtransaction?</b> For instance, a mandatory subscription fee is more important than cosmetic DLC.</li>
+        <li><b>What are the microtransactions?</b> Describe the flags you picked. If it's cosmetic DLC, is it skins, vehicles, etc.?</li>
         <li>
             <b>How do you pay for the microtransactions?</b>
             <ul>
-                <li>In game currency: If it takes a long time to unlock something this way, mention it.
+                <li>In game currency: If it takes a long time to unlock something this way, mention it.</li>
                 <li>
-                    Real money (or points bought with real money): If it's 1 item type, how much does it normally cost? If it's multiple, what's the price range? Right Right now, these prices should be in USD.
+                    Real money (or points bought with real money): If it's 1 item type, how much does it normally cost? If it's multiple, what's the price range? If possible, these prices should be listed in USD.
                     If you can't access U.S. prices, go ahead and leave out the numbers for another user to fill in.
                 </li>
             </ul>
         </li>
         <li>
             <b>For those games whose crimes are especially heinous:</b> If the game reaches prerelease Star Wars: Battlefront II badness, it can be tempting to tear it apart. Fortunately for us, you don't have to&mdash;
-            people will understand when they read it takes 40 hours to unlock a character you can buy right now for a few dollars. Let them speak for themselves.
+            people will understand when they read it takes 40 hours to unlock a character without dipping into microtransactions. Let their Sins speak for themselves.
         </li>
     </ul>
 
@@ -59,11 +59,11 @@
     <h4>Why was my entry rejected?</h4>
 
     <ul>
-        <li><b>Too subjective:</b> Descriptions should be as objective as possible. Read more under Detailed Info.
-        <li><b>Incorrect information:</b> The entry may have contained information we couldn't verify. If you feel this was done in error, feel free to attach sources in the Links section.
-        <li><b>Irrelevant information:</b> Try to avoid talking about things external to the game other than in quick references to clarify something.
-        <li><b>Illegible:</b> We couldn't understand some or all of the written sections.
-        <li><b>Abusive or discriminatory:</b> We will not approve entries that include language we deem inappropriate. Repeated entries like this from the same IP will lead to a ban.
+        <li><b>Too subjective:</b> Descriptions should be as objective as possible. Read more under Detailed Info.</li>
+        <li><b>Incorrect information:</b> The entry may have contained information we couldn't verify. If you feel this was done in error, feel free to attach sources in the Links section.</li>
+        <li><b>Irrelevant information:</b> Try to avoid talking about things external to the game other than in quick references to clarify something.</li>
+        <li><b>Illegible:</b> We couldn't understand some or all of the written sections.</li>
+        <li><b>Abusive or discriminatory:</b> We will not approve entries that include language we deem inappropriate. Repeated entries like this from the same IP will lead to a ban.</li>
         <li><b>Spam:</b> Entries containing advertisements or written to troll will eventually lead to a ban.</li>
     </ul>
 
