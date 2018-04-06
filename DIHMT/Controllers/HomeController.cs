@@ -36,5 +36,17 @@ namespace DIHMT.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult SubmissionGuide()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Tags ()
+        {
+            return View();
+        }
     }
 }
