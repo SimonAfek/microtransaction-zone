@@ -5,121 +5,98 @@
     ViewBag.Title = "Advanced Search";
 }
 
-<h2>Advanced Search</h2>
+<div class="basic">
+    <h2>Advanced Search</h2>
 
-@using (Html.BeginForm("Advanced", "Search", FormMethod.Get))
-{
-    <label class="col-md-2">
-        Search text
-    </label>
-    <div class="col-md-10">
-        @Html.TextBox("q", string.Empty, new { @class = "wide-input" })
-    </div>
+    @using (Html.BeginForm("Advanced", "Search", FormMethod.Get))
+    {
+        
+        <label><h4>Search Text</h4></label>
+        
+        @Html.TextBox("q", string.Empty, new { @class = "wide-input form-control" })
+        
+        
+        <hr class="divider-basic" />
 
-    <hr />
+        <label><h4>I'm looking for games in the following genres...</h4></label>
+        <p>@Html.ListBoxFor(x => x.Genres, new MultiSelectList(Model.Genres, nameof(DbGenre.Id), nameof(DbGenre.Name)), new { Name = "genres", Size = "10", @class = "form-control" })</p>
+        <i>Leave this blank and we'll show games regardless of genre</i>
 
-    <label class="col-md-2">
-        I'm looking for games in the following genres...
-    </label>
-    <div class="col-md-10">
-        @Html.ListBoxFor(x => x.Genres, new MultiSelectList(Model.Genres, nameof(DbGenre.Id), nameof(DbGenre.Name)), new { Name = "genres", Size = "10" })
-        <br />
-        (Leave this blank and we'll show games regardless of genre)
-    </div>
+        <hr class="divider-basic" />
 
-    <hr />
+        <label><h4>I'm looking for games on the following platforms...</h4></label>
+        <p>@Html.ListBoxFor(x => x.Platforms, new MultiSelectList(Model.Platforms, nameof(DbPlatform.Id), nameof(DbPlatform.Name)), new {Name = "platforms", Size = "10", @class = "form-control" })</p>
+        <i>Leave this blank and we'll show games regardless of platform</i>
 
-    <label class="col-md-2">
-        I'm looking for games on the following platforms...
-    </label>
-    <div class="col-md-10">
-        @Html.ListBoxFor(x => x.Platforms, new MultiSelectList(Model.Platforms, nameof(DbPlatform.Id), nameof(DbPlatform.Name)), new {Name = "platforms", Size = "10"})
-        <br />
-        (Leave this blank and we'll show games regardless of platform)
-    </div>
+        <hr class="divider-basic" />
 
-    <hr />
+        <h4>I'm only interested in games tagged "Spotless"</h4>
+        <label><input type="radio" name="requireFlags" value="@((int)EnumTag.Spotless)" />&nbsp;Yes&nbsp;&nbsp;</label>
+        <label><input type="radio" name="requireFlags" value="-1" checked />&nbsp;No</label>
 
-    <label class="col-md-2">
-        I'm only interested in games tagged "Spotless"
-    </label>
-    <div class="col-md-10">
-        <label>
-            <input type="radio" name="requireFlags" value="@((int)EnumTag.Spotless)" /> Yes&nbsp;&nbsp;
-        </label>
-        <label>
-            <input type="radio" name="requireFlags" value="-1" checked /> No
-        </label>
-    </div>
+        <hr class="divider-basic" />
 
-    <hr />
-
-    <label class="col-md-2">
-        I'm not interested in games with the following tags
-    </label>
-    <div class="col-md-10">
+        <h4>I'm not interested in games with the following tags</h4>
+        <p></p>
         <p>
             <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.HorseArmor)" /> Horse Armor
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.HorseArmor)" />&nbsp;Horse Armor
             </label>
         </p>
         <p>
             <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.BulkOrderHorseArmor)" /> Bulk Order Horse Armor
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.BulkOrderHorseArmor)" />&nbsp;Bulk Order Horse Armor
             </label>
         </p>
         <p>
             <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.ExpansiveExpansions)" /> Expansive Expansions
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.ExpansiveExpansions)" />&nbsp;Expansive Expansions
             </label>
         </p>
 
         <p>
             <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.Lootboxes)" /> It's Not Gambling, We Swear
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.Lootboxes)" />&nbsp;It's Not Gambling, We Swear
             </label>
         </p>
 
         <p>
             <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.MoneyHole)" /> Infinite Money Hole
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.MoneyHole)" />&nbsp;Infinite Money Hole
             </label>
         </p>
 
         <p>
             <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.NotJustCosmetic)" /> It's Not Just Cosmetic
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.NotJustCosmetic)" />&nbsp;It's Not Just Cosmetic
             </label>
         </p>
 
         <p>
             <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.Subscription)" /> But First, You'll Need A Contract
+                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.Subscription)" />&nbsp;But First, You'll Need A Contract
             </label>
         </p>
-    </div>
 
-    <hr />
+        <hr class="divider-basic" />
 
-    <label class="col-md-2">
-        I'm willing to make an exception for games with the following tags
-    </label>
-    <div class="col-md-10">
+        <label><h4>I'm willing to make an exception for games with the following tags</h4></label>
+        <p></p>
         <p>
             <label>
-                <input type="checkbox" name="allowFlags" value="@((int) EnumTag.SingleplayerUntouched)" /> Table For One
+                <input type="checkbox" name="allowFlags" value="@((int) EnumTag.SingleplayerUntouched)" />&nbsp;Table For One
             </label>
         </p>
         <p>
             <label>
-                <input type="checkbox" name="allowFlags" value="@((int) EnumTag.F2P)" /> Free To Play
+                <input type="checkbox" name="allowFlags" value="@((int) EnumTag.F2P)" />&nbsp;Free To Play
             </label>
         </p>
-    </div>
 
-    <hr />
+        <hr class="divider-basic" />
 
-    <div class="offset-md-2 col-md-10">
-        <input type="Submit" value="Let's take a look then" />
-    </div>
-}
+        <div>
+            <input class="btn btn-primary" type="Submit" value="Let's take a look, then..." />
+        </div>
+    }
+</div>

@@ -34,7 +34,7 @@ namespace DIHMT.Controllers
             }
 
             Response.StatusCode = 400; // Bad Request
-            return Json("Something went wrong with your submission - most likely, you have a malformed URL in the \"Links\" section. Please try again or contact one of the site administrators.");
+            return Json("Something went wrong with your submission - most likely, you have a malformed URL in the \"Links\"-section. Please try again or contact one of the site administrators.");
         }
     }
 }
