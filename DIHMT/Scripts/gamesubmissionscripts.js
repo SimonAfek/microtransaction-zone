@@ -16,8 +16,12 @@
                 $(".successmessage").text(data);
             },
             error: function (data) {
-                $(".failuremessage").text(data.responseText.replace(/^"(.*)"$/, "$1"));
-                $(".submissionbutton").prop({ disabled: false });
+                if (data.status === 400) {
+                    $(".failuremessage").text(data.responseText.replace(/^"(.*)"$/, "$1").replace(/\\/g, ""));
+                } else {
+                    $(".failuremessage").text("The server experienced an error while trying to process your submission. Sorry about that - please try again.");
+                }
+                $("#submissionbutton").prop({ disabled: false });
             }
         });
     });
