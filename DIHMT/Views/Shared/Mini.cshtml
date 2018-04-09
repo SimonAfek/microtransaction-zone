@@ -15,25 +15,34 @@
             {
                 var write = i == Model.Platforms.Count - 1 ? Model.Platforms[i].Abbreviation : $"{Model.Platforms[i].Abbreviation} | ";
 
-                @: <span class="list-platform">@write</span>
+                <span class="list-platform">@write</span>
             }
         </p>
 
-        @if (!string.IsNullOrEmpty(Model.Basically))
+        @if (Model.IsRated)
         {
-            <p>
-                <b>Basically, @Model.Name...</b> @Model.Basically&nbsp;-
-                <a href="@Url.Action("Index", "Game", new { id = Model.Id })">Details</a>
-            </p>
-        }
+            if (!string.IsNullOrEmpty(Model.Basically))
+            {
+                <p>
+                    <b>Basically, @Model.Name...</b> @Model.Basically&nbsp;-
+                    <a href="@Url.Action("Index", "Game", new { id = Model.Id })">Details</a>
+                </p>
+            }
 
+            else
+            {
+                <p>
+                    <i>No summary description available</i>&nbsp;-<a href="@Url.Action("Index", "Game", new { id = Model.Id })">Details</a>
+                </p>
+            }
+
+        }
         else
         {
             <p>
-                <i>No summary description available.</i>
+                <i>We don't yet have a rating for this game - <a href="@Url.Action("Index", "Game", new { id = Model.Id })">click through</a> and hit the "Submit/Edit Rating"-button if you know what's up</i>
             </p>
         }
-
     </div>
 </div>
 
