@@ -338,6 +338,7 @@
     <Content Include="Images\1-1_PayingForPower.svg" />
     <Content Include="Images\1-1_Spotless.svg" />
     <Content Include="Images\1-1_TableForOne.svg" />
+    <Content Include="Images\become_a_patron_button.png" />
     <Content Include="Images\MZLogo.svg" />
     <Content Include="Images\SearchWhite-01.svg" />
     <Content Include="Models\EfModel.edmx.diagram">
