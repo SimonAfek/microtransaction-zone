@@ -9,8 +9,7 @@ namespace DIHMT
         {
             filters.Add(new HandleErrorAttribute());
 
-            GlobalFilters.Filters.Add(new CspAttribute());
-
+            filters.Add(new CspAttribute());
             filters.Add(new CspDefaultSrcAttribute { None = true });
             filters.Add(new CspScriptSrcAttribute { Self = true, CustomSources = "platform.twitter.com cdn.syndication.twitter.com cdn.syndication.twimg.com" });
             filters.Add(new CspStyleSrcAttribute { Self = true, UnsafeInline = true, CustomSources = "fonts.googleapis.com platform.twitter.com ton.twimg.com" });
