@@ -19,6 +19,7 @@ namespace DIHMT
             filters.Add(new CspFrameSrcAttribute { Self = true, CustomSources = "platform.twitter.com syndication.twitter.com" });
             filters.Add(new CspChildSrcAttribute { Self = true, CustomSources = "platform.twitter.com syndication.twitter.com" });
             filters.Add(new CspConnectSrcAttribute { Self = true });
+            filters.Add(new CspReportUriAttribute { ReportUris = "https://mtxz.report-uri.com/r/d/csp/enforce" });
         }
     }
 }
