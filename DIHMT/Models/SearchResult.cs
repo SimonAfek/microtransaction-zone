@@ -8,7 +8,7 @@ namespace DIHMT.Models
         public int Page { get; set; }
         public List<DisplayGame> Results { get; set; }
         public string Query { get; set; }
-        public bool IsAdvanced { get; set; }
+        public SearchType Type { get; set; }
         public List<int> RequireFlags { get; set; }
         public List<int> BlockFlags { get; set; }
         public List<int> AllowFlags { get; set; }
@@ -19,7 +19,7 @@ namespace DIHMT.Models
         {
             get
             {
-                if (!IsAdvanced)
+                if (Type != SearchType.Advanced)
                 {
                     return string.Empty;
                 }
@@ -48,5 +48,12 @@ namespace DIHMT.Models
             Genres = new List<int>();
             Platforms = new List<int>();
         }
+    }
+
+    public enum SearchType
+    {
+        Standard,
+        Advanced,
+        Recent
     }
 }

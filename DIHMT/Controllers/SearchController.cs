@@ -59,7 +59,7 @@ namespace DIHMT.Controllers
                 Page = page,
                 Results = games,
                 Query = q,
-                IsAdvanced = false
+                Type = SearchType.Standard
             };
 
             return View(retval);
@@ -109,7 +109,21 @@ namespace DIHMT.Controllers
                 RequireFlags = requireFlags,
                 Genres = genres,
                 Platforms = platforms,
-                IsAdvanced = true
+                Type = SearchType.Advanced
+            };
+
+            return View("Search", retval);
+        }
+
+        public ActionResult Recent(int page = 1)
+        {
+            var games = GameHelpers.GetRecentlyRatedGames(PageLimit, page).ToList();
+
+            var retval = new SearchResult
+            {
+                Page = page,
+                Results = games,
+                Type = SearchType.Recent
             };
 
             return View("Search", retval);

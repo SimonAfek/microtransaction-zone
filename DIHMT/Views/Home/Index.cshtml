@@ -4,7 +4,7 @@
     ViewBag.Title = "MICROTRANSACTION.ZONE";
 }
 
-<div class="page-title" id="page-title">Recently Rated Games</div>
+<div class="page-title" id="page-title"><a href="@Url.Action("Recent", "Search")">Recently Rated Games</a></div>
 <div class="column no-gutters">
     @foreach (var v in GameHelpers.GetRecentlyRatedGames(3))
     {

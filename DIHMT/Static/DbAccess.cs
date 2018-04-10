@@ -237,7 +237,7 @@ namespace DIHMT.Static
             }
         }
 
-        public static List<DbGame> GetRecentlyRatedGames(int numOfGames)
+        public static List<DbGame> GetRecentlyRatedGames(int numOfGames, int page, int pageLimit)
         {
             using (var ctx = new DIHMTEntities())
             {
@@ -247,6 +247,7 @@ namespace DIHMT.Static
                     .Include(x => x.DbGameRatings.Select(y => y.DbRating))
                     .Include(x => x.DbGameLinks)
                     .OrderByDescending(x => x.RatingLastUpdated)
+                    .Skip((page - 1) * pageLimit)
                     .Take(numOfGames)
                     .ToList();
             }

@@ -308,9 +308,9 @@ namespace DIHMT.Static
             return sorted;
         }
 
-        public static List<DisplayGame> GetRecentlyRatedGames(int numOfGames)
+        public static List<DisplayGame> GetRecentlyRatedGames(int numOfGames, int page = 1, int pageLimit = 10)
         {
-            var dbGames = DbAccess.GetRecentlyRatedGames(numOfGames);
+            var dbGames = DbAccess.GetRecentlyRatedGames(numOfGames, page, pageLimit);
 
             return dbGames.Select(x => new DisplayGame(x)).ToList();
         }
