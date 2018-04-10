@@ -71,3 +71,7 @@ $(function () {
         }
     });
 });
+
+function captchaComplete() {
+    $("#submissionbutton").prop({ disabled: false });
+}

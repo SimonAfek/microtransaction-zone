@@ -1,4 +1,5 @@
-﻿@using DIHMT.Models
+﻿@using System.Web.Configuration
+@using DIHMT.Models
 @using DIHMT.Static
 @model RatingInputModel
 
@@ -127,16 +128,21 @@
                     <div class="successmessage"></div>
                     <div class="failuremessage"></div>
                 </div>
+                
+                <!-- RECAPTCHA -->
+                
+                <div class="form-group row">
+                    <div class="g-recaptcha" data-sitekey="@WebConfigurationManager.AppSettings["ReCaptchaPublicKey"]" data-callback="captchaComplete"></div>
+                </div>
 
                 <!-- FOOTER -->
                 <div class="modal-footer">
                     <div class="form-group row">
                         <div class="col-sm-offset-1 col-sm-2">
-                            <input type="submit" value="Save" id="submissionbutton" class="btn btn-primary" />
+                            <input type="submit" value="Save" id="submissionbutton" class="btn btn-primary" disabled />
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

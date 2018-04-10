@@ -16,9 +16,16 @@ namespace DIHMT.Controllers
         }
 
         [HttpPost]
+        [ReCaptcha]
         [ValidateAntiForgeryToken]
         public ActionResult SubmitRating(RatingInputModel input)
         {
+            if (!ModelState.IsValid)
+            {
+                Response.StatusCode = 400;
+                return Json("Captcha error - please complete the captcha and try again.");
+            }
+
             if (input.Valid && Request.UserHostAddress != null)
             {
                 input.SubmitterIp = Request.IsAuthenticated ? string.Empty : CryptHelper.Hash(Request.UserHostAddress);
