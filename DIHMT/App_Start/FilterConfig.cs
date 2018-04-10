@@ -17,7 +17,8 @@ namespace DIHMT
             filters.Add(new CspFontSrcAttribute { CustomSources = "fonts.gstatic.com" });
             filters.Add(new CspFrameSrcAttribute { Self = true, CustomSources = "platform.twitter.com syndication.twitter.com" });
             filters.Add(new CspChildSrcAttribute { Self = true, CustomSources = "platform.twitter.com syndication.twitter.com" });
-            filters.Add(new CspConnectSrcAttribute { Self = true, CustomSources = "www.paypal.com"});
+            filters.Add(new CspConnectSrcAttribute { Self = true, CustomSources = "www.paypal.com" });
+            filters.Add(new CspFrameAncestorsAttribute { None = true });
             filters.Add(new CspReportUriAttribute { ReportUris = "https://mtxz.report-uri.com/r/d/csp/enforce" });
         }
     }
