@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using DIHMT.Models;
 using DIHMT.Static;
 
@@ -20,7 +21,7 @@ namespace DIHMT.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitRating(RatingInputModel input)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.Keys.Contains("ReCaptcha") && ModelState["ReCaptcha"].Errors.Any())
             {
                 Response.StatusCode = 400;
                 return Json("Captcha error - please complete the captcha and try again.");
