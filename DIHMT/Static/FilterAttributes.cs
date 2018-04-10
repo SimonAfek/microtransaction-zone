@@ -12,6 +12,12 @@ namespace DIHMT.Static
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            if (filterContext.RequestContext.HttpContext.Request.IsAuthenticated)
+            {
+                // Bypass captcha for logged-in users
+                return;
+            }
+
             var privateKey = WebConfigurationManager.AppSettings["ReCaptchaPrivateKey"];
 
             if (string.IsNullOrEmpty(privateKey))
@@ -52,7 +58,7 @@ namespace DIHMT.Static
                     {
                         var responseFromServer = JsonConvert.DeserializeObject<ReCaptchaResponse>(reader.ReadToEnd());
 
-                        if (!responseFromServer.success)
+                        if (!responseFromServer.Success)
                         {
                             ((Controller)filterContext.Controller).ModelState.AddModelError("ReCaptcha", "Captcha error");
                         }
@@ -67,7 +73,8 @@ namespace DIHMT.Static
 
         private class ReCaptchaResponse
         {
-            public bool success { get; set; }
+            [JsonProperty("success")]
+            public bool Success { get; set; }
         }
     }
 }

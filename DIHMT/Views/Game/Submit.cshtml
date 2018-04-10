@@ -126,14 +126,17 @@
                     </div>
                     
                     <!-- RECAPTCHA -->
-
-                    <div class="form-group row no-gutters">
-                        <div class="col-lg-3"></div>
-                        <div class="col-lg-9">
-                            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-                            <div class="g-recaptcha" data-sitekey="@WebConfigurationManager.AppSettings["ReCaptchaPublicKey"]" data-callback="captchaComplete"></div>
+                    
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <div class="form-group row no-gutters">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-9">
+                                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                                <div class="g-recaptcha" data-sitekey="@WebConfigurationManager.AppSettings["ReCaptchaPublicKey"]" data-callback="captchaComplete"></div>
+                            </div>
                         </div>
-                    </div>
+                    } @*Should only be shown to non-logged in users*@
 
                     <div class="successmessage"></div>
                     <div class="failuremessage"></div>
@@ -144,7 +147,8 @@
                 <div class="modal-footer">
                     <div class="form-group row">
                         <div class="col-sm-offset-1 col-sm-2">
-                            <input type="submit" value="Save" id="submissionbutton" class="btn btn-primary" disabled />
+                            @*If user is not logged in, button will be disabled until reCAPTCHA is completed*@
+                            <input type="submit" value="Save" id="submissionbutton" class="btn btn-primary" disabled="@(!Request.IsAuthenticated)"/>
                         </div>
                     </div>
                 </div>
