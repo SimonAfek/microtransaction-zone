@@ -28,7 +28,7 @@ namespace DIHMT.Static
                 return;
             }
 
-            var postData = $"secret={privateKey}&response={filterContext.RequestContext.HttpContext.Request.Form["g-recaptcha-response"]}";
+            var postData = $"secret={privateKey}&response={gCaptchaResponse}";
 
             var postDataAsBytes = Encoding.UTF8.GetBytes(postData);
 
