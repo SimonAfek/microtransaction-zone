@@ -119,6 +119,16 @@
             @Html.EditorFor(model => model.SubmitterIp, new { htmlAttributes = new { @class = "form-control", disabled = "true" } })
             @Html.ValidationMessageFor(model => model.SubmitterIp, "", new { @class = "text-danger" })
         </p>
+        
+        <p>
+            @Html.LabelFor(model => model.QuietUpdate, htmlAttributes: new { @class = "control-label" })
+        </p>
+        <p>
+            <div class="form-check">
+                <input type="checkbox" name="QuietUpdate" value="true" />
+                <label>&ensp;Yes</label>
+            </div>
+        </p>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

@@ -138,6 +138,24 @@
                         </div>
                     } @*Should only be shown to non-logged in users*@
 
+                    @*Quiet update*@
+
+                    else
+                    {
+                        <div class="form-group row no-gutters">
+                            <div class="col-lg-3">
+                                @Html.LabelFor(model => model.QuietUpdate, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            
+                            <div class="col-lg-9">
+                                <div class="form-check">
+                                    <input type="checkbox" name="QuietUpdate" value="true" />
+                                    <label>&ensp;Yes</label>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
                     <div class="successmessage"></div>
                     <div class="failuremessage"></div>
                 </div>

@@ -23,6 +23,9 @@ namespace DIHMT.Models
         [DisplayName("Submission timestamp")]
         public DateTime TimeOfSubmission { get; set; }
 
+        [DisplayName("Quiet update")]
+        public bool QuietUpdate { get; set; }
+
         public string SubmitterIp { get; set; }
 
         [DisplayName("Hash of submitter's IP")]

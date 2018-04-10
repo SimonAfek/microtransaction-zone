@@ -207,7 +207,7 @@ namespace DIHMT.Static
                     {
                         // Set IsRated + RatingLastUpdated & update explanation
                         game.IsRated = true;
-                        game.RatingLastUpdated = DateTime.UtcNow;
+                        game.RatingLastUpdated = input.QuietUpdate ? game.RatingLastUpdated : DateTime.UtcNow;
                         game.Basically = input.Basically;
                         game.RatingExplanation = input.RatingExplanation;
 
@@ -313,7 +313,7 @@ namespace DIHMT.Static
                     {
                         // Set IsRated + RatingLastUpdated & update explanation
                         game.IsRated = true;
-                        game.RatingLastUpdated = DateTime.UtcNow;
+                        game.RatingLastUpdated = input.QuietUpdate ? game.RatingLastUpdated : DateTime.UtcNow;
                         game.Basically = input.Basically;
                         game.RatingExplanation = input.RatingExplanation;
 
