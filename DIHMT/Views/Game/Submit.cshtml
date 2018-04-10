@@ -124,15 +124,18 @@
                         </div>
 
                     </div>
+                    
+                    <!-- RECAPTCHA -->
+
+                    <div class="form-group row no-gutters">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-9">
+                            <div class="g-recaptcha" data-sitekey="@WebConfigurationManager.AppSettings["ReCaptchaPublicKey"]" data-callback="captchaComplete"></div>
+                        </div>
+                    </div>
 
                     <div class="successmessage"></div>
                     <div class="failuremessage"></div>
-                </div>
-                
-                <!-- RECAPTCHA -->
-                
-                <div class="form-group row">
-                    <div class="g-recaptcha" data-sitekey="@WebConfigurationManager.AppSettings["ReCaptchaPublicKey"]" data-callback="captchaComplete"></div>
                 </div>
 
                 <!-- FOOTER -->
