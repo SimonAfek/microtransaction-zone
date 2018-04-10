@@ -176,6 +176,27 @@ a {
         background-color: #aaa;
     }
 
+.btn-fake {
+    background-color: #999;
+    border-radius: .25rem;
+    color: white;
+    margin-top: 10 px;
+    padding: 7px 0 7px 0;
+    text-align: center;
+}
+
+    .btn-fake:hover {
+        color: white;
+        text-decoration: none;
+    }
+
+@media (max-width: 991px) {
+    .btn-fake {
+        margin-top: 10px;
+    }
+}
+
+
 /* Popovers */
 
 .popover-header {

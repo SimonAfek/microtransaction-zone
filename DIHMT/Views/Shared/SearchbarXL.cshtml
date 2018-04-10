@@ -3,10 +3,9 @@
     <form class="searchbar-xl" action="@Url.Action("Search", "Search" )">
 
         <input class="form-control form-control-lg col-sm-12" type="text" name="q" placeholder="Search All Games">
-        <button class="btn btn-primary col-12 col-md-2" type="submit"><strong>Search</strong></button>
-        <a class="btn btn-secondary col-md-3 d-none d-md-inline" href="@Url.Action("Advanced", "Search")"><strong>Advanced Search</strong></a>
-        <a class="btn btn-secondary col-12 d-inline d-md-none" href="@Url.Action("Advanced", "Search")"><strong>Advanced</strong></a>
-
+        <button class="btn btn-primary col-12" type="submit"><strong>Search</strong></button>
     </form>
+
+    <a class="btn-fake col-12 d-block" href="@Url.Action("Advanced", "Search")"><strong>Advanced Search</strong></a>
 
 </div>
