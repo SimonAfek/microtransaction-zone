@@ -180,7 +180,6 @@ a {
     background-color: #999;
     border-radius: .25rem;
     color: white;
-    margin-top: 10 px;
     padding: 7px 0 7px 0;
     text-align: center;
 }
@@ -552,7 +551,8 @@ form.searchbar-xl > button {
 }
 
 .inactive-flag-img {
-    opacity: 0.3;
+    opacity: 0.4;
+    filter: grayscale(75%)
 }
 
 
@@ -659,6 +659,10 @@ form.searchbar-xl > button {
 }
 
 .flag-name {
+    color: #784ef9;
+}
+
+.flag-name-spotless {
     color: #784ef9;
 }
 
@@ -798,11 +802,6 @@ textarea {
 
 
 /* b. Modal */
-
-.modal-lg {
-    
-}
-
 
 .modal-header {
     padding: 16px 25px 16px 25px;
