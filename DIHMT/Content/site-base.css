@@ -198,11 +198,9 @@ a {
 
 /* Popovers */
 
-.popover-header {
-    background-color: #784ef9;
-    color: white;
+/*.popover-header {
     margin-top: unset;
-}
+}*/
 
 .popover-body {
     margin-bottom: 5px;
@@ -551,8 +549,8 @@ form.searchbar-xl > button {
 }
 
 .inactive-flag-img {
-    opacity: 0.4;
-    filter: grayscale(75%)
+    opacity: 0.5;
+    filter: grayscale(100%)
 }
 
 
@@ -663,7 +661,11 @@ form.searchbar-xl > button {
 }
 
 .flag-name-spotless {
-    color: #784ef9;
+    color: #D3B42F;
+}
+
+.flag-name-tfof2p {
+    color: #2ABCB8;
 }
 
 

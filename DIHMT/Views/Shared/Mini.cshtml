@@ -57,14 +57,14 @@
                 // If this one is active, display the icon
                 if (Model.Ratings.Any(x => x.Id == k.Id))
                 {
-                    <img src="@k.ImageUrl" class="flag-img" data-toggle="popover" data-placement="right" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
+                    <img src="@k.ImageUrl" class="flag-img" data-toggle="popover" data-placement="bottom" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
                 }
 
                 // If this is the iteration for normal horse armor
                 // and neither one is active, display the inactive icon
                 if (k.Id == (int)EnumTag.HorseArmor && !Model.Ratings.Any(x => x.Id == (int)EnumTag.HorseArmor || x.Id == (int)EnumTag.BulkOrderHorseArmor))
                 {
-                    <img src="@k.ImageUrl" class="flag-img inactive-flag-img" data-toggle="popover" data-placement="right" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
+                    <img src="@k.ImageUrl" class="flag-img inactive-flag-img" data-toggle="popover" data-placement="bottom" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
                 }
             }
 
@@ -72,12 +72,12 @@
             {
                 if (Model.Ratings.Any(x => x.Id == k.Id))
                 {
-                    <img src="@k.ImageUrl" class="flag-img" data-toggle="popover" data-placement="right" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
+                    <img src="@k.ImageUrl" class="flag-img" data-toggle="popover" data-placement="bottom" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
                 }
 
                 else
                 {
-                    <img src="@k.ImageUrl" class="flag-img inactive-flag-img" data-toggle="popover" data-placement="right" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
+                    <img src="@k.ImageUrl" class="flag-img inactive-flag-img" data-toggle="popover" data-placement="bottom" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
                 }
             }
         }
