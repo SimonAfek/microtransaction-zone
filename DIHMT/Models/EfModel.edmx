@@ -105,6 +105,7 @@
           <Property Name="TimeOfSubmission" Type="datetime" Nullable="false" />
           <Property Name="SubmitterIp" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Basically" Type="nvarchar" MaxLength="280" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <Association Name="FK__DbGamePla__GameI__31EC6D26">
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="1" />
@@ -540,6 +541,7 @@
           <Property Name="SubmitterIp" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Basically" Type="String" MaxLength="280" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PendingGameLinks" Relationship="Entities.FK_PendingGameLink_PendingSubmission_Id" FromRole="PendingSubmission" ToRole="PendingGameLink" />
+          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           </EntityType>
         <Association Name="FK_GameId_Game_Id">
           <End Type="Entities.DbGame" Role="DbGame" Multiplicity="1">
@@ -718,6 +720,7 @@
           <EntitySetMapping Name="PendingSubmissions">
             <EntityTypeMapping TypeName="Entities.PendingSubmission">
               <MappingFragment StoreEntitySet="PendingSubmission">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Basically" ColumnName="Basically" />
                 <ScalarProperty Name="SubmitterIp" ColumnName="SubmitterIp" />
                 <ScalarProperty Name="TimeOfSubmission" ColumnName="TimeOfSubmission" />
