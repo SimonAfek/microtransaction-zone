@@ -3,7 +3,6 @@
         indigo           #784ef9
         indigo-light     #9f8af9
         indigo-hover     #bfb1fb
-        indigo-header    #5c43be
         indigo-dark      #3f3882
 
         gray-dark        #1a1a1a 
@@ -27,6 +26,7 @@
         c. Popovers
         d. Navigation
         e. Sidebar
+        f. Search XL
     2. GAME LIST
         a. Small Image
         b. Game List Flags
@@ -96,7 +96,7 @@ body {
 }
 
 h1 {
-    color: #9f8af9;
+    color: #784ef9;
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 1px;
@@ -104,27 +104,26 @@ h1 {
 }
 
 h2 {
-    color: #9f8af9;
-    font-size: 1.75rem;
+    color: #3f3882;
+    font-size: 1.5rem;
     font-weight: 700;
-    letter-spacing: 1px;
     margin-bottom: 20px;
     text-transform: uppercase;
 }
 
+    h2.softh2 {
+        margin-bottom: 10px;
+        text-transform: none;
+    }
+
 h3 {
-    color: #3f3882;
-    font-size: 1.5rem;
+    color: #784ef9;
+    font-size: 1.25rem;
     font-weight: 700;
 }
 
 h4 {
     color: #3f3882;
-    font-size: 1.25rem;
-    font-weight: 700;
-}
-
-h5 {
     font-size: 1rem;
     font-weight: 700;
 }
@@ -157,13 +156,13 @@ a {
 }
 
 /* in which VS tells me this valid pseudo-element isn't valid*/
-::placeholder {
+.searchbar::placeholder {
     font-weight: 700;
     text-transform: uppercase;
 }
 
 @media (max-width: 767px) {
-    ::placeholder {
+    .searchbar::placeholder {
         font-size: 1.15rem;
     }
 }
@@ -213,7 +212,7 @@ a {
 }
 
 
-/* Popovers */
+/* c. Popovers */
 
 /*.popover-header {
     margin-top: unset;
@@ -223,7 +222,7 @@ a {
     margin-bottom: 5px;
 }
 
-/* c. Navigation */
+/* d. Navigation */
 
 .nav {
     background-color: #1a1a1a;
@@ -262,11 +261,11 @@ nav > div > div > ul > li > a {
     }
 
 nav > div > a {
-    color: white;
+    color: #9f8af9;
 }
 
     nav > div > a:hover {
-        color: #9f8af9;
+        color: white;
     }
 
     nav > div > a > img {
@@ -337,7 +336,7 @@ nav > div > a {
     }
 }
 
-/* d. Sidebar */
+/* e. Sidebar */
 
 .sidebar {
     background-color: #1a1a1a;
@@ -384,7 +383,7 @@ nav > div > a {
     border: .5px solid white;
 }
 
-/* e. XL Search */
+/* f. XL Search */
 
 .search-xl {
     margin: 20px 0 40px 0;
@@ -597,10 +596,17 @@ form.searchbar-xl > button {
 }
 
 .game-name {
-    line-height: 1;
+    color: #9f8af9;
+}
+
+@media (max-width: 575px) {
+    .game-name {
+        font-size: 7vw;
+    }
 }
 
 .game-platform {
+    overflow: hidden;
     line-height: 1.25;
     margin: 0 0 10px 0;
 }
