@@ -9,7 +9,7 @@
 
     <div class="list-item-text">
         <p class="list-game-platform">
-            <strong><a href="@Url.Action("Index", "Game", new { id = Model.Id })" class="list-game-name">@Model.Name</a></strong>
+            <strong><a href="@Url.Action("Index", "Game", new { id = Model.Id })" class="list-game-name indigo">@Model.Name</a></strong>
             <br />
             @for (var i = 0; i < Model.Platforms.Count; i++)
             {

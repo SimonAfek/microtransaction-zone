@@ -1,9 +1,16 @@
 ﻿/*  HEX COLORS
-        MZ-indigo           #784ef9
-        MZ-indigo-light     #9f8af9
-        MZ-indigo-hover     #bfb1fb
-        MZ-indigo-dark      #3f3882
-        MZ-gray-dark        #1a1a1a 
+
+        indigo           #784ef9
+        indigo-light     #9f8af9
+        indigo-hover     #bfb1fb
+        indigo-header    #5c43be
+        indigo-dark      #3f3882
+
+        gray-dark        #1a1a1a 
+
+        teal             #2ABCB8
+        teal-light       #5AE5DE
+        
 */
 
 /*  BOOTSTRAP BREAKPOINTS
@@ -14,22 +21,22 @@
 */
 
 /*  CSS INDEX 
-        1. ALL PAGES  
-            a. Typography
-            b. Buttons
-            c. Popovers
-            d. Navigation
-            e. Sidebar
-        2. GAME LIST
-            a. Small Image
-            b. Game List Flags
-        3. GAME INDEX
-            a. Large Image
-            b. Game Index Flags
-        4. SUBMISSION FORM
-            a. Submission Checkboxes
-            b. Modal
-        5. FOOTER
+    1. ALL PAGES  
+        a. Typography
+        b. Buttons
+        c. Popovers
+        d. Navigation
+        e. Sidebar
+    2. GAME LIST
+        a. Small Image
+        b. Game List Flags
+    3. GAME INDEX
+        a. Large Image
+        b. Game Index Flags
+    4. SUBMISSION FORM
+        a. Submission Checkboxes
+        b. Modal
+    5. FOOTER
 */
 
 
@@ -41,7 +48,7 @@
 body {
     color: #1a1a1a;
     font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .body-content {
@@ -123,17 +130,25 @@ h5 {
 }
 
 a {
-    color: #9f8af9;
+    color: #2ABCB8;
     transition: all 0.1s linear;
 }
 
     a:hover {
-        color: #bfb1fb;
+        color: #5AE5DE;
     }
 
     a.disabled {
         color: #aaa;
         pointer-events: none;
+    }
+
+    a.indigo {
+        color: #9f8af9;
+    }
+
+    a.indigo:hover {
+        color: #bfb1fb;
     }
 
 .bold-grey {
@@ -168,6 +183,7 @@ a {
     }
 
 .btn-secondary {
+    background-color: #666;
     font-weight: 700;
     border: 0;
 }
@@ -177,7 +193,7 @@ a {
     }
 
 .btn-fake {
-    background-color: #999;
+    background-color: #555;
     border-radius: .25rem;
     color: white;
     padding: 7px 0 7px 0;
@@ -185,6 +201,7 @@ a {
 }
 
     .btn-fake:hover {
+        background-color: #888;
         color: white;
         text-decoration: none;
     }
@@ -245,7 +262,7 @@ nav > div > div > ul > li > a {
     }
 
 nav > div > a {
-    color: #9f8af9;
+    color: white;
 }
 
     nav > div > a:hover {
@@ -282,9 +299,15 @@ nav > div > a {
 }
 
 .dropdown-menu {
-    background-color: #3f3882;
+    background-color: #1a1a1a;
     border-radius: 0px;
     transform: translateX(-5%);
+}
+
+@media (max-width: 767px) {
+    .dropdown-menu {
+        border-left: 1px solid white;
+    }
 }
 
 .dropdown-item {
