@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Web.Mvc.Html;
 
 namespace DIHMT.Models
 {
@@ -26,6 +25,7 @@ namespace DIHMT.Models
         [DisplayName("Quiet update")]
         public bool QuietUpdate { get; set; }
 
+        public string Comment { get; set; }
         public string SubmitterIp { get; set; }
 
         [DisplayName("Hash of submitter's IP")]
@@ -58,6 +58,7 @@ namespace DIHMT.Models
             RatingExplanation = input.RatingExplanation;
             SubmitterIp = input.SubmitterIp;
             TimeOfSubmission = input.TimeOfSubmission;
+            Comment = input.Comment;
 
             try
             {

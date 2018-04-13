@@ -23,6 +23,7 @@ namespace DIHMT.Models
         [DisplayName("Quiet update")]
         public bool QuietUpdate { get; set; }
 
+        public string Comment { get; set; }
         public string SubmitterIp { get; set; }
 
         private List<int> _flags;

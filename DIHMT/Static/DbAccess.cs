@@ -263,7 +263,8 @@ namespace DIHMT.Static
                     RatingExplanation = input.RatingExplanation,
                     Basically = input.Basically,
                     TimeOfSubmission = DateTime.UtcNow,
-                    SubmitterIp = input.SubmitterIp
+                    SubmitterIp = input.SubmitterIp,
+                    Comment = input.Comment
                 };
 
                 ctx.PendingSubmissions.Add(pendingRatingObject);

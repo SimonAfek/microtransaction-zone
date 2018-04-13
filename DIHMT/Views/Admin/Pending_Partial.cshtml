@@ -71,6 +71,18 @@
                 @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
             </div>
         </p>
+        
+        <!-- COMMENT -->
+        
+        <p>
+            @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-lg-2" })
+        </p>
+        <p>
+            <div class="col-md-9 wide-input-box">
+                <textarea name="RatingExplanation" class="form-control wide-input" rows="10" cols="100" maxlength="1000">@Model.Comment</textarea>
+                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+            </div>
+        </p>
 
         <p>
             @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label col-lg-2" })
