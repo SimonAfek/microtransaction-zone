@@ -11,7 +11,7 @@ namespace DIHMT
 
             filters.Add(new CspAttribute());
             filters.Add(new CspDefaultSrcAttribute { None = true });
-            filters.Add(new CspScriptSrcAttribute { Self = true, CustomSources = "www.google.com www.gstatic.com platform.twitter.com cdn.syndication.twitter.com cdn.syndication.twimg.com" });
+            filters.Add(new CspScriptSrcAttribute { Self = true, CustomSources = "www.google.com www.gstatic.com cdnjs.cloudflare.com platform.twitter.com cdn.syndication.twitter.com cdn.syndication.twimg.com" });
             filters.Add(new CspStyleSrcAttribute { Self = true, UnsafeInline = true, CustomSources = "fonts.googleapis.com platform.twitter.com ton.twimg.com" });
             filters.Add(new CspImgSrcAttribute { Self = true, CustomSources = "www.giantbomb.com www.paypalobjects.com syndication.twitter.com pbs.twimg.com platform.twitter.com ton.twimg.com data:" });
             filters.Add(new CspFontSrcAttribute { CustomSources = "fonts.gstatic.com" });

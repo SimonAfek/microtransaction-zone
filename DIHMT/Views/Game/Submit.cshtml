@@ -8,7 +8,6 @@
 </button>
 
 @using (Html.BeginForm("SubmitRating", "Game", FormMethod.Post, new { id = "submissionform" }))
-
 {
     var ratings = GameHelpers.GetRatings();
     var spotlessRating = ratings.First(x => x.Id == (int)EnumTag.Spotless);
@@ -133,7 +132,7 @@
                             <div class="col-lg-3">@Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label" })</div>
                             <div class="col-lg-9 wide-input-box">
                                 <textarea name="Comment" class="form-control wide-input" rows="10" cols="100" maxlength="1000" placeholder="Enter a comment for the mods. This will not be part of the published rating."></textarea>
-                                @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -183,3 +182,5 @@
         </div>
     </div>
 }
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.AreYouSure/1.9.0/jquery.are-you-sure.min.js" integrity="sha256-5VKy5bw46U62DHG7pAhtXgsgmSjMSLjP5s4oQHW1LEI=" crossorigin="anonymous"></script>

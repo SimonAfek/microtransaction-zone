@@ -7,6 +7,10 @@
     <title>@ViewBag.Title - MICROTRANSACTION.ZONE</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/gamesubmissionscripts")
+    @RenderSection("scripts", required: false)
 </head>
 
 <body>
@@ -75,12 +79,6 @@
         <p>&copy; @DateTime.Now.Year - MICROTRANSACTION.ZONE</p>
         @Html.Partial("_LoginPartial")
     </footer>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/gamesubmissionscripts")
-    @RenderSection("scripts", required: false)
-
 </body>
 
 </html>

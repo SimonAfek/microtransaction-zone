@@ -1,6 +1,12 @@
 ﻿$(function () {
     var submissionform = $("#submissionform");
 
+    if (typeof (submissionform.areYouSure) === "function") {
+        submissionform.areYouSure({
+            message: "Are you sure you want to leave this page? The changes you've made to this game's rating will be discarded."
+        });
+    }
+
     submissionform.submit(function (e) {
         e.preventDefault();
 
