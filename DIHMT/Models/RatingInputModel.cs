@@ -78,6 +78,11 @@ namespace DIHMT.Models
                     return false;
                 }
 
+                if (Comment != null && Comment.Length > 1000)
+                {
+                    return false;
+                }
+
                 if (Links.Any(x => !Uri.IsWellFormedUriString(x, UriKind.Absolute)))
                 {
                     return false;
