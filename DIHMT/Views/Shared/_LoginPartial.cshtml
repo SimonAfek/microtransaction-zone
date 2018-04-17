@@ -9,6 +9,8 @@
             <li class="login-hello">
                 Hello, @User.Identity.GetUserName()!
             </li>
+            <li class="logout-button"><a class="btn btn-primary" href="@Url.Action("Pending", "Admin")">Pending submissions</a></li>
+            <li>&nbsp;</li>
             <li class="logout-button"><input class="btn btn-primary" type="submit" value="Logout" /></li>
         </ul>
     }
