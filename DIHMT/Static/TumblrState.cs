@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Xml;
 using DIHMT.Models;
+using HtmlAgilityPack;
 
 namespace DIHMT.Static
 {
@@ -52,12 +53,27 @@ namespace DIHMT.Static
                 for (var i = 0; i < postsToLoad; i++)
                 {
                     var curItem = itemsList[i];
-                    var descriptionIsHtml = curItem.Summary.Text.StartsWith("<");
+
+                    var htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(curItem.Summary.Text);
+                    var strippedHtmlDescription = htmlDoc.DocumentNode.InnerText;
+
+                    if (strippedHtmlDescription.Length > 100)
+                    {
+                        strippedHtmlDescription = $"{strippedHtmlDescription.Substring(0, 100)}...";
+                    }
+
+                    // This bit just removes the body text if it's near-identical to the headline. You can comment it out if you want.
+                    if (strippedHtmlDescription.StartsWith(curItem.Title.Text)
+                    || curItem.Title.Text.EndsWith("...") && strippedHtmlDescription.StartsWith(curItem.Title.Text.Substring(0, curItem.Title.Text.Length - 3)))
+                    {
+                        strippedHtmlDescription = string.Empty;
+                    }
 
                     newPosts.Add(new TumblrPost
                     {
                         Title = curItem.Title.Text,
-                        Description = descriptionIsHtml ? string.Empty : curItem.Summary.Text,
+                        Description = strippedHtmlDescription,
                         Link = curItem.Links.FirstOrDefault()?.Uri.ToString() ?? "/",
                         PubDate = curItem.PublishDate.DateTime
                     });
