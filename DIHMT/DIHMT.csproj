@@ -287,6 +287,7 @@
     </Compile>
     <Compile Include="Models\RatingInputModel.cs" />
     <Compile Include="Models\SearchResult.cs" />
+    <Compile Include="Models\TumblrResponseModel.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Static\CryptHelper.cs" />
     <Compile Include="Static\DbAccess.cs" />
@@ -314,6 +315,7 @@
     <Compile Include="Static\GameHelpers.cs" />
     <Compile Include="Static\GbGateway.cs" />
     <Compile Include="Static\SearchHelpers.cs" />
+    <Compile Include="Static\TumblrState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -458,6 +460,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\SubmissionGuide.cshtml" />
     <Content Include="Views\Home\Tags.cshtml" />
+    <Content Include="Views\Shared\Tumblr.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
