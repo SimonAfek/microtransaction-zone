@@ -59,13 +59,11 @@ namespace DIHMT.Static
                 }
 
                 CurrentPosts = newPosts;
+                _timeOfLastRequest = DateTime.Now;
             }
             catch
             {
                 CurrentPosts = ErrorModel;
-            }
-            finally
-            {
                 _timeOfLastRequest = DateTime.Now;
             }
         }
