@@ -13,7 +13,7 @@ namespace DIHMT.Static
         {
             var keyBytes = Encoding.UTF8.GetBytes(secret);
             var saltBytes = Encoding.UTF8.GetBytes(IpSalt);
-            const int cost = 262144;
+            const int cost = 65536;
             const int blockSize = 8;
             const int parallel = 1;
             const int derivedKeyLength = 128;
