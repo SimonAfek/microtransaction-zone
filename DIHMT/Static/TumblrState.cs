@@ -12,7 +12,7 @@ namespace DIHMT.Static
         private static int NumOfPosts => 5;
         private static DateTime _timeOfLastRequest = DateTime.MinValue;
         private static int MillisecondsBetweenRequests => 30000; // 30 seconds should be alright
-        private static object Lock = new object();
+        private static readonly object Lock = new object();
         private static List<TumblrPost> CurrentPosts { get; set; }
 
         private static List<TumblrPost> ErrorModel => new List<TumblrPost>
