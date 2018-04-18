@@ -15,6 +15,16 @@ namespace DIHMT.Static
         private static int MillisecondsBetweenRequests => 30000; // 30 seconds should be alright
         private static List<TumblrResponseModelResponsePost> CurrentPosts { get; set; }
 
+        private static List<TumblrResponseModelResponsePost> ErrorModel => new List<TumblrResponseModelResponsePost>
+        {
+            new TumblrResponseModelResponsePost
+            {
+                Title = "Can't load tumblr posts; try again later.",
+                PostUrl = "/",
+                Date = DateTime.Now
+            }
+        };
+
         public static List<TumblrResponseModelResponsePost> GetPosts()
         {
             if (_timeOfLastRequest.AddMilliseconds(MillisecondsBetweenRequests) < DateTime.Now)
@@ -33,22 +43,23 @@ namespace DIHMT.Static
                 {
                     var rawData = wc.DownloadString($"https://api.tumblr.com/v2/blog/mtxzone.tumblr.com/posts?api_key={ApiKey}&limit=5");
 
-                    CurrentPosts = JsonConvert.DeserializeObject<TumblrResponseModel>(rawData).Response.Posts.ToList();
+                    var deserializedData = JsonConvert.DeserializeObject<TumblrResponseModel>(rawData);
+
+                    if (deserializedData?.Meta?.Status == 200)
+                    {
+                        CurrentPosts = deserializedData.Response?.Posts?.ToList() ?? ErrorModel;
+                    }
+                    else
+                    {
+                        CurrentPosts = ErrorModel;
+                    }
                 }
 
                 _timeOfLastRequest = DateTime.Now;
             }
             catch
             {
-                CurrentPosts = new List<TumblrResponseModelResponsePost>
-                {
-                    new TumblrResponseModelResponsePost
-                    {
-                        Title = "Can't load tumblr posts; try again later.",
-                        PostUrl = "/",
-                        Date = DateTime.Now
-                    }
-                };
+                CurrentPosts = ErrorModel;
             }
         }
     }
