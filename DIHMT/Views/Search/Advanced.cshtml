@@ -10,12 +10,12 @@
 
     @using (Html.BeginForm("Advanced", "Search", FormMethod.Get))
     {
-        
+
         <label><h4>Search Text</h4></label>
-        
+
         @Html.TextBox("q", string.Empty, new { @class = "wide-input form-control" })
-        
-        
+
+
         <hr class="divider-basic" />
 
         <label><h4>I'm looking for games in the following genres...</h4></label>
@@ -25,58 +25,60 @@
         <hr class="divider-basic" />
 
         <label><h4>I'm looking for games on the following platforms...</h4></label>
-        <p>@Html.ListBoxFor(x => x.Platforms, new MultiSelectList(Model.Platforms, nameof(DbPlatform.Id), nameof(DbPlatform.Name)), new {Name = "platforms", Size = "10", @class = "form-control" })</p>
+        <p>@Html.ListBoxFor(x => x.Platforms, new MultiSelectList(Model.Platforms, nameof(DbPlatform.Id), nameof(DbPlatform.Name)), new { Name = "platforms", Size = "10", @class = "form-control" })</p>
         <i>Leave this blank and we'll show games regardless of platform</i>
 
         <hr class="divider-basic" />
 
         <h4>I'm only interested in games tagged "Spotless"</h4>
-        <label><input type="radio" name="requireFlags" value="@((int)EnumTag.Spotless)" />&nbsp;Yes&nbsp;&nbsp;</label>
-        <label><input type="radio" name="requireFlags" value="-1" checked />&nbsp;No</label>
+        <label><input type="radio" name="requireFlags" value="@((int)EnumTag.Spotless)" class="advanced-search-spotless-radio" />&nbsp;Yes&nbsp;&nbsp;</label>
+        <label><input type="radio" name="requireFlags" value="-1" class="advanced-search-spotless-radio" checked />&nbsp;No</label>
 
-        <hr class="divider-basic" />
+        <div id="blockflagsdiv">
+            <hr class="divider-basic" />
 
-        <h4>I'm not interested in games with the following tags</h4>
-        <p></p>
-        <p>
-            <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.HorseArmor)" />&nbsp;Horse Armor
-            </label>
-        </p>
-        <p>
-            <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.BulkOrderHorseArmor)" />&nbsp;Bulk Order Horse Armor
-            </label>
-        </p>
-        <p>
-            <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.ExpansiveExpansions)" />&nbsp;Expansive Expansions
-            </label>
-        </p>
+            <h4>I'm not interested in games with the following tags</h4>
+            <p></p>
+            <p>
+                <label>
+                    <input type="checkbox" name="blockFlags" value="@((int)EnumTag.HorseArmor)" />&nbsp;Horse Armor
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input type="checkbox" name="blockFlags" value="@((int)EnumTag.BulkOrderHorseArmor)" />&nbsp;Bulk Order Horse Armor
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input type="checkbox" name="blockFlags" value="@((int)EnumTag.ExpansiveExpansions)" />&nbsp;Expansive Expansions
+                </label>
+            </p>
 
-        <p>
-            <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.Lootboxes)" />&nbsp;It's Not Gambling, We Swear
-            </label>
-        </p>
+            <p>
+                <label>
+                    <input type="checkbox" name="blockFlags" value="@((int)EnumTag.Lootboxes)" />&nbsp;It's Not Gambling, We Swear
+                </label>
+            </p>
 
-        <p>
-            <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.MoneyHole)" />&nbsp;Infinite Money Hole
-            </label>
-        </p>
+            <p>
+                <label>
+                    <input type="checkbox" name="blockFlags" value="@((int)EnumTag.MoneyHole)" />&nbsp;Infinite Money Hole
+                </label>
+            </p>
 
-        <p>
-            <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.NotJustCosmetic)" />&nbsp;It's Not Just Cosmetic
-            </label>
-        </p>
+            <p>
+                <label>
+                    <input type="checkbox" name="blockFlags" value="@((int)EnumTag.NotJustCosmetic)" />&nbsp;It's Not Just Cosmetic
+                </label>
+            </p>
 
-        <p>
-            <label>
-                <input type="checkbox" name="blockFlags" value="@((int)EnumTag.Subscription)" />&nbsp;But First, You'll Need A Contract
-            </label>
-        </p>
+            <p>
+                <label>
+                    <input type="checkbox" name="blockFlags" value="@((int)EnumTag.Subscription)" />&nbsp;But First, You'll Need A Contract
+                </label>
+            </p>
+        </div>
 
         <hr class="divider-basic" />
 

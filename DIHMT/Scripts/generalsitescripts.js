@@ -78,6 +78,16 @@ $(function () {
     });
 });
 
+$(function() {
+    $(".advanced-search-spotless-radio").click(function() {
+        if ($(this).val() === "3") { // "Spotless"
+            $("#blockflagsdiv").hide();
+        } else {
+            $("#blockflagsdiv").show();
+        }
+    });
+});
+
 function captchaComplete() {
     $("#submissionbutton").prop({ disabled: false });
 }

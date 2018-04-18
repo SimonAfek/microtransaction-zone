@@ -21,8 +21,8 @@ namespace DIHMT
             bundles.Add(new ScriptBundle("~/bundles/pendingpartial").Include(
                         "~/Scripts/pendingpartial.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/gamesubmissionscripts").Include(
-                        "~/Scripts/gamesubmissionscripts.js"));
+            bundles.Add(new ScriptBundle("~/bundles/generalsitescripts").Include(
+                        "~/Scripts/generalsitescripts.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                         "~/Scripts/umd/popper.js",
