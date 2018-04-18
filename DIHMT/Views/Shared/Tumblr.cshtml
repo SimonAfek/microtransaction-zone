@@ -4,8 +4,11 @@
 
 @foreach (var v in Model)
 {
-    <p><a href="@v.Link"><strong>@v.Title</strong></a></p>
-    <p>@v.Description</p>
-    <sub><a href="@v.Link">@v.PubDate.ToString("yyyy MMMM dd", new CultureInfo("en-US"))</a></sub>
+    <p><a href="@v.Link" target="_blank"><strong>@v.Title</strong></a></p>
+    if (!string.IsNullOrEmpty(v.Description))
+    {
+        <p>@v.Description</p>
+    }
+    <sub><a href="@v.Link" target="_blank">@v.PubDate.ToString("dd MMMM yyyy", new CultureInfo("en-US"))</a></sub>
     <hr />
 }

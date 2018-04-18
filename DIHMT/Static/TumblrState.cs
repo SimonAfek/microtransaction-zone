@@ -52,11 +52,12 @@ namespace DIHMT.Static
                 for (var i = 0; i < postsToLoad; i++)
                 {
                     var curItem = itemsList[i];
+                    var descriptionIsHtml = curItem.Summary.Text.StartsWith("<");
 
                     newPosts.Add(new TumblrPost
                     {
                         Title = curItem.Title.Text,
-                        Description = curItem.Summary.Text,
+                        Description = descriptionIsHtml ? string.Empty : curItem.Summary.Text,
                         Link = curItem.Links.FirstOrDefault()?.Uri.ToString() ?? "/",
                         PubDate = curItem.PublishDate.DateTime
                     });
