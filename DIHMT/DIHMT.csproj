@@ -188,6 +188,7 @@
     <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -287,7 +288,7 @@
     </Compile>
     <Compile Include="Models\RatingInputModel.cs" />
     <Compile Include="Models\SearchResult.cs" />
-    <Compile Include="Models\TumblrResponseModel.cs" />
+    <Compile Include="Models\TumblrPost.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Static\CryptHelper.cs" />
     <Compile Include="Static\DbAccess.cs" />

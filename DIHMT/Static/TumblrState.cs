@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Web.Configuration;
+using System.ServiceModel.Syndication;
+using System.Xml;
 using DIHMT.Models;
-using Newtonsoft.Json;
 
 namespace DIHMT.Static
 {
     public static class TumblrState
     {
-        private static string ApiKey => WebConfigurationManager.AppSettings["TumblrApiKey"];
+        private static int NumOfPosts => 5;
         private static DateTime _timeOfLastRequest = DateTime.MinValue;
         private static int MillisecondsBetweenRequests => 30000; // 30 seconds should be alright
-        private static List<TumblrResponseModelResponsePost> CurrentPosts { get; set; }
+        private static List<TumblrPost> CurrentPosts { get; set; }
 
-        private static List<TumblrResponseModelResponsePost> ErrorModel => new List<TumblrResponseModelResponsePost>
+        private static List<TumblrPost> ErrorModel => new List<TumblrPost>
         {
-            new TumblrResponseModelResponsePost
+            new TumblrPost
             {
                 Title = "Can't load tumblr posts; try again later.",
-                PostUrl = "/",
-                Date = DateTime.Now
+                Link = "/",
+                PubDate = DateTime.Now
             }
         };
 
-        public static List<TumblrResponseModelResponsePost> GetPosts()
+        public static List<TumblrPost> GetPosts()
         {
             if (_timeOfLastRequest.AddMilliseconds(MillisecondsBetweenRequests) < DateTime.Now)
             {
@@ -39,27 +38,35 @@ namespace DIHMT.Static
         {
             try
             {
-                using (var wc = new WebClient())
+                var reader = XmlReader.Create("https://mtxzone.tumblr.com/rss");
+                var feed = SyndicationFeed.Load(reader);
+                reader.Close();
+                var postsToLoad = Math.Min(NumOfPosts, feed.Items.Count());
+                var itemsList = feed.Items.ToList();
+                var newPosts = new List<TumblrPost>();
+
+                for (var i = 0; i < postsToLoad; i++)
                 {
-                    var rawData = wc.DownloadString($"https://api.tumblr.com/v2/blog/mtxzone.tumblr.com/posts?api_key={ApiKey}&limit=5");
+                    var curItem = itemsList[i];
 
-                    var deserializedData = JsonConvert.DeserializeObject<TumblrResponseModel>(rawData);
-
-                    if (deserializedData?.Meta?.Status == 200)
+                    newPosts.Add(new TumblrPost
                     {
-                        CurrentPosts = deserializedData.Response?.Posts?.ToList() ?? ErrorModel;
-                    }
-                    else
-                    {
-                        CurrentPosts = ErrorModel;
-                    }
+                        Title = curItem.Title.Text,
+                        Description = curItem.Summary.Text,
+                        Link = curItem.Links.FirstOrDefault()?.Uri.ToString() ?? "/",
+                        PubDate = curItem.PublishDate.DateTime
+                    });
                 }
 
-                _timeOfLastRequest = DateTime.Now;
+                CurrentPosts = newPosts;
             }
             catch
             {
                 CurrentPosts = ErrorModel;
+            }
+            finally
+            {
+                _timeOfLastRequest = DateTime.Now;
             }
         }
     }

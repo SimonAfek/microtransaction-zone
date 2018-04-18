@@ -1,14 +1,11 @@
 ﻿@using System.Globalization
 @using DIHMT.Models
-@model List<TumblrResponseModelResponsePost>
+@model List<TumblrPost>
 
 @foreach (var v in Model)
 {
-    if (v.Type == "text")
-    {
-        <p><a href="@v.ShortUrl"><strong>@v.Title</strong></a></p>
-        <p>@v.Summary</p>
-        <sub><a href="@v.ShortUrl">@v.Date.ToString("yyyy MMMM dd", new CultureInfo("en-US"))</a></sub>
-    }
+    <p><a href="@v.Link"><strong>@v.Title</strong></a></p>
+    <p>@v.Description</p>
+    <sub><a href="@v.Link">@v.PubDate.ToString("yyyy MMMM dd", new CultureInfo("en-US"))</a></sub>
     <hr />
 }
