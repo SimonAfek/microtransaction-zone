@@ -27,6 +27,11 @@
                 } else {
                     $(".failuremessage").text("The server experienced an error while trying to process your submission. Sorry about that - please try again.");
                 }
+
+                if (typeof (grecaptcha.reset) === "function") {
+                    grecaptcha.reset();
+                }
+
                 $("#submissionbutton").prop({ disabled: false });
             }
         });
