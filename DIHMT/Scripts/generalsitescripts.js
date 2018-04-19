@@ -81,6 +81,7 @@ $(function () {
 $(function() {
     $(".advanced-search-spotless-radio").click(function() {
         if ($(this).val() === "3") { // "Spotless"
+            $(".advanced-search-blockflags-checkbox").prop({ checked: false });
             $("#blockflagsdiv").hide();
         } else {
             $("#blockflagsdiv").show();
