@@ -1,4 +1,8 @@
-﻿@using DIHMT.Models
+﻿@{
+    Layout = "/Views/Shared/_PendingLayout.cshtml";
+}
+
+@using DIHMT.Models
 @using DIHMT.Static
 @model Tuple<DisplayGame, PendingDisplayModel>
 
@@ -6,10 +10,9 @@
     ViewBag.Title = $"Pending - {Model.Item2.GameName}";
 }
 
-<h2><a href="@Url.Action("Index", "Game", new { id = Model.Item2.GameId })" target="_blank">@Model.Item2.GameName</a></h2>
-
 @if (!Model.Item1.IsRated)
 {
+    <h2><a href="@Url.Action("Index", "Game", new { id = Model.Item2.GameId })" target="_blank">@Model.Item2.GameName</a></h2>
     <h3>This game currently has no rating</h3>
     <br />
     @Html.Partial("Pending_Partial", Model.Item2)
@@ -17,6 +20,9 @@
 
 else
 {
+    <div class="col-md-12">
+        <h2><a href="@Url.Action("Index", "Game", new { id = Model.Item2.GameId })" target="_blank">@Model.Item2.GameName</a></h2>
+    </div>
     <div class="col-md-6">
         <h3>Existing rating</h3>
 
@@ -48,28 +54,28 @@ else
         </p>
 
         @foreach (var v in GameHelpers.GetRatings().Where(x => Model.Item1.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
-    {
-        <p>
-            <label>
-                <input type="checkbox" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains(v.Id)" disabled /> @v.Name
-            </label>
-        </p>
-}
+        {
+            <p>
+                <label>
+                    <input type="checkbox" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains(v.Id)" disabled /> @v.Name
+                </label>
+            </p>
+        }
 
         @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.Item1.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
-    {
-        <p>
-            <label>
-                <input type="checkbox" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains(v.Id)" disabled /> @v.Name
-            </label>
-        </p>
-}
+        {
+            <p>
+                <label>
+                    <input type="checkbox" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains(v.Id)" disabled /> @v.Name
+                </label>
+            </p>
+        }
         <div class="form-group">
             <p>
                 @Html.LabelFor(model => model.Item1.Basically, htmlAttributes: new { @class = "control-label col-md-2 " })
             </p>
             <p>
-                <input type="text" name="Basically" size="280" value="@Model.Item1.Basically" class="wide-input" maxlength="280" />
+                <input type="text" name="Basically" size="280" value="@Model.Item1.Basically" class="form-control wide-input" maxlength="280" />
             </p>
         </div>
 

@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,700,700i" crossorigin="anonymous">
+    <title>@ViewBag.Title - MICROTRANSACTION.ZONE</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/generalsitescripts")
+    @RenderSection("scripts", required: false)
+</head>
+
+<body>
+
+    <header>
+        <nav class="nav navbar navbar-expand-md d-flex fixed-top nav-border">
+            <div class="container">
+
+                <a class="navbar-brand align-self-center" href="@Url.Action("Index", "Home")">
+                    <img class="d-none d-sm-inline" src="~/Images/MZLogo.svg" alt="Microtransaction.zone Logo"> Microtransaction.zone
+                </a>
+
+                <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbar1">
+
+                    <ul class="navbar-nav col-lg-6" id="navbarNavDropdown">
+                        <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a>@Html.ActionLink("About Our Tags", "Tags", "Home", null, new { @class = "dropdown-item" })</a>
+                                <a>@Html.ActionLink("FAQ", "FAQ", "Home", null, new { @class = "dropdown-item" })</a>
+                                <a>@Html.ActionLink("About Us", "About", "Home", null, new { @class = "dropdown-item" })</a>
+                                <a>@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "dropdown-item" })</a>
+                                <a>@Html.ActionLink("Submission Guide", "SubmissionGuide", "Home", null, new { @class = "dropdown-item" })</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">@Html.ActionLink("Donate", "Donate", "Home", null, new { @class = "nav-link" })</li>
+                    </ul>
+
+                    <form class="d-none d-lg-inline-flex form-horizontal" action="@Url.Action("Search", "Search")">
+                        <input class="form-control" type="text" name="q" placeholder="Search All Games" aria-hidden="true">
+                        <button class="btn btn-primary"><img class="search-icon" src="~/Images/SearchWhite-01.svg" /></button>
+                    </form>
+
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="body-content">
+            <div class="container" style="max-width: 90%">
+                <div class="row">
+
+                        @RenderBody()
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <hr />
+        <p>&copy; @DateTime.Now.Year - MICROTRANSACTION.ZONE</p>
+        @Html.Partial("_LoginPartial")
+    </footer>
+</body>
+
+</html>
