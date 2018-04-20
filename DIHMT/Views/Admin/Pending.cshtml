@@ -12,10 +12,13 @@
 
 @if (!Model.Item1.IsRated)
 {
-    <h2><a href="@Url.Action("Index", "Game", new { id = Model.Item2.GameId })" target="_blank">@Model.Item2.GameName</a></h2>
-    <br />
-    <h3>This game currently has no rating</h3>
-    <br />
+    <div>
+        <h2><a href="@Url.Action("Index", "Game", new {id = Model.Item2.GameId})" target="_blank">@Model.Item2.GameName</a></h2>
+    </div>
+    <div>
+        <h3>This game currently has no rating</h3>
+    </div>
+
     @Html.Partial("Pending_Partial", Model.Item2)
 }
 
