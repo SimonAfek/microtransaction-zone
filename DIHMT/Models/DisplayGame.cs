@@ -11,7 +11,7 @@ namespace DIHMT.Models
         public string GameSummary { get; set; }
         public string Basically { get; set; }
         public string RatingExplanation { get; set; }
-        public string[] RatingExplanationArrayOfParagraphs => RatingExplanation.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).Where(x => !string.IsNullOrEmpty(x)).ToArray();
+        public string[] RatingExplanationArrayOfParagraphs => RatingExplanation.Split(new[] { $"{Environment.NewLine}{Environment.NewLine}" }, StringSplitOptions.None).Where(x => !string.IsNullOrEmpty(x)).ToArray();
         public DateTime? RatingLastUpdated { get; set; }
         public DateTime LastUpdated { get; set; }
         public string SmallImageUrl { get; set; }

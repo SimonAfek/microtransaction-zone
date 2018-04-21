@@ -4,6 +4,12 @@
     ViewBag.Title = "MICROTRANSACTION.ZONE";
 }
 
+<div class="alert alert-danger" role="alert">
+    <p><strong>Hello! Thank you for visiting MICROTRANSACTION.ZONE!</strong> After a post about us was shared on the /r/PCGaming subreddit, we have been experiencing a higher volume of submissions than we were prepared for (there are not very many of us, and we check each submission manually).<br /></p>
+    <p>Please feel free to submit ratings for as many games as you want, but be aware that it might be several days before we get to your submission. If we have to spend too long fact-checking and editing to get it to a state we're happy with, we might also delete it to help keep the amount of pending submissions manageable.</p>
+    <p>When sending in a submission, please use the "Links"-section to paste links to DLC storefronts, wiki articles, and news articles that corroborate your write-up! It'll make life much easier for us and get your submission out there much quicker.</p>
+</div>
+
 <div class="page-title" id="page-title">Recently rated games <a href="@Url.Action("Recent", "Search")" class="indigo">(Click here for more)</a></div>
 <div class="column no-gutters">
     @foreach (var v in GameHelpers.GetRecentlyRatedGames(3))
