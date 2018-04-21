@@ -274,9 +274,6 @@ nav > div > a {
     }
 
 @media (max-width: 767px) {
-    #navbarNavDropdown {
-        margin-top: 10px;
-    }
 
     .nav-item {
         margin-bottom: 5px;
@@ -305,7 +302,13 @@ nav > div > a {
 
 @media (max-width: 767px) {
     .dropdown-menu {
-        border-left: 1px solid white;
+        
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .navbar-collapse {
+        padding-top: 8px;
     }
 }
 
