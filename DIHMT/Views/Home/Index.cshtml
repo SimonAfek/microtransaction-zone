@@ -10,7 +10,7 @@
     <p>When sending in a submission, please use the "Links"-section to paste links to DLC storefronts, wiki articles, and news articles that corroborate your write-up! It'll make life much easier for us and get your submission out there much quicker.</p>
 </div>
 
-<div class="page-title" id="page-title">Recently rated games <a href="@Url.Action("Recent", "Search")" class="indigo">(Click here for more)</a></div>
+<div class="page-title" id="page-title">Recently Rated Games — <a href="@Url.Action("Recent", "Search")" class="grey">View All Rated Games</a></div>
 <div class="column no-gutters">
     @foreach (var v in GameHelpers.GetRecentlyRatedGames(3))
     {
