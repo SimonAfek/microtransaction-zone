@@ -256,9 +256,6 @@
     <Compile Include="Models\DbGame.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DbGameAlia.cs">
-      <DependentUpon>EfModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DbGameGenre.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>

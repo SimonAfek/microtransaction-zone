@@ -20,14 +20,7 @@
           <Property Name="IsRated" Type="bit" Nullable="false" />
           <Property Name="RatingLastUpdated" Type="datetime" />
           <Property Name="Basically" Type="nvarchar" MaxLength="280" />
-        </EntityType>
-        <EntityType Name="DbGameAlias">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="GameId" Type="int" Nullable="false" />
-          <Property Name="Alias" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Aliases" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="DbGameGenre">
           <Key>
@@ -115,18 +108,6 @@
           <Property Name="Basically" Type="nvarchar" MaxLength="280" />
           <Property Name="Comment" Type="nvarchar" MaxLength="1000" />
         </EntityType>
-        <Association Name="FK__DbGameAli__GameI__6FE99F9F">
-          <End Role="DbGame" Type="Self.DbGame" Multiplicity="1" />
-          <End Role="DbGameAlias" Type="Self.DbGameAlias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DbGame">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DbGameAlias">
-              <PropertyRef Name="GameId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__DbGamePla__GameI__31EC6D26">
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="1" />
           <End Role="DbGamePlatform" Type="Self.DbGamePlatform" Multiplicity="*" />
@@ -269,7 +250,6 @@
         </Association>
         <EntityContainer Name="EntitiesStoreContainer">
           <EntitySet Name="DbGame" EntityType="Self.DbGame" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DbGameAlias" EntityType="Self.DbGameAlias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGameGenre" EntityType="Self.DbGameGenre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGameLink" EntityType="Self.DbGameLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGamePlatform" EntityType="Self.DbGamePlatform" Schema="dbo" store:Type="Tables" />
@@ -280,10 +260,6 @@
           <EntitySet Name="PendingDbGameRating" EntityType="Self.PendingDbGameRating" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PendingGameLink" EntityType="Self.PendingGameLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PendingSubmission" EntityType="Self.PendingSubmission" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__DbGameAli__GameI__6FE99F9F" Association="Self.FK__DbGameAli__GameI__6FE99F9F">
-            <End Role="DbGame" EntitySet="DbGame" />
-            <End Role="DbGameAlias" EntitySet="DbGameAlias" />
-          </AssociationSet>
           <AssociationSet Name="FK__DbGamePla__GameI__31EC6D26" Association="Self.FK__DbGamePla__GameI__31EC6D26">
             <End Role="DbGame" EntitySet="DbGame" />
             <End Role="DbGamePlatform" EntitySet="DbGamePlatform" />
@@ -353,7 +329,7 @@
           <NavigationProperty Name="PendingSubmissions" Relationship="Entities.FK_GameId_Game_Id" FromRole="DbGame" ToRole="PendingSubmission" />
           <Property Name="Basically" Type="String" MaxLength="280" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DbGameLinks" Relationship="Entities.FK_DbGameLink_DbGame_Id" FromRole="DbGame" ToRole="DbGameLink" />
-          <NavigationProperty Name="DbGameAlias" Relationship="Entities.FK__DbGameAli__GameI__6FE99F9F" FromRole="DbGame" ToRole="DbGameAlia" />
+          <Property Name="Aliases" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DbGamePlatform">
           <Key>
@@ -454,11 +430,6 @@
           <AssociationSet Name="FK_PendingGameLink_PendingSubmission_Id" Association="Entities.FK_PendingGameLink_PendingSubmission_Id">
             <End Role="PendingSubmission" EntitySet="PendingSubmissions" />
             <End Role="PendingGameLink" EntitySet="PendingGameLinks" />
-          </AssociationSet>
-          <EntitySet Name="DbGameAlias" EntityType="Entities.DbGameAlia" />
-          <AssociationSet Name="FK__DbGameAli__GameI__6FE99F9F" Association="Entities.FK__DbGameAli__GameI__6FE99F9F">
-            <End Role="DbGame" EntitySet="DbGames" />
-            <End Role="DbGameAlia" EntitySet="DbGameAlias" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="DbGameGenre">
@@ -660,27 +631,6 @@
 			</Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="DbGameAlia">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GameId" Type="Int32" Nullable="false" />
-          <Property Name="Alias" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DbGame" Relationship="Entities.FK__DbGameAli__GameI__6FE99F9F" FromRole="DbGameAlia" ToRole="DbGame" />
-        </EntityType>
-        <Association Name="FK__DbGameAli__GameI__6FE99F9F">
-          <End Type="Entities.DbGame" Role="DbGame" Multiplicity="1" />
-          <End Type="Entities.DbGameAlia" Role="DbGameAlia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DbGame">
-			  <PropertyRef Name="Id" />
-			</Principal>
-            <Dependent Role="DbGameAlia">
-			  <PropertyRef Name="GameId" />
-			</Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -690,6 +640,7 @@
           <EntitySetMapping Name="DbGames">
             <EntityTypeMapping TypeName="Entities.DbGame">
               <MappingFragment StoreEntitySet="DbGame">
+                <ScalarProperty Name="Aliases" ColumnName="Aliases" />
                 <ScalarProperty Name="Basically" ColumnName="Basically" />
                 <ScalarProperty Name="RatingLastUpdated" ColumnName="RatingLastUpdated" />
                 <ScalarProperty Name="IsRated" ColumnName="IsRated" />
@@ -796,15 +747,6 @@
               <MappingFragment StoreEntitySet="PendingGameLink">
                 <ScalarProperty Name="Link" ColumnName="Link" />
                 <ScalarProperty Name="PendingSubmissionId" ColumnName="PendingSubmissionId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DbGameAlias">
-            <EntityTypeMapping TypeName="Entities.DbGameAlia">
-              <MappingFragment StoreEntitySet="DbGameAlias">
-                <ScalarProperty Name="Alias" ColumnName="Alias" />
-                <ScalarProperty Name="GameId" ColumnName="GameId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -25,7 +25,8 @@ namespace DIHMT.Static
                 LastUpdated = DateTime.UtcNow,
                 SmallImageUrl = input.Image.SmallUrl,
                 ThumbImageUrl = input.Image.ThumbUrl,
-                GbSiteDetailUrl = input.SiteDetailUrl
+                GbSiteDetailUrl = input.SiteDetailUrl,
+                Aliases = input.Aliases
             };
         }
 

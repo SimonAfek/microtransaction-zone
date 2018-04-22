@@ -18,7 +18,9 @@ namespace DIHMT.Static
             using (var ctx = new DIHMTEntities())
             {
                 var dbResults = ctx.DbGames
-                    .Where(q => query.All(k => q.Name.Contains(k)))
+                    .Where(q =>
+                        query.All(k => q.Name.Contains(k))
+                        || query.All(k => q.Aliases.Contains(k)))
                     .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
                     .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
                     .Include(x => x.DbGameRatings.Select(y => y.DbRating))
