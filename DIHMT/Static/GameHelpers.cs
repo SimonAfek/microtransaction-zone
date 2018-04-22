@@ -17,7 +17,7 @@ namespace DIHMT.Static
         /// <returns></returns>
         public static DbGame CreateDbGameObjectWithoutNavigation(Game input)
         {
-            return new DbGame
+            var retval = new DbGame
             {
                 Id = input.Id,
                 Name = input.Name,
@@ -28,6 +28,27 @@ namespace DIHMT.Static
                 GbSiteDetailUrl = input.SiteDetailUrl,
                 Aliases = input.Aliases
             };
+
+            var nameCharArray = input.Name.ToCharArray();
+
+            if (nameCharArray.Any(x => char.IsSymbol(x) || char.IsPunctuation(x)))
+            {
+                var strippedName = new string(nameCharArray.Where(x => !char.IsSymbol(x) && !char.IsPunctuation(x)).ToArray());
+
+                if (!retval.Aliases?.Contains(strippedName) ?? false)
+                {
+                    if (string.IsNullOrEmpty(retval.Aliases))
+                    {
+                        retval.Aliases = strippedName;
+                    }
+                    else
+                    {
+                        retval.Aliases += $"{Environment.NewLine}{strippedName}";
+                    }
+                }
+            }
+
+            return retval;
         }
 
         /// <summary>
@@ -48,6 +69,10 @@ namespace DIHMT.Static
             dbGame.LastUpdated = DateTime.UtcNow;
 
             DbAccess.SaveGame(dbGame);
+
+            var dbGamePlatforms = CreateDbGamePlatformsListWithoutNavigation(gbGame);
+
+            DbAccess.SaveGamePlatforms(dbGamePlatforms);
 
             if (!includeGenres || gbGame.Genres == null || !gbGame.Genres.Any())
             {
@@ -131,13 +156,14 @@ namespace DIHMT.Static
         /// <summary>
         /// Saves multiple GbGame objects to the database, including
         /// relevaing joining rows. Ignores games that already exist in the DB.
+        /// Also updates games whose info is at least 7 days old.
         /// </summary>
         /// <param name="input">A list of objects to save</param>
         public static void SaveGamesToDb(List<Game> input)
         {
             var dbGames = input.Select(CreateDbGameObjectWithoutNavigation).ToList();
 
-            DbAccess.SaveListOfNewGames(dbGames, out var newGameIds);
+            DbAccess.SaveListOfNewGames(dbGames, out var newGameIds, out var gamesToUpdate);
 
             var dbGamePlatforms = input
                 .Where(x => newGameIds.Contains(x.Id))
@@ -158,6 +184,29 @@ namespace DIHMT.Static
             if (dbGameGenres.Any())
             {
                 DbAccess.SaveGameGenres(dbGameGenres);
+            }
+
+            // Updating existing games with out-of-date info
+            if (gamesToUpdate.Any())
+            {
+                var gameObjectsToUpdate = input.Where(x => gamesToUpdate.Contains(x.Id)).ToList();
+
+                foreach (var v in gameObjectsToUpdate)
+                {
+                    var dGame = CreateDisplayGameObject(v.Id);
+
+                    var dbGame = CreateDbGameObjectWithoutNavigation(v);
+                    var dbGamePlatformsUpdate = CreateDbGamePlatformsListWithoutNavigation(v);
+
+                    dbGame.IsRated = dGame.IsRated;
+                    dbGame.Basically = dGame.Basically;
+                    dbGame.RatingExplanation = dGame.RatingExplanation;
+                    dbGame.RatingLastUpdated = dGame.RatingLastUpdated;
+                    dbGame.LastUpdated = DateTime.UtcNow;
+
+                    DbAccess.SaveGame(dbGame);
+                    DbAccess.SaveGamePlatforms(dbGamePlatformsUpdate);
+                }
             }
         }
 

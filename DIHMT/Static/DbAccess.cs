@@ -59,7 +59,9 @@ namespace DIHMT.Static
 
                 if (query != null && query.Any(x => !string.IsNullOrEmpty(x)))
                 {
-                    games = games.Where(q => query.All(k => q.Name.Contains(k)));
+                    games = games.Where(q =>
+                        query.All(k => q.Name.Contains(k))
+                        || query.All(k => q.Aliases.Contains(k)));
                 }
 
                 if (genres != null && genres.Any())
@@ -77,7 +79,7 @@ namespace DIHMT.Static
                     // Avoids warning about implicit closure
                     var allowFlagsSeparateList = allowFlags.Select(x => x).ToList();
 
-                    games = games.Where(x => 
+                    games = games.Where(x =>
                         x.DbGameRatings.Select(y => y.RatingId).Intersect(requireFlags).Any()
                         || x.DbGameRatings.Select(y => y.RatingId).Intersect(allowFlagsSeparateList).Any()
                     );
@@ -131,20 +133,30 @@ namespace DIHMT.Static
             return results;
         }
 
-        public static void SaveListOfNewGames(List<DbGame> input, out List<int> newIds)
+        public static void SaveListOfNewGames(List<DbGame> input, out List<int> newIds, out List<int> gamesToUpdate)
         {
             using (var ctx = new DIHMTEntities())
             {
-                input = input.Where(x => ctx.DbGames.FirstOrDefault(y => y.Id == x.Id) == null).ToList();
+                var newGames = input.Where(x => ctx.DbGames.FirstOrDefault(y => y.Id == x.Id) == null).ToList();
 
-                if (input.Any())
+                if (newGames.Any())
                 {
-                    ctx.DbGames.AddRange(input);
+                    ctx.DbGames.AddRange(newGames);
 
                     ctx.SaveChanges();
                 }
 
-                newIds = input.Select(x => x.Id).ToList();
+                newIds = newGames.Select(x => x.Id).ToList();
+
+                // var roles = db.Roles.Where(r => user.Roles.Contains(r.RoleId));
+
+                var inputIds = input.Select(x => x.Id).ToArray();
+
+                gamesToUpdate = ctx.DbGames.Where(x => inputIds.Contains(x.Id))
+                    .AsEnumerable()
+                    .Where(x => (DateTime.UtcNow - x.LastUpdated).Days >= 7)
+                    .Select(x => x.Id)
+                    .ToList();
             }
         }
 
@@ -177,7 +189,36 @@ namespace DIHMT.Static
             {
                 using (var ctx = new DIHMTEntities())
                 {
-                    ctx.DbGamePlatforms.AddRange(input);
+                    var inputList = input.ToList();
+
+                    foreach (var v in inputList.GroupBy(x => x.GameId))
+                    {
+                        if (ctx.DbGamePlatforms.Any(x => x.GameId == v.Key))
+                        {
+                            var existingPlatformIds = v.Select(x => x.PlatformId).ToList();
+
+                            // Remove entries that are in DB but not in input
+                            var toRemove = ctx.DbGamePlatforms.Where(x =>
+                                x.GameId == v.Key
+                                && !existingPlatformIds.Contains(x.PlatformId));
+
+                            ctx.DbGamePlatforms.RemoveRange(toRemove);
+
+                            // Add entries that are in input but not in DB
+                            var existingEntries = ctx.DbGamePlatforms.Where(x => x.GameId == v.Key).ToList();
+
+                            var toAdd = v.Where(x =>
+                                !existingEntries.Any(y =>
+                                    y.GameId == v.Key
+                                    && y.PlatformId == x.PlatformId));
+
+                            ctx.DbGamePlatforms.AddRange(toAdd);
+                        }
+                        else
+                        {
+                            ctx.DbGamePlatforms.AddRange(v);
+                        }
+                    }
 
                     ctx.SaveChanges();
                 }
