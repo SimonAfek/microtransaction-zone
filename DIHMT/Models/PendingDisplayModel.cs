@@ -19,7 +19,7 @@ namespace DIHMT.Models
         [DisplayName("Description")]
         public string ShortExplanation => RatingExplanation?.Length > 50 ? $"{RatingExplanation.Substring(0, 46)}..." : RatingExplanation;
 
-        [DisplayName("Submission timestamp")]
+        [DisplayName("Timestamp (UTC)")]
         public DateTime TimeOfSubmission { get; set; }
 
         [DisplayName("Quiet update")]
@@ -28,7 +28,7 @@ namespace DIHMT.Models
         public string Comment { get; set; }
         public string SubmitterIp { get; set; }
 
-        [DisplayName("Hash of submitter's IP")]
+        [DisplayName("IP Hash")]
         public string ShortSubmitterIp => SubmitterIp?.Length > 45 ? $"{SubmitterIp.Substring(0, 40)}..." : SubmitterIp;
 
         public string SubmitAction { get; set; }

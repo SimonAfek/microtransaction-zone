@@ -862,6 +862,7 @@ textarea {
 }
 
 
+
 /*--------------------------*/
 /*      5. FOOTER           */
 /*--------------------------*/
@@ -887,4 +888,42 @@ footer {
 
 .logout-button {
     position: relative;
+}
+
+
+
+/*--------------------------*/
+/*      6. PENDING          */
+/*--------------------------*/
+
+.table {
+    font-size: .85rem;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.row-id {
+    width: 10%;
+}
+
+.row-game {
+    width: 25%;
+}
+
+.row-description {
+    width: 25%;
+}
+
+.row-timestamp {
+    width: 25%;
+}
+
+.row-ip {
+    width: 15%;
+}
+
+.ipwrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
