@@ -31,6 +31,11 @@
                 <div class="modal-body">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.Id)
+                    
+                    <p>
+                        Hi there! If this is your first time submitting something to the site, please take a minute or two to read our <a href="@Url.Action("Tags", "Home")" target="_blank">Tag overview</a> and <a href="@Url.Action("SubmissionGuide", "Home")" target="_blank">Submission guide</a>.
+                        That'll make it much easier for us to get your submission reviewed.
+                    </p>
 
                     <!-- FLAGS -->
                     <div class="form-group row no-gutters">
