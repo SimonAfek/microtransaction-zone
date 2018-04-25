@@ -4,11 +4,15 @@
 
 @foreach (var v in Model)
 {
-    <p><a href="@v.Link" target="_blank"><strong>@v.Title</strong></a></p>
+    <a class="indigo" href="@v.Link" target="_blank"><sub class="blog-post-date">@v.PubDate.ToString("dd MMMM yyyy", new CultureInfo("en-US"))</sub>
+    <p class="blog-post-title"><strong>@v.Title</strong></p></a>
     if (!string.IsNullOrEmpty(v.Description))
     {
-        <p>@v.Description</p>
+        <p>
+            @v.Description
+            <a href="@v.Link" target="_blank">[read more]</a>
+        </p>
     }
-    <sub><a href="@v.Link" target="_blank">@v.PubDate.ToString("dd MMMM yyyy", new CultureInfo("en-US"))</a></sub>
-    <hr />
+
+    
 }

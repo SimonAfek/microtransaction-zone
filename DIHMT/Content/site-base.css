@@ -361,7 +361,6 @@ nav > div > a {
     background-color: #1a1a1a;
     color: white;
     font-size: .75rem;
-    font-weight: 500;
     max-height: 1193px;
     height: 100%;
     padding: 20px;
@@ -387,15 +386,14 @@ nav > div > a {
 }
 
 .blog-post-date {
-    color: white;
+    font-size: .65rem;
     font-weight: 700;
+    letter-spacing: .5px;
     text-transform: uppercase;
 }
 
 .blog-post-title {
-    font-weight: 700;
-    margin-bottom: 5px;
-    text-transform: uppercase;
+    margin-bottom: 5px; 
 }
 
 .divider {
