@@ -36,6 +36,7 @@ namespace DIHMT.Models
         public Nullable<System.DateTime> RatingLastUpdated { get; set; }
         public string Basically { get; set; }
         public string Aliases { get; set; }
+        public Nullable<System.DateTime> ReleaseDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DbGamePlatform> DbGamePlatforms { get; set; }

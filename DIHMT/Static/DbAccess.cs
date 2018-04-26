@@ -24,7 +24,8 @@ namespace DIHMT.Static
                     .Include(x => x.DbGamePlatforms.Select(y => y.DbPlatform))
                     .Include(x => x.DbGameGenres.Select(y => y.DbGenre))
                     .Include(x => x.DbGameRatings.Select(y => y.DbRating))
-                    .Include(x => x.DbGameLinks);
+                    .Include(x => x.DbGameLinks)
+                    .OrderByDescending(x => x.ReleaseDate);
 
                 results = dbResults.Any() ? dbResults.ToList() : results;
             }
@@ -95,6 +96,8 @@ namespace DIHMT.Static
                         || x.DbGameRatings.Select(y => y.RatingId).Intersect(allowFlagsSeparateList).Any()
                     );
                 }
+
+                games = games.OrderByDescending(x => x.ReleaseDate);
 
                 return games.ToList();
             }

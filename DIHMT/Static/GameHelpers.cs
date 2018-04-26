@@ -48,6 +48,30 @@ namespace DIHMT.Static
                 }
             }
 
+            if (input.OriginalReleaseDate.HasValue)
+            {
+                retval.ReleaseDate = input.OriginalReleaseDate.Value.Date;
+            }
+            else if (input.ExpectedReleaseYear.HasValue)
+            {
+                var releaseDate = DateTime.MinValue;
+
+                releaseDate = releaseDate.AddYears(input.ExpectedReleaseYear.Value - 1);
+
+                if (input.ExpectedReleaseQuarter.HasValue && !input.ExpectedReleaseMonth.HasValue)
+                {
+                    releaseDate = releaseDate.AddMonths((input.ExpectedReleaseQuarter.Value * 3) - 1);
+                }
+                else
+                {
+                    releaseDate = releaseDate.AddMonths((input.ExpectedReleaseMonth ?? 1) - 1);
+                }
+
+                releaseDate = releaseDate.AddDays((input.ExpectedReleaseDay ?? 1) - 1);
+
+                retval.ReleaseDate = releaseDate;
+            }
+
             return retval;
         }
 
