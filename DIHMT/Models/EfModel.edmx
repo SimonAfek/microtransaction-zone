@@ -21,6 +21,7 @@
           <Property Name="RatingLastUpdated" Type="datetime" />
           <Property Name="Basically" Type="nvarchar" MaxLength="280" />
           <Property Name="Aliases" Type="nvarchar" MaxLength="500" />
+          <Property Name="ReleaseDate" Type="date" />
         </EntityType>
         <EntityType Name="DbGameGenre">
           <Key>
@@ -330,6 +331,7 @@
           <Property Name="Basically" Type="String" MaxLength="280" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DbGameLinks" Relationship="Entities.FK_DbGameLink_DbGame_Id" FromRole="DbGame" ToRole="DbGameLink" />
           <Property Name="Aliases" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ReleaseDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="DbGamePlatform">
           <Key>
@@ -640,6 +642,7 @@
           <EntitySetMapping Name="DbGames">
             <EntityTypeMapping TypeName="Entities.DbGame">
               <MappingFragment StoreEntitySet="DbGame">
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
                 <ScalarProperty Name="Aliases" ColumnName="Aliases" />
                 <ScalarProperty Name="Basically" ColumnName="Basically" />
                 <ScalarProperty Name="RatingLastUpdated" ColumnName="RatingLastUpdated" />
