@@ -1,6 +1,10 @@
 ﻿$(function () {
     var submissionform = $("#submissionform");
 
+    if (typeof (submissionform.areYouSure) === "function") {
+        submissionform.areYouSure();
+    }
+
     submissionform.submit(function (e) {
         e.preventDefault();
 
@@ -17,10 +21,16 @@
             },
             error: function (data) {
                 if (data.status === 400) {
-                    $(".failuremessage").text(data.responseText.replace(/^"(.*)"$/, "$1").replace(/\\/g, ""));
+                    $(".failuremessage").text(data.responseText.replace(/^"(.*)"$/, "$1").replace(/u0027/g, "\'").replace(/\\/g, ""));
+                    //$(".failuremessage").text(data.responseText.replace(/^"(.*)"$/, "$1"));
                 } else {
                     $(".failuremessage").text("The server experienced an error while trying to process your submission. Sorry about that - please try again.");
                 }
+
+                if (typeof (grecaptcha.reset) === "function") {
+                    grecaptcha.reset();
+                }
+
                 $("#submissionbutton").prop({ disabled: false });
             }
         });
@@ -71,3 +81,18 @@ $(function () {
         }
     });
 });
+
+$(function() {
+    $(".advanced-search-spotless-radio").click(function() {
+        if ($(this).val() === "3") { // "Spotless"
+            $(".advanced-search-blockflags-checkbox").prop({ checked: false });
+            $("#blockflagsdiv").hide();
+        } else {
+            $("#blockflagsdiv").show();
+        }
+    });
+});
+
+function captchaComplete() {
+    $("#submissionbutton").prop({ disabled: false });
+}

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Web.Mvc.Html;
 
 namespace DIHMT.Models
 {
@@ -20,12 +19,16 @@ namespace DIHMT.Models
         [DisplayName("Description")]
         public string ShortExplanation => RatingExplanation?.Length > 50 ? $"{RatingExplanation.Substring(0, 46)}..." : RatingExplanation;
 
-        [DisplayName("Submission timestamp")]
+        [DisplayName("Timestamp (UTC)")]
         public DateTime TimeOfSubmission { get; set; }
 
+        [DisplayName("Quiet update")]
+        public bool QuietUpdate { get; set; }
+
+        public string Comment { get; set; }
         public string SubmitterIp { get; set; }
 
-        [DisplayName("Hash of submitter's IP")]
+        [DisplayName("IP Hash")]
         public string ShortSubmitterIp => SubmitterIp?.Length > 45 ? $"{SubmitterIp.Substring(0, 40)}..." : SubmitterIp;
 
         public string SubmitAction { get; set; }
@@ -55,6 +58,7 @@ namespace DIHMT.Models
             RatingExplanation = input.RatingExplanation;
             SubmitterIp = input.SubmitterIp;
             TimeOfSubmission = input.TimeOfSubmission;
+            Comment = input.Comment;
 
             try
             {

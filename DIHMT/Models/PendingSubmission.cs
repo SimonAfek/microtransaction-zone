@@ -27,6 +27,7 @@ namespace DIHMT.Models
         public System.DateTime TimeOfSubmission { get; set; }
         public string SubmitterIp { get; set; }
         public string Basically { get; set; }
+        public string Comment { get; set; }
     
         public virtual DbGame DbGame { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

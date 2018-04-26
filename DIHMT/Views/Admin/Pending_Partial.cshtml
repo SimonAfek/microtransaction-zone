@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h3>Pending submission</h3>
+        <div class="page-title">Pending Submission</div>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.GameId)
@@ -71,6 +71,18 @@
                 @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
             </div>
         </p>
+        
+        <!-- COMMENT -->
+        
+        <p>
+            @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-lg-2" })
+        </p>
+        <p>
+            <div class="col-md-9 wide-input-box">
+                <textarea name="RatingExplanation" class="form-control wide-input" rows="10" cols="100" maxlength="1000">@Model.Comment</textarea>
+                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+            </div>
+        </p>
 
         <p>
             @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label col-lg-2" })
@@ -118,6 +130,16 @@
         <p>
             @Html.EditorFor(model => model.SubmitterIp, new { htmlAttributes = new { @class = "form-control", disabled = "true" } })
             @Html.ValidationMessageFor(model => model.SubmitterIp, "", new { @class = "text-danger" })
+        </p>
+        
+        <p>
+            @Html.LabelFor(model => model.QuietUpdate, htmlAttributes: new { @class = "control-label" })
+        </p>
+        <p>
+            <div class="form-check">
+                <input type="checkbox" name="QuietUpdate" value="true" />
+                <label>&ensp;Yes</label>
+            </div>
         </p>
 
         <div class="form-group">

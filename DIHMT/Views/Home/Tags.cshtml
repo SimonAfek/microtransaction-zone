@@ -24,11 +24,11 @@
     </div>
 
     <!-- Spotless -->
-    <a class="anchor" name="spotless"></a>
+    <a class="anchor" id="spotless"></a>
     <img class="game-flag-img" src="~/Images/1-1_Spotless.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
-            <strong class="flag-name">Spotless (No Monetized Content)</strong>
+            <strong class="flag-name-spotless">Spotless (No Monetized Content)</strong>
             <br />
             You buy the game, you own the game&mdash;full stop.
         </p>
@@ -37,9 +37,10 @@
     <p>
         This game contains no post-purchase real-money transactions of any kind (e.g. expansion packs, DLC, loot boxes). Only one purchase is necessary to own the complete game and all future content.
         Online features tied to PlayStation Plus and Xbox Live Gold do not disqualify a game from this tag.
+        Pre-order items which are no longer available for sale also don't count against this tag - we choose to live in the present. Anything that isn't actually available to buy doesn't count as far as we're concerned.
     </p>
 
-    <h5>Examples</h5>
+    <h4>Examples</h4>
     <ul>
         <li><a href="@Url.Action("Index", "Game", new { id = 50899 })">Stardew Valley</a> has released several major updates at no cost and has no plans to release paid content.</li>
         <li><a href="@Url.Action("Index", "Game", new { id = 43972 })">Gravity Rush 2</a> has several costumes and an expansion available, all of which are free.</li>
@@ -48,7 +49,7 @@
     <hr class="divider-basic">
 
     <!-- Horse Armor -->
-    <a class="anchor" name="horsearmor"></a>
+    <a class="anchor" id="horsearmor"></a>
     <img class="game-flag-img" src="~/Images/1-1_Horse Armor.svg" />
 
     <div class="game-flag-box">
@@ -61,8 +62,12 @@
 
     <p>
         This game contains some minor—i.e. cosmetic or non-gameplay-altering—DLC, such as character skins, vehicle parts, background music, etc.
-        The DLC can be purchased directly, with no randomness or loot boxes involved.
+        The DLC can be purchased directly, with no randomness or loot boxes involved. If you can purchase a premium currency with real money which can then be spent on things that would reach this classification, that also counts.
         Things that were commonly included as cheat codes in the pre-internet days (big head mode, god mode, in-game money, etc) are also covered by this classification.
+    </p>
+
+    <p>
+        <strong>TL;DR:</strong> If you can buy a thing with real money with no randomization involved (directly or through a premium currency) and it isn't something that falls under the "<a href="#expansions">Expansive Expansions</a>" tag, then we consider it Horse Armor—whether or not it's purely cosmetic or it affects the gameplay in some way.
     </p>
     <p>
         <i>
@@ -71,7 +76,7 @@
         </i>
     </p>
 
-    <a class="anchor" name="horsearmorbo"></a>
+    <a class="anchor" id="horsearmorbo"></a>
     <img class="game-flag-img" src="~/Images/1-1_HorseArmorBO.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
@@ -86,7 +91,7 @@
         The DLC can be purchased directly, with no randomness or loot boxes involved.
     </p>
 
-    <h5>Examples</h5>
+    <h4>Examples</h4>
     <ul>
         <li><a href="@Url.Action("Index", "Game", new { id = 37030 })">Fortnite</a> offers clothing, tool skins, glider skins, and emotes for $8-$20 worth of the currency "V-Bucks."</li>
         <li><a href="@Url.Action("Index", "Game", new { id = 30486 })">Persona 5</a> offers several costume packs and downloadable monsters for $3-$7 each, totaling over $90 in all.</li>
@@ -95,7 +100,7 @@
     <hr class="divider-basic">
 
     <!-- Expansions -->
-    <a class="anchor" name="expansions"></a>
+    <a class="anchor" id="expansions"></a>
     <img class="game-flag-img" src="~/Images/1-1_Expansions.svg" />
 
     <div class="game-flag-box">
@@ -116,7 +121,7 @@
         <i><strong>Note:</strong> This does not necessarily indicate that the content in question is of high quality, or represents good value for money.</i>
     </p>
 
-    <h5>Examples</h5>
+    <h4>Examples</h4>
     <ul>
         <li><a href="@Url.Action("Index", "Game", new { id = 46569 })">Bloodborne</a> sells a $20 expansion pack with several new gameplay areas, enemies, weapons, and bosses.</li>
         <li><a href="@Url.Action("Index", "Game", new { id = 57213 })">Crash Bandicoot N. Sane Trilogy</a> is a platformer with an additional level for sale for $3.</li>
@@ -125,7 +130,7 @@
     <hr class="divider-basic">
 
     <!-- Gambling -->
-    <a class="anchor" name="notgambling"></a>
+    <a class="anchor" id="notgambling"></a>
     <img class="game-flag-img" src="~/Images/1-1_NotGambling.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
@@ -140,9 +145,9 @@
         Some games have boxes that require paid single-use keys in order to unlock the box.
     </p>
 
-    <h5>Examples</h5>
+    <h4>Examples</h4>
     <ul>
-        <li><a href="@Url.Action("Index", "Game", new { id = 48190 })">Overwatch</a> provides loot boxes for leveling up, completing certain activities, or in bundles starting at $1.99 for 2.</li>
+        <li><a href="@Url.Action("Index", "Game", new { id = 48190 })">Overwatch</a> provides loot boxes for leveling up, completing certain activities, or in bundles starting at $2 for 2.</li>
         <li>
             <a href="@Url.Action("Index", "Game", new { id = 54979 })">PlayerUnknown's Battlegrounds</a>, commonly known as PUBG, provides loot crates that can be opened for free, as well as "Desperado crates" that drop in-game or sell for money on the Steam Marketplace.
             Desperado crates cost $2.50 each to open.
@@ -152,7 +157,7 @@
     <hr class="divider-basic">
 
     <!-- Money Hole -->
-    <a class="anchor" name="moneyhole"></a>
+    <a class="anchor" id="moneyhole"></a>
     <img class="game-flag-img" src="~/Images/1-1_MoneyHole.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
@@ -166,7 +171,7 @@
         This game has no limit to the amount of money that can be spent. Usually, though not always, this involves loot boxes of some kind.
     </p>
 
-    <h5>Examples</h5>
+    <h4>Examples</h4>
     <ul>
         <li>
             <a href="@Url.Action("Index", "Game", new { id = 36113 })">Counter Strike: Global Offensive</a> has a market of weapon skins dropped from boxes, which are unlocked with keys. Skins, boxes, and keys can all be bought, traded, and sold with real money via the Steam Marketplace.
@@ -177,7 +182,7 @@
     <hr class="divider-basic">
 
     <!-- Not Cosmetic -->
-    <a class="anchor" name="notjustcosmetic"></a>
+    <a class="anchor" id="notjustcosmetic"></a>
     <img class="game-flag-img" src="~/Images/1-1_PayingForPower.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
@@ -188,10 +193,20 @@
     </div>
 
     <p>
-        This game contains gameplay-altering content, such as experience boosts or powerful weapons. This may be done directly with real money, or indirectly by buying in-game currencies and loot boxes with real money.
+        This game contains gameplay-altering content, such as experience boosts or powerful weapons.
+        This may be done directly with real money, or indirectly by buying in-game currencies and loot boxes with real money.
+    </p>
+    <p>
+        This tag is primarily meant to be paired with the <a href="#horsearmor">Horse Armor</a>, <a href="#horsearmorbo">Bulk Order Horse Armor</a>, and <a href="#notgambling">It's Not Gambling, We Swear</a> tags.
+        If there's stuff covered by those tags which affects game balance/gameplay, rather than just appearances, check this one off.
+        In-game currencies which can be bought with real money and then used to purchase things which affect gameplay are also included here.
     </p>
 
-    <h5>Examples</h5>
+    <p>
+        <strong>TL;DR:</strong> If it can be bought with real money (through loot boxes, through a premium currency, or directly), and it affects the gameplay in some way (whether it's objectively an "upgrade" or not), <strong>and</strong> it isn't something that would fall under the "<a href="#expansions">Expansive Expansions</a>"-tag, then it's Not Just Cosmetic.
+    </p>
+
+    <h4>Examples</h4>
     <ul>
         <li><a href="@Url.Action("Index", "Game", new { id = 36765 })">Grand Theft Auto V</a> sells several tiers of "Shark Cards" for $10-$100 each, which grant various amounts of in-game money. This can, in turn, be spent on any number of powerful in-game items.</li>
         <li><a href="@Url.Action("Index", "Game", new { id = 32265 })">Tales of Xillia</a> sells several "level-up" packs for $3-$4.50 each, raising the levels of your characters by 5 or 10 each, respectively.</li>
@@ -200,7 +215,7 @@
     <hr class="divider-basic">
 
     <!-- Contract -->
-    <a class="anchor" name="contract"></a>
+    <a class="anchor" id="contract"></a>
     <img class="game-flag-img" src="~/Images/1-1_Contract.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
@@ -211,11 +226,11 @@
     </div>
 
     <p>
-        This game contains a paid subscription service. The subscription may be required to play the game. Alternatively, it may be a freemium service in which the game is free to play but paying for a subscription provides bonuses or enhances gameplay.
+        This game contains a paid subscription service. The subscription may be required to play the game. Alternatively, it may be the case that paying for the subscription is optional, but provides bonuses or enhances gameplay.
         This does not include services such as Playstation Plus and Xbox Live Gold, which apply to multiple games rather than one specific game.
     </p>
 
-    <h5>Examples</h5>
+    <h4>Examples</h4>
     <ul>
         <li><a href="@Url.Action("Index", "Game", new { id = 19783 })">World of Warcraft</a> and <a href="@Url.Action("Index", "Game", new { id = 26847 })">Final Fantasy XIV: A Realm Reborn</a> both have mandatory subscription fees of $15 per month—or less, if purchasing multiple months of service at a time.</li>
         <li><a href="@Url.Action("Index", "Game", new { id = 38206 })">The Elder Scrolls Online</a> allows players to play for free once the base game is purchased, but also offers a freemium service named ESO Plus that adds bonuses such as DLC access and experience boosts.</li>
@@ -224,33 +239,38 @@
     <hr class="divider-basic">
 
     <!-- Table -->
-    <a class="anchor" name="tableforone"></a>
+    <a class="anchor" id="tableforone"></a>
     <img class="game-flag-img" src="~/Images/1-1_TableForOne.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
-            <strong class="flag-name">Table for One (Standalone Single Player)</strong>
+            <strong class="flag-name-tfof2p">Table for One (Standalone Single Player)</strong>
             <br />
             Contains a single-player campaign with no additional monetization.
         </p>
     </div>
 
     <p>
-        This game has a complete single-player campaign without any microtransactions. Other tags applied to this game are based exclusively on multiplayer content.
+        This game has a complete single-player campaign without any microtransactions.
+        Other tags applied to this game are based exclusively on multiplayer content.
     </p>
 
-    <h5>Examples</h5>
+    <p>
+        This tag is <strong>only</strong> for games where the multiplayer has monetization of some kind, and the single-player would've been a valid candidate for the "Spotless" tag if it had been released on its own.
+    </p>
+
+    <h4>Examples</h4>
     <ul>
-        <li><a href="@Url.Action("Index", "Game", new { id = 44507 })">Uncharted 4</a> sells packs of "Uncharted Points" for $3-$35 a pack, but these are only relevant to the multiplayer portion.</li>
+        <li><a href="@Url.Action("Index", "Game", new { id = 44507 })">Uncharted 4</a> sells packs of "Uncharted Points" for $3-$50 a pack, but these are only relevant to the multiplayer portion.</li>
     </ul>
 
     <hr class="divider-basic">
 
     <!-- F2P -->
-    <a class="anchor" name="f2p"></a>
+    <a class="anchor" id="f2p"></a>
     <img class="game-flag-img" src="~/Images/1-1_F2P.svg" />
     <div class="game-flag-box">
         <p class="game-flag-description">
-            <strong class="flag-name">Free to Play (No Cost of Entry)</strong>
+            <strong class="flag-name-tfof2p">Free to Play (No Cost of Entry)</strong>
             <br />
             No up-front purchase required to play.
         </p>
@@ -260,7 +280,7 @@
         This game can be downloaded and played for free. Often, the game requires users to create an account.
     </p>
 
-    <h5>Examples</h5>
+    <h4>Examples</h4>
     <ul>
         <li><a href="@Url.Action("Index", "Game", new { id = 24024 })">League of Legends</a> has plenty of microtransactions, but requires no purchase to download and begin playing.</li>
     </ul>

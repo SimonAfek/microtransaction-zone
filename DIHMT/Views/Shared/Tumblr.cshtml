@@ -1,0 +1,18 @@
+﻿@using System.Globalization
+@using DIHMT.Models
+@model List<TumblrPost>
+
+@foreach (var v in Model)
+{
+    <a class="indigo" href="@v.Link" target="_blank"><sub class="blog-post-date">@v.PubDate.ToString("dd MMMM yyyy", new CultureInfo("en-US"))</sub>
+    <p class="blog-post-title"><strong>@v.Title</strong></p></a>
+    if (!string.IsNullOrEmpty(v.Description))
+    {
+        <p>
+            @v.Description
+            <a href="@v.Link" target="_blank">[read more]</a>
+        </p>
+    }
+
+    
+}

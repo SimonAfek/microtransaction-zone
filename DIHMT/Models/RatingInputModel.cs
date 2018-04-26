@@ -10,12 +10,20 @@ namespace DIHMT.Models
     {
         public int[] MonetizationFlags => new[] { 1, 2, 4, 5, 6, 7, 8, 9 };
         public bool IsSpotless => Flags.Contains((int)EnumTag.Spotless);
+
         [Required]
         public int Id { get; set; }
+
         [DisplayName("Basically, this game")]
         public string Basically { get; set; }
+
         [DisplayName("Detailed Info")]
         public string RatingExplanation { get; set; }
+
+        [DisplayName("Quiet update")]
+        public bool QuietUpdate { get; set; }
+
+        public string Comment { get; set; }
         public string SubmitterIp { get; set; }
 
         private List<int> _flags;
@@ -66,6 +74,11 @@ namespace DIHMT.Models
                 }
 
                 if (RatingExplanation != null && RatingExplanation.Length > 4000)
+                {
+                    return false;
+                }
+
+                if (Comment != null && Comment.Length > 1000)
                 {
                     return false;
                 }

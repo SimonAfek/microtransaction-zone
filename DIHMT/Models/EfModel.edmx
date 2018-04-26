@@ -20,6 +20,7 @@
           <Property Name="IsRated" Type="bit" Nullable="false" />
           <Property Name="RatingLastUpdated" Type="datetime" />
           <Property Name="Basically" Type="nvarchar" MaxLength="280" />
+          <Property Name="Aliases" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="DbGameGenre">
           <Key>
@@ -105,6 +106,7 @@
           <Property Name="TimeOfSubmission" Type="datetime" Nullable="false" />
           <Property Name="SubmitterIp" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Basically" Type="nvarchar" MaxLength="280" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <Association Name="FK__DbGamePla__GameI__31EC6D26">
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="1" />
@@ -327,6 +329,7 @@
           <NavigationProperty Name="PendingSubmissions" Relationship="Entities.FK_GameId_Game_Id" FromRole="DbGame" ToRole="PendingSubmission" />
           <Property Name="Basically" Type="String" MaxLength="280" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DbGameLinks" Relationship="Entities.FK_DbGameLink_DbGame_Id" FromRole="DbGame" ToRole="DbGameLink" />
+          <Property Name="Aliases" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DbGamePlatform">
           <Key>
@@ -540,6 +543,7 @@
           <Property Name="SubmitterIp" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Basically" Type="String" MaxLength="280" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PendingGameLinks" Relationship="Entities.FK_PendingGameLink_PendingSubmission_Id" FromRole="PendingSubmission" ToRole="PendingGameLink" />
+          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           </EntityType>
         <Association Name="FK_GameId_Game_Id">
           <End Type="Entities.DbGame" Role="DbGame" Multiplicity="1">
@@ -636,6 +640,7 @@
           <EntitySetMapping Name="DbGames">
             <EntityTypeMapping TypeName="Entities.DbGame">
               <MappingFragment StoreEntitySet="DbGame">
+                <ScalarProperty Name="Aliases" ColumnName="Aliases" />
                 <ScalarProperty Name="Basically" ColumnName="Basically" />
                 <ScalarProperty Name="RatingLastUpdated" ColumnName="RatingLastUpdated" />
                 <ScalarProperty Name="IsRated" ColumnName="IsRated" />
@@ -718,6 +723,7 @@
           <EntitySetMapping Name="PendingSubmissions">
             <EntityTypeMapping TypeName="Entities.PendingSubmission">
               <MappingFragment StoreEntitySet="PendingSubmission">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Basically" ColumnName="Basically" />
                 <ScalarProperty Name="SubmitterIp" ColumnName="SubmitterIp" />
                 <ScalarProperty Name="TimeOfSubmission" ColumnName="TimeOfSubmission" />

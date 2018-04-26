@@ -1,9 +1,15 @@
 ﻿/*  HEX COLORS
-        MZ-indigo           #784ef9
-        MZ-indigo-light     #9f8af9
-        MZ-indigo-hover     #bfb1fb
-        MZ-indigo-dark      #3f3882
-        MZ-gray-dark        #1a1a1a 
+
+        indigo           #784ef9
+        indigo-light     #9f8af9
+        indigo-hover     #bfb1fb
+        indigo-dark      #3f3882
+
+        gray-dark        #1a1a1a 
+
+        teal             #2ABCB8
+        teal-light       #5AE5DE
+        
 */
 
 /*  BOOTSTRAP BREAKPOINTS
@@ -14,22 +20,23 @@
 */
 
 /*  CSS INDEX 
-        1. ALL PAGES  
-            a. Typography
-            b. Buttons
-            c. Popovers
-            d. Navigation
-            e. Sidebar
-        2. GAME LIST
-            a. Small Image
-            b. Game List Flags
-        3. GAME INDEX
-            a. Large Image
-            b. Game Index Flags
-        4. SUBMISSION FORM
-            a. Submission Checkboxes
-            b. Modal
-        5. FOOTER
+    1. ALL PAGES  
+        a. Typography
+        b. Buttons
+        c. Popovers
+        d. Navigation
+        e. Sidebar
+        f. Search XL
+    2. GAME LIST
+        a. Small Image
+        b. Game List Flags
+    3. GAME INDEX
+        a. Large Image
+        b. Game Index Flags
+    4. SUBMISSION FORM
+        a. Submission Checkboxes
+        b. Modal
+    5. FOOTER
 */
 
 
@@ -41,7 +48,7 @@
 body {
     color: #1a1a1a;
     font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .body-content {
@@ -89,7 +96,7 @@ body {
 }
 
 h1 {
-    color: #9f8af9;
+    color: #784ef9;
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 1px;
@@ -97,43 +104,58 @@ h1 {
 }
 
 h2 {
-    color: #9f8af9;
-    font-size: 1.75rem;
+    color: #3f3882;
+    font-size: 1.5rem;
     font-weight: 700;
-    letter-spacing: 1px;
     margin-bottom: 20px;
     text-transform: uppercase;
 }
 
+    h2.softh2 {
+        margin-bottom: 10px;
+        text-transform: none;
+    }
+
 h3 {
-    color: #3f3882;
-    font-size: 1.5rem;
+    color: #784ef9;
+    font-size: 1.25rem;
     font-weight: 700;
 }
 
 h4 {
     color: #3f3882;
-    font-size: 1.25rem;
-    font-weight: 700;
-}
-
-h5 {
     font-size: 1rem;
     font-weight: 700;
 }
 
 a {
-    color: #9f8af9;
+    color: #2ABCB8;
     transition: all 0.1s linear;
 }
 
     a:hover {
-        color: #bfb1fb;
+        color: #5AE5DE;
     }
 
     a.disabled {
         color: #aaa;
         pointer-events: none;
+    }
+
+    a.indigo {
+        color: #9f8af9;
+    }
+
+    a.indigo:hover {
+        color: #bfb1fb;
+    }
+
+    a.grey {
+        color: #ccc;
+    }
+
+    a.grey:hover {
+        color: white;
     }
 
 .bold-grey {
@@ -142,13 +164,13 @@ a {
 }
 
 /* in which VS tells me this valid pseudo-element isn't valid*/
-::placeholder {
+.searchbar::placeholder {
     font-weight: 700;
     text-transform: uppercase;
 }
 
 @media (max-width: 767px) {
-    ::placeholder {
+    .searchbar::placeholder {
         font-size: 1.15rem;
     }
 }
@@ -168,6 +190,7 @@ a {
     }
 
 .btn-secondary {
+    background-color: #666;
     font-weight: 700;
     border: 0;
 }
@@ -176,19 +199,38 @@ a {
         background-color: #aaa;
     }
 
-/* Popovers */
-
-.popover-header {
-    background-color: #784ef9;
+.btn-fake {
+    background-color: #555;
+    border-radius: .25rem;
     color: white;
-    margin-top: unset;
+    padding: 7px 0 7px 0;
+    text-align: center;
 }
+
+    .btn-fake:hover {
+        background-color: #888;
+        color: white;
+        text-decoration: none;
+    }
+
+@media (max-width: 991px) {
+    .btn-fake {
+        margin-top: 10px;
+    }
+}
+
+
+/* c. Popovers */
+
+/*.popover-header {
+    margin-top: unset;
+}*/
 
 .popover-body {
     margin-bottom: 5px;
 }
 
-/* c. Navigation */
+/* d. Navigation */
 
 .nav {
     background-color: #1a1a1a;
@@ -200,7 +242,7 @@ a {
 }
 
 .nav-border {
-    border-bottom: 1px solid #cccccc;
+    border-bottom: 1px solid #ccc;
 }
 
 .navbar-brand {
@@ -231,7 +273,7 @@ nav > div > a {
 }
 
     nav > div > a:hover {
-        color: #9f8af9;
+        color: white;
     }
 
     nav > div > a > img {
@@ -240,10 +282,6 @@ nav > div > a {
     }
 
 @media (max-width: 767px) {
-    #navbarNavDropdown {
-        margin-top: 10px;
-    }
-
     .nav-item {
         margin-bottom: 5px;
         padding-left: 15px;
@@ -264,9 +302,9 @@ nav > div > a {
 }
 
 .dropdown-menu {
-    background-color: #3f3882;
+    background-color: #1a1a1a;
     border-radius: 0px;
-    transform: translateX(-5%);
+    transform: translateX(-4%);
 }
 
 .dropdown-item {
@@ -282,13 +320,34 @@ nav > div > a {
     color: white;
 }
 
+@media (min-width: 768px) {
+    .dropdown-menu {
+        border-right: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+        margin-top: 7px;
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .dropdown-menu {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .navbar-collapse {
+        padding-top: 8px;
+    }
+}
+
 @media (max-width: 991px) {
     .dropdown-menu {
         transform: translateX(0%);
     }
     .dropdown-item {
         padding-left: 20px;
-        padding-right: auto;
+        padding-right: 20px;
     }
     .dropdown-item:hover {
         background-color: none;
@@ -296,13 +355,12 @@ nav > div > a {
     }
 }
 
-/* d. Sidebar */
+/* e. Sidebar */
 
 .sidebar {
     background-color: #1a1a1a;
     color: white;
     font-size: .75rem;
-    font-weight: 500;
     max-height: 1193px;
     height: 100%;
     padding: 20px;
@@ -328,22 +386,21 @@ nav > div > a {
 }
 
 .blog-post-date {
-    color: white;
+    font-size: .65rem;
     font-weight: 700;
+    letter-spacing: .5px;
     text-transform: uppercase;
 }
 
 .blog-post-title {
-    font-weight: 700;
-    margin-bottom: 5px;
-    text-transform: uppercase;
+    margin-bottom: 5px; 
 }
 
 .divider {
     border: .5px solid white;
 }
 
-/* e. XL Search */
+/* f. XL Search */
 
 .search-xl {
     margin: 20px 0 40px 0;
@@ -531,7 +588,8 @@ form.searchbar-xl > button {
 }
 
 .inactive-flag-img {
-    opacity: 0.3;
+    opacity: 0.4;
+    filter: grayscale(100%)
 }
 
 
@@ -555,10 +613,17 @@ form.searchbar-xl > button {
 }
 
 .game-name {
-    line-height: 1;
+    color: #9f8af9;
+}
+
+@media (max-width: 575px) {
+    .game-name {
+        font-size: 7vw;
+    }
 }
 
 .game-platform {
+    overflow: hidden;
     line-height: 1.25;
     margin: 0 0 10px 0;
 }
@@ -639,6 +704,14 @@ form.searchbar-xl > button {
 
 .flag-name {
     color: #784ef9;
+}
+
+.flag-name-spotless {
+    color: #D3B42F;
+}
+
+.flag-name-tfof2p {
+    color: #2ABCB8;
 }
 
 
@@ -778,11 +851,6 @@ textarea {
 
 /* b. Modal */
 
-.modal-lg {
-    
-}
-
-
 .modal-header {
     padding: 16px 25px 16px 25px;
 }
@@ -790,6 +858,7 @@ textarea {
 .modal-body {
     padding: 25px;
 }
+
 
 
 /*--------------------------*/
@@ -817,4 +886,42 @@ footer {
 
 .logout-button {
     position: relative;
+}
+
+
+
+/*--------------------------*/
+/*      6. PENDING          */
+/*--------------------------*/
+
+.table {
+    font-size: .85rem;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.row-id {
+    width: 10%;
+}
+
+.row-game {
+    width: 25%;
+}
+
+.row-description {
+    width: 25%;
+}
+
+.row-timestamp {
+    width: 25%;
+}
+
+.row-ip {
+    width: 15%;
+}
+
+.ipwrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

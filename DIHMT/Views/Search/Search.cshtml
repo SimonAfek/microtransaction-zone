@@ -1,4 +1,5 @@
-﻿@model DIHMT.Models.SearchResult
+﻿@using DIHMT.Models
+@model SearchResult
 
 @{
     ViewBag.Title = "Search";
@@ -9,7 +10,6 @@
     <div class="page-title">Search Results</div>
     foreach (var item in Model.Results)
     {
-                    
         @Html.Partial("Mini", item)
     } // For each result
 } // if model results any
@@ -23,13 +23,17 @@ else
 
 @if (Model.Page > 1)
 {
-    if (Model.IsAdvanced)
+    if (Model.Type == SearchType.Advanced)
     {
-        <a href="@(Url.Action("Advanced", "Search") + Model.AdvancedQueryStringWithoutPageNumber + (Model.Page - 1))">&lt;== Prev</a>
+        <a href="@(Url.Action("Advanced") + Model.AdvancedQueryStringWithoutPageNumber + (Model.Page - 1))">&lArr; Prev</a>
     }
-    else
+    else if (Model.Type == SearchType.Standard)
     {
-        <a href="@Url.Action("Search", "Search", new { q = Model.Query, page = Model.Page - 1})">&lArr; Prev</a>
+        <a href="@Url.Action("Search", new { q = Model.Query, page = Model.Page - 1 })">&lArr; Prev</a>
+    }
+    else if (Model.Type == SearchType.Recent)
+    {
+        <a href="@Url.Action("Recent", new { page = Model.Page - 1 })">&lArr; Prev</a>
     }
     <text>&nbsp;|&nbsp;</text>
 }
@@ -39,12 +43,16 @@ else
 @if (Model.Results.Any())
 {
     <text>&nbsp;|&nbsp;</text>
-    if (Model.IsAdvanced)
+    if (Model.Type == SearchType.Advanced)
     {
-        <a href="@(Url.Action("Advanced", "Search") + Model.AdvancedQueryStringWithoutPageNumber + (Model.Page + 1))">Next ==&gt;</a>
+        <a href="@(Url.Action("Advanced") + Model.AdvancedQueryStringWithoutPageNumber + (Model.Page + 1))">Next &rArr;</a>
     }
-    else
+    else if (Model.Type == SearchType.Standard)
     {
-        <a href="@Url.Action("Search", "Search", new { q = Model.Query, page = Model.Page + 1})">Next &rArr;</a>
+        <a href="@Url.Action("Search", new { q = Model.Query, page = Model.Page + 1})">Next &rArr;</a>
+    }
+    else if (Model.Type == SearchType.Recent)
+    {
+        <a href="@Url.Action("Recent", new { page = Model.Page + 1 })">Next &rArr;</a>
     }
 }

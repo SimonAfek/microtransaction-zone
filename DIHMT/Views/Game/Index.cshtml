@@ -12,45 +12,46 @@
 
     <div class="game-platform">
 
-        <p><h1><strong>@Model.Name</strong></h1></p>
-
-        <p>Platform(s)
-        <br />
-        @for (var i = 0; i < Model.Platforms.Count; i++)
-        {
-            if (i < Model.Platforms.Count - 1)
-            {
-                <b> @Model.Platforms[i].Abbreviation | </b>
-            }
-
-            else
-            {
-                <b> @Model.Platforms[i].Abbreviation </b>
-            }
-        }
-        </p>
+        <p><h1 class="game-name"><strong>@Model.Name</strong></h1></p>
 
         <p>
-        Genre(s)
-        <br />
-        @if (Model.Genres != null && Model.Genres.Any())
-        {
-        <span>
-
-            @for (var i = 0; i < Model.Genres.Count; i++)
+            Platform(s)
+            <br />
+            @for (var i = 0; i < Model.Platforms.Count; i++)
             {
-                if (i < Model.Genres.Count - 1)
+                if (i < Model.Platforms.Count - 1)
                 {
-                    <b>@Model.Genres[i].Name | </b>
+                    <b> @Model.Platforms[i].Abbreviation | </b>
                 }
 
                 else
                 {
-                    <b>@Model.Genres[i].Name</b>
+                    <b> @Model.Platforms[i].Abbreviation </b>
                 }
             }
-        </span>
-        }
+        </p>
+
+        <p>
+            Genre(s)
+            <br />
+            @if (Model.Genres != null && Model.Genres.Any())
+            {
+                <span>
+
+                    @for (var i = 0; i < Model.Genres.Count; i++)
+                    {
+                        if (i < Model.Genres.Count - 1)
+                        {
+                            <b>@Model.Genres[i].Name | </b>
+                        }
+
+                        else
+                        {
+                            <b>@Model.Genres[i].Name</b>
+                        }
+                    }
+                </span>
+            }
         </p>
 
     </div>
@@ -84,41 +85,41 @@
         {
             <p>This game does not fulfill the conditions for any of our monetization classifications&mdash;please see the description below for further info.</p>
         }
-                
-    <p></p>
-    <h3>Detailed Info</h3>
-    <p>
-        @if (string.IsNullOrEmpty(Model.RatingExplanation))
-        {
-            <i>No reason for this game's rating is available.</i>
-        }
 
-        else
-        {
-            foreach (var v in Model.RatingExplanationArrayOfParagraphs)
+        <p></p>
+        <h3>Detailed Info</h3>
+        <p>
+            @if (string.IsNullOrEmpty(Model.RatingExplanation))
             {
-                <p>@v</p>
+                <i>No reason for this game's rating is available.</i>
+            }
+
+            else
+            {
+                foreach (var v in Model.RatingExplanationArrayOfParagraphs)
+                {
+                <p>@Html.Raw(Html.Encode(v).Replace(Environment.NewLine, "<br />"))</p>
             }
         }
 
-        @if (Model.Links != null && Model.Links.Any())
-        {
-            <h3>External Links</h3>
+            @if (Model.Links != null && Model.Links.Any())
+            {
+                <h3>External Links</h3>
 
-            <p>
-                @foreach (var v in Model.Links)
-                {
-                    <a class="external-links" href="@v" target="_blank">@v</a><br />
-                }
+                <p>
+                    @foreach (var v in Model.Links)
+                    {
+                        <a class="external-links" href="@v" target="_blank">@v</a><br />
+                    }
+                </p>
+            }
             </p>
         }
-    </p>
-    }       
-                
+
     <hr class="divider-basic">
 
 </div>
 
-<div class="basic">
+<div class="basic btn-submitedit">
     @Html.Partial("Submit", Model.RatingModel)
 </div>

@@ -14,18 +14,18 @@
         <EntityTypeShape EntityType="Entities.DbGenre" Width="1.5" PointX="1.875" PointY="5.625" />
         <AssociationConnector Association="Entities.FK_DbGameGenre_GameId" />
         <AssociationConnector Association="Entities.FK_DbGameGenre_GenreId" />
-        <EntityTypeShape EntityType="Entities.DbGameRating" Width="1.5" PointX="13.75" PointY="5" />
-        <EntityTypeShape EntityType="Entities.DbRating" Width="1.5" PointX="11.5" PointY="9" />
+        <EntityTypeShape EntityType="Entities.DbGameRating" Width="1.5" PointX="13.875" PointY="3.625" />
+        <EntityTypeShape EntityType="Entities.DbRating" Width="1.5" PointX="12.125" PointY="5.75" />
         <AssociationConnector Association="Entities.FK_DbGameRating_GameId" />
         <AssociationConnector Association="Entities.FK_DbGameRating_RatingId" />
-        <EntityTypeShape EntityType="Entities.PendingDbGameRating" Width="1.5" PointX="13.75" PointY="11.125" />
-        <EntityTypeShape EntityType="Entities.PendingSubmission" Width="1.5" PointX="10.75" PointY="13.125" />
+        <EntityTypeShape EntityType="Entities.PendingDbGameRating" Width="1.5" PointX="16.75" PointY="8" />
+        <EntityTypeShape EntityType="Entities.PendingSubmission" Width="1.5" PointX="5.875" PointY="7.5" />
         <AssociationConnector Association="Entities.FK_GameId_Game_Id" />
         <AssociationConnector Association="Entities.FK_PendingDbGameRating_Rating" />
         <AssociationConnector Association="Entities.FK_PendingDbGameRating_PendingSubmission" />
         <EntityTypeShape EntityType="Entities.DbGameLink" Width="1.5" PointX="3.625" PointY="1.375" />
         <AssociationConnector Association="Entities.FK_DbGameLink_DbGame_Id" />
-        <EntityTypeShape EntityType="Entities.PendingGameLink" Width="1.5" PointX="9.75" PointY="8" />
+        <EntityTypeShape EntityType="Entities.PendingGameLink" Width="1.5" PointX="10.125" PointY="5.625" />
         <AssociationConnector Association="Entities.FK_PendingGameLink_PendingSubmission_Id" />
         </Diagram>
     </edmx:Diagrams>

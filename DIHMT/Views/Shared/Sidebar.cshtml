@@ -1,37 +1,15 @@
-﻿<div class="sidebar">
+﻿@using DIHMT.Static
+<div class="sidebar">
 
     <div class="blog">
 
         <a href="#">
-            <a href="#" class="blog-name">MTX.Zone News</a>
+            <a href="#" class="blog-name indigo">MTX.Zone Blog</a>
         </a>
 
         <hr class="divider-top" />
-
-        <p class="blog-post-body">Coming soon!</p>
-
-        @*
-        <a href="#">
-            <div class="blog-post-date">2018 Jun 01</div>
-            <div class="blog-post-title">New Games This Week</div>
-        </a>
-        <div class="blog-post-body">Check out our ratings on the newest games this week, including Video Game One and Video Game 2!</div>
-
-        <hr class="divider" />
-
-        <a href="#">
-            <div class="blog-post-date">2018 May 22</div>
-            <div class="blog-post-title">New Games This Week&mdash;now with a longer title!</div>
-        </a>
-        <div class="blog-post-body">Check out our ratings on the newest games this week, including Video Game One and Video Game 2!</div>
-
-        <hr class="divider" />
-
-        <a href="#">
-            <div class="blog-post-date">2018 May 03</div>
-            <div class="blog-post-title">New Games This Week</div>
-        </a>
-        <div class="blog-post-body">Check out our ratings on the <a href="#">newest games</a> this week, including Video Game One and Video Game 2!</div>*@
+        
+        @Html.Partial("Tumblr", TumblrState.GetPosts())
 
     </div>
 

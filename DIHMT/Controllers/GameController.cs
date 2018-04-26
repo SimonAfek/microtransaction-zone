@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Text;
+using System.Web.Mvc;
 using DIHMT.Models;
 using DIHMT.Static;
 
@@ -16,11 +18,24 @@ namespace DIHMT.Controllers
         }
 
         [HttpPost]
+        [ReCaptcha]
         [ValidateAntiForgeryToken]
         public ActionResult SubmitRating(RatingInputModel input)
         {
+            if (ModelState.Keys.Contains("ReCaptcha") && ModelState["ReCaptcha"].Errors.Any())
+            {
+                Response.StatusCode = 400;
+                return Json("Captcha error - please complete the captcha and try again.");
+            }
+
             if (input.Valid && Request.UserHostAddress != null)
             {
+                if (!input.Flags.Contains((int)EnumTag.Spotless) && (string.IsNullOrEmpty(input.Basically) || string.IsNullOrEmpty(input.RatingExplanation)))
+                {
+                    Response.StatusCode = 400;
+                    return Json(System.Text.RegularExpressions.Regex.Unescape("When submitting a game without the 'Spotless'-tag, we require that you fill out the 'Basically' and 'Rating Explanation'-fields explaining the game's purchases in some detail. Please fill out those fields and submit again."));
+                }
+
                 input.SubmitterIp = Request.IsAuthenticated ? string.Empty : CryptHelper.Hash(Request.UserHostAddress);
 
                 GameHelpers.SubmitRating(input, Request.IsAuthenticated);

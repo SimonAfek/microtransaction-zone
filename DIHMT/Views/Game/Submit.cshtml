@@ -1,4 +1,5 @@
-﻿@using DIHMT.Models
+﻿@using System.Web.Configuration
+@using DIHMT.Models
 @using DIHMT.Static
 @model RatingInputModel
 
@@ -7,7 +8,6 @@
 </button>
 
 @using (Html.BeginForm("SubmitRating", "Game", FormMethod.Post, new { id = "submissionform" }))
-
 {
     var ratings = GameHelpers.GetRatings();
     var spotlessRating = ratings.First(x => x.Id == (int)EnumTag.Spotless);
@@ -31,6 +31,11 @@
                 <div class="modal-body">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.Id)
+                    
+                    <p>
+                        Hi there! If this is your first time submitting something to the site, please take a minute or two to read our <a href="@Url.Action("Tags", "Home")" target="_blank">Tag overview</a> and <a href="@Url.Action("SubmissionGuide", "Home")" target="_blank">Submission guide</a>.
+                        That'll make it much easier for us to get your submission reviewed.
+                    </p>
 
                     <!-- FLAGS -->
                     <div class="form-group row no-gutters">
@@ -123,16 +128,57 @@
                         </div>
 
                     </div>
+                    
+                    <!-- RECAPTCHA -->
+                    
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <div class="form-group row no-gutters">
+                            <div class="col-lg-3">@Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label" })</div>
+                            <div class="col-lg-9 wide-input-box">
+                                <textarea name="Comment" class="form-control wide-input" rows="10" cols="100" maxlength="1000" placeholder="Enter a comment for the mods. This will not be part of the published rating."></textarea>
+                                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row no-gutters">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-9">
+                                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                                <div class="g-recaptcha" data-sitekey="@WebConfigurationManager.AppSettings["ReCaptchaPublicKey"]" data-callback="captchaComplete"></div>
+                            </div>
+                        </div>
+                    } @*Should only be shown to non-logged in users*@
+
+                    @*Quiet update*@
+
+                    else
+                    {
+                        <div class="form-group row no-gutters">
+                            <div class="col-lg-3">
+                                @Html.LabelFor(model => model.QuietUpdate, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            
+                            <div class="col-lg-9">
+                                <div class="form-check">
+                                    <input type="checkbox" name="QuietUpdate" value="true" />
+                                    <label>&ensp;Yes</label>
+                                </div>
+                            </div>
+                        </div>
+                    }
 
                     <div class="successmessage"></div>
                     <div class="failuremessage"></div>
                 </div>
 
                 <!-- FOOTER -->
+
                 <div class="modal-footer">
                     <div class="form-group row">
                         <div class="col-sm-offset-1 col-sm-2">
-                            <input type="submit" value="Save" id="submissionbutton" class="btn btn-primary" />
+                            @*If user is not logged in, button will be disabled until reCAPTCHA is completed*@
+                            <input type="submit" value="Save" id="submissionbutton" class="btn btn-primary" disabled="@(!Request.IsAuthenticated)"/>
                         </div>
                     </div>
                 </div>
@@ -141,3 +187,5 @@
         </div>
     </div>
 }
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.AreYouSure/1.9.0/jquery.are-you-sure.min.js" integrity="sha256-5VKy5bw46U62DHG7pAhtXgsgmSjMSLjP5s4oQHW1LEI=" crossorigin="anonymous"></script>

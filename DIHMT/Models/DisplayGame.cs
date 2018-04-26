@@ -11,7 +11,7 @@ namespace DIHMT.Models
         public string GameSummary { get; set; }
         public string Basically { get; set; }
         public string RatingExplanation { get; set; }
-        public string[] RatingExplanationArrayOfParagraphs => RatingExplanation.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).Where(x => !string.IsNullOrEmpty(x)).ToArray();
+        public string[] RatingExplanationArrayOfParagraphs => RatingExplanation.Split(new[] { $"{Environment.NewLine}{Environment.NewLine}" }, StringSplitOptions.None).Where(x => !string.IsNullOrEmpty(x)).ToArray();
         public DateTime? RatingLastUpdated { get; set; }
         public DateTime LastUpdated { get; set; }
         public string SmallImageUrl { get; set; }
@@ -22,6 +22,7 @@ namespace DIHMT.Models
         public List<DisplayGamePlatform> Platforms { get; set; }
         public List<DisplayGameGenre> Genres { get; set; }
         public List<string> Links { get; set; }
+        public string Aliases { get; set; }
 
         public RatingInputModel RatingModel => new RatingInputModel
         {
@@ -76,6 +77,8 @@ namespace DIHMT.Models
             SmallImageUrl = input.SmallImageUrl;
             GameSummary = input.Summary;
             ThumbImageUrl = input.ThumbImageUrl;
+
+            Aliases = input.Aliases;
         }
     }
 

@@ -4,49 +4,54 @@
     ViewBag.Title = "Pending";
 }
 
-<h2>Pending</h2>
+<div class="basic">
+    <h1>Pending</h1>
+    <p></p>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GameName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShortExplanation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimeOfSubmission)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShortSubmitterIp)
-        </th>
-        <th></th>
-    </tr>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th class="row-id">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th class="row-game">
+                    @Html.DisplayNameFor(model => model.GameName)
+                </th>
+                <th class="row-description">
+                    @Html.DisplayNameFor(model => model.ShortExplanation)
+                </th>
+                <th class="row-timestamp">
+                    @Html.DisplayNameFor(model => model.TimeOfSubmission)
+                </th>
+                <th class="row-ip">
+                    @Html.DisplayNameFor(model => model.ShortSubmitterIp)
+                </th>
+                @*<th></th>*@
+            </tr>
+        </thead>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink(item.Id.ToString(), "Pending", new { id = item.Id })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GameName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShortExplanation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TimeOfSubmission)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShortSubmitterIp)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Pending", new { id = item.Id })
-            </td>
-        </tr>
-    }
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Id.ToString(), "Pending", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GameName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShortExplanation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeOfSubmission)
+                </td>
+                <td class="ipwrap">
+                    @Html.DisplayFor(modelItem => item.ShortSubmitterIp)
+                </td>
+                @*<td>
+                    @Html.ActionLink("Edit", "Pending", new { id = item.Id })
+                </td>*@
+            </tr>
+        }
+    </table>
+</div>
