@@ -71,9 +71,9 @@
                 @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
             </div>
         </p>
-        
+
         <!-- COMMENT -->
-        
+
         <p>
             @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-lg-2" })
         </p>
@@ -131,7 +131,7 @@
             @Html.EditorFor(model => model.SubmitterIp, new { htmlAttributes = new { @class = "form-control", disabled = "true" } })
             @Html.ValidationMessageFor(model => model.SubmitterIp, "", new { @class = "text-danger" })
         </p>
-        
+
         <p>
             @Html.LabelFor(model => model.QuietUpdate, htmlAttributes: new { @class = "control-label" })
         </p>
@@ -147,6 +147,33 @@
                 <input type="submit" name="SubmitAction" id="ApproveButton" value="Approve" class="btn btn-success" />
                 <input type="submit" name="SubmitAction" id="RejectButton" value="Reject" class="btn btn-danger" />
             </div>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("Block", "Admin"))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="BlockedIp" value="@Model.SubmitterIp" />
+    <input type="hidden" name="PendingId" value="@Model.Id" />
+
+    <div class="form-horizontal">
+        <h3>Block submitter</h3>
+        <div class="form-group">
+            <p>
+                <label class="control-label">Reason for block</label>
+                <input type="text" class="wide-input form-control" name="Reason"/>
+            </p>
+            <p>
+                <div class="col-md-2">
+                    <label class="control-label">Explicit block?</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="checkbox" name="Explicit"/> Check this box and the user will be made aware on timeout when they try to submit. Leave it blank and they won't. Permabans are always without notification.
+                </div>
+            </p>
+            <input type="submit" name="BlockType" id="TimeOutButton" value="TimeOut" class="btn btn-warning"/>
+            <input type="submit" name="BlockType" id="PermabanButton" value="PERMABAN" class="btn btn-danger"/>
         </div>
     </div>
 }

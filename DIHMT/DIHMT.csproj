@@ -253,6 +253,10 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Models\AdminViewModels.cs" />
     <Compile Include="Models\AdvancedSearchViewModel.cs" />
+    <Compile Include="Models\BlockList.cs">
+      <DependentUpon>EfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BlockModel.cs" />
     <Compile Include="Models\DbGame.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>
@@ -293,6 +297,7 @@
     <Compile Include="Models\SearchResult.cs" />
     <Compile Include="Models\TumblrPost.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Static\BlockHelpers.cs" />
     <Compile Include="Static\CryptHelper.cs" />
     <Compile Include="Static\DbAccess.cs" />
     <Compile Include="Global.asax.cs">

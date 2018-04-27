@@ -27,6 +27,7 @@
         <AssociationConnector Association="Entities.FK_DbGameLink_DbGame_Id" />
         <EntityTypeShape EntityType="Entities.PendingGameLink" Width="1.5" PointX="10.125" PointY="5.625" />
         <AssociationConnector Association="Entities.FK_PendingGameLink_PendingSubmission_Id" />
+        <EntityTypeShape EntityType="Entities.BlockList" Width="1.5" PointX="0.75" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

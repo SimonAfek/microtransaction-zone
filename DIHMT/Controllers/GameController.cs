@@ -3,6 +3,7 @@ using System.Text;
 using System.Web.Mvc;
 using DIHMT.Models;
 using DIHMT.Static;
+using WebGrease.Css.Ast.Selectors;
 
 namespace DIHMT.Controllers
 {
@@ -36,7 +37,25 @@ namespace DIHMT.Controllers
                     return Json(System.Text.RegularExpressions.Regex.Unescape("When submitting a game without the 'Spotless'-tag, we require that you fill out the 'Basically' and 'Rating Explanation'-fields explaining the game's purchases in some detail. Please fill out those fields and submit again."));
                 }
 
-                input.SubmitterIp = Request.IsAuthenticated ? string.Empty : CryptHelper.Hash(Request.UserHostAddress);
+                input.SubmitterIp = string.Empty;
+
+                if (!Request.IsAuthenticated)
+                {
+                    input.SubmitterIp = CryptHelper.Hash(Request.UserHostAddress);
+
+                    var blockStatus = BlockHelpers.GetBlockStatus(input.SubmitterIp);
+
+                    if (blockStatus == BlockType.ExplicitBlocked)
+                    {
+                        Response.StatusCode = 400;
+                        return Json("We have temporarily stopped your ability to send in submissions - come back tomorrow and you can submit ratings again.");
+                    }
+
+                    if (blockStatus == BlockType.HiddenBlocked)
+                    {
+                        return Json("Your submission has been accepted. It will go live as soon as it's been verified. Thank you for helping out!");
+                    }
+                }
 
                 GameHelpers.SubmitRating(input, Request.IsAuthenticated);
 

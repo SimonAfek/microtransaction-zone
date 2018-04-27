@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using DIHMT.Models;
 using GiantBomb.Api.Model;
 
@@ -416,6 +417,34 @@ namespace DIHMT.Static
             using (var ctx = new DIHMTEntities())
             {
                 return ctx.DbGenres.ToList();
+            }
+        }
+
+        public static BlockList IsBlocked(string ip)
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                return ctx.BlockLists.FirstOrDefault(x => x.BlockedIp == ip);
+            }
+        }
+
+        public static void BlockIp(BlockList input)
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                var curBlock = ctx.BlockLists.FirstOrDefault(x => x.BlockedIp == input.BlockedIp);
+
+                if (curBlock == null)
+                {
+                    ctx.BlockLists.Add(input);
+                }
+                else
+                {
+                    curBlock.Expiration = input.Expiration;
+                    curBlock.Explicit = input.Explicit;
+                }
+
+                ctx.SaveChanges();
             }
         }
     }

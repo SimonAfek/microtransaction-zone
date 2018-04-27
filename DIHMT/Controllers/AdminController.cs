@@ -198,6 +198,23 @@ namespace DIHMT.Controllers
             return RedirectToAction("Index", "Game", new { id = input.GameId });
         }
 
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Block(BlockModel input)
+        {
+            if (!string.IsNullOrEmpty(input.BlockedIp))
+            {
+                if (input.BlockType.ToLower() == "permaban")
+                {
+                    input.Explicit = false;
+                }
+
+                BlockHelpers.BlockIp(input);
+            }
+
+            return RedirectToAction("Pending", new { id = input.PendingId });
+        }
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

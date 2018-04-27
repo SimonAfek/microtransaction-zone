@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BlockList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlockedIp" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Expiration" Type="date" Nullable="false" />
+          <Property Name="Explicit" Type="bit" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="DbGame">
           <Key>
             <PropertyRef Name="Id" />
@@ -250,6 +260,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EntitiesStoreContainer">
+          <EntitySet Name="BlockList" EntityType="Self.BlockList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGame" EntityType="Self.DbGame" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGameGenre" EntityType="Self.DbGameGenre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DbGameLink" EntityType="Self.DbGameLink" Schema="dbo" store:Type="Tables" />
@@ -433,6 +444,7 @@
             <End Role="PendingSubmission" EntitySet="PendingSubmissions" />
             <End Role="PendingGameLink" EntitySet="PendingGameLinks" />
           </AssociationSet>
+          <EntitySet Name="BlockLists" EntityType="Entities.BlockList" />
           </EntityContainer>
         <EntityType Name="DbGameGenre">
           <Key>
@@ -633,6 +645,16 @@
 			</Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="BlockList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlockedIp" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Expiration" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Explicit" Type="Boolean" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -750,6 +772,17 @@
               <MappingFragment StoreEntitySet="PendingGameLink">
                 <ScalarProperty Name="Link" ColumnName="Link" />
                 <ScalarProperty Name="PendingSubmissionId" ColumnName="PendingSubmissionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlockLists">
+            <EntityTypeMapping TypeName="Entities.BlockList">
+              <MappingFragment StoreEntitySet="BlockList">
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Explicit" ColumnName="Explicit" />
+                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
+                <ScalarProperty Name="BlockedIp" ColumnName="BlockedIp" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
