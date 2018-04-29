@@ -11,6 +11,7 @@
 {
     var ratings = GameHelpers.GetRatings();
     var spotlessRating = ratings.First(x => x.Id == (int)EnumTag.Spotless);
+    var f2pRating = ratings.First(x => x.Id == (int)EnumTag.F2P);
 
     @Html.AntiForgeryToken()
 
@@ -31,7 +32,7 @@
                 <div class="modal-body">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.Id)
-                    
+
                     <p>
                         Hi there! If this is your first time submitting something to the site, please take a minute or two to read our <a href="@Url.Action("Tags", "Home")" target="_blank">Tag overview</a> and <a href="@Url.Action("SubmissionGuide", "Home")" target="_blank">Submission guide</a>.
                         That'll make it much easier for us to get your submission reviewed.
@@ -49,19 +50,16 @@
                                 <label>&ensp;Spotless</label>
                             </div>
 
+                            <div class="form-check">
+                                <input type="checkbox" name="Flags" value="@((int)EnumTag.F2P)" checked="@Model.Flags.Contains((int)EnumTag.F2P)" id="@($"submission-checkbox-{(int)EnumTag.F2P}")" class="submission-checkbox" />
+                                <label for="@($"submission-checkbox-{(int)EnumTag.F2P}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@f2pRating.Name" data-content="@f2pRating.ShortDescription"></label>
+                                <label>&ensp;Free To Play</label>
+                            </div>
+
                             @foreach (var v in ratings.Where(x => Model.MonetizationFlags.Contains(x.Id)))
                             {
-                                <div class="form-check">
+                                <div class="form-check hide-when-spotless">
                                     <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="monetization-input submission-checkbox" disabled="@Model.IsSpotless" />
-                                    <label for="@($"submission-checkbox-{v.Id}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@v.Name" data-content="@v.ShortDescription"></label>
-                                    <label>&ensp;@v.Name</label>
-                                </div>
-                            }
-
-                            @foreach (var v in ratings.Where(x => !Model.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
-                            {
-                                <div class="form-check">
-                                    <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="submission-checkbox" />
                                     <label for="@($"submission-checkbox-{v.Id}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@v.Name" data-content="@v.ShortDescription"></label>
                                     <label>&ensp;@v.Name</label>
                                 </div>
@@ -128,9 +126,9 @@
                         </div>
 
                     </div>
-                    
+
                     <!-- RECAPTCHA -->
-                    
+
                     @if (!Request.IsAuthenticated)
                     {
                         <div class="form-group row no-gutters">
@@ -158,7 +156,7 @@
                             <div class="col-lg-3">
                                 @Html.LabelFor(model => model.QuietUpdate, htmlAttributes: new { @class = "control-label" })
                             </div>
-                            
+
                             <div class="col-lg-9">
                                 <div class="form-check">
                                     <input type="checkbox" name="QuietUpdate" value="true" />
@@ -178,7 +176,7 @@
                     <div class="form-group row">
                         <div class="col-sm-offset-1 col-sm-2">
                             @*If user is not logged in, button will be disabled until reCAPTCHA is completed*@
-                            <input type="submit" value="Save" id="submissionbutton" class="btn btn-primary" disabled="@(!Request.IsAuthenticated)"/>
+                            <input type="submit" value="Save" id="submissionbutton" class="btn btn-primary" disabled="@(!Request.IsAuthenticated)" />
                         </div>
                     </div>
                 </div>

@@ -848,6 +848,14 @@ textarea {
     background-image: url('/Images/1-1_F2P.svg');
 }
 
+#submission-checkbox-11 + label {
+    background-image: url('/Images/1-1_BatteriesNotIncluded.svg')
+}
+
+#submission-checkbox-12 + label {
+    background-image: url('/Images/1-1_TimeIsMoney.svg')
+}
+
 
 /* b. Modal */
 
