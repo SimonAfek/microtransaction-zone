@@ -49,7 +49,12 @@
 
 <div class="flag-container d-block">
     <div class="flag-row flex-md-row justify-content-around">
-        @foreach (var k in GameHelpers.GetRatings())
+        @{ var ratings =
+                   Model.Ratings.Any(x => x.Id == (int)EnumTag.Spotless)
+                   ? GameHelpers.GetRatings().Where(x => x.Id == (int)EnumTag.Spotless || x.Id == (int)EnumTag.F2P)
+                   : GameHelpers.GetRatings().Where(x => x.Id != (int)EnumTag.Spotless); }
+
+        @foreach (var k in ratings)
         {
             // I should not have made these two tiered versions of each other this is so stupid
             if (k.Id == (int)EnumTag.HorseArmor || k.Id == (int)EnumTag.BulkOrderHorseArmor)

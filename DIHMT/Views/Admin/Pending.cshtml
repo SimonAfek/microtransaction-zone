@@ -26,34 +26,7 @@
         <div>
             <div class="page-title">Existing rating</div>
 
-            <p>
-                <label>
-                    <input type="checkbox" name="Flags" checked="@Model.Item1.RatingModel.IsSpotless" disabled /> Spotless
-                </label>
-            </p>
-
-            <p>
-                <strong>Horse Armor</strong>
-                <ul>
-                    <li>
-                        <label>
-                            <input type="radio" name="Flags" checked="@(!(Model.Item1.RatingModel.Flags.Contains((int) EnumTag.HorseArmor) || Model.Item1.RatingModel.Flags.Contains((int) EnumTag.BulkOrderHorseArmor)))" disabled /> No
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="radio" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains((int) EnumTag.HorseArmor)" disabled /> Yes
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="radio" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains((int) EnumTag.BulkOrderHorseArmor)" disabled /> Bulk Order
-                        </label>
-                    </li>
-                </ul>
-            </p>
-
-            @foreach (var v in GameHelpers.GetRatings().Where(x => Model.Item1.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
+            @foreach (var v in GameHelpers.GetRatings())
             {
                 <p>
                     <label>
@@ -62,14 +35,6 @@
                 </p>
             }
 
-            @foreach (var v in GameHelpers.GetRatings().Where(x => !Model.Item1.RatingModel.MonetizationFlags.Contains(x.Id) && x.Id > (int)EnumTag.Spotless))
-            {
-                <p>
-                    <label>
-                        <input type="checkbox" name="Flags" checked="@Model.Item1.RatingModel.Flags.Contains(v.Id)" disabled /> @v.Name
-                    </label>
-                </p>
-            }
             <div class="form-group">
                 <p>
                     @Html.LabelFor(model => model.Item1.Basically, htmlAttributes: new { @class = "control-label col-md-2 " })
@@ -87,6 +52,18 @@
                     <textarea name="RatingExplanation" class="wide-input" rows="10" cols="100" maxlength="4000">@Model.Item1.RatingExplanation</textarea>
                 </p>
             </div>
+
+            @if (Model.Item1.Links?.Any() ?? false)
+            {
+                <ul>
+                    @foreach (var v in Model.Item1.Links)
+                    {
+                        <li>
+                            @v
+                        </li>
+                    }
+                </ul>
+            }
         </div>
 
         <div>

@@ -64,8 +64,10 @@ $(function () {
     $(".spotless-checkbox").click(function () {
         if ($(this).is(":checked")) {
             $(".monetization-input").prop({ disabled: true, checked: false });
+            $(".hide-when-spotless").hide();
         } else {
             $(".monetization-input").prop({ disabled: false });
+            $(".hide-when-spotless").show();
         }
     });
 

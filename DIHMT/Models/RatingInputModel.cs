@@ -8,8 +8,8 @@ namespace DIHMT.Models
 {
     public class RatingInputModel
     {
-        public int[] MonetizationFlags => new[] { 1, 2, 4, 5, 6, 7, 8, 9 };
-        public bool IsSpotless => Flags.Contains((int)EnumTag.Spotless);
+        public int[] MonetizationFlags => new[] { 1, 2, 4, 5, 6, 7, 8, 9, 11, 12 };
+        public bool IsSpotless => Flags?.Contains((int)EnumTag.Spotless) ?? false;
 
         [Required]
         public int Id { get; set; }
@@ -30,7 +30,7 @@ namespace DIHMT.Models
         public List<int> Flags
         {
             get => _flags;
-            set => _flags = value?.Where(x => x >= (int)EnumTag.HorseArmor && x <= (int)EnumTag.F2P).ToList();
+            set => _flags = value?.Where(x => x >= (int)EnumTag.HorseArmor && x <= (int)EnumTag.TimeIsMoney).ToList();
         }
 
         private List<string> _links;
@@ -58,7 +58,9 @@ namespace DIHMT.Models
                     Flags.Contains((int)EnumTag.Subscription) ||
                     Flags.Contains((int)EnumTag.SingleplayerUntouched) ||
                     Flags.Contains((int)EnumTag.HorseArmor) ||
-                    Flags.Contains((int)EnumTag.BulkOrderHorseArmor)))
+                    Flags.Contains((int)EnumTag.BulkOrderHorseArmor) ||
+                    Flags.Contains((int)EnumTag.PhysicalDlc) ||
+                    Flags.Contains((int)EnumTag.TimeIsMoney)))
                 {
                     return false;
                 }
@@ -104,6 +106,8 @@ namespace DIHMT.Models
         NotJustCosmetic = 7,
         Subscription = 8,
         SingleplayerUntouched = 9,
-        F2P = 10
+        F2P = 10,
+        PhysicalDlc = 11,
+        TimeIsMoney = 12
     }
 }

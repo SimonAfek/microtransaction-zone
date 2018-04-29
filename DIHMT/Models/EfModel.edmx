@@ -90,6 +90,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
           <Property Name="ImageUrl" Type="nvarchar" MaxLength="400" />
           <Property Name="ShortDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PendingDbGameRating">
           <Key>
@@ -509,6 +510,7 @@
           <NavigationProperty Name="DbGameRatings" Relationship="Entities.FK_DbGameRating_RatingId" FromRole="DbRating" ToRole="DbGameRating" />
           <Property Name="ShortDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PendingDbGameRatings" Relationship="Entities.FK_PendingDbGameRating_Rating" FromRole="DbRating" ToRole="PendingDbGameRating" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_DbGameRating_GameId">
           <End Type="Entities.DbGame" Role="DbGame" Multiplicity="1" />
@@ -728,6 +730,7 @@
           <EntitySetMapping Name="DbRatings">
             <EntityTypeMapping TypeName="Entities.DbRating">
               <MappingFragment StoreEntitySet="DbRating">
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
                 <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using DIHMT.Models;
 using GiantBomb.Api.Model;
 
@@ -120,6 +119,8 @@ namespace DIHMT.Static
                         .FirstOrDefault(x => x.Id == id);
                 }
             }
+
+            results.DbGameRatings = results.DbGameRatings.OrderBy(x => x.DbRating.SortOrder).ToList();
 
             return results;
         }
@@ -280,7 +281,7 @@ namespace DIHMT.Static
         {
             using (var ctx = new DIHMTEntities())
             {
-                return ctx.DbRatings.Where(x => x.Id <= 10).ToList();
+                return ctx.DbRatings.OrderBy(x => x.SortOrder).ToList();
             }
         }
 
