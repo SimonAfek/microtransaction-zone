@@ -280,7 +280,7 @@ namespace DIHMT.Static
         {
             using (var ctx = new DIHMTEntities())
             {
-                return ctx.DbRatings.ToList();
+                return ctx.DbRatings.Where(x => x.Id <= 10).ToList();
             }
         }
 
