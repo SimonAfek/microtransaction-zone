@@ -44,7 +44,13 @@ namespace DIHMT.Controllers
         }
 
         [HttpGet]
-        public ActionResult Tags ()
+        public ActionResult Tags()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Error()
         {
             return View();
         }
