@@ -8,7 +8,7 @@ namespace DIHMT.Models
 {
     public class RatingInputModel
     {
-        public int[] MonetizationFlags => new[] { 1, 2, 4, 5, 6, 7, 8, 9, 11, 12 };
+        public int[] MonetizationFlags => new[] { 1, 4, 5, 6, 7, 8, 9, 11, 12 };
         public bool IsSpotless => Flags?.Contains((int)EnumTag.Spotless) ?? false;
 
         [Required]
@@ -29,8 +29,8 @@ namespace DIHMT.Models
         private List<int> _flags;
         public List<int> Flags
         {
-            get => _flags;
-            set => _flags = value?.Where(x => x >= (int)EnumTag.HorseArmor && x <= (int)EnumTag.TimeIsMoney).ToList();
+            get => _flags ?? new List<int>();
+            set => _flags = value?.Where(x => x >= (int)EnumTag.HorseArmor && x <= (int)EnumTag.TimeIsMoney).ToList() ?? new List<int>();
         }
 
         private List<string> _links;
@@ -45,7 +45,8 @@ namespace DIHMT.Models
         {
             get
             {
-                if (Flags == null)
+                // Decommissioned
+                if (Flags.Contains((int)EnumTag.BulkOrderHorseArmor))
                 {
                     return false;
                 }
@@ -58,14 +59,8 @@ namespace DIHMT.Models
                     Flags.Contains((int)EnumTag.Subscription) ||
                     Flags.Contains((int)EnumTag.SingleplayerUntouched) ||
                     Flags.Contains((int)EnumTag.HorseArmor) ||
-                    Flags.Contains((int)EnumTag.BulkOrderHorseArmor) ||
                     Flags.Contains((int)EnumTag.PhysicalDlc) ||
                     Flags.Contains((int)EnumTag.TimeIsMoney)))
-                {
-                    return false;
-                }
-
-                if (Flags.Contains((int)EnumTag.HorseArmor) && Flags.Contains((int)EnumTag.BulkOrderHorseArmor))
                 {
                     return false;
                 }

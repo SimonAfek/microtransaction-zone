@@ -49,41 +49,23 @@
 
 <div class="flag-container d-block">
     <div class="flag-row flex-md-row justify-content-around">
-        @{ var ratings =
-                   Model.Ratings.Any(x => x.Id == (int)EnumTag.Spotless)
-                   ? GameHelpers.GetRatings().Where(x => x.Id == (int)EnumTag.Spotless || x.Id == (int)EnumTag.F2P)
-                   : GameHelpers.GetRatings().Where(x => x.Id != (int)EnumTag.Spotless); }
+        @{ 
+            var ratings =
+                Model.Ratings.Any(x => x.Id == (int)EnumTag.Spotless)
+                ? GameHelpers.GetRatings().Where(x => x.Id == (int)EnumTag.Spotless || x.Id == (int)EnumTag.F2P)
+                : GameHelpers.GetRatings().Where(x => x.Id != (int)EnumTag.Spotless); 
+        }
 
         @foreach (var k in ratings)
         {
-            // I should not have made these two tiered versions of each other this is so stupid
-            if (k.Id == (int)EnumTag.HorseArmor || k.Id == (int)EnumTag.BulkOrderHorseArmor)
+            if (Model.Ratings.Any(x => x.Id == k.Id))
             {
-                // If this one is active, display the icon
-                if (Model.Ratings.Any(x => x.Id == k.Id))
-                {
-                    <img src="@k.ImageUrl" class="flag-img" data-toggle="popover" data-placement="bottom" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
-                }
-
-                // If this is the iteration for normal horse armor
-                // and neither one is active, display the inactive icon
-                if (k.Id == (int)EnumTag.HorseArmor && !Model.Ratings.Any(x => x.Id == (int)EnumTag.HorseArmor || x.Id == (int)EnumTag.BulkOrderHorseArmor))
-                {
-                    <img src="@k.ImageUrl" class="flag-img inactive-flag-img" data-toggle="popover" data-placement="bottom" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
-                }
+                <img src="@k.ImageUrl" class="flag-img" data-toggle="popover" data-placement="bottom" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
             }
 
             else
             {
-                if (Model.Ratings.Any(x => x.Id == k.Id))
-                {
-                    <img src="@k.ImageUrl" class="flag-img" data-toggle="popover" data-placement="bottom" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
-                }
-
-                else
-                {
-                    <img src="@k.ImageUrl" class="flag-img inactive-flag-img" data-toggle="popover" data-placement="bottom" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
-                }
+                <img src="@k.ImageUrl" class="flag-img inactive-flag-img" data-toggle="popover" data-placement="bottom" data-trigger="hover focus" title="@k.Name" data-content="@k.ShortDescription" />
             }
         }
     </div>

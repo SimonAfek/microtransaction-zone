@@ -281,7 +281,7 @@ namespace DIHMT.Static
         {
             using (var ctx = new DIHMTEntities())
             {
-                return ctx.DbRatings.OrderBy(x => x.SortOrder).ToList();
+                return ctx.DbRatings.Where(x => !x.DeletedFlag).OrderBy(x => x.SortOrder).ToList();
             }
         }
 
