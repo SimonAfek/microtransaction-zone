@@ -91,6 +91,7 @@
           <Property Name="ImageUrl" Type="nvarchar" MaxLength="400" />
           <Property Name="ShortDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="DeletedFlag" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PendingDbGameRating">
           <Key>
@@ -344,7 +345,7 @@
           <NavigationProperty Name="DbGameLinks" Relationship="Entities.FK_DbGameLink_DbGame_Id" FromRole="DbGame" ToRole="DbGameLink" />
           <Property Name="Aliases" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ReleaseDate" Type="DateTime" Precision="0" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="DbGamePlatform">
           <Key>
             <PropertyRef Name="Id" />
@@ -354,7 +355,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="DbGame" Relationship="Self.FK__DbGamePla__GameI__29572725" FromRole="DbGamePlatform" ToRole="DbGame" />
           <NavigationProperty Name="DbPlatform" Relationship="Self.FK__DbGamePla__Platf__2A4B4B5E" FromRole="DbGamePlatform" ToRole="DbPlatform" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="DbPlatform">
           <Key>
             <PropertyRef Name="Id" />
@@ -511,6 +512,7 @@
           <Property Name="ShortDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PendingDbGameRatings" Relationship="Entities.FK_PendingDbGameRating_Rating" FromRole="DbRating" ToRole="PendingDbGameRating" />
           <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="DeletedFlag" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_DbGameRating_GameId">
           <End Type="Entities.DbGame" Role="DbGame" Multiplicity="1" />
@@ -730,6 +732,7 @@
           <EntitySetMapping Name="DbRatings">
             <EntityTypeMapping TypeName="Entities.DbRating">
               <MappingFragment StoreEntitySet="DbRating">
+                <ScalarProperty Name="DeletedFlag" ColumnName="DeletedFlag" />
                 <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
                 <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
