@@ -75,36 +75,5 @@ namespace DIHMT.Controllers
             Response.StatusCode = 400; // Bad Request
             return Json("Something went wrong with your submission - most likely, you have a malformed URL in the \"Links\"-section. Please try again or contact one of the site administrators.");
         }
-
-        [HttpGet]
-        public ActionResult Regurgitate(string url)
-        {
-            if (string.IsNullOrEmpty(url)
-                || string.IsNullOrEmpty(Request.UserAgent)
-                || !Request.UserAgent.StartsWith("Twitterbot/")
-                || !Uri.IsWellFormedUriString(url, UriKind.Absolute)
-                || !url.ToLower().StartsWith("https://www.giantbomb.com/api/")
-                || !(url.ToLower().EndsWith(".png") || url.ToLower().EndsWith(".jpg")))
-            {
-                return null;
-            }
-
-            byte[] bytes;
-            string contentType;
-
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("user-agent", "MTXZone/1.0");
-                bytes = wc.DownloadData(url);
-                contentType = wc.ResponseHeaders["Content-Type"];
-            }
-
-            if (contentType != "image/jpeg" && contentType != "image/png")
-            {
-                return null;
-            }
-
-            return File(bytes, contentType);
-        }
     }
 }

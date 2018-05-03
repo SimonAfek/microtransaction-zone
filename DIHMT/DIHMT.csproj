@@ -480,7 +480,6 @@
     <Content Include="Views\Home\Tags.cshtml" />
     <Content Include="Views\Shared\Tumblr.cshtml" />
     <Content Include="Views\Shared\_PendingLayout.cshtml" />
-    <Content Include="Views\Admin\CurDir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
