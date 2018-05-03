@@ -22,6 +22,7 @@ namespace DIHMT.Models
             this.DbGameRatings = new HashSet<DbGameRating>();
             this.PendingSubmissions = new HashSet<PendingSubmission>();
             this.DbGameLinks = new HashSet<DbGameLink>();
+            this.ThumbImages = new HashSet<ThumbImage>();
         }
     
         public int Id { get; set; }
@@ -48,5 +49,7 @@ namespace DIHMT.Models
         public virtual ICollection<PendingSubmission> PendingSubmissions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DbGameLink> DbGameLinks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThumbImage> ThumbImages { get; set; }
     }
 }
