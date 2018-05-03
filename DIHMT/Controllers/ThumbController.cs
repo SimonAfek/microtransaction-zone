@@ -12,14 +12,14 @@ namespace DIHMT.Controllers
         {
             if (id <= 0)
             {
-                return Redirect("/Images/MTZ_profile_pic.png");
+                return File("/Images/MTZ_profile_pic.png", "image/png");
             }
 
             var thumb = ThumbHelpers.GetThumbByGameId(id, false);
 
             if (thumb == null)
             {
-                return Redirect("/Images/MTZ_profile_pic.png");
+                return File("/Images/MTZ_profile_pic.png", "image/png");
             }
 
             if (!System.IO.File.Exists($"{HostingEnvironment.ApplicationPhysicalPath}{thumb.Item1.Substring(1).Replace("/", @"\")}"))
