@@ -5,6 +5,31 @@
     ViewBag.Title = "Search";
 }
 
+@section twittercard
+{
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@("@MTXZone")" />
+    <meta name="twitter:title" content="MICROTRANSACTION.ZONE - Search" />
+    
+    @if (string.IsNullOrEmpty(Model.Query))
+    {
+        <meta name="twitter:description" content="Search results on MICROTRANSACTION.ZONE" />
+    }
+    else
+    {
+        <meta name="twitter:description" content="Results for @Model.Query on MICROTRANSACTION.ZONE" />
+    }
+    
+    @if (Model.Results.Any())
+    {
+        <meta name="twitter:image" content="@Model.Results.First().SmallImageUrl" />
+    }
+    else
+    {
+        <meta name="twitter:image" content="https://microtransaction.zone/Images/MTZ_profile_pic.png" />
+    }
+}
+
 @if (Model.Results.Any())
 {
     <div class="page-title">Search Results</div>

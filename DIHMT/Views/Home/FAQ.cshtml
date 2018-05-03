@@ -2,6 +2,15 @@
     ViewBag.Title = "FAQ";
 }
 
+@section twittercard
+{
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@("@MTXZone")" />
+    <meta name="twitter:title" content="MICROTRANSACTION.ZONE - FAQ" />
+    <meta name="twitter:description" content="Frequently asked questions about the niftiest website on the internet." />
+    <meta name="twitter:image" content="https://microtransaction.zone/Images/MTZ_profile_pic.png" />
+}
+
 <div class="basic">
 
     <h1>Frequently Asked Questions</h1>
@@ -11,9 +20,9 @@
     <h2 class="faq">What do the different tags/icons mean?</h2>
 
     <p>We have an entire page dedicated to answering that question! Click <a href="@Url.Action("Tags")">here</a> to go there.</p>
-    
+
     <h2 class="faq">I searched for a game and it didn't appear - please advise</h2>
-    
+
     <p>Wait a couple of seconds and try again.</p>
     <p>No, really. There's a long and boring technical explanation, but if you search for a game and it's not in the results, try waiting a couple seconds and then repeating your search. It should be there this time.</p>
 
@@ -24,12 +33,14 @@
         When someone has read a game's entry, they should have a clear understanding of the basic monetization scheme of the game in question.
     </p>
     <p>For more information, head over to the <a href="@Url.Action("SubmissionGuide")">Submission Guide</a>.</p>
-    
+
     <h2 class="faq">I submitted a rating, but it doesn't seem to have appeared on the page. How come?</h2>
 
     <p>To prevent abuse, and to ensure all entries are truthful, all submissions are placed in a queue for manual validation/proofreading/editing before they go live on the site.</p>
-    <p>If it's been more than a day or two since you sent in your submission, and it still hasn't appeared, try submitting it again or <a href="@Url.Action("Contact")">contacting us</a>. 
-        It may also be that we've rejected your submission for one reason or another; read more at <a href="@Url.Action("SubmissionGuide")#rejected">"Why was my entry rejected?"</a> in the <a href="@Url.Action("SubmissionGuide")">Submission Guide.</a></p>
+    <p>
+        If it's been more than a day or two since you sent in your submission, and it still hasn't appeared, try submitting it again or <a href="@Url.Action("Contact")">contacting us</a>.
+        It may also be that we've rejected your submission for one reason or another; read more at <a href="@Url.Action("SubmissionGuide")#rejected">"Why was my entry rejected?"</a> in the <a href="@Url.Action("SubmissionGuide")">Submission Guide.</a>
+    </p>
 
     <h2 class="faq">I submitted a rating, but it seems to have been changed before it went live! What happened?</h2>
 
