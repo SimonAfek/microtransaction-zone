@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using DIHMT.Static;
 
@@ -14,11 +15,16 @@ namespace DIHMT.Controllers
                 return Redirect("/Images/MTZ_profile_pic.png");
             }
 
-            var thumb = ThumbHelpers.GetThumbByGameId(id);
+            var thumb = ThumbHelpers.GetThumbByGameId(id, false);
 
-            if (thumb == null || !new[] { "image/png", "image/jpeg" }.Contains(thumb.Item2))
+            if (thumb == null)
             {
                 return Redirect("/Images/MTZ_profile_pic.png");
+            }
+
+            if (!System.IO.File.Exists($"{HostingEnvironment.ApplicationPhysicalPath}{thumb.Item1.Substring(1).Replace("/", @"\")}"))
+            {
+                thumb = ThumbHelpers.GetThumbByGameId(id, true);
             }
 
             return File(thumb.Item1, thumb.Item2);

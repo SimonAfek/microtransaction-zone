@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using DIHMT.Models;
 using DIHMT.Static;
@@ -214,7 +216,7 @@ namespace DIHMT.Controllers
 
             return RedirectToAction("Pending", new { id = input.PendingId });
         }
-
+        
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

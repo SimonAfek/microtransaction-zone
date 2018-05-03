@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using DIHMT.Models;
 using GiantBomb.Api.Model;
 
@@ -460,7 +461,7 @@ namespace DIHMT.Static
             }
         }
 
-        public static void SaveThumb(int gameId, byte[] data, string contentType)
+        public static void SaveThumb(int gameId, string imageUrl, string contentType)
         {
             lock (Lock)
             {
@@ -473,7 +474,7 @@ namespace DIHMT.Static
                         ctx.ThumbImages.Add(new ThumbImage
                         {
                             GameId = gameId,
-                            Data = data,
+                            ImageUrl = imageUrl,
                             ContentType = contentType,
                             LastUpdated = DateTime.UtcNow
                         });
@@ -482,7 +483,7 @@ namespace DIHMT.Static
                     }
                     else
                     {
-                        existingThumb.Data = data;
+                        existingThumb.ImageUrl = imageUrl;
                         existingThumb.ContentType = contentType;
                         existingThumb.LastUpdated = DateTime.UtcNow;
 

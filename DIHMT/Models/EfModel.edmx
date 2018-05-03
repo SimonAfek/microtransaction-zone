@@ -127,9 +127,9 @@
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GameId" Type="int" Nullable="false" />
-          <Property Name="Data" Type="varbinary(max)" Nullable="false" />
           <Property Name="ContentType" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <Association Name="FK__DbGamePla__GameI__31EC6D26">
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="1" />
@@ -155,7 +155,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ThumbImag__GameI__7C4F7684">
+        <Association Name="FK__ThumbImag__GameI__7F2BE32F">
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="1" />
           <End Role="ThumbImage" Type="Self.ThumbImage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -305,7 +305,7 @@
             <End Role="DbPlatform" EntitySet="DbPlatform" />
             <End Role="DbGamePlatform" EntitySet="DbGamePlatform" />
           </AssociationSet>
-          <AssociationSet Name="FK__ThumbImag__GameI__7C4F7684" Association="Self.FK__ThumbImag__GameI__7C4F7684">
+          <AssociationSet Name="FK__ThumbImag__GameI__7F2BE32F" Association="Self.FK__ThumbImag__GameI__7F2BE32F">
             <End Role="DbGame" EntitySet="DbGame" />
             <End Role="ThumbImage" EntitySet="ThumbImage" />
           </AssociationSet>
@@ -372,7 +372,7 @@
           <NavigationProperty Name="DbGameLinks" Relationship="Entities.FK_DbGameLink_DbGame_Id" FromRole="DbGame" ToRole="DbGameLink" />
           <Property Name="Aliases" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ReleaseDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ThumbImages" Relationship="Entities.FK__ThumbImag__GameI__7C4F7684" FromRole="DbGame" ToRole="ThumbImage" />
+          <NavigationProperty Name="ThumbImages" Relationship="Entities.FK__ThumbImag__GameI__7F2BE32F" FromRole="DbGame" ToRole="ThumbImage" />
           </EntityType>
         <EntityType Name="DbGamePlatform">
           <Key>
@@ -476,7 +476,7 @@
           </AssociationSet>
           <EntitySet Name="BlockLists" EntityType="Entities.BlockList" />
           <EntitySet Name="ThumbImages" EntityType="Entities.ThumbImage" />
-          <AssociationSet Name="FK__ThumbImag__GameI__7C4F7684" Association="Entities.FK__ThumbImag__GameI__7C4F7684">
+          <AssociationSet Name="FK__ThumbImag__GameI__7F2BE32F" Association="Entities.FK__ThumbImag__GameI__7F2BE32F">
             <End Role="DbGame" EntitySet="DbGames" />
             <End Role="ThumbImage" EntitySet="ThumbImages" />
           </AssociationSet>
@@ -532,7 +532,7 @@
           <Property Name="RatingId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DbGame" Relationship="Entities.FK_DbGameRating_GameId" FromRole="DbGameRating" ToRole="DbGame" />
           <NavigationProperty Name="DbRating" Relationship="Entities.FK_DbGameRating_RatingId" FromRole="DbGameRating" ToRole="DbRating" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="DbRating">
           <Key>
             <PropertyRef Name="Id" />
@@ -546,7 +546,7 @@
           <NavigationProperty Name="PendingDbGameRatings" Relationship="Entities.FK_PendingDbGameRating_Rating" FromRole="DbRating" ToRole="PendingDbGameRating" />
           <Property Name="SortOrder" Type="Int32" Nullable="false" />
           <Property Name="DeletedFlag" Type="Boolean" Nullable="false" />
-        </EntityType>
+          </EntityType>
         <Association Name="FK_DbGameRating_GameId">
           <End Type="Entities.DbGame" Role="DbGame" Multiplicity="1" />
           <End Type="Entities.DbGameRating" Role="DbGameRating" Multiplicity="*" />
@@ -698,12 +698,12 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GameId" Type="Int32" Nullable="false" />
-          <Property Name="Data" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="ContentType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DbGame" Relationship="Entities.FK__ThumbImag__GameI__7C4F7684" FromRole="ThumbImage" ToRole="DbGame" />
+          <Property Name="ImageUrl" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DbGame" Relationship="Entities.FK__ThumbImag__GameI__7F2BE32F" FromRole="ThumbImage" ToRole="DbGame" />
         </EntityType>
-        <Association Name="FK__ThumbImag__GameI__7C4F7684">
+        <Association Name="FK__ThumbImag__GameI__7F2BE32F">
           <End Type="Entities.DbGame" Role="DbGame" Multiplicity="1" />
           <End Type="Entities.ThumbImage" Role="ThumbImage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -852,9 +852,9 @@
           <EntitySetMapping Name="ThumbImages">
             <EntityTypeMapping TypeName="Entities.ThumbImage">
               <MappingFragment StoreEntitySet="ThumbImage">
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
                 <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-                <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="GameId" ColumnName="GameId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

@@ -16,9 +16,9 @@ namespace DIHMT.Models
     {
         public long Id { get; set; }
         public int GameId { get; set; }
-        public byte[] Data { get; set; }
         public string ContentType { get; set; }
         public System.DateTime LastUpdated { get; set; }
+        public string ImageUrl { get; set; }
     
         public virtual DbGame DbGame { get; set; }
     }

@@ -1,12 +1,17 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Net;
+using System.Web.Hosting;
 using DIHMT.Models;
 
 namespace DIHMT.Static
 {
     public static class ThumbHelpers
     {
-        public static Tuple<byte[], string> GetThumbByGameId(int id)
+        private static readonly object Lock = new object();
+
+        public static Tuple<string, string> GetThumbByGameId(int id, bool forceUpdate)
         {
             var game = DbAccess.GetDbGameView(id);
 
@@ -17,36 +22,43 @@ namespace DIHMT.Static
 
             var existingThumb = DbAccess.GetThumb(id);
 
-            Tuple<byte[], string> retval;
-
-            if (existingThumb == null || (DateTime.UtcNow - existingThumb.LastUpdated).Days > 7)
-            {
-                retval = RefreshThumb(game);
-            }
-            else
-            {
-                retval = new Tuple<byte[], string>(existingThumb.Data, existingThumb.ContentType);
-            }
+            var retval = existingThumb == null || forceUpdate
+                ? RefreshThumb(game)
+                : new Tuple<string, string>(existingThumb.ImageUrl, existingThumb.ContentType);
 
             return retval;
         }
 
-        private static Tuple<byte[], string> RefreshThumb(DbGame game)
+        private static Tuple<string, string> RefreshThumb(DbGame game)
         {
-            Tuple<byte[], string> retval;
-
-            using (var wc = new WebClient())
+            lock (Lock)
             {
-                wc.Headers.Add("user-agent", "MTXZoneThumbCacher/1.0");
-                var data = wc.DownloadData(game.ThumbImageUrl);
-                var contentType = wc.ResponseHeaders["Content-Type"];
+                var uri = new Uri(game.ThumbImageUrl);
 
-                retval = new Tuple<byte[], string>(data, contentType);
+                var filename = $"/Images/Thumb/{Path.GetFileName(uri.LocalPath)}";
+
+                string contentType;
+                byte[] data;
+
+                using (var wc = new WebClient())
+                {
+                    wc.Headers.Add("user-agent", "MTXZoneThumbCacher/1.0");
+                    data = wc.DownloadData(game.ThumbImageUrl);
+                    contentType = wc.ResponseHeaders["Content-Type"];
+                }
+
+                if (!new[] { "image/png", "image/jpeg" }.Contains(contentType))
+                {
+                    return null;
+                }
+
+                var path = $"{HostingEnvironment.ApplicationPhysicalPath}{filename.Substring(1).Replace("/", @"\")}";
+                File.WriteAllBytes(path, data);
+
+                DbAccess.SaveThumb(game.Id, filename, contentType);
+
+                return new Tuple<string, string>(filename, contentType);
             }
-
-            DbAccess.SaveThumb(game.Id, retval.Item1, retval.Item2);
-
-            return retval;
         }
     }
 }
