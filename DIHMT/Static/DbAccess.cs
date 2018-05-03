@@ -120,7 +120,10 @@ namespace DIHMT.Static
                 }
             }
 
-            results.DbGameRatings = results.DbGameRatings.OrderBy(x => x.DbRating.SortOrder).ToList();
+            if (results != null)
+            {
+                results.DbGameRatings = results.DbGameRatings.OrderBy(x => x.DbRating.SortOrder).ToList();
+            }
 
             return results;
         }
@@ -446,6 +449,48 @@ namespace DIHMT.Static
                 }
 
                 ctx.SaveChanges();
+            }
+        }
+
+        public static ThumbImage GetThumb(int gameId)
+        {
+            using (var ctx = new DIHMTEntities())
+            {
+                return ctx.ThumbImages.FirstOrDefault(x => x.GameId == gameId);
+            }
+        }
+
+        public static void SaveThumb(int gameId, byte[] data, string contentType)
+        {
+            lock (Lock)
+            {
+                using (var ctx = new DIHMTEntities())
+                {
+                    var existingThumb = ctx.ThumbImages.FirstOrDefault(x => x.GameId == gameId);
+
+                    if (existingThumb == null)
+                    {
+                        ctx.ThumbImages.Add(new ThumbImage
+                        {
+                            GameId = gameId,
+                            Data = data,
+                            ContentType = contentType,
+                            LastUpdated = DateTime.UtcNow
+                        });
+
+                        ctx.SaveChanges();
+                    }
+                    else
+                    {
+                        existingThumb.Data = data;
+                        existingThumb.ContentType = contentType;
+                        existingThumb.LastUpdated = DateTime.UtcNow;
+
+                        ctx.Entry(existingThumb).State = EntityState.Modified;
+
+                        ctx.SaveChanges();
+                    }
+                }
             }
         }
     }

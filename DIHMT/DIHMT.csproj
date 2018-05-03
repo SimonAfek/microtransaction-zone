@@ -251,6 +251,7 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\ThumbController.cs" />
     <Compile Include="Models\AdminViewModels.cs" />
     <Compile Include="Models\AdvancedSearchViewModel.cs" />
     <Compile Include="Models\BlockList.cs">
@@ -295,6 +296,9 @@
     </Compile>
     <Compile Include="Models\RatingInputModel.cs" />
     <Compile Include="Models\SearchResult.cs" />
+    <Compile Include="Models\ThumbImage.cs">
+      <DependentUpon>EfModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TumblrPost.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Static\BlockHelpers.cs" />
@@ -324,6 +328,7 @@
     <Compile Include="Static\GameHelpers.cs" />
     <Compile Include="Static\GbGateway.cs" />
     <Compile Include="Static\SearchHelpers.cs" />
+    <Compile Include="Static\ThumbHelpers.cs" />
     <Compile Include="Static\TumblrState.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -479,6 +484,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Database\" />
+    <Folder Include="Views\Thumb\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

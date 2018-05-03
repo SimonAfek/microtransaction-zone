@@ -20,6 +20,11 @@ namespace DIHMT
                 defaults: new { controller = "Game", action = "Index" });
 
             routes.MapRoute(
+                name: "Thumb",
+                url: "Thumb",
+                defaults: new { controller = "Thumb", action = "Index" });
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
