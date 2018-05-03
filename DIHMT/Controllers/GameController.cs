@@ -26,6 +26,7 @@ namespace DIHMT.Controllers
         {
             if (ModelState.Keys.Contains("ReCaptcha") && ModelState["ReCaptcha"].Errors.Any())
             {
+                Response.TrySkipIisCustomErrors = true;
                 Response.StatusCode = 400;
                 return Json("Captcha error - please complete the captcha and try again.");
             }
@@ -34,6 +35,7 @@ namespace DIHMT.Controllers
             {
                 if (!input.Flags.Contains((int)EnumTag.Spotless) && (string.IsNullOrEmpty(input.Basically) || string.IsNullOrEmpty(input.RatingExplanation)))
                 {
+                    Response.TrySkipIisCustomErrors = true;
                     Response.StatusCode = 400;
                     return Json(System.Text.RegularExpressions.Regex.Unescape("When submitting a game without the 'Spotless'-tag, we require that you fill out the 'Basically' and 'Rating Explanation'-fields explaining the game's purchases in some detail. Please fill out those fields and submit again."));
                 }
@@ -48,6 +50,7 @@ namespace DIHMT.Controllers
 
                     if (blockStatus == BlockType.ExplicitBlocked)
                     {
+                        Response.TrySkipIisCustomErrors = true;
                         Response.StatusCode = 400;
                         return Json("We have temporarily stopped your ability to send in submissions - come back tomorrow and you can submit ratings again.");
                     }
@@ -68,6 +71,7 @@ namespace DIHMT.Controllers
                 return Json("Your submission has been accepted. It will go live as soon as it's been verified. Thank you for helping out!");
             }
 
+            Response.TrySkipIisCustomErrors = true;
             Response.StatusCode = 400; // Bad Request
             return Json("Something went wrong with your submission - most likely, you have a malformed URL in the \"Links\"-section. Please try again or contact one of the site administrators.");
         }
