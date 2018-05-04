@@ -18,7 +18,7 @@ namespace DIHMT.Static
             if (forceUpdate)
             {
                 game = DbAccess.GetDbGameView(id);
-                return RefreshThumb(game);
+                return game == null ? null : RefreshThumb(game);
             }
 
             var existingThumb = DbAccess.GetThumb(id);
