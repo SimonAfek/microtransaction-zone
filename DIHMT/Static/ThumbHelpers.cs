@@ -13,20 +13,24 @@ namespace DIHMT.Static
 
         public static Tuple<string, string> GetThumbByGameId(int id, bool forceUpdate)
         {
-            var game = DbAccess.GetDbGameView(id);
+            DbGame game;
 
-            if (game == null)
+            if (forceUpdate)
             {
-                return null;
+                game = DbAccess.GetDbGameView(id);
+                return RefreshThumb(game);
             }
 
             var existingThumb = DbAccess.GetThumb(id);
 
-            var retval = existingThumb == null || forceUpdate
-                ? RefreshThumb(game)
-                : new Tuple<string, string>(existingThumb.ImageUrl, existingThumb.ContentType);
+            if (existingThumb != null)
+            {
+                return new Tuple<string, string>(existingThumb.ImageUrl, existingThumb.ContentType);
+            }
 
-            return retval;
+            game = DbAccess.GetDbGameView(id);
+
+            return game == null ? null : RefreshThumb(game);
         }
 
         private static Tuple<string, string> RefreshThumb(DbGame game)
