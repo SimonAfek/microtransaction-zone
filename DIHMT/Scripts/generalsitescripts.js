@@ -69,18 +69,6 @@ $(function () {
             $(".hide-when-spotless").show();
         }
     });
-
-    $("#submission-checkbox-1").click(function () {
-        if ($(this).is(":checked")) {
-            $("#submission-checkbox-2").prop({ checked: false });
-        }
-    });
-
-    $("#submission-checkbox-2").click(function () {
-        if ($(this).is(":checked")) {
-            $("#submission-checkbox-1").prop({ checked: false });
-        }
-    });
 });
 
 $(function() {
