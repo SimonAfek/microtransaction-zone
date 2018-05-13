@@ -1,7 +1,7 @@
 ﻿$(function () {
     var submissionform = $("#submissionform");
 
-    if (typeof (submissionform.areYouSure) === "function") {
+    if (typeof submissionform.areYouSure === "function") {
         submissionform.areYouSure();
     }
 
@@ -26,7 +26,7 @@
                     $(".failuremessage").text("The server experienced an error while trying to process your submission. Sorry about that - please try again.");
                 }
 
-                if (typeof (grecaptcha.reset) === "function") {
+                if (typeof grecaptcha.reset === "function") {
                     grecaptcha.reset();
                 }
                 
@@ -38,16 +38,14 @@
 
 $(function () {
     // Submission form swapping
-
-    $("#submissionform").hide();
-
+    
     $(".submission-form-edit-button").click(function () {
         $("#submissionform").show();
         $(".game-rating-box").hide();
     });
 
     $(".submission-form-cancel-button").click(function () {
-        $("#submissionform").hide().get(0).reset();
+        $("#submissionform").hide();
         $(".game-rating-box").show();
     });
 });
@@ -78,10 +76,8 @@ $(function () {
 $(function () {
     function syncSpotless() {
         if ($(".spotless-checkbox").is(":checked")) {
-            $(".monetization-input").prop({ disabled: true, checked: false });
             $(".hide-when-spotless").hide();
         } else {
-            $(".monetization-input").prop({ disabled: false });
             $(".hide-when-spotless").show();
         }
     }

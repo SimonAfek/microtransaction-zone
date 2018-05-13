@@ -783,6 +783,11 @@ textarea {
     width: 35px;
 }
 
+#submissionform {
+    background-color: #f8eccc;
+    box-shadow: #f8eccc 0px 0px 20px 20px;
+}
+
 /* a. Submission Checkboxes */
 
 .submission-checkbox {
@@ -792,69 +797,11 @@ textarea {
     .submission-checkbox + label {
         cursor: pointer;
         opacity: 0.45;
-        height: 50px;
-        width: 50px;
-        display: inline-block;
-        padding: 0;
-        margin-right: 7px;
-        background-repeat: no-repeat;
     }
 
     .submission-checkbox:checked + label {
         opacity: 1;
     }
-
-    .submission-checkbox:disabled + label {
-        opacity: 0.15;
-    }
-
-#submission-checkbox-1 + label {
-    background-image: url('/Images/1-1_HorseArmorBO.svg');
-}
-
-#submission-checkbox-2 + label {
-    background-image: url('/Images/1-1_HorseArmorBO.svg');
-}
-
-#submission-checkbox-3 + label {
-    background-image: url('/Images/1-1_Spotless.svg');
-}
-
-#submission-checkbox-4 + label {
-    background-image: url('/Images/1-1_Expansions.svg');
-}
-
-#submission-checkbox-5 + label {
-    background-image: url('/Images/1-1_NotGambling.svg');
-}
-
-#submission-checkbox-6 + label {
-    background-image: url('/Images/1-1_MoneyHole.svg');
-}
-
-#submission-checkbox-7 + label {
-    background-image: url('/Images/1-1_PayingForPower.svg');
-}
-
-#submission-checkbox-8 + label {
-    background-image: url('/Images/1-1_Contract.svg');
-}
-
-#submission-checkbox-9 + label {
-    background-image: url('/Images/1-1_TableForOne.svg');
-}
-
-#submission-checkbox-10 + label {
-    background-image: url('/Images/1-1_F2P.svg');
-}
-
-#submission-checkbox-11 + label {
-    background-image: url('/Images/1-1_BatteriesNotIncluded.svg')
-}
-
-#submission-checkbox-12 + label {
-    background-image: url('/Images/1-1_TimeIsMoney.svg')
-}
 
 
 /* b. Modal */
