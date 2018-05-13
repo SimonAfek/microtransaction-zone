@@ -60,15 +60,18 @@ $(function () {
 });
 
 $(function () {
-    $(".spotless-checkbox").click(function () {
-        if ($(this).is(":checked")) {
+    function syncSpotless() {
+        if ($(".spotless-checkbox").is(":checked")) {
             $(".monetization-input").prop({ disabled: true, checked: false });
             $(".hide-when-spotless").hide();
         } else {
             $(".monetization-input").prop({ disabled: false });
             $(".hide-when-spotless").show();
         }
-    });
+    }
+
+    $(".spotless-checkbox").click(syncSpotless);
+    syncSpotless();
 });
 
 $(function() {
