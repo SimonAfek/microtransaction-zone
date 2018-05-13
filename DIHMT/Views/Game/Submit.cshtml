@@ -3,10 +3,6 @@
 @using DIHMT.Static
 @model RatingInputModel
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submission-modal">
-    Submit/Edit Rating
-</button>
-
 @using (Html.BeginForm("SubmitRating", "Game", FormMethod.Post, new { id = "submissionform" }))
 {
     var ratings = GameHelpers.GetRatings();
@@ -18,169 +14,154 @@
     <div class="successmessage"></div>
     <div class="failuremessage"></div>
 
-    <div class="modal fade" id="submission-modal" tabindex="-1" role="document">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
+    <div class="submission-form-body">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
 
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLongTitle">Submit/Edit Rating</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+        <p>
+            Hi there! If this is your first time submitting something to the site, please take a minute or two to read our <a href="@Url.Action("Tags", "Home")" target="_blank">Tag overview</a> and <a href="@Url.Action("SubmissionGuide", "Home")" target="_blank">Submission guide</a>.
+            That'll make it much easier for us to get your submission reviewed.
+        </p>
+
+        <!-- FLAGS -->
+        <div class="form-group row no-gutters">
+
+            <div class="col-md-3">@Html.LabelFor(model => model.Flags, htmlAttributes: new { @class = "control-label-flags" })</div>
+
+            <div class="col-md-9">
+                <div class="form-check">
+                    <input type="checkbox" name="Flags" value="@((int)EnumTag.Spotless)" checked="@Model.IsSpotless" id="@($"submission-checkbox-{(int)EnumTag.Spotless}")" class="spotless-checkbox submission-checkbox" />
+                    <label for="@($"submission-checkbox-{(int)EnumTag.Spotless}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@spotlessRating.Name" data-content="@spotlessRating.ShortDescription"></label>
+                    <label>&ensp;Spotless</label>
                 </div>
 
-                <div class="modal-body">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.Id)
+                <div class="form-check">
+                    <input type="checkbox" name="Flags" value="@((int)EnumTag.F2P)" checked="@Model.Flags.Contains((int)EnumTag.F2P)" id="@($"submission-checkbox-{(int)EnumTag.F2P}")" class="submission-checkbox" />
+                    <label for="@($"submission-checkbox-{(int)EnumTag.F2P}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@f2pRating.Name" data-content="@f2pRating.ShortDescription"></label>
+                    <label>&ensp;Free To Play</label>
+                </div>
 
-                    <p>
-                        Hi there! If this is your first time submitting something to the site, please take a minute or two to read our <a href="@Url.Action("Tags", "Home")" target="_blank">Tag overview</a> and <a href="@Url.Action("SubmissionGuide", "Home")" target="_blank">Submission guide</a>.
-                        That'll make it much easier for us to get your submission reviewed.
-                    </p>
-
-                    <!-- FLAGS -->
-                    <div class="form-group row no-gutters">
-
-                        <div class="col-md-3">@Html.LabelFor(model => model.Flags, htmlAttributes: new { @class = "control-label-flags" })</div>
-
-                        <div class="col-md-9">
-                            <div class="form-check">
-                                <input type="checkbox" name="Flags" value="@((int)EnumTag.Spotless)" checked="@Model.IsSpotless" id="@($"submission-checkbox-{(int)EnumTag.Spotless}")" class="spotless-checkbox submission-checkbox" />
-                                <label for="@($"submission-checkbox-{(int)EnumTag.Spotless}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@spotlessRating.Name" data-content="@spotlessRating.ShortDescription"></label>
-                                <label>&ensp;Spotless</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input type="checkbox" name="Flags" value="@((int)EnumTag.F2P)" checked="@Model.Flags.Contains((int)EnumTag.F2P)" id="@($"submission-checkbox-{(int)EnumTag.F2P}")" class="submission-checkbox" />
-                                <label for="@($"submission-checkbox-{(int)EnumTag.F2P}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@f2pRating.Name" data-content="@f2pRating.ShortDescription"></label>
-                                <label>&ensp;Free To Play</label>
-                            </div>
-
-                            @foreach (var v in ratings.Where(x => Model.MonetizationFlags.Contains(x.Id)))
-                            {
-                                <div class="form-check hide-when-spotless">
-                                    <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="monetization-input submission-checkbox" disabled="@Model.IsSpotless" />
-                                    <label for="@($"submission-checkbox-{v.Id}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@v.Name" data-content="@v.ShortDescription"></label>
-                                    <label>&ensp;@v.Name</label>
-                                </div>
-                            }
-                        </div>
+                @foreach (var v in ratings.Where(x => Model.MonetizationFlags.Contains(x.Id)))
+                {
+                    <div class="form-check hide-when-spotless">
+                        <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="monetization-input submission-checkbox" disabled="@Model.IsSpotless" />
+                        <label for="@($"submission-checkbox-{v.Id}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@v.Name" data-content="@v.ShortDescription"></label>
+                        <label>&ensp;@v.Name</label>
                     </div>
+                }
+            </div>
+        </div>
 
-                    <!-- BASICALLY... -->
-                    <div class="form-group row no-gutters">
+        <!-- BASICALLY... -->
+        <div class="form-group row no-gutters">
 
-                        <div class="col-lg-3">@Html.LabelFor(model => model.Basically, htmlAttributes: new { @class = "control-label" })</div>
+            <div class="col-lg-3">@Html.LabelFor(model => model.Basically, htmlAttributes: new { @class = "control-label" })</div>
 
-                        <div class="col-lg-9 wide-input-box">
-                            <input type="text" name="Basically" value="@Model.Basically" class="form-control wide-input" maxlength="280" />
-                        </div>
+            <div class="col-lg-9 wide-input-box">
+                <input type="text" name="Basically" value="@Model.Basically" class="form-control wide-input" maxlength="280" />
+            </div>
 
-                    </div>
+        </div>
 
-                    <!-- DETAILED INFO -->
-                    <div class="form-group row no-gutters">
+        <!-- DETAILED INFO -->
+        <div class="form-group row no-gutters">
 
-                        <div class="col-lg-3">@Html.LabelFor(model => model.RatingExplanation, htmlAttributes: new { @class = "control-label" })</div>
+            <div class="col-lg-3">@Html.LabelFor(model => model.RatingExplanation, htmlAttributes: new { @class = "control-label" })</div>
 
-                        <div class="col-lg-9 wide-input-box">
-                            <textarea name="RatingExplanation" class="form-control wide-input" rows="10" cols="100" maxlength="4000">@Model.RatingExplanation</textarea>
-                            @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
-                        </div>
+            <div class="col-lg-9 wide-input-box">
+                <textarea name="RatingExplanation" class="form-control wide-input" rows="10" cols="100" maxlength="4000">@Model.RatingExplanation</textarea>
+                @Html.ValidationMessageFor(model => model.RatingExplanation, "", new { @class = "text-danger" })
+            </div>
 
-                    </div>
+        </div>
 
 
-                    <!-- LINKS -->
-                    <div class="form-group row no-gutters">
+        <!-- LINKS -->
+        <div class="form-group row no-gutters">
 
-                        <div class="col-lg-3">
-                            @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label" })
-                        </div>
+            <div class="col-lg-3">
+                @Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label" })
+            </div>
 
-                        <div class="col-lg-9 input-fields-wrap">
-                            @if (Model.Links != null && Model.Links.Any())
-                            {
-                                for (var i = 0; i < Model.Links.Count; i++)
-                                {
-                                    if (i == 0)
-                                    {
-                                        <div class="wide-input-box d-inline-flex form-horizontal links-margin">
-                                            <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" value="@Model.Links[i]" />&emsp;<button href="#" class="add-field-element btn btn-primary">+</button>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="wide-input-box d-inline-flex form-horizontal links-margin">
-                                            <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" value="@Model.Links[i]" />&emsp;<button href="#" class="remove_field btn btn-primary">-</button>
-                                        </div>
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                <div class="wide-input-box d-inline-flex form-horizontal links-margin">
-                                    <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" />&emsp;<button href="#" class="add-field-element btn btn-primary">+</button>
-                                </div>
-                            }
-                        </div>
-
-                    </div>
-
-                    <!-- RECAPTCHA -->
-
-                    @if (!Request.IsAuthenticated)
+            <div class="col-lg-9 input-fields-wrap">
+                @if (Model.Links != null && Model.Links.Any())
+                {
+                    for (var i = 0; i < Model.Links.Count; i++)
                     {
-                        <div class="form-group row no-gutters">
-                            <div class="col-lg-3">@Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label" })</div>
-                            <div class="col-lg-9 wide-input-box">
-                                <textarea name="Comment" class="form-control wide-input" rows="10" cols="100" maxlength="1000" placeholder="Enter a comment for the mods. This will not be part of the published rating."></textarea>
-                                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+                        if (i == 0)
+                        {
+                            <div class="wide-input-box d-inline-flex form-horizontal links-margin">
+                                <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" value="@Model.Links[i]" />&emsp;<button href="#" class="add-field-element btn btn-primary">+</button>
                             </div>
-                        </div>
-
-                        <div class="form-group row no-gutters">
-                            <div class="col-lg-3"></div>
-                            <div class="col-lg-9">
-                                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-                                <div class="g-recaptcha" data-sitekey="@WebConfigurationManager.AppSettings["ReCaptchaPublicKey"]" data-callback="captchaComplete"></div>
+                        }
+                        else
+                        {
+                            <div class="wide-input-box d-inline-flex form-horizontal links-margin">
+                                <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" value="@Model.Links[i]" />&emsp;<button href="#" class="remove_field btn btn-primary">-</button>
                             </div>
-                        </div>
-                    } @*Should only be shown to non-logged in users*@
-
-                    @*Quiet update*@
-
-                    else
-                    {
-                        <div class="form-group row no-gutters">
-                            <div class="col-lg-3">
-                                @Html.LabelFor(model => model.QuietUpdate, htmlAttributes: new { @class = "control-label" })
-                            </div>
-
-                            <div class="col-lg-9">
-                                <div class="form-check">
-                                    <input type="checkbox" name="QuietUpdate" value="true" />
-                                    <label>&ensp;Yes</label>
-                                </div>
-                            </div>
-                        </div>
+                        }
                     }
+                }
+                else
+                {
+                    <div class="wide-input-box d-inline-flex form-horizontal links-margin">
+                        <input type="text" name="Links" class="form-control wide-input links-input" maxlength="500" />&emsp;<button href="#" class="add-field-element btn btn-primary">+</button>
+                    </div>
+                }
+            </div>
 
-                    <div class="successmessage"></div>
-                    <div class="failuremessage"></div>
+        </div>
+
+        <!-- RECAPTCHA -->
+
+        @if (!Request.IsAuthenticated)
+        {
+            // Should only be shown to non-logged in users
+            <div class="form-group row no-gutters">
+                <div class="col-lg-3">@Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label" })</div>
+                <div class="col-lg-9 wide-input-box">
+                    <textarea name="Comment" class="form-control wide-input" rows="10" cols="100" maxlength="1000" placeholder="Enter a comment for the mods. This will not be part of the published rating."></textarea>
+                    @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row no-gutters">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-9">
+                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                    <div class="g-recaptcha" data-sitekey="@WebConfigurationManager.AppSettings["ReCaptchaPublicKey"]" data-callback="captchaComplete"></div>
+                </div>
+            </div>
+        }
+        else
+        {
+            // Quiet update
+
+            <div class="form-group row no-gutters">
+                <div class="col-lg-3">
+                    @Html.LabelFor(model => model.QuietUpdate, htmlAttributes: new { @class = "control-label" })
                 </div>
 
-                <!-- FOOTER -->
-
-                <div class="modal-footer">
-                    <div class="form-group row">
-                        <div class="col-sm-offset-1 col-sm-2">
-                            @*If user is not logged in, button will be disabled until reCAPTCHA is completed*@
-                            <input type="submit" value="Save" id="submissionbutton" class="btn btn-primary" disabled="@(!Request.IsAuthenticated)" />
-                        </div>
+                <div class="col-lg-9">
+                    <div class="form-check">
+                        <input type="checkbox" name="QuietUpdate" value="true" />
+                        <label>&ensp;Yes</label>
                     </div>
                 </div>
+            </div>
+        }
 
+        <div class="successmessage"></div>
+        <div class="failuremessage"></div>
+
+        <div class="form-group row">
+            <div class="col-sm-offset-1 col-sm-2">
+                @* If user is not logged in, button will be disabled until reCAPTCHA is completed *@
+                <input type="submit" value="Save" class="btn btn-primary submission-form-submit-button" disabled="@(!Request.IsAuthenticated)" />
+            </div>
+
+            <div class="col-sm-offset-1 col-sm-2">
+                <button type="button" class="btn btn-secondary submission-form-cancel-button">Cancel</button>
             </div>
         </div>
     </div>

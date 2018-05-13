@@ -73,7 +73,7 @@
 
 </div>
 
-<div class="basic">
+<div class="basic game-rating-box">
 
     @if (Model.IsRated)
     {
@@ -132,6 +132,8 @@
 
 </div>
 
-<div class="basic btn-submitedit">
-    @Html.Partial("Submit", Model.RatingModel)
-</div>
+@Html.Partial("Submit", Model.RatingModel)
+
+<button type="button" class="btn btn-primary submission-form-edit-button">
+    Submit/Edit Rating
+</button>

@@ -8,7 +8,7 @@
     submissionform.submit(function (e) {
         e.preventDefault();
 
-        $("#submissionbutton").prop({ disabled: true });
+        $(".submission-form-submit-button").prop({ disabled: true });
         $(".successmessage").text("");
         $(".failuremessage").text("");
 
@@ -29,10 +29,26 @@
                 if (typeof (grecaptcha.reset) === "function") {
                     grecaptcha.reset();
                 }
-
-                $("#submissionbutton").prop({ disabled: false });
+                
+                $(".submission-form-submit-button").prop({ disabled: false });
             }
         });
+    });
+});
+
+$(function () {
+    // Submission form swapping
+
+    $("#submissionform").hide();
+
+    $(".submission-form-edit-button").click(function () {
+        $("#submissionform").show();
+        $(".game-rating-box").hide();
+    });
+
+    $(".submission-form-cancel-button").click(function () {
+        $("#submissionform").hide().get(0).reset();
+        $(".game-rating-box").show();
     });
 });
 
@@ -86,5 +102,5 @@ $(function() {
 });
 
 function captchaComplete() {
-    $("#submissionbutton").prop({ disabled: false });
+    $(".submission-form-submit-button").prop({ disabled: false });
 }
