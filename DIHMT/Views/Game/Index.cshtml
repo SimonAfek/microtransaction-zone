@@ -73,7 +73,7 @@
 
 </div>
 
-<div class="basic">
+<div class="basic game-rating-box">
 
     @if (Model.IsRated)
     {
@@ -92,46 +92,50 @@
                 </div>
             }
         }
-
         else
         {
             <p>This game does not fulfill the conditions for any of our monetization classifications&mdash;please see the description below for further info.</p>
         }
 
-        <p></p>
         <h3>Detailed Info</h3>
-        <p>
-            @if (string.IsNullOrEmpty(Model.RatingExplanation))
-            {
-                <i>No reason for this game's rating is available.</i>
-            }
-
-            else
-            {
-                foreach (var v in Model.RatingExplanationArrayOfParagraphs)
-                {
-                <p>@Html.Raw(Html.Encode(v).Replace(Environment.NewLine, "<br />"))</p>
-            }
+        <div>
+        @if (string.IsNullOrEmpty(Model.RatingExplanation))
+        {
+            <p><i>No reason for this game's rating is available.</i></p>
         }
-
-            @if (Model.Links != null && Model.Links.Any())
+        else
+        {
+            foreach (var v in Model.RatingExplanationArrayOfParagraphs)
             {
-                <h3>External Links</h3>
-
                 <p>
-                    @foreach (var v in Model.Links)
-                    {
-                        <a class="external-links" href="@v" target="_blank">@v</a><br />
-                    }
+                    @Html.Raw(Html.Encode(v).Replace(Environment.NewLine, "<br />"))
                 </p>
             }
+        }
+
+        @if (Model.Links != null && Model.Links.Any())
+        {
+            <h3>External Links</h3>
+
+            <p>
+                @foreach (var v in Model.Links)
+                {
+                    <a class="external-links" href="@v" target="_blank">@v</a><br />
+                }
             </p>
         }
+        </div>
+    }
 
     <hr class="divider-basic">
 
+    <button type="button" class="btn btn-primary submission-form-edit-button">
+        Submit/Edit Rating
+    </button>
 </div>
 
-<div class="basic btn-submitedit">
-    @Html.Partial("Submit", Model.RatingModel)
-</div>
+@{ 
+    ViewBag.GameName = Model.Name;
+}
+
+@Html.Partial("Submit", Model.RatingModel)

@@ -1,14 +1,14 @@
 ﻿$(function () {
     var submissionform = $("#submissionform");
 
-    if (typeof (submissionform.areYouSure) === "function") {
+    if (typeof submissionform.areYouSure === "function") {
         submissionform.areYouSure();
     }
 
     submissionform.submit(function (e) {
         e.preventDefault();
 
-        $("#submissionbutton").prop({ disabled: true });
+        $(".submission-form-submit-button").prop({ disabled: true });
         $(".successmessage").text("");
         $(".failuremessage").text("");
 
@@ -26,13 +26,27 @@
                     $(".failuremessage").text("The server experienced an error while trying to process your submission. Sorry about that - please try again.");
                 }
 
-                if (typeof (grecaptcha.reset) === "function") {
+                if (typeof grecaptcha.reset === "function") {
                     grecaptcha.reset();
                 }
-
-                $("#submissionbutton").prop({ disabled: false });
+                
+                $(".submission-form-submit-button").prop({ disabled: false });
             }
         });
+    });
+});
+
+$(function () {
+    // Submission form swapping
+    
+    $(".submission-form-edit-button").click(function () {
+        $("#submissionform").show();
+        $(".game-rating-box").hide();
+    });
+
+    $(".submission-form-cancel-button").click(function () {
+        $("#submissionform").hide();
+        $(".game-rating-box").show();
     });
 });
 
@@ -60,27 +74,16 @@ $(function () {
 });
 
 $(function () {
-    $(".spotless-checkbox").click(function () {
-        if ($(this).is(":checked")) {
-            $(".monetization-input").prop({ disabled: true, checked: false });
+    function syncSpotless() {
+        if ($(".spotless-checkbox").is(":checked")) {
             $(".hide-when-spotless").hide();
         } else {
-            $(".monetization-input").prop({ disabled: false });
             $(".hide-when-spotless").show();
         }
-    });
+    }
 
-    $("#submission-checkbox-1").click(function () {
-        if ($(this).is(":checked")) {
-            $("#submission-checkbox-2").prop({ checked: false });
-        }
-    });
-
-    $("#submission-checkbox-2").click(function () {
-        if ($(this).is(":checked")) {
-            $("#submission-checkbox-1").prop({ checked: false });
-        }
-    });
+    $(".spotless-checkbox").click(syncSpotless);
+    syncSpotless();
 });
 
 $(function() {
@@ -95,5 +98,5 @@ $(function() {
 });
 
 function captchaComplete() {
-    $("#submissionbutton").prop({ disabled: false });
+    $(".submission-form-submit-button").prop({ disabled: false });
 }
