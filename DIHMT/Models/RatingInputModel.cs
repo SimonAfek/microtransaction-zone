@@ -55,7 +55,7 @@ namespace DIHMT.Models
                    (Flags.Contains((int)EnumTag.ExpansiveExpansions) ||
                     Flags.Contains((int)EnumTag.Lootboxes) ||
                     Flags.Contains((int)EnumTag.MoneyHole) ||
-                    Flags.Contains((int)EnumTag.NotJustCosmetic) ||
+                    Flags.Contains((int)EnumTag.ChangingTheGame) ||
                     Flags.Contains((int)EnumTag.Subscription) ||
                     Flags.Contains((int)EnumTag.SingleplayerUntouched) ||
                     Flags.Contains((int)EnumTag.HorseArmor) ||
@@ -98,7 +98,7 @@ namespace DIHMT.Models
         ExpansiveExpansions = 4,
         Lootboxes = 5,
         MoneyHole = 6,
-        NotJustCosmetic = 7,
+        ChangingTheGame = 7,
         Subscription = 8,
         SingleplayerUntouched = 9,
         F2P = 10,
