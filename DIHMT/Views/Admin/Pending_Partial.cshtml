@@ -25,14 +25,18 @@
 
             <div class="col-md-9">
                 <div class="form-check">
-                    <input type="checkbox" name="Flags" value="@((int)EnumTag.Spotless)" checked="@Model.RatingModel.IsSpotless" id="@($"submission-checkbox-{(int)EnumTag.Spotless}")" class="spotless-checkbox submission-checkbox" />
-                    <label for="@($"submission-checkbox-{(int)EnumTag.Spotless}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@spotlessRating.Name" data-content="@spotlessRating.ShortDescription"></label>
+                <input type="checkbox" name="Flags" value="@((int)EnumTag.Spotless)" checked="@Model.RatingModel.IsSpotless" id="@($"submission-checkbox-{(int)EnumTag.Spotless}")" class="spotless-checkbox submission-checkbox" />
+                <label for="@($"submission-checkbox-{(int) EnumTag.Spotless}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@spotlessRating.Name" data-content="@spotlessRating.ShortDescription">
+                    <img class="game-flag-img" src="@spotlessRating.ImageUrl" />
+                </label>
                     <label>&ensp;Spotless</label>
                 </div>
 
                 <div class="form-check">
                     <input type="checkbox" name="Flags" value="@((int)EnumTag.F2P)" checked="@Model.Flags.Contains((int)EnumTag.F2P)" id="@($"submission-checkbox-{(int)EnumTag.F2P}")" class="submission-checkbox" />
-                    <label for="@($"submission-checkbox-{(int)EnumTag.F2P}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@f2pRating.Name" data-content="@f2pRating.ShortDescription"></label>
+                    <label for="@($"submission-checkbox-{(int) EnumTag.F2P}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@f2pRating.Name" data-content="@f2pRating.ShortDescription">
+                        <img class="game-flag-img" src="@f2pRating.ImageUrl" />
+                    </label>
                     <label>&ensp;Free To Play</label>
                 </div>
 
@@ -40,7 +44,9 @@
                 {
                     <div class="form-check hide-when-spotless">
                         <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="monetization-input submission-checkbox" disabled="@Model.RatingModel.IsSpotless" />
-                        <label for="@($"submission-checkbox-{v.Id}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@v.Name" data-content="@v.ShortDescription"></label>
+                        <label for="@($"submission-checkbox-{v.Id}")" data-toggle="popover" data-placement="left" data-trigger="hover focus" title="@v.Name" data-content="@v.ShortDescription">
+                            <img class="game-flag-img" src="@v.ImageUrl" />
+                        </label>
                         <label>&ensp;@v.Name</label>
                     </div>
                 }
