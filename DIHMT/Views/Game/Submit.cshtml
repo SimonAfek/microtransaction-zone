@@ -5,12 +5,12 @@
 
 @helper RatingLamp(DbRating v)
 {
-    bool isSpotless = (v.Id == (int)EnumTag.Spotless);
-    bool isF2P = (v.Id == (int)EnumTag.F2P);
+    bool isSpotless = v.Id == (int)EnumTag.Spotless;
+    bool isF2P = v.Id == (int)EnumTag.F2P;
     bool isMonetization = !(isSpotless || isF2P);
 
     <div class="form-check @(isMonetization ? "hide-when-spotless" : "")">
-        <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="@(isSpotless ? "spotless-checkbox" : "") submission-checkbox" />
+        <input type="checkbox" name="Flags" value="@v.Id" checked="@Model.Flags.Contains(v.Id)" id="@($"submission-checkbox-{v.Id}")" class="@(isSpotless ? "spotless-checkbox " : string.Empty)@(!isSpotless && !isF2P ? "monetization-input " : string.Empty)submission-checkbox" />
         <label for="@($"submission-checkbox-{v.Id}")">
             <img class="game-flag-img" src="@v.ImageUrl" />
         </label>
