@@ -494,5 +494,16 @@ namespace DIHMT.Static
                 }
             }
         }
+
+        public static void PurgeThumbs()
+        {
+            lock (Lock)
+            {
+                using (var ctx = new DIHMTEntities())
+                {
+                    ctx.Database.ExecuteSqlCommand("DELETE FROM [ThumbImage];");
+                }
+            }
+        }
     }
 }

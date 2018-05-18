@@ -362,6 +362,9 @@
     <Content Include="Images\MZLogo.svg" />
     <Content Include="Images\SearchWhite-01.svg" />
     <Content Include="Images\1-1_TimeIsMoney.svg" />
+    <Content Include="Images\Thumb\dummy.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Models\EfModel.edmx.diagram">
       <DependentUpon>EfModel.edmx</DependentUpon>
     </Content>
@@ -484,8 +487,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Database\" />
-    <Folder Include="Images\Thumb\" />
-    <Folder Include="Views\Thumb\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
