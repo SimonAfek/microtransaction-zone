@@ -99,31 +99,33 @@
 
         <h3>Detailed Info</h3>
         <div>
-        @if (string.IsNullOrEmpty(Model.RatingExplanation))
-        {
-            <p><i>No reason for this game's rating is available.</i></p>
-        }
-        else
-        {
-            foreach (var v in Model.RatingExplanationArrayOfParagraphs)
+            @if (string.IsNullOrEmpty(Model.RatingExplanation))
             {
-                <p>
-                    @Html.Raw(Html.Encode(v).Replace(Environment.NewLine, "<br />"))
-                </p>
+                <p><i>No reason for this game's rating is available.</i></p>
             }
-        }
-
-        @if (Model.Links != null && Model.Links.Any())
-        {
-            <h3>External Links</h3>
-
-            <p>
-                @foreach (var v in Model.Links)
+            else
+            {
+                foreach (var v in Model.RatingExplanationArrayOfParagraphs)
                 {
-                    <a class="external-links" href="@v" target="_blank">@v</a><br />
+                    <p>
+                        @Html.Raw(Html.Encode(v).Replace(Environment.NewLine, "<br />"))
+                    </p>
                 }
-            </p>
-        }
+            }
+
+            @if (Model.Links != null && Model.Links.Any())
+            {
+                <h3>External Links</h3>
+
+                <ul>
+                    @foreach (var v in Model.Links)
+                    {
+                        <li>
+                            <a class="external-links" href="@v" target="_blank">@v</a><br />
+                        </li>
+                    }
+                </ul>
+            }
         </div>
     }
 
@@ -134,7 +136,7 @@
     </button>
 </div>
 
-@{ 
+@{
     ViewBag.GameName = Model.Name;
 }
 
