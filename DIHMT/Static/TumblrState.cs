@@ -20,8 +20,8 @@ namespace DIHMT.Static
         {
             new TumblrPost
             {
-                Title = "Can't load tumblr posts; try again later.",
-                Link = "/",
+                Title = "Unable to load recent blog posts; click here to go directly to our blog.",
+                Link = "https://mtxzone.tumblr.com",
                 PubDate = DateTime.Now
             }
         };
