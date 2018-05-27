@@ -84,8 +84,8 @@
     <Reference Include="GiantBomb.Api, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GiantBomb.Api.2.4.0\lib\netstandard1.2\GiantBomb.Api.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.8.2.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.8.2\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.8.4.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.8.4\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -346,25 +346,24 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EfModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Images\1-1_Contract.svg" />
-    <Content Include="Images\1-1_Expansions.svg" />
-    <Content Include="Images\1-1_F2P.svg" />
-    <Content Include="Images\1-1_Horse Armor.svg" />
-    <Content Include="Images\1-1_HorseArmorBO.svg" />
-    <Content Include="Images\1-1_MoneyHole.svg" />
-    <Content Include="Images\1-1_NotGambling.svg" />
-    <Content Include="Images\1-1_PayingForPower.svg" />
-    <Content Include="Images\1-1_Spotless.svg" />
-    <Content Include="Images\1-1_TableForOne.svg" />
-    <Content Include="Images\1-1_BatteriesNotIncluded.svg" />
+    <Content Include="Images\BatteriesNotIncluded.svg" />
     <Content Include="Images\become_a_patron_button.png" />
+    <Content Include="Images\Contract.svg" />
+    <Content Include="Images\Expansions.svg" />
+    <Content Include="Images\F2P.svg" />
+    <Content Include="Images\HorseArmor.svg" />
+    <Content Include="Images\MoneyHole.svg" />
     <Content Include="Images\MTZ_profile_pic.png" />
     <Content Include="Images\MZLogo.svg" />
+    <Content Include="Images\NotGambling.svg" />
+    <Content Include="Images\PayingForPower.svg" />
     <Content Include="Images\SearchWhite-01.svg" />
-    <Content Include="Images\1-1_TimeIsMoney.svg" />
+    <Content Include="Images\Spotless.svg" />
+    <Content Include="Images\TableForOne.svg" />
     <Content Include="Images\Thumb\dummy.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\TimeIsMoney.svg" />
     <Content Include="Models\EfModel.edmx.diagram">
       <DependentUpon>EfModel.edmx</DependentUpon>
     </Content>
