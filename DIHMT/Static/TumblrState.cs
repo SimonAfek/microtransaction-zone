@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.ServiceModel.Syndication;
 using System.Xml;
 using DIHMT.Models;
@@ -43,9 +45,25 @@ namespace DIHMT.Static
         {
             try
             {
-                var reader = XmlReader.Create("https://mtxzone.tumblr.com/rss");
-                var feed = SyndicationFeed.Load(reader);
-                reader.Close();
+                byte[] byteArray;
+                SyndicationFeed feed;
+
+                using (var wc = new WebClient())
+                {
+                    // Gotta add a cookie to get past the stupid GDPR screen
+                    wc.Headers.Add(HttpRequestHeader.Cookie, "pfg=f3803a70020b2d33c2a7a8f2bc9668f4b0239870d2c8eaac0181813e0c767cd4%23%7B%22eu_resident%22%3A1%2C%22gdpr_is_acceptable_age%22%3A1%2C%22gdpr_consent_core%22%3A1%2C%22gdpr_consent_first_party_ads%22%3A1%2C%22gdpr_consent_third_party_ads%22%3A1%2C%22gdpr_consent_search_history%22%3A1%2C%22exp%22%3A1559058504%2C%22vc%22%3A%22%22%7D%230759470943");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+                    wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36");
+
+                    byteArray = wc.DownloadData("https://mtxzone.tumblr.com/rss");
+                }
+
+                using (Stream stream = new MemoryStream(byteArray))
+                using (var reader = XmlReader.Create(stream))
+                {
+                    feed = SyndicationFeed.Load(reader);
+                }
+
                 var postsToLoad = Math.Min(NumOfPosts, feed.Items.Count());
                 var itemsList = feed.Items.ToList();
                 var newPosts = new List<TumblrPost>();
