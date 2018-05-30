@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using NWebsec.Mvc.HttpHeaders;
 using NWebsec.Mvc.HttpHeaders.Csp;
 
 namespace DIHMT
@@ -8,6 +9,10 @@ namespace DIHMT
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+
+            /*
+             * Content Security Policy
+             */
 
             filters.Add(new CspAttribute());
             filters.Add(new CspDefaultSrcAttribute { None = true });
@@ -20,6 +25,14 @@ namespace DIHMT
             filters.Add(new CspConnectSrcAttribute { Self = true });
             filters.Add(new CspFrameAncestorsAttribute { None = true });
             filters.Add(new CspReportUriAttribute { ReportUris = "https://mtxz.report-uri.com/r/d/csp/enforce" });
+
+            /*
+             * Other security headers
+             */
+
+            filters.Add(new XFrameOptionsAttribute { Policy = XFrameOptionsPolicy.SameOrigin });
+            filters.Add(new XXssProtectionAttribute());
+            filters.Add(new XContentTypeOptionsAttribute());
         }
     }
 }

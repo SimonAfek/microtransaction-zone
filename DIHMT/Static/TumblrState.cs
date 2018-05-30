@@ -58,7 +58,7 @@ namespace DIHMT.Static
                     byteArray = wc.DownloadData("https://mtxzone.tumblr.com/rss");
                 }
 
-                using (Stream stream = new MemoryStream(byteArray))
+                using (var stream = new MemoryStream(byteArray))
                 using (var reader = XmlReader.Create(stream))
                 {
                     feed = SyndicationFeed.Load(reader);
