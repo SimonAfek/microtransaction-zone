@@ -12,7 +12,7 @@ namespace DIHMT.Static
 {
     public static class TumblrState
     {
-        private static int NumOfPosts => 5;
+        private static int NumOfPosts => 3;
         private static DateTime _timeOfLastRequest = DateTime.MinValue;
         private static int MillisecondsBetweenRequests => 30000; // 30 seconds should be alright
         private static readonly object Lock = new object();
