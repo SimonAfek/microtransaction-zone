@@ -56,7 +56,7 @@
         <!-- BASICALLY... -->
         <div class="form-group row no-gutters">
             @* TODO: Don't use ViewBag for passing parameters through -- need a VM that has GameName. *@
-            <h3>@Html.LabelFor(model => model.Basically, (string)String.Format("Basically, {0}...", ViewBag.GameName), htmlAttributes: new { @class = "control-label" })</h3>
+            <h3>@Html.LabelFor(model => model.Basically, $"Basically, {ViewBag.GameName}...", new { @class = "control-label" })</h3>
 
             <div class="wide-input-box">
                 <textarea name="Basically" class="form-control wide-input" rows="2" maxlength="280">@Model.Basically</textarea>
@@ -76,7 +76,7 @@
 
         <!-- DETAILED INFO -->
         <div class="form-group row no-gutters">
-            <h3>@Html.LabelFor(model => model.RatingExplanation, htmlAttributes: new { @class = "control-label" })</h3>
+            <h3>@Html.LabelFor(model => model.RatingExplanation, new { @class = "control-label" })</h3>
 
             <div class="wide-input-box">
                 <textarea name="RatingExplanation" class="form-control wide-input" rows="10" maxlength="4000">@Model.RatingExplanation</textarea>
@@ -87,7 +87,7 @@
 
         <!-- LINKS -->
         <div class="form-group row no-gutters input-fields-wrap">
-            <h3>@Html.LabelFor(model => model.Links, htmlAttributes: new { @class = "control-label" })</h3>
+            <h3>@Html.LabelFor(model => model.Links, new { @class = "control-label" })</h3>
 
             @if (Model.Links != null && Model.Links.Any())
             {
@@ -122,7 +122,7 @@
         {
             // Should only be shown to non-logged in users
             <div class="form-group row no-gutters">
-                <h3>@Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label" })</h3>
+                <h3>@Html.LabelFor(model => model.Comment, new { @class = "control-label" })</h3>
 
                 <div class="wide-input-box">
                     <textarea name="Comment" class="form-control wide-input" rows="10" maxlength="1000" placeholder="Enter a comment for the mods - if this is an edit to an existing rating, please use this field to explain what you're changing and why. This will not be part of the published rating."></textarea>
@@ -143,7 +143,7 @@
 
             <div class="form-group row no-gutters">
                 <div class="col-lg-3">
-                    @Html.LabelFor(model => model.QuietUpdate, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.QuietUpdate, new { @class = "control-label" })
                 </div>
 
                 <div class="col-lg-9">
