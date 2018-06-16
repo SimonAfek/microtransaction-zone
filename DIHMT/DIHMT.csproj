@@ -296,6 +296,7 @@
     </Compile>
     <Compile Include="Models\RatingInputModel.cs" />
     <Compile Include="Models\SearchResult.cs" />
+    <Compile Include="Models\TabRequest.cs" />
     <Compile Include="Models\ThumbImage.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>
@@ -526,6 +527,7 @@
     <Content Include="Views\Home\Tags.cshtml" />
     <Content Include="Views\Shared\Tumblr.cshtml" />
     <Content Include="Views\Shared\_PendingLayout.cshtml" />
+    <Content Include="Views\Game\Tab.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
