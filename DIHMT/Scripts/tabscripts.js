@@ -17,13 +17,13 @@
         e.preventDefault();
         e.stopPropagation();
 
+        var newTabHeader = '<li><a href="#tabs-' + tabCounter +'">Additional tags: '+ index + 1 +'</a></li>';
+
         var postData = {
             Index: index++,
             TabIndex: tabCounter++,
             Platforms: platforms
         };
-
-        var newTabHeader = '<li><a href="#tabs-' + tabCounter +'">Additional tags: '+ index +'</a></li>';
 
         $.ajax({
             type: "POST",
