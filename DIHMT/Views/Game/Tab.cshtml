@@ -2,7 +2,8 @@
 @using DIHMT.Static
 @model TabRequestView
 
-@{ 
+@{
+    Layout = null;
     var ratings = GameHelpers.GetRatings();
 }
 
@@ -23,16 +24,20 @@
     </div>
 }
 
-<div class="form-group row no-gutters">
-    @foreach (var v in Model.Platforms)
-    {
-        <input type="checkbox" name="@($"TagSets[{Model.Index}].Platforms")" value="@v.Id" id="@($"platforms-{v.Id}-{Model.Index}")" /> @v.Name
+<div id="@($"tabs-{Model.TabIndex}")">
+    <p class="form-group row no-gutters">
+        @foreach (var v in Model.Platforms)
+        {
+        <p>
+            <input type="checkbox" name="@($"TagSets[{Model.Index}].Platforms")" value="@v.Id" id="@($"platforms-{v.Id}-{Model.Index}")" /> @v.Name
+            <br />
+        </p>
     }
-
-    <br />
-
-    @foreach (var v in ratings)
-    {
-        @RatingLamp(v)
-    }
-</div>
+    </div>
+    <div class="form-group row no-gutters">
+        @foreach (var v in ratings)
+        {
+            @RatingLamp(v)
+        }
+    </div>
+    </div>

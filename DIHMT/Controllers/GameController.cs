@@ -76,7 +76,16 @@ namespace DIHMT.Controllers
         [HttpPost]
         public ActionResult Tab(TabRequestInput input)
         {
-            return View(input);
+            var platforms = DbAccess.GetPlatforms().Where(x => input.Platforms.Contains(x.Id)).ToList();
+
+            var vm = new TabRequestView
+            {
+                Index = input.Index,
+                TabIndex = input.TabIndex,
+                Platforms = platforms
+            };
+
+            return View(vm);
         }
     }
 }
