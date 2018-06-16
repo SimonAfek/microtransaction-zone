@@ -64,14 +64,21 @@
         </div>
 
         <!-- FLAGS -->
-        <div class="form-group row no-gutters">
-            @RatingLamp(spotlessRating)
-            @RatingLamp(f2pRating)
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">Default tags</a></li>
+            </ul>
+            <div id="tabs-1">
+                <div class="form-group row no-gutters">
+                    @RatingLamp(spotlessRating)
+                    @RatingLamp(f2pRating)
 
-            @foreach (var v in ratings.Where(x => Model.MonetizationFlags.Contains(x.Id)))
-            {
-                @RatingLamp(v)
-            }
+                    @foreach (var v in ratings.Where(x => Model.MonetizationFlags.Contains(x.Id)))
+                    {
+                        @RatingLamp(v)
+                    }
+                </div>
+            </div>
         </div>
 
         <!-- DETAILED INFO -->
@@ -172,3 +179,5 @@
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.AreYouSure/1.9.0/jquery.are-you-sure.min.js" integrity="sha256-5VKy5bw46U62DHG7pAhtXgsgmSjMSLjP5s4oQHW1LEI=" crossorigin="anonymous"></script>
+@Scripts.Render("~/bundles/jqueryuiscript")
+@Styles.Render("~/bundles/jqueryuistyle")

@@ -29,7 +29,14 @@ namespace DIHMT
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/respond.js",
                         "~/Scripts/initialize-site.js"));
-            
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryuiscript").Include(
+                        "~/Scripts/jquery-ui-{version}.js",
+                        "~/Scripts/tabscripts.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/jqueryuistyle").Include(
+                        "~/Content/themes/base/jquery-ui.css"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/bootstrap.css",
                         "~/Content/site-base.css"));
