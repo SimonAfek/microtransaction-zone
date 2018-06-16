@@ -24,6 +24,11 @@
     </div>
 }
 
+@foreach (DisplayGamePlatform v in ViewBag.Platforms)
+{
+    <input type="hidden" class="platform-id" value="@v.Id" />
+}
+
 @using (Html.BeginForm("SubmitRating", "Game", FormMethod.Post, new { id = "submissionform", style = "display: none", autocomplete = "off" }))
 {
     var ratings = GameHelpers.GetRatings();
