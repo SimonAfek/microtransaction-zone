@@ -1,6 +1,5 @@
 ﻿$(function () {
     // Variables
-    var tabTitle = "Secondary tags";
     var index = 0;
     var tabCounter = 2;
     var platforms = [];
@@ -17,7 +16,7 @@
         e.preventDefault();
         e.stopPropagation();
 
-        var newTabHeader = '<li><a href="#tabs-' + tabCounter +'">Additional tags: '+ index + 1 +'</a></li>';
+        var newTabHeader = '<li><a href="#tabs-' + tabCounter +'">Additional tags: '+ (index + 1) +'</a></li>';
 
         var postData = {
             Index: index++,
