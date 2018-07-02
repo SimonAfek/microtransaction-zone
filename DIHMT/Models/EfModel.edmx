@@ -64,6 +64,7 @@
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GameId" Type="int" Nullable="false" />
           <Property Name="RatingId" Type="int" Nullable="false" />
+          <Property Name="PlatformId" Type="int" />
         </EntityType>
         <EntityType Name="DbGenre">
           <Key>
@@ -100,6 +101,7 @@
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PendingSubmissionId" Type="int" Nullable="false" />
           <Property Name="RatingId" Type="int" Nullable="false" />
+          <Property Name="PlatformId" Type="int" />
         </EntityType>
         <EntityType Name="PendingGameLink">
           <Key>
@@ -217,6 +219,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DbGameRating_PlatformId">
+          <End Role="DbPlatform" Type="Self.DbPlatform" Multiplicity="0..1" />
+          <End Role="DbGameRating" Type="Self.DbGameRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DbPlatform">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DbGameRating">
+              <PropertyRef Name="PlatformId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DbGameRating_RatingId">
           <End Role="DbRating" Type="Self.DbRating" Multiplicity="1" />
           <End Role="DbGameRating" Type="Self.DbGameRating" Multiplicity="*" />
@@ -254,6 +268,18 @@
             </Principal>
             <Dependent Role="PendingDbGameRating">
               <PropertyRef Name="PendingSubmissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PendingDbGameRating_PlatformId">
+          <End Role="DbPlatform" Type="Self.DbPlatform" Multiplicity="0..1" />
+          <End Role="PendingDbGameRating" Type="Self.PendingDbGameRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DbPlatform">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PendingDbGameRating">
+              <PropertyRef Name="PlatformId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -325,6 +351,10 @@
             <End Role="DbGame" EntitySet="DbGame" />
             <End Role="DbGameRating" EntitySet="DbGameRating" />
           </AssociationSet>
+          <AssociationSet Name="FK_DbGameRating_PlatformId" Association="Self.FK_DbGameRating_PlatformId">
+            <End Role="DbPlatform" EntitySet="DbPlatform" />
+            <End Role="DbGameRating" EntitySet="DbGameRating" />
+          </AssociationSet>
           <AssociationSet Name="FK_DbGameRating_RatingId" Association="Self.FK_DbGameRating_RatingId">
             <End Role="DbRating" EntitySet="DbRating" />
             <End Role="DbGameRating" EntitySet="DbGameRating" />
@@ -335,6 +365,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_PendingDbGameRating_PendingSubmission" Association="Self.FK_PendingDbGameRating_PendingSubmission">
             <End Role="PendingSubmission" EntitySet="PendingSubmission" />
+            <End Role="PendingDbGameRating" EntitySet="PendingDbGameRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PendingDbGameRating_PlatformId" Association="Self.FK_PendingDbGameRating_PlatformId">
+            <End Role="DbPlatform" EntitySet="DbPlatform" />
             <End Role="PendingDbGameRating" EntitySet="PendingDbGameRating" />
           </AssociationSet>
           <AssociationSet Name="FK_PendingDbGameRating_Rating" Association="Self.FK_PendingDbGameRating_Rating">
@@ -393,6 +427,8 @@
           <Property Name="ImageUrl" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
           <Property Name="Abbreviation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DbGamePlatforms" Relationship="Self.FK__DbGamePla__Platf__2A4B4B5E" FromRole="DbPlatform" ToRole="DbGamePlatform" />
+          <NavigationProperty Name="DbGameRatings" Relationship="Entities.FK_DbGameRating_PlatformId" FromRole="DbPlatform" ToRole="DbGameRating" />
+          <NavigationProperty Name="PendingDbGameRatings" Relationship="Entities.FK_PendingDbGameRating_PlatformId" FromRole="DbPlatform" ToRole="PendingDbGameRating" />
         </EntityType>
         <Association Name="FK__DbGamePla__GameI__29572725">
           <End Role="DbGame" Type="Self.DbGame" Multiplicity="1" />
@@ -480,6 +516,14 @@
             <End Role="DbGame" EntitySet="DbGames" />
             <End Role="ThumbImage" EntitySet="ThumbImages" />
           </AssociationSet>
+          <AssociationSet Name="FK_DbGameRating_PlatformId" Association="Entities.FK_DbGameRating_PlatformId">
+            <End EntitySet="DbPlatforms" Role="DbPlatform" />
+            <End EntitySet="DbGameRatings" Role="DbGameRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PendingDbGameRating_PlatformId" Association="Entities.FK_PendingDbGameRating_PlatformId">
+            <End Role="DbPlatform" EntitySet="DbPlatforms" />
+            <End Role="PendingDbGameRating" EntitySet="PendingDbGameRatings" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="DbGameGenre">
           <Key>
@@ -532,6 +576,8 @@
           <Property Name="RatingId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DbGame" Relationship="Entities.FK_DbGameRating_GameId" FromRole="DbGameRating" ToRole="DbGame" />
           <NavigationProperty Name="DbRating" Relationship="Entities.FK_DbGameRating_RatingId" FromRole="DbGameRating" ToRole="DbRating" />
+          <Property Name="PlatformId" Type="Int32" />
+          <NavigationProperty Name="DbPlatform" Relationship="Entities.FK_DbGameRating_PlatformId" FromRole="DbGameRating" ToRole="DbPlatform" />
           </EntityType>
         <EntityType Name="DbRating">
           <Key>
@@ -580,6 +626,8 @@
           <Property Name="RatingId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DbRating" Relationship="Entities.FK_PendingDbGameRating_Rating" FromRole="PendingDbGameRating" ToRole="DbRating" />
           <NavigationProperty Name="PendingSubmission" Relationship="Entities.FK_PendingDbGameRating_PendingSubmission" FromRole="PendingDbGameRating" ToRole="PendingSubmission" />
+          <Property Name="PlatformId" Type="Int32" />
+          <NavigationProperty Name="DbPlatform" Relationship="Entities.FK_PendingDbGameRating_PlatformId" FromRole="PendingDbGameRating" ToRole="DbPlatform" />
           </EntityType>
         <EntityType Name="PendingSubmission">
           <Key>
@@ -715,6 +763,30 @@
 			</Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DbGameRating_PlatformId">
+          <End Type="Entities.DbPlatform" Multiplicity="0..1" Role="DbPlatform" />
+          <End Type="Entities.DbGameRating" Multiplicity="*" Role="DbGameRating" />
+          <ReferentialConstraint>
+            <Principal Role="DbPlatform">
+			  <PropertyRef Name="Id" />
+			</Principal>
+            <Dependent Role="DbGameRating">
+			  <PropertyRef Name="PlatformId" />
+			</Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PendingDbGameRating_PlatformId">
+          <End Type="Entities.DbPlatform" Role="DbPlatform" Multiplicity="0..1" />
+          <End Type="Entities.PendingDbGameRating" Role="PendingDbGameRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DbPlatform">
+			  <PropertyRef Name="Id" />
+			</Principal>
+            <Dependent Role="PendingDbGameRating">
+			  <PropertyRef Name="PlatformId" />
+			</Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -779,6 +851,7 @@
           <EntitySetMapping Name="DbGameRatings">
             <EntityTypeMapping TypeName="Entities.DbGameRating">
               <MappingFragment StoreEntitySet="DbGameRating">
+                <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
                 <ScalarProperty Name="RatingId" ColumnName="RatingId" />
                 <ScalarProperty Name="GameId" ColumnName="GameId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -801,6 +874,7 @@
           <EntitySetMapping Name="PendingDbGameRatings">
             <EntityTypeMapping TypeName="Entities.PendingDbGameRating">
               <MappingFragment StoreEntitySet="PendingDbGameRating">
+                <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
                 <ScalarProperty Name="RatingId" ColumnName="RatingId" />
                 <ScalarProperty Name="PendingSubmissionId" ColumnName="PendingSubmissionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

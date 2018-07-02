@@ -269,6 +269,15 @@ namespace DIHMT.Static
                         // Add ratings from input
                         ctx.DbGameRatings.AddRange(input.Flags?.Select(x => new DbGameRating { GameId = input.Id, RatingId = x }) ?? new List<DbGameRating>());
 
+                        // Add platform-specific ratings, if any
+                        foreach (var v in input.TagSets)
+                        {
+                            foreach (var k in v.Platforms)
+                            {
+                                ctx.DbGameRatings.AddRange(v.Flags?.Select(x => new DbGameRating { GameId = input.Id, PlatformId = k, RatingId = x }) ?? new List<DbGameRating>());
+                            }
+                        }
+
                         // Remove current links
                         ctx.DbGameLinks.RemoveRange(ctx.DbGameLinks.Where(x => x.GameId == input.Id));
 
@@ -325,6 +334,14 @@ namespace DIHMT.Static
 
                 ctx.PendingDbGameRatings.AddRange(input.Flags?.Select(x => new PendingDbGameRating { PendingSubmissionId = pendingRatingObject.Id, RatingId = x }) ?? new List<PendingDbGameRating>());
 
+                foreach (var v in input.TagSets)
+                {
+                    foreach (var k in v.Platforms)
+                    {
+                        ctx.PendingDbGameRatings.AddRange(v.Flags?.Select(x => new PendingDbGameRating { PendingSubmissionId = pendingRatingObject.Id, PlatformId = k, RatingId = x }) ?? new List<PendingDbGameRating>());
+                    }
+                }
+                
                 ctx.PendingGameLinks.AddRange(input.Links?.Select(x => new PendingGameLink { PendingSubmissionId = pendingRatingObject.Id, Link = x }) ?? new List<PendingGameLink>());
 
                 ctx.SaveChanges();

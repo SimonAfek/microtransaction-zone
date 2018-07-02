@@ -30,6 +30,8 @@
         <EntityTypeShape EntityType="Entities.BlockList" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Entities.ThumbImage" Width="1.5" PointX="10.75" PointY="9.75" />
         <AssociationConnector Association="Entities.FK__ThumbImag__GameI__7F2BE32F" />
+        <AssociationConnector Association="Entities.FK_DbGameRating_PlatformId" />
+        <AssociationConnector Association="Entities.FK_PendingDbGameRating_PlatformId" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -17,8 +17,10 @@ namespace DIHMT.Models
         public long Id { get; set; }
         public int PendingSubmissionId { get; set; }
         public int RatingId { get; set; }
+        public Nullable<int> PlatformId { get; set; }
     
         public virtual DbRating DbRating { get; set; }
         public virtual PendingSubmission PendingSubmission { get; set; }
+        public virtual DbPlatform DbPlatform { get; set; }
     }
 }

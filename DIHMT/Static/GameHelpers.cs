@@ -347,6 +347,17 @@ namespace DIHMT.Static
 
             input.Flags.Sort();
 
+            if (input.TagSets?.Any() ?? false)
+            {
+                foreach (var v in input.TagSets)
+                {
+                    v.Flags = v.Flags ?? new List<int>();
+
+                    v.Flags.Sort();
+                    v.Platforms.Sort();
+                }
+            }
+
             if (isAuthenticated)
             {
                 DbAccess.SaveGameRating(input);

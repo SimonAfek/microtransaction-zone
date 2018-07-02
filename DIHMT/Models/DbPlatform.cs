@@ -18,6 +18,8 @@ namespace DIHMT.Models
         public DbPlatform()
         {
             this.DbGamePlatforms = new HashSet<DbGamePlatform>();
+            this.DbGameRatings = new HashSet<DbGameRating>();
+            this.PendingDbGameRatings = new HashSet<PendingDbGameRating>();
         }
     
         public int Id { get; set; }
@@ -27,5 +29,9 @@ namespace DIHMT.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DbGamePlatform> DbGamePlatforms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DbGameRating> DbGameRatings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PendingDbGameRating> PendingDbGameRatings { get; set; }
     }
 }

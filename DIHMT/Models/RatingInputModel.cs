@@ -40,6 +40,7 @@ namespace DIHMT.Models
             set => _links = value?.Where(x => !string.IsNullOrEmpty(x)).ToList() ?? new List<string>();
         }
 
+        public List<TagSet> TagSets { get; set; }
 
         public bool Valid
         {
@@ -85,8 +86,53 @@ namespace DIHMT.Models
                     return false;
                 }
 
+                if (TagSets?.Any() ?? false)
+                {
+                    var platforms = new List<int>();
+
+                    foreach (var v in TagSets)
+                    {
+                        if (v.Platforms?.Any() ?? false)
+                        {
+                            return false;
+                        }
+
+                        if (platforms.Any(x => v.Platforms.Contains(x)))
+                        {
+                            return false;
+                        }
+
+                        platforms.AddRange(v.Platforms);
+
+                        if (v.Flags.Contains((int)EnumTag.BulkOrderHorseArmor))
+                        {
+                            return false;
+                        }
+                        
+                        if (v.Flags.Contains((int)EnumTag.Spotless) &&
+                           (v.Flags.Contains((int)EnumTag.ExpansiveExpansions) ||
+                            v.Flags.Contains((int)EnumTag.Lootboxes) ||
+                            v.Flags.Contains((int)EnumTag.MoneyHole) ||
+                            v.Flags.Contains((int)EnumTag.ChangingTheGame) ||
+                            v.Flags.Contains((int)EnumTag.Subscription) ||
+                            v.Flags.Contains((int)EnumTag.SingleplayerUntouched) ||
+                            v.Flags.Contains((int)EnumTag.HorseArmor) ||
+                            v.Flags.Contains((int)EnumTag.PhysicalDlc) ||
+                            v.Flags.Contains((int)EnumTag.TimeIsMoney)))
+                        {
+                            return false;
+                        }
+                    }
+                }
+
                 return true;
             }
+        }
+
+        public class TagSet
+        {
+            public List<int> Flags { get; set; }
+            public List<int> Platforms { get; set; }
         }
     }
 
