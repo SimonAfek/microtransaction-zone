@@ -98,7 +98,7 @@ namespace DIHMT.Models
                 }
 
                 var tagset = new TagSet { Flags = new List<int>(), Platforms = new List<int>() };
-                var group = input.GroupBy(x => x.PlatformId);
+                var groups = input.GroupBy(x => x.PlatformId);
 
                 // First/"target" platform
                 var pId = input[0].PlatformId;
@@ -110,10 +110,10 @@ namespace DIHMT.Models
                 tagset.Flags.AddRange(fRatings);
 
                 // For each platform with ratings...
-                foreach (var v in group)
+                foreach (var v in groups.Where(x => x.Key != pId))
                 {
                     // Grab those ratings
-                    var groupRatings = input.Where(x => x.PlatformId == v.Key).Select(x => x.RatingId).ToList();
+                    var groupRatings = v.Select(x => x.RatingId).ToList();
                     groupRatings.Sort();
 
                     // If they're equal to the ratings of the target, add the platformId
