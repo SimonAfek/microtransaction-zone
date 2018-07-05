@@ -94,7 +94,7 @@ namespace DIHMT.Models
             {
                 if (!input.Any() || input.Any(x => !x.PlatformId.HasValue))
                 {
-                    throw new ArgumentNullException();
+                    return;
                 }
 
                 var tagset = new TagSet { Flags = new List<int>(), Platforms = new List<int>() };
