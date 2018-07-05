@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace DIHMT.Models
 {
@@ -19,6 +20,7 @@ namespace DIHMT.Models
         public string GbSiteDetailUrl { get; set; }
         public bool IsRated { get; set; }
         public List<DisplayGameRating> Ratings { get; set; }
+        public List<TagSet> TagSets { get; set; }
         public List<DisplayGamePlatform> Platforms { get; set; }
         public List<DisplayGameGenre> Genres { get; set; }
         public List<string> Links { get; set; }
@@ -28,6 +30,7 @@ namespace DIHMT.Models
         {
             Id = Id,
             Flags = Ratings?.Select(x => x.Id).ToList() ?? new List<int>(),
+            TagSets = TagSets ?? new List<TagSet>(),
             Links = Links ?? new List<string>(),
             Basically = Basically,
             RatingExplanation = RatingExplanation
@@ -59,7 +62,7 @@ namespace DIHMT.Models
                 Name = x.DbGenre.Name
             }).ToList();
 
-            Ratings = input.DbGameRatings.Select(x => new DisplayGameRating
+            Ratings = input.DbGameRatings.Where(x => !x.PlatformId.HasValue).Select(x => new DisplayGameRating
             {
                 Id = x.DbRating.Id,
                 Description = x.DbRating.Description,
@@ -67,6 +70,8 @@ namespace DIHMT.Models
                 Name = x.DbRating.Name,
                 ShortDescription = x.DbRating.ShortDescription
             }).ToList();
+
+            FillTagSets(input.DbGameRatings.Where(x => x.PlatformId.HasValue).ToList());
 
             Links = input.DbGameLinks.Select(x => x.Link).ToList();
 
@@ -79,6 +84,59 @@ namespace DIHMT.Models
             ThumbImageUrl = input.ThumbImageUrl;
 
             Aliases = input.Aliases;
+        }
+
+        private void FillTagSets(List<DbGameRating> input)
+        {
+            TagSets = new List<TagSet>();
+
+            while (true)
+            {
+                if (!input.Any() || input.Any(x => !x.PlatformId.HasValue))
+                {
+                    throw new ArgumentNullException();
+                }
+
+                var tagset = new TagSet { Flags = new List<int>(), Platforms = new List<int>() };
+                var group = input.GroupBy(x => x.PlatformId);
+
+                // First/"target" platform
+                var pId = input[0].PlatformId;
+                tagset.Platforms.Add(pId ?? -1);
+
+                var fRatings = input.Where(x => x.PlatformId == pId).Select(x => x.RatingId).ToList();
+                fRatings.Sort();
+
+                tagset.Flags.AddRange(fRatings);
+
+                // For each platform with ratings...
+                foreach (var v in group)
+                {
+                    // Grab those ratings
+                    var groupRatings = input.Where(x => x.PlatformId == v.Key).Select(x => x.RatingId).ToList();
+                    groupRatings.Sort();
+
+                    // If they're equal to the ratings of the target, add the platformId
+                    if (fRatings.SequenceEqual(groupRatings))
+                    {
+                        tagset.Platforms.Add(v.Key ?? -1);
+                    }
+                }
+
+                tagset.Platforms.RemoveAll(x => x < 0);
+                TagSets.Add(tagset);
+
+                // Remove all matched platforms from input
+                input.RemoveAll(x => x.PlatformId.HasValue && tagset.Platforms.Contains(x.PlatformId.Value));
+
+                if (input.Any())
+                {
+                    // Do it again, baby
+                    continue;
+                }
+
+                break;
+            }
         }
     }
 

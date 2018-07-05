@@ -297,6 +297,7 @@
     <Compile Include="Models\RatingInputModel.cs" />
     <Compile Include="Models\SearchResult.cs" />
     <Compile Include="Models\TabRequest.cs" />
+    <Compile Include="Models\TagSet.cs" />
     <Compile Include="Models\ThumbImage.cs">
       <DependentUpon>EfModel.tt</DependentUpon>
     </Compile>

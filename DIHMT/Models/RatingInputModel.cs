@@ -128,12 +128,6 @@ namespace DIHMT.Models
                 return true;
             }
         }
-
-        public class TagSet
-        {
-            public List<int> Flags { get; set; }
-            public List<int> Platforms { get; set; }
-        }
     }
 
     public enum EnumTag
