@@ -719,6 +719,20 @@ form.searchbar-xl > button {
 /*     4. SUBMISSION FORM   */
 /*--------------------------*/
 
+#tabs > ul > li {
+    background-color: #784ef9;
+    font-weight: 500;
+}
+
+.submission-info {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#submissionform > .submission-form-body > .justify-content-end {
+   margin-bottom: 5px;
+}
+
 .successmessage {
     color: green;
 }

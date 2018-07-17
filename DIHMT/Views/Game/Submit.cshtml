@@ -44,16 +44,15 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group row justify-content-end">
+        <div class="form-group row justify-content-end remove-margin">
             <div class="col-sm-auto">
                 <button type="button" area-label="Close" class="close submission-form-cancel-button">
                     <span area-hidden="true">&times;</span>
                 </button>
-
             </div>
         </div>
 
-        <p>
+        <p class="submission-info">
             Hi there! If this is your first time submitting something to the site, please take a minute or two to read our <a href="@Url.Action("Tags", "Home")" target="_blank">Tag overview</a> and <a href="@Url.Action("SubmissionGuide", "Home")" target="_blank">Submission guide</a>.
             That'll make it much easier for us to get your submission reviewed.
         </p>
@@ -68,12 +67,20 @@
             </div>
         </div>
 
-        <button id="tagset-addtab" value="Add Tab">Add Tab</button>
 
         <!-- FLAGS -->
+        <h3 class="control-label">Tags</h3>
+
+        <p class="submission-info">
+            We have a new feature: tabs! Does this game have different features on different consoles?
+            After choosing the "Default Tags" that apply to every version of the game, select "Add Tab," check the boxes for the console with differences, then select the tags unique to that console.
+        </p>
+
+        <p><button id="tagset-addtab" class="btn btn-primary" value="Add Tab">Add Tab</button></p>
+
         <div id="tabs">
             <ul>
-                <li><a href="#tabs-1">Default tags</a></li>
+                <li><a href="#tabs-1">Default Tags</a></li>
             </ul>
             <div id="tabs-1">
                 <div class="form-group row no-gutters">
